@@ -1,0 +1,39 @@
+name: install
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel previous runs
+        uses: styfle/cancel-workflow-action@0.5.0
+        with:
+          access_token: ${{ github.token }}
+      - uses: actions/checkout@v2.3.3
+      - name: Docker setup
+        run: docker-compose up -d
+      - name: Push to GitHub packages
+        uses: docker/build-push-action@v2
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          repository: evanriley/config/opensuse/tumbleweed
+  macos:
+    runs-on: macos-latest
+    steps:
+      - name: Cancel previous runs
+        uses: styfle/cancel-workflow-action@0.5.0
+        with:
+          access_token: ${{ github.token }}
+      - uses: actions/checkout@v2.3.3
+      - name: Bare setup
+        run: bash bin/install
+      - name: Install packages
+        run: brew install coreutils
+      - name: System defaults
+        run: bash .macos
