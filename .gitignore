@@ -9,3 +9,4 @@
 .npm
 .cargo
 .cache
+.config/gh/hosts.yml
