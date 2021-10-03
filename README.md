@@ -2,10 +2,10 @@
 
 Hello there, these are my dotfiles!
 
-OS - macOS & openSUSE Tumbleweed, WSL(Also openSUSE Tumbleweed)
-Shell - Fish
-Terminal - Kitty, iTerm2, Windows Terminal
-Editors - Neovim & Doom Emacs
+- OS - macOS & openSUSE Tumbleweed, WSL(Also openSUSE Tumbleweed)
+- Shell - Fish
+- Terminal - Kitty, iTerm2, Windows Terminal
+- Editors - Neovim & Doom Emacs
 
 # Setup
 
