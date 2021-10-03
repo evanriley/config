@@ -31,6 +31,7 @@
 [user]
        name = Evan Riley
        email = evanriley@hey.com
+       signingkey = B61357FACF8C4B65
 [commit]
         gpgsign = true
 [gpg]
