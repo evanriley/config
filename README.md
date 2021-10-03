@@ -12,7 +12,7 @@ Hello there, these are my dotfiles!
 1. Install the dotfiles into a bare repo.
 
 ```shell
-curl -sL https://raw.githubusercontent.com/evanriley/config/main/bin/install | bash
+curl -sL https://evanriley.dev/dotfiles | bash
 ```
 
 2. Install dependecies and enable services
