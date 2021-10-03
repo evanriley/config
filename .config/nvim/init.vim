@@ -104,7 +104,6 @@ set backspace=indent,eol,start                  " Intuitive backspacing in inser
 set whichwrap+=<,>,h,l
 
 " Format
-set textwidth=80                                " Wrap text starting here
 set nowrap                                      " Disable softwrap
 set breakindent                                 " Breack with an indentation
 set breakat=\ \	;:,!?                           " Long lines break chars
