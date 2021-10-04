@@ -38,7 +38,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.PAT }}
           file: .github/docker/Dockerfile
-          registry: docker.pkg.github.com
+          registry: ghcr.io
           repository: evanriley/config/opensuse
