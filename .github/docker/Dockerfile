@@ -7,5 +7,4 @@ RUN gpasswd -a cirun wheel
 RUN echo 'cirun ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 USER cirun
 RUN curl -sL evanriley.dev/dotfiles | bash
-RUN $HOME/bin/linux-deps
 LABEL org.opencontainers.image.source="https://github.com/evanriley/config"
