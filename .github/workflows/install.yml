@@ -41,4 +41,4 @@ jobs:
           password: ${{ secrets.PAT }}
           file: .github/docker/Dockerfile
           registry: ghrc.io
-          repository: evanriley/config/config
+          repository: evanriley/config
