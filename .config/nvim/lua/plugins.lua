@@ -5,10 +5,15 @@ return require('packer').startup(function()
 	-- LSP stuff
 	use 'neovim/nvim-lspconfig'
 	use 'kabouzeid/nvim-lspinstall'
-	use 'hrsh7th/nvim-compe'
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/nvim-cmp'
+  -- Deprecated 
+  -- use 'hrsh7th/nvim-compe'
 
 	-- Editor cstuff
 	use 'windwp/nvim-autopairs'
+  use 'L3MON4D3/luasnip'
 	use {
   		'hoob3rt/lualine.nvim',
   		requires = { 'kyazdani42/nvim-web-devicons', opt = true } 
@@ -36,10 +41,17 @@ return require('packer').startup(function()
   		'lewis6991/gitsigns.nvim',
   		requires = { 'nvim-lua/plenary.nvim'} 
 	}
+  use {
+      'TimUntersberger/neogit',
+      requires = 'nvim-lua/plenary.nvim'
+  }
 	use 'phaazon/hop.nvim'
   use 'machakann/vim-sandwich'
 	-- Themes
 	use 'folke/tokyonight.nvim'
+
+  -- General Language
+  use 'p00f/nvim-ts-rainbow'
 
   -- Specific Lang Stuff --
   -- Clojure

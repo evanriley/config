@@ -24,6 +24,9 @@ map('n', '<leader>ln', ':set rnu!<CR>', opt) -- toggle relative line numbers
 map('', '<C-c>', ':CommentToggle<CR>', opt) -- toggle comment on current line or selection
 map('n', '<leader>nf', ':Neoformat<CR>', { noremap = true }) -- format current buffer with neoformat
 
+-- general mappings
+map('n', '<esc>', ':nohlsearch<cr>', { silent = true})
+
 -- clipboard mappings
 map('n', '<leader>ya', ':%y+<CR>', opt) -- Copy content of entire buffer to system clipboard
 map('n', '<leader>yl', '"+yy', opt) -- yank current line into system clipboard
