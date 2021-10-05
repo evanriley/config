@@ -20,12 +20,19 @@ local opt = {} --empty opt for maps with no extra options
 --]]
 
 vim.g.mapleader = ' ' -- Map leader key to space
+vim.g.maplocalleader = ',' -- Map localleader
 map('n', '<leader>ln', ':set rnu!<CR>', opt) -- toggle relative line numbers
 map('', '<C-c>', ':CommentToggle<CR>', opt) -- toggle comment on current line or selection
 map('n', '<leader>nf', ':Neoformat<CR>', { noremap = true }) -- format current buffer with neoformat
 
 -- general mappings
 map('n', '<esc>', ':nohlsearch<cr>', { silent = true})
+vim.cmd [[
+  command! W :w
+  command! Q :q
+  command! Qa :qa
+]]  -- Make :Q, :Q, and :Qa work like :q, :w, and :qa because I'm dumb
+    -- I don't know how to do this in lua...
 
 -- clipboard mappings
 map('n', '<leader>ya', ':%y+<CR>', opt) -- Copy content of entire buffer to system clipboard
@@ -36,6 +43,11 @@ map('i', '<Tab>', 'v:lua.tab_complete()', { expr = true })
 map('s', '<Tab>', 'v:lua.tab_complete()', { expr = true })
 map('i', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
 map('s', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
+
+-- Easily reachable Packer commands
+map('n', '<localleader>pu', ':PackerUpdate<cr>', opt)
+map('n', '<localleader>pc', ':PackerClean<cr>', opt)
+map('n', '<localleader>pi', ':PackerInstall<cr>', opt)
 
 -- buffer management
 map('n', '<leader>bh', ':bf<CR>', { noremap = true })
@@ -53,3 +65,10 @@ map('n', '<leader>fG', ':Telescope git_branches<CR>', { noremap = true })
 -- hop.nvim
 map('n', '<leader>hH', ':HopWord<CR>', opt)
 map('n', '<leader>hh', ':HopLine<CR>', opt)
+
+-- Terminal mappings
+vim.cmd [[
+  noremap  <leader>t  :FloatermToggle<CR>i
+  noremap! <leader>t  <Esc>:FloatermToggle<CR>i
+  tnoremap <leader>t  <C-\><C-n>:FloatermToggle<CR>    
+]]
