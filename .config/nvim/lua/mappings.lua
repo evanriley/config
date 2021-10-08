@@ -69,7 +69,7 @@ map('n', '<leader>hh', ':HopLine<CR>', opt)
 
 -- Terminal mappings
 vim.cmd [[
-  noremap  <leader>t  :FloatermToggle<CR>i
-  noremap! <leader>t  <Esc>:FloatermToggle<CR>i
+  nnoremap  <leader>t  :FloatermToggle<CR>i
+  " nnoremap! <leader>t  <Esc>:FloatermToggle<CR>i
   tnoremap <leader>t  <C-\><C-n>:FloatermToggle<CR>    
 ]]
