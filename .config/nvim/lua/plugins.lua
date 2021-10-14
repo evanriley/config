@@ -37,8 +37,8 @@ return require('packer').startup(function()
   }
 	use 'norcalli/nvim-colorizer.lua'
 	use {
-  		'lewis6991/gitsigns.nvim',
-  		requires = { 'nvim-lua/plenary.nvim'} 
+	  		'lewis6991/gitsigns.nvim',
+	  		requires = { 'nvim-lua/plenary.nvim'} 
 	}
   use {
       'TimUntersberger/neogit',
@@ -72,4 +72,9 @@ return require('packer').startup(function()
       tag = 'v4.24.1'
   }
 
+  --  Go
+  use {
+    'fatih/vim-go',
+    run = ':GoUpdateBinaries'
+  } 
 end)

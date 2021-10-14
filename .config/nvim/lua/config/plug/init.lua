@@ -10,6 +10,7 @@ return {
   require('config.plug.nvim-colorizer'),
   require('config.plug.nvim-comment'),
   require('config.plug.nvim-treesitter'),
+  require('config.plug.go'),
   require('config.plug.telescope'),
 }
 
