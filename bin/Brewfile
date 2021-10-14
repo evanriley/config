@@ -40,7 +40,7 @@ brew 'pngpaste'
 brew 'bat'
 brew 'heroku'
 brew 'frum'
-brwe 'lazygit'
+brew 'lazygit'
 
 # cask installs
 cask 'google-chrome'
