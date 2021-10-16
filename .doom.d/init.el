@@ -60,7 +60,7 @@
        ;;lispy             ; vim for lisp, for people who don't like vim
        multiple-cursors  ; editing in many places at once
        ;;objed             ; text object editing for the innocent
-       parinfer          ; turn lisp into python, sort of
+       ;;parinfer          ; turn lisp into python, sort of
        ;;rotate-text       ; cycle region at point between text candidates
        snippets          ; my elves. They type so I don't have to
        ;;word-wrap         ; soft wrapping with language-aware indent
@@ -86,7 +86,7 @@
        :tools
        ;;ansible
        ;;debugger          ; FIXME stepping through code, to help you add bugs
-       ;;direnv
+       direnv
        ;;docker
        ;;editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
@@ -160,7 +160,6 @@
        ;;rest              ; Emacs as a REST client
        ;;rst               ; ReST in peace
        (ruby
-        +lsp
         +rails)       ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
        rust         ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala               ; java, but good
