@@ -65,6 +65,7 @@ cask 'adoptopenjdk16'
 cask 'kitty'
 cask 'raycast'
 cask 'ubersicht'
+cask 'tableplus'
 
 # mas installs
 mas 'NextDNS', id: 1_464_122_853

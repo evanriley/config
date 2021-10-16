@@ -150,3 +150,13 @@
 ;; Auto download parinfer-rust to keep it in sync
 (setq parinfer-rust-auto-download t)
 (add-hook 'emacs-lisp-mode 'parinfer-rust-mode)
+
+;; Start pinentry on launch
+(pinentry-start)
+
+;; Tree Sitter
+;; (use-package! tree-sitter
+;;   :config
+;;   (require 'tree-sitter-langs)
+;;   (global-tree-sitter-mode)
+;;   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
