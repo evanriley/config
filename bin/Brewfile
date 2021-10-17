@@ -17,6 +17,9 @@ brew 'tree-sitter'
 brew 'luajit', args: ['HEAD']
 brew 'neovim', args: ['HEAD']
 brew 'mas'
+brew 'mu'
+brew 'isync'
+brew 'msmtp'
 brew 'gpg2'
 brew 'starship'
 brew 'coreutils'

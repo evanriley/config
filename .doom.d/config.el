@@ -15,6 +15,19 @@
 ;; Path settings that sometimes decide not to work
 (add-to-list 'exec-path "/opt/homebrew/bin/lein")
 
+(setq frame-title-format
+      '(""
+        (:eval
+         (if (s-contains-p org-roam-directory (or buffer-file-name ""))
+             (replace-regexp-in-string
+              ".*/[0-9]*-?" "☰ "
+              (subst-char-in-string ?_ ?  buffer-file-name))
+           "%b"))
+        (:eval
+         (let ((project-name (projectile-project-name)))
+           (unless (string= "-" project-name)
+             (format (if (buffer-modified-p)  " ◉ %s" "  ●  %s") project-name))))))
+
 ;; Simple ascii emacs banner
 (defun doom-dashboard-draw-ascii-emacs-banner-fn ()
   (let* ((banner
@@ -160,3 +173,47 @@
 ;;   (require 'tree-sitter-langs)
 ;;   (global-tree-sitter-mode)
 ;;   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+;; Direnv
+(use-package! direnv
+  :config
+  (direnv-mode))
+
+;; email settings
+ (after! mu4e
+  (setq sendmail-program (executable-find "msmtp")
+        send-mail-function #'smtpmail-send-it
+        message-sendmail-f-is-evil t
+        message-sendmail-extra-arguments '("--read-envelope-from")
+        message-send-mail-function #'message-send-mail-with-sendmail))
+
+(setq mu4e-get-mail-command (concat (executable-find "mbsync") " -a"))
+
+
+(set-email-account! "evan@riley.industires"
+  '((mu4e-sent-folder       . "/icloud/Sent Messages")
+    (mu4e-drafts-folder     . "/icloud/Drafts")
+    (mu4e-trash-folder      . "/icloud/Deleted Messages")
+    (mu4e-refile-folder     . "/icloud/Archive")
+    (smtpmail-smtp-user     . "evancriley")
+    (user-mail-address      . "evan@riley.industries")    ;; only needed for mu < 1.4
+    (mu4e-compose-signature . "---\nEvan Riley"))
+  t)
+
+(set-email-account! "me@evanriley.me"
+  '((mu4e-sent-folder       . "/fastmail/Sent")
+    (mu4e-drafts-folder     . "/fastmail/Drafts")
+    (mu4e-trash-folder      . "/fastmail/Trash")
+    (mu4e-refile-folder     . "/fastmail/Archive")
+    (smtpmail-smtp-user     . "me@evanriley.me")
+    (user-mail-address      . "me@evanriley.me")    ;; only needed for mu < 1.4
+    (mu4e-compose-signature . "---\nEvan Riley"))
+  t)
+
+
+
+(setq   mu4e-maildir-shortcuts
+        '(("/icloud/INBOX" . ?i)
+          ("/icloud/Sent Messages" . ?I)
+          ("/fastmail/INBOX" . ?f)
+          ("/fastmail/Sent" . ?F)))

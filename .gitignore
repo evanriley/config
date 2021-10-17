@@ -10,3 +10,5 @@
 .cargo
 .cache
 .config/gh/hosts.yml
+.envrc
+/.idea/
