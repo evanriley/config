@@ -22,5 +22,6 @@ opt.splitbelow = true
 opt.splitright = true
 o.completeopt = 'menuone,noselect'
 opt.wrap = false
+o.clipboard = 'unnamedplus'
 
 vim.opt.termguicolors = true

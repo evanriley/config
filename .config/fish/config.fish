@@ -1,12 +1,10 @@
 set -gx EDITOR nvim
-set -gx PATH ~/bin $NPM_PACKAGES/bin ~/.cargo/bin ~/.emacs.d/bin /opt/homebrew/bin ~/go/bin $PATH
+set -gx PATH ~/bin ~/.local/bin $NPM_PACKAGES/bin ~/.cargo/bin ~/.emacs.d/bin /opt/homebrew/bin ~/go/bin /opt/homebrew/opt/grep/libexec/gnubin $PATH
 set -gx GPG_TTY (tty)
 
-frum init | source
-
 set -g fish_greeting
+
 # Aliases
-#
 # Use this to manage dotfiles
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
@@ -51,5 +49,15 @@ alias cat='bat'
 
 # tidy
 alias tidy=/opt/homebrew/bin/tidy
+
+# pyenv
+status is-login; and pyenv init --path | source
+status is-interactive; and pyenv init - | source
+
+# frum
+frum init | source
+
+# fnm
+fnm env | source
 
 starship init fish | source

@@ -135,11 +135,21 @@
       "C-<down>"       #'+evil/window-move-down
       "C-<up>"         #'+evil/window-move-up
       "C-<right>"      #'+evil/window-move-right))
-
-;; Default Directories for Org and Org-Roam
+;; Set directory for org
 (setq
- org-directory "~/Code/org/"
- org-roam-directory "~/Code/org/notes")
+ org-directory "~/Code/org/")
+
+;; Setup Org-Roam
+(use-package! org-roam
+  :ensure t
+  :init
+  (setq org-roam-v2-ack t)
+  :custom
+  (org-roam-directory "~/Code/org/notes")
+  (org-roam-complete-everywhere t)
+  :config
+  (org-roam-db-autosync-mode))
+
 
 ;; Hide Org Markup Indicators
 (after! org (setq org-hide-emphasis-markers t))
@@ -189,7 +199,6 @@
 
 (setq mu4e-get-mail-command (concat (executable-find "mbsync") " -a"))
 
-
 (set-email-account! "evan@riley.industires"
   '((mu4e-sent-folder       . "/icloud/Sent Messages")
     (mu4e-drafts-folder     . "/icloud/Drafts")
@@ -210,10 +219,22 @@
     (mu4e-compose-signature . "---\nEvan Riley"))
   t)
 
-
-
 (setq   mu4e-maildir-shortcuts
         '(("/icloud/INBOX" . ?i)
           ("/icloud/Sent Messages" . ?I)
           ("/fastmail/INBOX" . ?f)
           ("/fastmail/Sent" . ?F)))
+
+;; screenshot settings
+;; Currently doesn't work on macOS Sadge
+;; (use-package! screenshot
+;;   :defer t
+;;   :config (setq screenshot-upload-fn "upload %s 2>/dev/null"))
+
+;; For Go
+(add-to-list 'auto-mode-alist '("\\.tmpl\\'" . web-mode))
+(setq web-mode-engines-alist
+      '(("go"    . "\\.gohtml\\'")
+        ("go"    . "\\.gotmpl\\'")
+        ("go"    . "\\.tmpl\\'"))
+)
