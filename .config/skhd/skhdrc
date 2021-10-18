@@ -1,5 +1,5 @@
 # open terminal
-cmd - return : /Applications/Kitty.app/Contents/MacOS/kitty --single-instance -d ~ &> /dev/null
+cmd - return : open -na /Applications/iTerm.app
 
 # open iina with url from clipboard
 cmd - m : open -na /Applications/iina.app --args (pbpaste)

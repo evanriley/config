@@ -38,7 +38,7 @@ yabai -m config --space games layout float
 
 yabai -m rule --add app="^Emacs" space=code
 yabai -m rule --add app="^Xcode" space=code
-yabai -m rule --add app="^HEY" space=mail
+yabai -m rule --add app="^Mail" space=mail
 yabai -m rule --add app="^Firefox" space=web
 yabai -m rule --add app="^Notes" space=notes
 yabai -m rule --add app="^Plex" space=media
