@@ -44,8 +44,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/evan/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/home/evan/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/home/evan/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/home/evan/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/evan/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
+local package_path_str = "/Users/evan/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/Users/evan/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/Users/evan/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/Users/evan/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/Users/evan/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -71,127 +71,135 @@ time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
   ["bufferline.nvim"] = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/bufferline.nvim"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/bufferline.nvim"
   },
   ["cmp-buffer"] = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/cmp-buffer"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/cmp-buffer"
   },
   ["cmp-nvim-lsp"] = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp"
   },
   conjure = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/conjure"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/conjure"
   },
   ["gitsigns.nvim"] = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
   },
   ["hop.nvim"] = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/hop.nvim"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/hop.nvim"
   },
   ["lualine.nvim"] = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/lualine.nvim"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/lualine.nvim"
   },
   luasnip = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/luasnip"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/luasnip"
   },
   neoformat = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/neoformat"
-  },
-  neogit = {
-    loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/neogit"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/neoformat"
   },
   ["nvim-autopairs"] = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/nvim-autopairs"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/nvim-autopairs"
   },
   ["nvim-cmp"] = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/nvim-cmp"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/nvim-cmp"
   },
   ["nvim-colorizer.lua"] = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua"
   },
   ["nvim-comment"] = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/nvim-comment"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/nvim-comment"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
   },
   ["nvim-lspinstall"] = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/nvim-lspinstall"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/nvim-lspinstall"
   },
   ["nvim-treesitter"] = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
   },
   ["nvim-ts-rainbow"] = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/nvim-ts-rainbow"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/nvim-ts-rainbow"
   },
   ["nvim-web-devicons"] = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
   },
   ["packer.nvim"] = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/packer.nvim"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/packer.nvim"
   },
   ["parinfer-rust"] = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/parinfer-rust"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/parinfer-rust"
   },
   ["plenary.nvim"] = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/plenary.nvim"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/plenary.nvim"
   },
   ["telescope-fzf-native.nvim"] = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/telescope.nvim"
   },
   ["tokyonight.nvim"] = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/tokyonight.nvim"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/tokyonight.nvim"
   },
   ["vim-dispatch"] = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/vim-dispatch"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/vim-dispatch"
   },
   ["vim-dispatch-neovim"] = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/vim-dispatch-neovim"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/vim-dispatch-neovim"
   },
   ["vim-floaterm"] = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/vim-floaterm"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/vim-floaterm"
+  },
+  ["vim-go"] = {
+    loaded = true,
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/vim-go"
   },
   ["vim-jack-in"] = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/vim-jack-in"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/vim-jack-in"
   },
   ["vim-sandwich"] = {
     loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/vim-sandwich"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/vim-sandwich"
+  },
+  vlime = {
+    loaded = true,
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/vlime/vim/"
   }
 }
 
 time([[Defining packer_plugins]], false)
+-- Runtimepath customization
+time([[Runtimepath customization]], true)
+vim.o.runtimepath = vim.o.runtimepath .. ",/Users/evan/.local/share/nvim/site/pack/packer/start/vlime/vim/"
+time([[Runtimepath customization]], false)
 if should_profile then save_profiles() end
 
 end)
