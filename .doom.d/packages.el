@@ -52,7 +52,7 @@
 (package! org-fancy-priorities)
 (package! org-super-agenda)
 (package! rotate)
-(package! parinfer-rust-mode)
+(unpin! parinfer-rust-mode)
 (package! pinentry)
 (package! direnv)
 ;; (package! tree-sitter)

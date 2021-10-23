@@ -62,8 +62,8 @@
 
 
 ;; Set theme
-;; (setq doom-theme 'doom-wilmersdorf)
-(setq doom-theme 'doom-city-lights)
+(setq doom-theme 'doom-wilmersdorf)
+;;(setq doom-theme 'doom-city-lights)
 ;; (setq doom-theme 'doom-acario-light)
 ;; (setq doom-theme 'doom-tomorrow-day)
 ;; (setq doom-theme 'doom-opera-light)
@@ -72,6 +72,8 @@
 ;; (setq doom-theme 'doom-gruvbox)
 ;; (setq doom-theme 'doom-xcode)
 ;; (setq doom-theme 'doom-sourcerer)
+;; (setq doom-theme 'doom-tokyo-night)
+;; (setq doom-theme 'doom-rouge)
 
 ;; Modeline Settings
 (defun doom-modeline-conditional-buffer-encoding ()
@@ -150,6 +152,8 @@
   :config
   (org-roam-db-autosync-mode))
 
+;; Org mode code block syntax highlighting
+(setq org-src-fontify-natively t)
 
 ;; Hide Org Markup Indicators
 (after! org (setq org-hide-emphasis-markers t))
@@ -169,10 +173,6 @@
   (setq lsp-ui-doc-show-with-cursor nil)
   (setq lsp-ui-doc-show-with-mouse t))
 
-;; Parinfer Rust Mode
-;; Auto download parinfer-rust to keep it in sync
-(setq parinfer-rust-auto-download t)
-(add-hook 'emacs-lisp-mode 'parinfer-rust-mode)
 
 ;; Start pinentry on launch
 (pinentry-start)
