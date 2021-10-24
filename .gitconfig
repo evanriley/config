@@ -35,7 +35,7 @@
 [commit]
         gpgsign = true
 [gpg]
-       program = gpg
+	program = gpg
 [credential]
        helper = osxkeychain
 [difftool "nvimdiff"]
