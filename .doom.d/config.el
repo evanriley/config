@@ -55,8 +55,8 @@
 
 ;; Set fonts
 (setq
- doom-font (font-spec :family "JetBrains Mono" :size 16)
- doom-big-font (font-spec :family "JetBrains Mono" :size 36)
+ doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 16)
+ doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 36)
  doom-variable-pitch-font (font-spec :fammily "Overpass" :size 16)
  doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
 
@@ -190,12 +190,12 @@
   (direnv-mode))
 
 ;; email settings
- (after! mu4e
-  (setq sendmail-program (executable-find "msmtp")
-        send-mail-function #'smtpmail-send-it
-        message-sendmail-f-is-evil t
-        message-sendmail-extra-arguments '("--read-envelope-from")
-        message-send-mail-function #'message-send-mail-with-sendmail))
+(after! mu4e
+ (setq sendmail-program (executable-find "msmtp")
+       send-mail-function #'smtpmail-send-it
+       message-sendmail-f-is-evil t
+       message-sendmail-extra-arguments '("--read-envelope-from")
+       message-send-mail-function #'message-send-mail-with-sendmail))
 
 (setq mu4e-get-mail-command (concat (executable-find "mbsync") " -a"))
 
@@ -236,5 +236,5 @@
 (setq web-mode-engines-alist
       '(("go"    . "\\.gohtml\\'")
         ("go"    . "\\.gotmpl\\'")
-        ("go"    . "\\.tmpl\\'"))
-)
+        ("go"    . "\\.tmpl\\'")))
+
