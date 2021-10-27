@@ -238,3 +238,8 @@
         ("go"    . "\\.gotmpl\\'")
         ("go"    . "\\.tmpl\\'")))
 
+;; For Parinfer
+(setq parinfer-rust-library "~/.emacs.d/.local/etc/parinfer-rust/parinfer-rust-darwin.so")
+
+;; For Lisp
+(load (expand-file-name "~/.roswell/helper.el"))
