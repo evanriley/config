@@ -1,6 +1,19 @@
 require('nvim-treesitter.configs').setup({
 	ensure_installed = {
-		-- "maintained",
+    "tsx",
+    "toml",
+    "fish",
+    "json",
+    "clojure",
+    "swift",
+    "html",
+    "scss",
+    "commonlisp",
+    "go",
+    "lua",
+    "nix",
+    "ruby",
+    "rust",
 	},
 	ignore_install = {}, -- List of parsers to ignore installing
 	highlight = {
@@ -16,5 +29,9 @@ require('nvim-treesitter.configs').setup({
     enable = true,
     extended_mode = true,
     max_file_lines = nil
+  },
+  indent = {
+    enable = false,
+    disbale = {},
   }
 })

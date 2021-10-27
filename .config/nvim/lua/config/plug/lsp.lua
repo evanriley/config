@@ -48,7 +48,7 @@ local on_attach = function(client, bufnr)
     autocmd! * <buffer>
     autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
     autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-    autocmd BufWritePre *.rb lua vim.lsp.buf.formatting()
+    autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()
     augroup END
     ]],
 			false
@@ -89,8 +89,18 @@ local ruby_settings = {
     completion = true,
     formatting = true,
   }
-
 }
+
+local typescript_settings = {
+  tsserver = {
+    autoformat = true,
+    completion = true,
+    formatting = true,
+    filetypes = { "typescript", "typescriptreact", "typescript.tsx" }
+  }
+}
+
+
 -- config that activates keymaps and enables snippet support
 local function make_config()
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
