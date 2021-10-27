@@ -41,10 +41,11 @@ alias ge='git-edit-new'
 alias myip="curl http://ipecho.net/plain; echo"
 
 ## more util commands
-alias ls='lsd'
-alias l='lsd -l'
-alias ll='lsd -l | less'
-alias la='lsd -la'
+alias ls='exa'
+alias l='exa -l'
+alias ll='exa -l | less'
+alias la='exa -la'
+alias lg='exa --git'
 alias cat='bat'
 
 # tidy
