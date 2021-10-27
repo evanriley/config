@@ -5,14 +5,24 @@ return require('packer').startup(function()
 	-- LSP stuff
 	use 'neovim/nvim-lspconfig'
 	use 'kabouzeid/nvim-lspinstall'
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/nvim-cmp'
-  use 'onsails/lspkind-nvim'
+  use 'ms-jpq/coq_nvim'
+  use {
+    'ms-jpq/coq.artifacts',
+    branch = 'artifacts'
+  }
+  use {
+    'ms-jpq/coq.thirdparty',
+    branch = '3p'
+  }
+  -- use 'hrsh7th/cmp-nvim-lsp'
+  -- use 'hrsh7th/cmp-buffer'
+  -- use 'hrsh7th/nvim-cmp'
+  -- use 'onsails/lspkind-nvim'
 
 	-- Editor cstuff
 	use 'windwp/nvim-autopairs'
-  use 'L3MON4D3/luasnip'
+  -- use 'L3MON4D3/luasnip'
+  -- use 'saadparwaiz1/cmp_luasnip'
 	use {
   		'nvim-lualine/lualine.nvim',
   		requires = { 'kyazdani42/nvim-web-devicons', opt = true } 
@@ -35,6 +45,7 @@ return require('packer').startup(function()
         	'nvim-treesitter/nvim-treesitter',
         	run = ':TSUpdate'
   }
+  use 'windwp/nvim-ts-autotag'
 	use 'norcalli/nvim-colorizer.lua'
 	use {
 	  		'lewis6991/gitsigns.nvim',
