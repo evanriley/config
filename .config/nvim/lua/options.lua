@@ -20,7 +20,7 @@ opt.hidden = true
 opt.ignorecase = true
 opt.splitbelow = true
 opt.splitright = true
-o.completeopt = 'menuone,noselect'
+o.completeopt = 'menu,menuone,noselect'
 opt.wrap = false
 o.clipboard = 'unnamedplus'
 
