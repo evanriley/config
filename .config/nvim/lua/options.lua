@@ -23,5 +23,6 @@ opt.splitright = true
 o.completeopt = 'menu,menuone,noselect'
 opt.wrap = false
 o.clipboard = 'unnamedplus'
+o.signcolumn = 'auto:2'
 
 vim.opt.termguicolors = true
