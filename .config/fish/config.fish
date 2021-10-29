@@ -49,7 +49,11 @@ alias lg='exa --git'
 alias cat='bat'
 
 if test (uname) = "Darwin"
- alias tmux 'tmux -CC new -A -s main'
+ alias tmn 'tmux -CC new -A -s main'
+ alias tma 'tmux -CC attach'
+ function tmxn
+  tmux -u -CC new -A -s $argv
+ end
 end
 
 # tidy

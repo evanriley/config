@@ -64,6 +64,7 @@ map('n', '<leader>fd', ':Telescope find_files<CR>', { noremap = true })
 map('n', '<leader>fF', ':Telescope file_browser<CR>', { noremap = true })
 map('n', '<leader>fg', ':Telescope git_commits<CR>', { noremap = true })
 map('n', '<leader>fG', ':Telescope git_branches<CR>', { noremap = true })
+map('n', '<leader>bb', ':Telescope buffers<CR>', { noremap = true })
 
 -- hop.nvim
 map('n', '<leader>hH', ':HopWord<CR>', opt)
