@@ -48,6 +48,10 @@ alias la='exa -la'
 alias lg='exa --git'
 alias cat='bat'
 
+if test (uname) = "Darwin"
+ alias tmux 'tmux -CC new -A -s main'
+end
+
 # tidy
 alias tidy=/opt/homebrew/bin/tidy
 
