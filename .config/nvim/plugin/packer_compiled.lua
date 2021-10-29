@@ -69,9 +69,9 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  ["bufferline.nvim"] = {
+  ["ayu-vim"] = {
     loaded = true,
-    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/bufferline.nvim"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/ayu-vim"
   },
   ["cmp-buffer"] = {
     loaded = true,
@@ -81,9 +81,21 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/evan/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp"
   },
+  ["cmp-vsnip"] = {
+    loaded = true,
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/cmp-vsnip"
+  },
   conjure = {
     loaded = true,
     path = "/Users/evan/.local/share/nvim/site/pack/packer/start/conjure"
+  },
+  ["emmet-vim"] = {
+    loaded = true,
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/emmet-vim"
+  },
+  ["friendly-snippets"] = {
+    loaded = true,
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/friendly-snippets"
   },
   ["gitsigns.nvim"] = {
     loaded = true,
@@ -93,13 +105,13 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/evan/.local/share/nvim/site/pack/packer/start/hop.nvim"
   },
+  ["lspkind-nvim"] = {
+    loaded = true,
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/lspkind-nvim"
+  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/Users/evan/.local/share/nvim/site/pack/packer/start/lualine.nvim"
-  },
-  luasnip = {
-    loaded = true,
-    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/luasnip"
   },
   neoformat = {
     loaded = true,
@@ -121,17 +133,21 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/evan/.local/share/nvim/site/pack/packer/start/nvim-comment"
   },
+  ["nvim-lsp-installer"] = {
+    loaded = true,
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/Users/evan/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
   },
-  ["nvim-lspinstall"] = {
-    loaded = true,
-    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/nvim-lspinstall"
-  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/Users/evan/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
+  },
+  ["nvim-ts-autotag"] = {
+    loaded = true,
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/nvim-ts-autotag"
   },
   ["nvim-ts-rainbow"] = {
     loaded = true,
@@ -140,6 +156,16 @@ _G.packer_plugins = {
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/Users/evan/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
+  },
+  ["org-bullets.nvim"] = {
+    config = { "\27LJ\2\nd\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\fsumbols\1\0\0\1\5\0\0\b◉\b○\b✸\b✿\nsetup\16org-bullets\frequire\0" },
+    loaded = true,
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/org-bullets.nvim"
+  },
+  ["orgmode.nvim"] = {
+    config = { "\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\forgmode\frequire\0" },
+    loaded = true,
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/orgmode.nvim"
   },
   ["packer.nvim"] = {
     loaded = true,
@@ -153,6 +179,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/evan/.local/share/nvim/site/pack/packer/start/plenary.nvim"
   },
+  slimv = {
+    loaded = true,
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/slimv"
+  },
   ["telescope-fzf-native.nvim"] = {
     loaded = true,
     path = "/Users/evan/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim"
@@ -160,6 +190,14 @@ _G.packer_plugins = {
   ["telescope.nvim"] = {
     loaded = true,
     path = "/Users/evan/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+  },
+  ["toggleterm.nvim"] = {
+    loaded = true,
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/toggleterm.nvim"
+  },
+  ["tokyodark.nvim"] = {
+    loaded = true,
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/tokyodark.nvim"
   },
   ["tokyonight.nvim"] = {
     loaded = true,
@@ -173,10 +211,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/evan/.local/share/nvim/site/pack/packer/start/vim-dispatch-neovim"
   },
-  ["vim-floaterm"] = {
-    loaded = true,
-    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/vim-floaterm"
-  },
   ["vim-go"] = {
     loaded = true,
     path = "/Users/evan/.local/share/nvim/site/pack/packer/start/vim-go"
@@ -189,17 +223,25 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/evan/.local/share/nvim/site/pack/packer/start/vim-sandwich"
   },
-  vlime = {
+  ["vim-vsnip"] = {
     loaded = true,
-    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/vlime/vim/"
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/vim-vsnip"
+  },
+  ["vim-vsnip-integ"] = {
+    loaded = true,
+    path = "/Users/evan/.local/share/nvim/site/pack/packer/start/vim-vsnip-integ"
   }
 }
 
 time([[Defining packer_plugins]], false)
--- Runtimepath customization
-time([[Runtimepath customization]], true)
-vim.o.runtimepath = vim.o.runtimepath .. ",/Users/evan/.local/share/nvim/site/pack/packer/start/vlime/vim/"
-time([[Runtimepath customization]], false)
+-- Config for: org-bullets.nvim
+time([[Config for org-bullets.nvim]], true)
+try_loadstring("\27LJ\2\nd\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\fsumbols\1\0\0\1\5\0\0\b◉\b○\b✸\b✿\nsetup\16org-bullets\frequire\0", "config", "org-bullets.nvim")
+time([[Config for org-bullets.nvim]], false)
+-- Config for: orgmode.nvim
+time([[Config for orgmode.nvim]], true)
+try_loadstring("\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\forgmode\frequire\0", "config", "orgmode.nvim")
+time([[Config for orgmode.nvim]], false)
 if should_profile then save_profiles() end
 
 end)
