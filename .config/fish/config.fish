@@ -48,10 +48,21 @@ alias lg 'exa --git'
 alias cat 'bat'
 
 if test (uname) = "Darwin"
- alias tmn 'tmux -CC new -A -s main'
- alias tma 'tmux -CC attach'
- function tmxn
-  tmux -u -CC new -A -s $argv
+  # the -CC argument is take advantage of iTerm2s tmux features
+ function tma # tmux attach to either last session or if given an argument connect to named session
+    if [ -z "$argv" ];
+      tmux -CC attach
+    else
+      tmux -CC attach -t $argv
+    end
+ end
+
+ function tmn # tmux new either create the 'main' session or new one named by argument
+    if [ -z "$argv" ];
+      tmux -CC new -A -s main
+    else
+      tmux -CC new -A -s $argv
+    end
  end
 end
 
