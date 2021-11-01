@@ -15,7 +15,6 @@ map('n', '<leader>ln', ':set rnu!<CR>', opt) -- toggle relative line numbers
 map('', '<C-c>', ':CommentToggle<CR>', opt) -- toggle comment on current line or selection
 map('n', '<leader>nf', ':Neoformat<CR>', { noremap = true }) -- format current buffer with neoformat
 
--- general mappings
 map('n', '<esc>', ':nohlsearch<cr>', { silent = true})
 vim.cmd [[
   command! W :w
@@ -23,24 +22,20 @@ vim.cmd [[
   command! Qa :qa
 ]]  -- Make :Q, :Q, and :Qa work like :q, :w, and :qa because I'm dumb
 
--- clipboard mappings
 map('n', '<leader>ya', ':%y+<CR>', opt) -- Copy content of entire buffer to system clipboard
 map('n', '<leader>yl', '"+yy', opt) -- yank current line into system clipboard
 
 
--- Easily reachable Packer commands
 map('n', '<localleader>pu', ':PackerUpdate<cr>', opt)
 map('n', '<localleader>pc', ':PackerClean<cr>', opt)
 map('n', '<localleader>pi', ':PackerInstall<cr>', opt)
 
--- buffer management
 map('n', '<leader>bh', ':bf<CR>', { noremap = true })
 map('n', '<leader>bk', ':bn<CR>', { noremap = true })
 map('n', '<leader>bj', ':bp<CR>', { noremap = true })
 map('n', '<leader>bl', ':bl<CR>', { noremap = true })
 map('n', '<leader>bd', ':bd<CR>', { noremap = true })
 
--- telescope pullup
 map('n', '<leader>ff', ':Telescope git_files<CR>', { noremap = true })
 map('n', '<leader>fd', ':Telescope find_files<CR>', { noremap = true })
 map('n', '<leader>fF', ':Telescope file_browser<CR>', { noremap = true })
@@ -48,6 +43,5 @@ map('n', '<leader>fg', ':Telescope git_commits<CR>', { noremap = true })
 map('n', '<leader>fG', ':Telescope git_branches<CR>', { noremap = true })
 map('n', '<leader>bb', ':Telescope buffers<CR>', { noremap = true })
 
--- hop.nvim
 map('n', '<leader>hH', ':HopWord<CR>', opt)
 map('n', '<leader>hh', ':HopLine<CR>', opt)

@@ -9,7 +9,6 @@ return require('packer').startup(function()
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/nvim-cmp'
   use 'onsails/lspkind-nvim'
-
 	use 'windwp/nvim-autopairs'
   use "rafamadriz/friendly-snippets"
   use 'hrsh7th/vim-vsnip'
