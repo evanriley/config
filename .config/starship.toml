@@ -15,7 +15,7 @@ disabled = true
 format = '\[[$symbol($version)]($style)\]'
 
 [cmd_duration]
-format = '\[[⏱ $duration ]($style)\]'
+disabled = true
 
 [conda]
 format = '\[[$symbol$environment]($style)\]'

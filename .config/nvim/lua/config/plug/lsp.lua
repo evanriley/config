@@ -66,7 +66,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local lsp_installer = require('nvim-lsp-installer')
-local servers = { 'pyright', 'rls', 'tsserver', 'clojure_lsp' }
+local servers = { 'pyright', 'rls', 'tsserver', 'clojure_lsp', 'gopls' }
 
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {

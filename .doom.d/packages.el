@@ -54,3 +54,4 @@
 (package! rotate)
 (package! pinentry)
 (package! direnv)
+(package! company-tabnine)
