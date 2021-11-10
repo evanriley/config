@@ -100,6 +100,9 @@
            (unless (string= "-" project-name)
              (format (if (buffer-modified-p) " ◉ %s" "  ●  %s") project-name))))))
 
+;; Transparent title bar
+(when (eq system-type 'darwin) (ns-auto-titlebar-mode))
+
 ;; Simple Settings/Better Defaults
 (setq-default
  delete-by-moving-to-trash t
