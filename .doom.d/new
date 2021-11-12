@@ -1,4 +1,0 @@
-
-error: (doom-hook-error emacs-lisp-mode-hook parinfer-rust-mode (module-open-failed /Users/<user>/.emacs.d/.local/etc/parinfer-rust/parinfer-rust-darwin.so dlopen(/Users/<user>/.emacs.d/.local/etc/parinfer-rust/parinfer-rust-darwin.so, 1): no suitable image found.  Did find:
-	/Users/<user>/.emacs.d/.local/etc/parinfer-rust/parinfer-rust-darwin.so: mach-o, but wrong architecture
-	/Users/<user>/.emacs.d/.local/etc/parinfer-rust/parinfer-rust-darwin.so: mach-o, but wrong architecture))
