@@ -76,19 +76,18 @@ return require('packer').startup(function()
     'fatih/vim-go',
     run = ':GoUpdateBinaries'
   } 
-  use {
-    'kristijanhusak/orgmode.nvim',
-    branch = 'tree-sitter',
-    config = function()
-        require('orgmode').setup{}
-    end
-  }
-  use {
-    'akinsho/org-bullets.nvim',
-    config = function()
-      require('org-bullets').setup {
-        sumbols = { "◉", "○", "✸", "✿" }
-      }
-    end
-  }
+  -- use {
+  --   'kristijanhusak/orgmode.nvim',
+  --   config = function()
+  --       require('orgmode').setup{}
+  --   end
+  -- }
+  -- use {
+  --   'akinsho/org-bullets.nvim',
+  --   config = function()
+  --     require('org-bullets').setup {
+  --       sumbols = { "◉", "○", "✸", "✿" }
+  --     }
+  --   end
+  -- }
 end)

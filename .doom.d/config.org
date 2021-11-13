@@ -183,6 +183,9 @@ Each module also comes with flags to alter their behavior.
         :emacs
         <<doom-emacs>>
 
+        :term
+        <<doom-term>>
+
         :checkers
         <<doom-checkers>>
 
@@ -274,7 +277,7 @@ file-templates      ; auto-snippets for empty files
 fold                ; (nigh) universal code folding
 (format +onsave)    ; automated prettiness
 ;;god               ; run Emacs commands without modifier keys
-lispy               ; vim for lisp, for people who don't like vim
+;;lispy             ; vim for lisp, for people who don't like vim
 multiple-cursors    ; editing in many places at once
 ;;objed             ; text object editing for the innocent
 parinfer            ; turn lisp into python, sort of
@@ -711,6 +714,28 @@ Nested snippets are cool, yo
  :actions '(insert))
 #+end_src
 
+*** Org Roam UI
+Org-Roam-UI is a pretty way of looking at my network of notes, lets downloaded needed packages up here.
+We also un-pin org-roam, org-roam-ui tries to keep up with the latest features of org-roam, which can lead to issues with a pinned version.
+#+begin_src emacs-lisp :tangle packages.el
+(unpin! org-roam)
+(package! websocket)
+(package! org-roam-ui :recipe (:host github :repo "org-roam/org-roam-ui" :files ("*.el" "out")))
+#+end_src
+
+Then set it all up
+#+begin_src emacs-lisp
+(use-package! websocket
+  :after org-roam)
+
+(use-package! org-roam-ui
+  :after org
+  :config
+  (setq org-roam-ui-sync-theme t
+        org-roam-ui-follow t
+        org-roam-ui-update-on-save t
+        org-roam-ui-open-on-start t))
+#+end_src
 ** Visual packages
 *** Info colors
 Make manual pages look a bit nicer.
@@ -811,25 +836,18 @@ Let's setup Org-Mode Here
 ;; Set directory for org
 (setq
  org-directory "~/Code/org/")
-
-;; Setup Org-Roam
-(use-package! org-roam
-  :init
-  (setq org-roam-v2-ack t)
-  :custom
-  (org-roam-directory "~/Code/org/notes")
-  (org-roam-complete-everywhere t)
-  :config
-  (org-roam-db-autosync-mode))
-
 ;; Org mode code block syntax highlighting
 (setq org-src-fontify-natively t)
-
 ;; Hide Org Markup Indicators
 (after! org (setq org-hide-emphasis-markers t))
-
 ;; Insert Org Headings At Point.
 (after! org (setq org-insert-heading-respect-content nil))
+#+end_src
+
+*** Org-Roam
+My prefered way of taking notes.
+#+begin_src emacs-lisp
+(setq org-roam-directory "~/Code/org/notes")
 #+end_src
 
 ** Markdown
