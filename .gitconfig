@@ -30,7 +30,7 @@
         default = simple
 [user]
        name = Evan Riley
-       email = evanriley@hey.com
+       email = git@evanriley.dev
        signingkey = B61357FACF8C4B65
 [commit]
         gpgsign = true
