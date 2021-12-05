@@ -14,9 +14,9 @@ brew 'gcc'
 brew 'git'
 brew 'automake'
 brew 'pkg-config'
-brew 'tree-sitter', args: ['HEAD']
-brew 'luajit', args: ['HEAD']
-brew 'neovim', args: ['HEAD']
+brew 'tree-sitter'
+brew 'luajit'
+brew 'neovim'
 brew 'mas'
 brew 'mu'
 brew 'isync'
