@@ -1,5 +1,5 @@
 set -gx EDITOR nvim
-set -gx PATH ~/bin ~/.local/bin $NPM_PACKAGES/bin ~/.roswell/bin ~/.yarn/bin ~/.cargo/bin ~/.emacs.d/bin /opt/homebrew/bin ~/go/bin /opt/homebrew/opt/grep/libexec/gnubin $PATH
+set -gx PATH ~/bin ~/.local/bin $NPM_PACKAGES/bin ~/.roswell/bin ~/.yarn/bin ~/.cargo/bin ~/.emacs.d/bin /opt/homebrew/bin  /opt/homebrew/sbin ~/go/bin /opt/homebrew/opt/grep/libexec/gnubin $PATH
 set -gx GPG_TTY (tty)
 
 set -g fish_greeting
