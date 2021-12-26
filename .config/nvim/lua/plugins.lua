@@ -13,6 +13,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
     execute("packadd packer.nvim")
 end
 
+
 -- Autocompile
 vim.cmd([[
   augroup packer_user_config
@@ -249,6 +250,10 @@ return require('packer').startup(function()
     })
 
     use({
+      "Pocco81/DAPInstall.nvim",
+    })
+
+    use({
       "mfussenegger/nvim-dap",
       config = function()
         require("plugins.dap")
@@ -283,6 +288,8 @@ return require('packer').startup(function()
         require("dapui").setup()
       end
     })
+
+    use({ "jbyuki/one-small-step-for-vimkind" })
 
     use({
       "rcarriga/vim-ultest",
