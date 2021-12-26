@@ -1,4 +1,3 @@
-
 require("nvim-treesitter.configs").setup({
 	ensure_installed = "maintained", --  "all", "maintained" or a list
 	ignore_install = {}, -- List of parsers to ignore installing
