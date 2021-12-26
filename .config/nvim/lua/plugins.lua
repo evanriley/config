@@ -119,6 +119,14 @@ return require('packer').startup(function()
       requires = {"tami5/sqlite.lua"}
     })
 
+    use({
+      "nvim-telescope/telescope-dap.nvim",
+      after = { "telescope.nvim", "nvim-dap" },
+      config = function()
+        require("telescope").load_extension("dap")
+      end
+    })
+
 
 
     --------------------------
@@ -202,6 +210,10 @@ return require('packer').startup(function()
 
     use({ "tpope/vim-surround" })
 
+    use({ "wellle/targets.vim" })
+
+    use({ "chrisbra/NrrwRgn" })
+
     -------------------------
     -- Utilities and stuff --
     -------------------------
@@ -233,6 +245,59 @@ return require('packer').startup(function()
       "direnv/direnv.vim",
       config = function()
         vim.g.direnv_silent_load = 0
+      end
+    })
+
+    use({
+      "mfussenegger/nvim-dap",
+      config = function()
+        require("plugins.dap")
+      end
+    })
+
+    use({
+      "theHamsta/nvim-dap-virtual-text",
+      after = "nvim-dap",
+      config = function()
+        require("nvim-dap-virtual-text").setup({
+         enabled = true, -- enable this plugin (the default)
+         enabled_commands = true, -- create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)
+         highlight_changed_variables = true, -- highlight changed values with NvimDapVirtualTextChanged, else always NvimDapVirtualText
+         highlight_new_as_changed = true, -- highlight new variables in the same way as changed variables (if highlight_changed_variables)
+         show_stop_reason = true, -- show stop reason when stopped for exceptions
+         commented = false, -- prefix virtual text with comment string
+         -- experimental features:
+         virt_text_pos = "eol", -- position of virtual text, see `:h nvim_buf_set_extmark()`
+         all_frames = false, -- show virtual text for all stack frames not only current. Only works for debugpy on my machine.
+         virt_lines = false, -- show virtual lines instead of virtual text (will flicker!)
+         virt_text_win_col = nil, -- position the virtual text at a fixed window column (starting from the first text column) ,
+        })
+      end,
+    })
+
+    use({
+      "rcarriga/nvim-dap-ui",
+      after = "nvim-dap",
+      module = "dapui",
+      config = function()
+        require("dapui").setup()
+      end
+    })
+
+    use({
+      "rcarriga/vim-ultest",
+      requires = { "vim-test/vim-test" },
+      run = ":UpdateRemotePlugins",
+      config = function()
+        require("plugins.ultest")
+      end
+    })
+
+    use({
+      "ThePrimeagen/refactoring.nvim",
+      after = "nvim-treesitter",
+      config = function()
+        require("refactoring").setup({})
       end
     })
 
