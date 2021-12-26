@@ -1,14 +1,13 @@
 -- Load Plugins
 require('plugins')
 
--- Load Options & Keymaps
-require('mappings')
+-- Load Options
 require('options')
+-- Load mappings
+require('mappings')
 
--- load theme
--- Use Scheme util, stolen from https://github.com/Theory-of-Everything/nii-nvim/blob/master/lua/lib/scheme.lua
-local scheme = require('lib.scheme')
-scheme.load_shared_scheme('kanagawa')
+-- Diagnostics
+require "diagnostics"
 
--- Load plugin configs
-require('config.plug')
+-- Set Colorscheme
+vim.cmd("colorscheme kanagawa")
