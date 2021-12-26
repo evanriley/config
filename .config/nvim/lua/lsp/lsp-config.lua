@@ -1,6 +1,5 @@
 local lspconfig = require('lspconfig')
 local lsp_installer = require("nvim-lsp-installer")
-local coq = require("coq")
 local configs = require('lsp.servers')
 local utils = require('lsp.utilities')
 
@@ -30,6 +29,7 @@ end
 
 -- Capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 capabilities.textDocument.codeAction = {
 	dynamicRegistration = true,
 	codeActionLiteralSupport = {
@@ -47,6 +47,7 @@ capabilities.textDocument.codeAction = {
 require("lsp-status").register_progress()
 capabilities.textDocument.completion.completionItem.workDoneProgress = true
 capabilities.window.workDoneProgress = true
+
 
 -- On Attach
 
@@ -126,7 +127,7 @@ for server, config in pairs(configs) do
   lsp_installer.on_server_ready(function(server)
     config.capabilities = capabilities
     config.on_attach = on_attach
-    server:setup(coq.lsp_ensure_capabilities(config))
+    server:setup(config)
   end)
 end
 

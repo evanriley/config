@@ -13,7 +13,6 @@ if fn.empty(fn.glob(install_path)) > 0 then
     execute("packadd packer.nvim")
 end
 
-
 -- Autocompile
 vim.cmd([[
   augroup packer_user_config
@@ -23,7 +22,6 @@ vim.cmd([[
 ]])
 
 
-require("plugins.coq") -- I need these settings to load before anything else.
 require("packer").init({
 	max_jobs = 50,
 })
@@ -39,17 +37,41 @@ return require('packer').startup(function()
     ----------------------------------------
     -- LSP, Copmletions and related items --
     ----------------------------------------
-    use ({
-	    'ms-jpq/coq_nvim',
-	    branch = 'coq',
-    })
     use({
-	    'ms-jpq/coq.artifacts',
-	    branch = 'artifacts',
+      "hrsh7th/nvim-cmp",
+      config = function()
+        require("plugins.cmp")
+      end,
+      requires = {
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-nvim-lua",
+        "hrsh7th/cmp-cmdline",
+        "hrsh7th/cmp-nvim-lsp",
+        "kdheepak/cmp-latex-symbols",
+        "dmitmel/cmp-cmdline-history",
+        "andersevenrud/cmp-tmux",
+        "quangnguyen30192/cmp-nvim-ultisnips",
+      },
     })
+
     use({
-	    'ms-jpq/coq.thirdparty',
-	    branch = '3p',
+      "tzachar/cmp-tabnine",
+      run = './install.sh',
+      requires = "hrsh7th/nvim-cmp",
+    })
+
+    use({
+      "SirVer/ultisnips",
+      requires = "honza/vim-snippets",
+      config = function() 
+        vim.opt.rtp:append({ vim.fn.stdpath("data") .. "/site/pack/packer/start/vim-snippets" })
+        vim.g.UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
+        vim.g.UltiSnipsJumpForwardTrigger = "<Plug>(ultisnips_jump_forward)"
+        vim.g.UltiSnipsJumpBackwardTrigger = "<Plug>(ultisnips_jump_backward)"
+        vim.g.UltiSnipsListSnippets = "<c-x><c-s>"
+        vim.g.UltiSnipsRemoveSelectModeMappings = 0
+      end,
     })
 
     use({
@@ -64,23 +86,12 @@ return require('packer').startup(function()
     use 'nvim-lua/lsp-status.nvim'
     use ({
       "onsails/lspkind-nvim",
-      config = function ()
+      config = function()
         require("lspkind").init({
           with_text = true,
-          preset = "codicons",
         })
-      end,
+      end
     })
-
-    use({
-      "jose-elias-alvarez/null-ls.nvim",
-      after = "nvim-lspconfig",
-      disable = false,
-      config = function()
-        require("lsp.null-ls")
-      end,
-    })
-
 
     use({
         "folke/trouble.nvim",
@@ -182,7 +193,7 @@ return require('packer').startup(function()
     ------------------------
     use({
 	    "windwp/nvim-autopairs",
-	    after = {"hop", "coq_nvim"},
+	    after = {"hop", "nvim-cmp"},
 	    config = function()
 	      require("plugins.autopairs")
       end,
