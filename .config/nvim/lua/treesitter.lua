@@ -19,9 +19,9 @@ require("nvim-treesitter.configs").setup({
 		enable = true,
 		keymaps = {
 			init_selection = "gnn",
-			node_incremental = "grn",
-			node_decremental = "grN",
-			scope_incremental = "grc",
+			node_incremental = "gnr",
+			node_decremental = "gNr",
+			scope_incremental = "gnc",
 		},
 	},
 	indent = {

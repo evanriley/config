@@ -14,6 +14,3 @@ require "diagnostics"
 
 -- Autocommands
 vim.cmd "source ~/.config/nvim/viml/autocommands.vim"
-
--- Neovim Cached
--- require("impatient")

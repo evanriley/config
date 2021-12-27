@@ -22,6 +22,7 @@ vim.cmd([[
 ]])
 
 
+require("plugins.coq")
 require("packer").init({
 	max_jobs = 50,
 })
@@ -37,42 +38,57 @@ return require('packer').startup(function()
     ----------------------------------------
     -- LSP, Copmletions and related items --
     ----------------------------------------
+    -- use({
+    --   "hrsh7th/nvim-cmp",
+    --   config = function()
+    --     require("plugins.cmp")
+    --   end,
+    --   requires = {
+    --     "hrsh7th/cmp-buffer",
+    --     "hrsh7th/cmp-path",
+    --     "hrsh7th/cmp-nvim-lua",
+    --     "hrsh7th/cmp-cmdline",
+    --     "hrsh7th/cmp-nvim-lsp",
+    --     "kdheepak/cmp-latex-symbols",
+    --     "dmitmel/cmp-cmdline-history",
+    --     "andersevenrud/cmp-tmux",
+    --     "quangnguyen30192/cmp-nvim-ultisnips",
+    --   },
+    -- })
+    --
+    -- use({
+    --   "tzachar/cmp-tabnine",
+    --   run = './install.sh',
+    --   requires = "hrsh7th/nvim-cmp",
+    -- })
+
+    -- use({
+    --   "SirVer/ultisnips",
+    --   event = 'InsertEnter',
+    --   requires = "honza/vim-snippets",
+    --   config = function() 
+    --     vim.opt.rtp:append({ vim.fn.stdpath("data") .. "/site/pack/packer/start/vim-snippets" })
+    --     vim.g.UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
+    --     vim.g.UltiSnipsJumpForwardTrigger = "<Plug>(ultisnips_jump_forward)"
+    --     vim.g.UltiSnipsJumpBackwardTrigger = "<Plug>(ultisnips_jump_backward)"
+    --     vim.g.UltiSnipsListSnippets = "<c-x><c-s>"
+    --     vim.g.UltiSnipsRemoveSelectModeMappings = 0
+    --   end,
+    -- })
+
     use({
-      "hrsh7th/nvim-cmp",
-      config = function()
-        require("plugins.cmp")
-      end,
-      requires = {
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-nvim-lua",
-        "hrsh7th/cmp-cmdline",
-        "hrsh7th/cmp-nvim-lsp",
-        "kdheepak/cmp-latex-symbols",
-        "dmitmel/cmp-cmdline-history",
-        "andersevenrud/cmp-tmux",
-        "quangnguyen30192/cmp-nvim-ultisnips",
-      },
+      "ms-jpq/coq_nvim",
+      branch = "coq",
     })
 
     use({
-      "tzachar/cmp-tabnine",
-      run = './install.sh',
-      requires = "hrsh7th/nvim-cmp",
+      "ms-jpq/coq.artifacts",
+      branch = "artifacts",
     })
 
     use({
-      "SirVer/ultisnips",
-      event = 'InsertEnter',
-      requires = "honza/vim-snippets",
-      config = function() 
-        vim.opt.rtp:append({ vim.fn.stdpath("data") .. "/site/pack/packer/start/vim-snippets" })
-        vim.g.UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
-        vim.g.UltiSnipsJumpForwardTrigger = "<Plug>(ultisnips_jump_forward)"
-        vim.g.UltiSnipsJumpBackwardTrigger = "<Plug>(ultisnips_jump_backward)"
-        vim.g.UltiSnipsListSnippets = "<c-x><c-s>"
-        vim.g.UltiSnipsRemoveSelectModeMappings = 0
-      end,
+      "ms-jpq/coq.thirdparty",
+      branch = "3p",
     })
 
     use({
@@ -208,7 +224,7 @@ return require('packer').startup(function()
     ------------------------
     use({
 	    "windwp/nvim-autopairs",
-	    after = {"hop", "nvim-cmp"},
+	    after = {"hop", "coq_nvim"},
 	    config = function()
 	      require("plugins.autopairs")
       end,
@@ -371,6 +387,4 @@ return require('packer').startup(function()
       "tpope/vim-rails",
       ft = { "ruby" }
     })
-
-
 end)
