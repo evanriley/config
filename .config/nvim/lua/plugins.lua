@@ -63,6 +63,7 @@ return require('packer').startup(function()
 
     use({
       "SirVer/ultisnips",
+      event = 'InsertEnter',
       requires = "honza/vim-snippets",
       config = function() 
         vim.opt.rtp:append({ vim.fn.stdpath("data") .. "/site/pack/packer/start/vim-snippets" })
@@ -123,6 +124,14 @@ return require('packer').startup(function()
     })
 
     use({
+      "nvim-telescope/telescope-file-browser.nvim",
+      after = "telescope.nvim",
+      config = function()
+        require("telescope").load_extension("file_browser")
+      end,
+    })
+
+    use({
       "nvim-telescope/telescope-frecency.nvim",
       after = { "telescope.nvim", "sqlite.lua"},
       config = function()
@@ -137,6 +146,12 @@ return require('packer').startup(function()
       config = function()
         require("telescope").load_extension("dap")
       end
+    })
+
+    use({
+      "ms-jpq/chadtree",
+      branch = "chad",
+      run = "python3 -m chadtree deps"
     })
 
 
@@ -202,7 +217,6 @@ return require('packer').startup(function()
     use({
 	    "phaazon/hop.nvim",
 	    as = "hop",
-	    disable = false,
 	    config = function()
 	      require("plugins.hop")
       end,
@@ -241,7 +255,6 @@ return require('packer').startup(function()
 
     use({ "rhysd/git-messenger.vim" })
 
-    use({ "moll/vim-bbye" })
 
     use({ "tpope/vim-dispatch" })
     use({ "radenling/vim-dispatch-neovim" })
@@ -318,28 +331,46 @@ return require('packer').startup(function()
         require("refactoring").setup({})
       end
     })
+    use({
+      "folke/todo-comments.nvim",
+      config = function()
+        require("todo-comments").setup{}
+      end,
+    })
+
+    use({ "tweekmonster/startuptime.vim" })
 
     -------------------------
     --  Language Specific  --
     -------------------------
 
     -- Clojure
-    use ({ "clojure-vim/vim-jack-in"})
+    use ({
+      "clojure-vim/vim-jack-in",
+      ft = {"clojure", "clojurescript"}
+    })
     use({
       "eraserhd/parinfer-rust",
-      run = "cargo build --release"
+      run = "cargo build --release",
+      ft = {"clojure", "clojurescript"}
     })
     use({
       "Olical/conjure",
-      tag = 'v4.28.0'
+      tag = 'v4.28.0',
+      ft = {"clojure", "clojurescript"}
     })
     use({ "p00f/nvim-ts-rainbow" })
 
     -- Ruby/Rails
-    use({ "tpope/vim-bundler" })
-    use({ "tpope/vim-rails" })
+    use({
+      "tpope/vim-bundler",
+      ft = { "ruby" }
 
-    -- F#
-    use({ "adelarsq/neofsharp.vim" })
+    })
+    use({
+      "tpope/vim-rails",
+      ft = { "ruby" }
+    })
+
 
 end)
