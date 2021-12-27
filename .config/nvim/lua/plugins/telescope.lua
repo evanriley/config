@@ -13,7 +13,7 @@ require('telescope').setup({
 			case_mode = 'smart_case',
 		},
 		frecency = {
-      show_scores = true,
+      show_scores = false,
       workspaces = {
         ["conf"] = "/Users/evan/.config",
         ["data"] = "/Users/evan/.local/share",

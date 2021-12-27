@@ -38,47 +38,24 @@ return require('packer').startup(function()
     ----------------------------------------
     -- LSP, Copmletions and related items --
     ----------------------------------------
-    -- use({
-    --   "hrsh7th/nvim-cmp",
-    --   config = function()
-    --     require("plugins.cmp")
-    --   end,
-    --   requires = {
-    --     "hrsh7th/cmp-buffer",
-    --     "hrsh7th/cmp-path",
-    --     "hrsh7th/cmp-nvim-lua",
-    --     "hrsh7th/cmp-cmdline",
-    --     "hrsh7th/cmp-nvim-lsp",
-    --     "kdheepak/cmp-latex-symbols",
-    --     "dmitmel/cmp-cmdline-history",
-    --     "andersevenrud/cmp-tmux",
-    --     "quangnguyen30192/cmp-nvim-ultisnips",
-    --   },
-    -- })
-    --
-    -- use({
-    --   "tzachar/cmp-tabnine",
-    --   run = './install.sh',
-    --   requires = "hrsh7th/nvim-cmp",
-    -- })
-
-    -- use({
-    --   "SirVer/ultisnips",
-    --   event = 'InsertEnter',
-    --   requires = "honza/vim-snippets",
-    --   config = function() 
-    --     vim.opt.rtp:append({ vim.fn.stdpath("data") .. "/site/pack/packer/start/vim-snippets" })
-    --     vim.g.UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
-    --     vim.g.UltiSnipsJumpForwardTrigger = "<Plug>(ultisnips_jump_forward)"
-    --     vim.g.UltiSnipsJumpBackwardTrigger = "<Plug>(ultisnips_jump_backward)"
-    --     vim.g.UltiSnipsListSnippets = "<c-x><c-s>"
-    --     vim.g.UltiSnipsRemoveSelectModeMappings = 0
-    --   end,
-    -- })
-
     use({
       "ms-jpq/coq_nvim",
       branch = "coq",
+      config = function()
+        vim.g.coq_settings = {
+          auto_start = "shut-up",
+          display = {
+            pum = {
+              fast_close = false
+            },
+          },
+          clients = {
+            tabnine = {
+              enable = true
+            },
+          },
+        }
+      end,
     })
 
     use({
@@ -89,6 +66,15 @@ return require('packer').startup(function()
     use({
       "ms-jpq/coq.thirdparty",
       branch = "3p",
+      config = function()
+        require("coq_3p")({
+          { src = "nvimlua", short_name = "nLUA"},
+          { src = "copilot",  short_name = "COP", tmp_accept_key = "<c-r>"},
+          { src = "bc", short_name = "MATH", precision = 6},
+          { src = "figlet", short_name = "BIG"},
+          { src = "dap"}
+        })
+      end,
     })
 
     use({
@@ -117,7 +103,9 @@ return require('packer').startup(function()
         end,
     })
 
-
+    use({
+      "github/copilot.vim"
+    })
 
     --------------------------------
     -- Fuzzy Finders and what not --
@@ -378,13 +366,6 @@ return require('packer').startup(function()
     use({ "p00f/nvim-ts-rainbow" })
 
     -- Ruby/Rails
-    use({
-      "tpope/vim-bundler",
-      ft = { "ruby" }
-
-    })
-    use({
-      "tpope/vim-rails",
-      ft = { "ruby" }
-    })
+    use({ "tpope/vim-bundler" })
+    use({ "tpope/vim-rails" })
 end)
