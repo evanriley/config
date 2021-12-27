@@ -22,7 +22,6 @@ vim.cmd([[
 ]])
 
 
-require("plugins.coq")
 require("packer").init({
 	max_jobs = 50,
 })
@@ -35,27 +34,14 @@ return require('packer').startup(function()
 
     use 'nvim-lua/popup.nvim'
 
+    use 'nathom/filetype.nvim'
+
     ----------------------------------------
     -- LSP, Copmletions and related items --
     ----------------------------------------
     use({
       "ms-jpq/coq_nvim",
       branch = "coq",
-      config = function()
-        vim.g.coq_settings = {
-          auto_start = "shut-up",
-          display = {
-            pum = {
-              fast_close = false
-            },
-          },
-          clients = {
-            tabnine = {
-              enable = true
-            },
-          },
-        }
-      end,
     })
 
     use({
@@ -103,9 +89,9 @@ return require('packer').startup(function()
         end,
     })
 
-    use({
+    --[[ use({
       "github/copilot.vim"
-    })
+    }) ]]
 
     --------------------------------
     -- Fuzzy Finders and what not --
@@ -342,7 +328,8 @@ return require('packer').startup(function()
       end,
     })
 
-    use({ "tweekmonster/startuptime.vim" })
+    -- Only use when needed.
+    -- use({ "tweekmonster/startuptime.vim" })
 
     -------------------------
     --  Language Specific  --
