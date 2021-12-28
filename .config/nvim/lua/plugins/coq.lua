@@ -1,17 +1,17 @@
 vim.g.coq_settings = {
   auto_start = 'shut-up',
   keymap = {
-    pre_select = true,
+    pre_select = false,
   },
   display = {
     pum = {
-      fast_close = false,
+      fast_close = true,
     },
     icons = {
       mode = 'none',
     },
     ghost_text = {
-      enabled = false,
+      enabled = true,
     },
   },
   clients = {

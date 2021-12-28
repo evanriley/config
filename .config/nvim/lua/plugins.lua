@@ -89,9 +89,15 @@ return require('packer').startup(function()
         end,
     })
 
-    --[[ use({
-      "github/copilot.vim"
-    }) ]]
+    use({
+      "jose-elias-alvarez/null-ls.nvim",
+      after = "nvim-lspconfig",
+      disable = false,
+      config = function()
+        require("lsp.null-ls")
+      end,
+    })
+    use({ "jose-elias-alvarez/nvim-lsp-ts-utils" })
 
     --------------------------------
     -- Fuzzy Finders and what not --
@@ -355,4 +361,12 @@ return require('packer').startup(function()
     -- Ruby/Rails
     use({ "tpope/vim-bundler" })
     use({ "tpope/vim-rails" })
+
+    --  Rust
+    use({
+      'simrat39/rust-tools.nvim',
+      config = function()
+        require('rust-tools').setup({})
+      end,
+    })
 end)
