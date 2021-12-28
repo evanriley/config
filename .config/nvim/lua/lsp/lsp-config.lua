@@ -1,5 +1,4 @@
 local lspconfig = require('lspconfig')
-local lsp_installer = require("nvim-lsp-installer")
 local configs = require('lsp.servers')
 local coq = require "coq"
 local utils = require('lsp.utilities')
@@ -88,6 +87,7 @@ local on_attach = function(client, bufnr)
 	if client.resolved_capabilities.document_formatting then
 		buf_set_keymap("n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting_seq_sync()<CR>", opts)
 		vim.cmd([[command! -buffer LspFormat lua vim.lsp.buf.formatting_seq_sync()]])
+		vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()")
 	elseif client.resolved_capabilities.document_range_formatting then
 		buf_set_keymap("x", "<leader>lf", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
 		vim.cmd([[command! -buffer -range LspRangeFormat lua vim.lsp.buf.range_formatting()]])
@@ -124,11 +124,9 @@ local on_attach = function(client, bufnr)
 end
 
 for server, config in pairs(configs) do
-  lsp_installer.on_server_ready(function(server)
     config.capabilities = capabilities
     config.on_attach = on_attach
-    server:setup(coq.lsp_ensure_capabilities(config))
-  end)
+    lspconfig[server].setup(coq.lsp_ensure_capabilities(config))
 end
 
 -- Commands

@@ -3,7 +3,7 @@ require("nvim-treesitter.configs").setup({
 	ignore_install = {}, -- List of parsers to ignore installing
 	highlight = {
 		enable = true, -- false will disable the whole extension
-		disable = { "vim", "sh", "bash" }, -- list of language that will be disabled
+		disable = { "vim", "sh", "bash", "javascript", "javascriptreact", "typescript", "typescriptreact" }, -- list of language that will be disabled
 		additional_vim_regex_highlighting = false,
 	},
 	autotag = {
@@ -26,6 +26,7 @@ require("nvim-treesitter.configs").setup({
 	},
 	indent = {
 		enable = false,
+		disable = { "javascript", "javascriptreact", "typescript", "typescriptreact" }, -- list of language that will be disabled
 	},
 	matchup = {
 		enable = true,

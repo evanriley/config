@@ -70,8 +70,6 @@ return require('packer').startup(function()
 	    end,
     })
 
-    use 'williamboman/nvim-lsp-installer'
-
     use 'nvim-lua/lsp-status.nvim'
     use ({
       "onsails/lspkind-nvim",
@@ -97,7 +95,10 @@ return require('packer').startup(function()
         require("lsp.null-ls")
       end,
     })
-    use({ "jose-elias-alvarez/nvim-lsp-ts-utils" })
+    use({
+      "jose-elias-alvarez/nvim-lsp-ts-utils",
+      after = "null-ls" 
+    })
 
     --------------------------------
     -- Fuzzy Finders and what not --
@@ -369,4 +370,10 @@ return require('packer').startup(function()
         require('rust-tools').setup({})
       end,
     })
+
+    -- JS/JSX/TS/TSX
+    -- TreeSitter...kind of sucks sometimes
+    use({ "maxmellon/vim-jsx-pretty" })
+    use({ "HerringtonDarkholme/yats.vim" })
+    use({ "yuezk/vim-js" })
 end)
