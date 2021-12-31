@@ -4,6 +4,9 @@ local sources = {
   -- For js,ts,jsx,tsx,etc
   null_ls.builtins.code_actions.eslint,
   null_ls.builtins.formatting.prettierd,
+  -- For go
+  null_ls.builtins.formatting.goimports,
+  null_ls.builtins.formatting.gofmt,
 
   null_ls.builtins.diagnostics.write_good,
 
