@@ -144,12 +144,6 @@ return require('packer').startup(function()
       end
     })
 
-    use({
-      "ms-jpq/chadtree",
-      branch = "chad",
-      run = "python3 -m chadtree deps"
-    })
-
 
 
     --------------------------
