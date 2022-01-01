@@ -20,9 +20,12 @@ local jsonls = {}
 local sumneko_lua = {}
 local fsautocomplete = {}
 local zls = {}
+local hls = {}
+
 local tailwindcss = {}
 local html = {}
 local cssls = {}
+local emmet_ls = {}
 
 local configs = {}
 
@@ -38,5 +41,7 @@ configs.zls = zls
 configs.tailwindcss = tailwindcss
 configs.html = html
 configs.cssls = cssls
+configs.emmet_ls = emmet_ls
+configs.hls = hls
 
 return configs
