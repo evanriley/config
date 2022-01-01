@@ -15,16 +15,14 @@ local tsserver = {
 }
 
 local clojure_lsp = {}
-
 local gopls = {}
-
 local jsonls = {}
-
 local sumneko_lua = {}
-
 local fsautocomplete = {}
-
 local zls = {}
+local tailwindcss = {}
+local html = {}
+local cssls = {}
 
 local configs = {}
 
@@ -37,5 +35,8 @@ configs.jsonls = jsonls
 configs.sumneko_lua = sumneko_lua
 configs.fsautocomplete = fsautocomplete
 configs.zls = zls
+configs.tailwindcss = tailwindcss
+configs.html = html
+configs.cssls = cssls
 
 return configs
