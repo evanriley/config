@@ -151,6 +151,7 @@ return require('packer').startup(function()
     --------------------------
 
     use 'rebelot/kanagawa.nvim'
+    use 'folke/tokyonight.nvim'
 
     use({
       "kyazdani42/nvim-web-devicons",
