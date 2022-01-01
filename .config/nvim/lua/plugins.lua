@@ -55,7 +55,7 @@ return require('packer').startup(function()
       config = function()
         require("coq_3p")({
           { src = "nvimlua", short_name = "nLUA"},
-          { src = "copilot",  short_name = "COP", tmp_accept_key = "<c-r>"},
+          { src = "copilot",  short_name = "COP", accept_key = "<c-r>"},
           { src = "bc", short_name = "MATH", precision = 6},
           { src = "figlet", short_name = "BIG"},
           { src = "dap"}
