@@ -1,0 +1,7 @@
+source "$(asdf direnv hook asdf)"
+
+use_ruby() {
+    local ruby_dir=$HOME/.rubies/$1
+    load_prefix $ruby_dir
+    layout ruby
+}
