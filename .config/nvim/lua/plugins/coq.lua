@@ -17,7 +17,7 @@ vim.g.coq_settings = {
       mode = 'none',
     },
     ghost_text = {
-      enabled = true,
+      enabled = false,
     },
   },
 }
