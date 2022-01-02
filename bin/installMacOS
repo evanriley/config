@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# curl -fsSL https://raw.githubusercontent.com/evanriley/dotfiles/master/bin/install | bash
+# curl -fsSL https://raw.githubusercontent.com/evanriley/dotfiles/master/bin/installMacOS | bash
 # or
-# wget -qO- https://raw.githubusercontent.com/evanriley/dotfiles/master/bin/install | bash
+# wget -qO- https://raw.githubusercontent.com/evanriley/dotfiles/master/bin/installMacOS | bash
 
 { # to make sure the entire script downloads
   basedir=$HOME/.dotfiles
