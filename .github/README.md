@@ -2,9 +2,9 @@
 
 Hello there, these are my dotfiles!
 
-- OS - macOS & openSUSE Tumbleweed, WSL(Also openSUSE Tumbleweed)
+- OS - macOS
 - Shell - Fish
-- Terminal - Kitty, iTerm2, Windows Terminal
+- Terminal - iTerm2
 - Editors - Neovim & Doom Emacs
 
 # Setup
@@ -26,15 +26,9 @@ brew bundle --file ~/bin/Brewfile
 sudo softwareupdate --install-rosetta --agree-to-license
 ```
 
-- openSUSE Tumbleweed
-
-```shell
-...Coming soon
-```
-
 3. Install system defaults and user configs.
 
-- macOS - All in the /bin/macos file
+- macOS - Most settings will be set in this shell script.
 
 ```shell
 ./bin/macos
