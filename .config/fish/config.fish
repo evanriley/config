@@ -4,6 +4,7 @@ set -gx PATH ~/bin ~/.local/bin $NPM_PACKAGES/bin ~/.roswell/bin ~/.yarn/bin ~/.
 set -gx GPG_TTY (tty)
 ## Source asdf
 source ~/.asdf/asdf.fish
+. ~/.asdf/plugins/java/set-java-home.fish
 ## use asdf direnv plugin and hook into it
 direnv hook fish | source
 
