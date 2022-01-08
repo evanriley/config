@@ -77,34 +77,6 @@ return require('packer').startup(function()
       "jose-elias-alvarez/nvim-lsp-ts-utils",
     })
 
-    -- nvim-cmp completion
-    -- use({ "hrsh7th/cmp-nvim-lsp" })
-    -- use({ "hrsh7th/cmp-buffer" })
-    -- use({ "hrsh7th/cmp-path" })
-    -- use({ "hrsh7th/cmp-cmdline" })
-    -- use({
-    --   "tzachar/cmp-tabnine",
-    --   run = "./install.sh",
-    --   requires = "hrsh7th/nvim-cmp"
-    -- })
-    --
-    -- use({
-    --   "hrsh7th/nvim-cmp",
-    --   config = function()
-    --     require("plugins.cmp")
-    --   end,
-    -- })
-    --
-    -- use({ "rafamadriz/friendly-snippets" })
-    -- use({
-    --   "L3MON4D3/LuaSnip",
-    --   config = function()
-    --     require("luasnip/loaders/from_vscode").load({ paths = { "~/.local/share/nvim/site/pack/packer/start/friendly-snippets" } })
-    --   end,
-    -- })
-    -- use({ "saadparwaiz1/cmp_luasnip" })
-
-    -- Coq completion
     use({
       "ms-jpq/coq_nvim",
       branch = "coq",
@@ -184,15 +156,7 @@ return require('packer').startup(function()
     use 'folke/tokyonight.nvim'
 
     use({
-      "kyazdani42/nvim-web-devicons",
-      config = function()
-        require("nvim-web-devicons").setup()
-      end,
-    })
-
-    use({
       "nvim-lualine/lualine.nvim",
-      requires = {"kyazdani42/nvim-web-devicons", opt = true},
       config = function()
         require("plugins.lualine")
       end,
