@@ -653,22 +653,22 @@ Then enable it on launch
 *** TabNine
 Has seemed fairly useful overtime, although this will likely be removed at some point.
 #+begin_src emacs-lisp :tangle packages.el
-(package! company-tabnine)
+(package! company-tabnine :recipe (:host github :repo "TommyX12/company-tabnine"))
 #+end_src
 
 Enable it
 #+begin_src emacs-lisp
-(use-package! company-tabnine
-  :after company
-  :config
-  (cl-pushnew 'company-tabnine (default-value 'company-backends)))
+(after! company
+  (setq +lsp-company-backends '(company-tabnine :separate company-capf company-yasnippet))
+  (setq company-show-numbers t)
+  (setq company-idle-delay 0))
 #+end_src
 
 *** Parinfer
 This is the best plugin, it's the worst plugin. It seems to break a lot.
 It also fails to pick up the correct binary. Let's help it out a bit.
 #+begin_src emacs-lisp
-(setq parinfer-rust-library "~/.emacs.d/.local/etc/parinfer-rust/parinfer-rust-darwin.so")
+;; (setq parinfer-rust-library "~/.emacs.d/.local/etc/parinfer-rust/parinfer-rust-darwin.so")
 #+end_src
 
 *** Eros
@@ -681,8 +681,7 @@ Make the prefix slightly nicer
 Save keystrokes more often, because who doesn't want to be a /little/ lazier?
 #+begin_src emacs-lisp
 (after! company
-  (setq company-show-numbers t)
-  (add-hook 'evil-normal-state-entry-hook #'company-abort)) ;; make aborting less annoying.
+  (setq company-show-quick-access t))
 #+end_src
 
 Improve the memory a bit.
@@ -691,11 +690,6 @@ Improve the memory a bit.
 (setq-default prescient-history-length 1000)
 #+end_src
 
-*** LSP
-Disable the ui-doc childframe
-#+begin_src emacs-lisp
-(setq lsp-ui-doc-enable nil)
-#+end_src
 *** YASnippet
 Nested snippets are cool, yo
 #+begin_src emacs-lisp
