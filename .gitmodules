@@ -1,0 +1,3 @@
+[submodule ".config/dwm/dwm"]
+	path = .config/dwm/dwm
+	url = git@github.com:evanriley/dwm.git
