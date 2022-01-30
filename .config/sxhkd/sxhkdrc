@@ -1,0 +1,7 @@
+# Toggle mute
+XF86AudioMute
+    pactl set-sink-mute @DEFAULT_SINK@ toggle; kill -64 (pidof dwmblocks)
+
+# Change volume
+XF86Audio{Raise,Lower}Volume
+    pactl set-sink-volume @DEFAULT_SINK@ {+,-}2%; kill -64 (pidof dwmblocks)
