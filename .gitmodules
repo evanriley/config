@@ -4,3 +4,6 @@
 [submodule ".config/dwm/dwmblocks"]
 	path = .config/dwm/dwmblocks
 	url = git@github.com:evanriley/dwmblocks.git
+[submodule ".config/slock/slock"]
+	path = .config/slock/slock
+	url = git@github.com:evanriley/slock.git
