@@ -4,8 +4,8 @@
 autorandr -l default &
 picom --experimental-backends &
 sxhkd &
+feh --bg-fill ~/.wallpaper/Wallpaper-Moon.png &
 
 # bar & dwm, required...
 dwmblocks &
-feh --bg-fill ~/Pictures/Wallpaper-Tree.png &
 dwm

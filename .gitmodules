@@ -7,3 +7,6 @@
 [submodule ".config/slock/slock"]
 	path = .config/slock/slock
 	url = git@github.com:evanriley/slock.git
+[submodule ".config/st/st"]
+	path = .config/st/st
+	url = git@github.com:evanriley/st.git
