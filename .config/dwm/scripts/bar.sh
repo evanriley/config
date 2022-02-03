@@ -16,9 +16,7 @@ cpu() {
 }
 
 pkg_updates() {
-	# updates=$(doas xbps-install -un | wc -l) # void
-	updates=$(checkupdates | wc -l)   # arch , needs pacman contrib
-	# updates=$(aptitude search '~U' | wc -l)  # apt (ubuntu,debian etc)
+	updates=$(checkupdates | wc -l)
 
 	if [ -z "$updates" ]; then
 		printf "^c$green^  Fully Updated"
@@ -28,26 +26,47 @@ pkg_updates() {
 }
 
 mem() {
-	printf "^c$blue^^b$black^ MEM "
+	printf "^c$blue^^b$black^  "
 	printf "^c$blue^ $(free -h | awk '/^Mem/ { print $3 }' | sed s/i//g)"
 }
 
 lan() {
 	case "$(cat /sys/class/net/en*/operstate 2>/dev/null)" in
-	up) printf "^c$black^ ^b$blue^  ^d^%s" " ^c$blue^Connected" ;;
-	down) printf "^c$black^ ^b$blue^  ^d^%s" " ^c$blue^Disconnected" ;;
+	up) printf "^c$black^ ^b$blue^ 󰤨 ^d^%s" " ^c$blue^Connected" ;;
+	down) printf "^c$black^ ^b$blue^ 󰤭 ^d^%s" " ^c$blue^Disconnected" ;;
 	esac
 }
 
 clock() {
-	printf "^c$black^ ^b$darkblue^  "
+	printf "^c$black^ ^b$darkblue^ 󱑆 "
 	printf "^c$black^^b$blue^ $(date '+%I:%M %p')  "
 }
 
-while true; do
+volume() {
+  muteIcon=' 婢 '
+  onIcon=' 墳 '
+  mute=$(pactl get-sink-mute @DEFAULT_SINK@)
+  volume=$(pamixer --get-volume)
+  if [ "${mute}" = 'Mute: yes' ]
+  then
+	  printf "^c$blue^ ^b$black^ 婢 "
+	  printf "^c$white^ ^b$grey^ $volume%%"
+  else
+	  printf "^c$blue^ ^b$black^ 墳 "
+	  printf "^c$white^ ^b$grey^ $volume%%"
+  fi
+}
 
+nowPlaying() {
+  curSong=$(playerctl --player=spotifyd metadata --format '{{ artist }} - {{ title }}')
+  if [ ! -z "$curSong" ]; then
+    printf "^c$white^ ^b$grey^ $curSong"
+  fi
+}
+
+while true; do
 	[ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && updates=$(pkg_updates)
 	interval=$((interval + 1))
 
-	sleep 1 && xsetroot -name "$updates $(cpu) $(mem) $(lan) $(clock)"
+  sleep 1 && xsetroot -name "$updates $(nowPlaying) $(cpu) $(mem) $(lan) $(volume) $(clock)"
 done
