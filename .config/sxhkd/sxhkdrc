@@ -1,7 +1,25 @@
+# -- Media Keys -- #
+
 # Toggle mute
 XF86AudioMute
-    pactl set-sink-mute @DEFAULT_SINK@ toggle; kill -64 (pidof dwmblocks)
+    pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # Change volume
 XF86Audio{Raise,Lower}Volume
-    pactl set-sink-volume @DEFAULT_SINK@ {+,-}2%; kill -64 (pidof dwmblocks)
+    pactl set-sink-volume @DEFAULT_SINK@ {+,-}2%
+
+# Next Track
+XF86AudioNext
+    playerctl --player=spotifyd,spotify,%any next
+
+# Previous Track
+XF86AudioNext
+    playerctl --player=spotifyd,spotify,%any previous
+
+# Play/Pause audio
+XF86AudioPlay
+    playerctl play-pause
+
+# -- Misc Keys -- #  
+Print
+  monshot
