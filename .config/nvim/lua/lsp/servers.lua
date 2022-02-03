@@ -26,6 +26,7 @@ local tailwindcss = {}
 local html = {}
 local cssls = {}
 local emmet_ls = {}
+local rust_analyzer = {}
 
 local configs = {}
 
@@ -43,5 +44,6 @@ configs.html = html
 configs.cssls = cssls
 configs.emmet_ls = emmet_ls
 configs.hls = hls
+configs.rust_analyzer = rust_analyzer
 
 return configs
