@@ -6,6 +6,10 @@ exec sxhkd &
 exec playerctld daemon &
 exec feh --bg-fill /home/evan/.wallpaper/Wallpaper-Bridge.jpg &
 
+# notifications
+# starts tiramisu script that writes to a file...yes, yes, I know
+~/.config/dwm/scripts/./cake.sh &
+
 # bar & dwm, required...
 ~/.config/dwm/scripts/./bar.sh &
 dwm

@@ -8,6 +8,14 @@ interval=0
 # load colors
 . ~/.config/dwm/scripts/bar_themes/onedark
 
+readNotifTxt() {
+  notif=$(cat /home/evan/.config/dwm/scripts/sometext.txt)
+  if [ ! -z "$notif" ]; then
+    printf "^c$white^ ^b$grey^ $notif"
+    wait
+  fi
+}
+
 cpu() {
 	cpu_val=$(grep -o "^[^ ]*" /proc/loadavg)
 
@@ -58,7 +66,7 @@ volume() {
 }
 
 nowPlaying() {
-  curSong=$(playerctl --player=spotifyd metadata --format '{{ artist }} - {{ title }}')
+  curSong=$(playerctl --player=spotifyd,spotify metadata --format '{{ artist }} - {{ title }}')
   if [ ! -z "$curSong" ]; then
     printf "^c$white^ ^b$grey^ $curSong"
   fi
@@ -68,5 +76,5 @@ while true; do
 	[ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && updates=$(pkg_updates)
 	interval=$((interval + 1))
 
-  sleep 1 && xsetroot -name "$updates $(nowPlaying) $(cpu) $(mem) $(lan) $(volume) $(clock)"
+  sleep 1 && xsetroot -name "$updates $(nowPlaying) $(cpu) $(mem) $(lan) $(volume) $(clock) $(readNotifTxt)"
 done
