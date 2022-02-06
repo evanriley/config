@@ -26,7 +26,7 @@ cpu() {
 pkg_updates() {
 	updates=$(checkupdates | wc -l)
 
-	if [ -z "$updates" ]; then
+	if [ "$updates" -eq 0 ]; then
 		printf "^c$green^  Fully Updated"
 	else
 		printf "^c$green^  $updates"" updates"
@@ -76,5 +76,5 @@ while true; do
 	[ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && updates=$(pkg_updates)
 	interval=$((interval + 1))
 
-  sleep 1 && xsetroot -name "$updates $(nowPlaying) $(cpu) $(mem) $(lan) $(volume) $(clock) $(readNotifTxt)"
+  sleep 1 && xsetroot -name " $(readNotifTxt) $(nowPlaying) $updates $(cpu) $(mem) $(lan) $(volume) $(clock)"
 done
