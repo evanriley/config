@@ -356,17 +356,17 @@ return require('packer').startup(function()
     })
 
     --  Rust
-    use({
-      'simrat39/rust-tools.nvim',
-      ft = {"rust"},
-      config = function()
-        require('rust-tools').setup({
-          tools = {
-            autoSetHints = false,
-        },
-      })
-      end,
-    })
+    -- use({
+    --   'simrat39/rust-tools.nvim',
+    --   ft = {"rust"},
+    --   config = function()
+    --     require('rust-tools').setup({
+    --       tools = {
+    --         autoSetHints = false,
+    --     },
+    --   })
+    --   end,
+    -- })
 
     -- JS/JSX/TS/TSX
     -- TreeSitter...kind of sucks sometimes
