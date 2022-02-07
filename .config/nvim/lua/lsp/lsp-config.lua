@@ -29,6 +29,7 @@ end
 
 -- Capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities() --for coq
+capabilities.offsetEncoding = { "utf-16" }
 capabilities.textDocument.codeAction = {
 	dynamicRegistration = true,
 	codeActionLiteralSupport = {
