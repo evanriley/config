@@ -13,7 +13,7 @@ XF86AudioNext
     playerctl --player=spotifyd,spotify,%any next
 
 # Previous Track
-XF86AudioNext
+XF86AudioPrev
     playerctl --player=spotifyd,spotify,%any previous
 
 # Play/Pause audio
