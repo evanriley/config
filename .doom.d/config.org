@@ -351,7 +351,7 @@ We can enable as many of these as we want, packages associated with these module
 ;;beancount         ; mind the GAAP
 ;;cc                ; C > C++ == 1
 clojure             ; java with a lisp
-common-lisp         ; if you've seen one lisp, you've seen them all
+;;common-lisp       ; if you've seen one lisp, you've seen them all
 ;;coq               ; proofs-as-programs
 ;;crystal           ; ruby at the speed of c
 ;;csharp            ; unity, .NET, and mono shenanigans
@@ -651,7 +651,7 @@ Then enable it on launch
 ** Tool packages
 
 *** TabNine
-Has seemed fairly useful overtime, although this will likely be removed at some point.
+Has seemed fairly useful, although this will likely be removed at some point.
 #+begin_src emacs-lisp :tangle packages.el
 (package! company-tabnine :recipe (:host github :repo "TommyX12/company-tabnine"))
 #+end_src
@@ -817,12 +817,6 @@ Use web-mode for go html templates
       '(("go"    . "\\.gohtml\\'")
         ("go"    . "\\.gotmpl\\'")
         ("go"    . "\\.tmpl\\'")))
-#+end_src
-
-** Common Lisp
-Load the roswell helper
-#+begin_src emacs-lisp
-(load (expand-file-name "~/.roswell/helper.el"))
 #+end_src
 
 ** Org
