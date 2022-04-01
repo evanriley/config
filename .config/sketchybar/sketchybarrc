@@ -73,25 +73,25 @@ sketchybar -m --add space code left                              \
 
 
 ############## SECONDARY DISPLAY SPACES ############## 
-sketchybar -m --add space social left                              \
-              --set social associated_display=2                    \
+sketchybar -m --add space web left                              \
+              --set web associated_display=2                    \
                          associated_space=7                      \
                          icon.font="JetBrainsMono Nerd Font:Bold:20.0"    \
                          icon=                                  \
                          icon.highlight_color=0xff48aa2a         \
                          icon.padding_left=0                     \
-                         label=social                              \
+                         label=web                              \
                          click_script="yabai -m space --focus 7"
 
 ############## TERTIARY DISPLAY SPACES ############## 
-sketchybar -m --add space web left                              \
-              --set web associated_display=3                    \
+sketchybar -m --add space social left                              \
+              --set social associated_display=3                    \
                          associated_space=8                      \
                          icon.font="JetBrainsMono Nerd Font:Bold:20.0"    \
                          icon=                                  \
                          icon.highlight_color=0xff48aa2a         \
                          icon.padding_left=0                     \
-                         label=web                              \
+                         label=social                              \
                          click_script="yabai -m space --focus 8"
 
 ############## ITEM DEFAULTS ###############
