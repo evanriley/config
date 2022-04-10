@@ -1,5 +1,5 @@
 require("nvim-treesitter.configs").setup({
-	ensure_installed = "maintained", --  "all", "maintained" or a list
+	ensure_installed = {"c", "clojure", "commonlisp", "cpp", "fish", "go", "html", "javascript", "json", "json5", "julia", "lua", "make", "r", "ruby", "rust", "tsx", "typescript", "vim", "vue", "zig"}, --  "all", "maintained" or a list
 	ignore_install = { "html" }, -- List of parsers to ignore installing
 	highlight = {
 		enable = true, -- false will disable the whole extension
