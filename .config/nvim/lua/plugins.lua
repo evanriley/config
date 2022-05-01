@@ -258,7 +258,7 @@ return require('packer').startup(function()
     })
 
     use({
-      "Pocco81/DAPInstall.nvim",
+      "frr0/dap-install",
     })
 
     use({
@@ -315,12 +315,12 @@ return require('packer').startup(function()
         require("refactoring").setup({})
       end
     })
-    use({
-      "folke/todo-comments.nvim",
-      config = function()
-        require("todo-comments").setup{}
-      end,
-    })
+    -- use({
+    --   "folke/todo-comments.nvim",
+    --   config = function()
+    --     require("todo-comments").setup{}
+    --   end,
+    -- })
 
     -- Only use when needed.
     -- use({ "tweekmonster/startuptime.vim" })
