@@ -197,5 +197,5 @@
     "security.workspace.trust.untrustedFiles": "open",
     "go.toolsManagement.autoUpdate": true,
     "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
-
+    "editor.accessibilitySupport": "off",
 }
