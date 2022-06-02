@@ -13,3 +13,6 @@
 [submodule ".config/dmenu/dmenu"]
 	path = .config/dmenu/dmenu
 	url = git@github.com:evanriley/dmenu.git
+[submodule ".config/keyboards/qmk"]
+	path = .config/keyboards/qmk
+	url = git@github.com:qmk/qmk_firmware.git

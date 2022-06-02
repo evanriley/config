@@ -74,3 +74,4 @@ if test (uname) = "Darwin"
     end
  end
 end
+fish_add_path /Users/evan/.spicetify

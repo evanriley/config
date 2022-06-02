@@ -27,32 +27,28 @@ yabai -m config auto_balance                 on
 yabai -m config external_bar all:26:0
 
 
-yabai -m space 1 --label code
+yabai -m space 1 --label main
 yabai -m space 2 --label mail
-yabai -m space 3 --label general
-yabai -m space 4 --label notes
-yabai -m space 5 --label media
-yabai -m space 6 --label games
-yabai -m space 7 --label web
-yabai -m space 8 --label social
+yabai -m space 3 --label media
+yabai -m space 4 --label web
+yabai -m space 5 --label social
 
 yabai -m config --space mail layout stack
 yabai -m config --space games layout float
 
 
-yabai -m rule --add app="^Emacs" space=code
-yabai -m rule --add app="^Xcode" space=code
+yabai -m rule --add app="^Emacs" space=main
+yabai -m rule --add app="^Xcode" space=main
 yabai -m rule --add app="^Mail" space=mail
 yabai -m rule --add app="^Mimestream" space=mail
 yabai -m rule --add app="^Firefox" space=web
 yabai -m rule --add app="^Brave" space=web
+yabai -m rule --add app="^Orion" space=web
 yabai -m rule --add app="^Notes" space=notes
-yabai -m rule --add app="^Plex" space=media
 yabai -m rule --add app="^Spotify" space=media
 yabai -m rule --add app="^Music" space=media
 yabai -m rule --add app="^Discord" space=social grid=1:1:0:0:1:1 manage=off
 yabai -m rule --add app="^Slack" space=social
-yabai -m rule --add app="^Steam" space=games manage=off
 yabai -m rule --add app="^System Preferences" manage=off
 yabai -m rule --add app="^Simulator" manage=off
 yabai -m rule --add app="^IINA" manage=off

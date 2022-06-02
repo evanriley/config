@@ -46,6 +46,5 @@ configs.cssls = cssls
 configs.emmet_ls = emmet_ls
 configs.hls = hls
 configs.rust_analyzer = rust_analyzer
-configs.clangd = clangd
 
 return configs
