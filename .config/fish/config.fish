@@ -9,6 +9,9 @@ source ~/.asdf/asdf.fish
 ## use asdf direnv plugin and hook into it
 direnv hook fish | source
 
+## Secretive.app Secret Agent.
+set -x SSH_AUTH_SOCK /Users/evan/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
+
 # Aliases
 # Use this to manage dotfiles
 alias config '/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
