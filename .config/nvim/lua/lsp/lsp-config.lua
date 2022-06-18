@@ -85,11 +85,11 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
 	buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 
-	if client.resolved_capabilities.document_formatting then
+	if client.server_capabilities.documentFormattingProvider then
 		buf_set_keymap("n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting_seq_sync()<CR>", opts)
 		vim.cmd([[command! -buffer LspFormat lua vim.lsp.buf.formatting_seq_sync()]])
 		vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()")
-	elseif client.resolved_capabilities.document_range_formatting then
+	elseif client.server_capabilities.documentRangeFormattingProvider then
 		buf_set_keymap("x", "<leader>lf", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
 		vim.cmd([[command! -buffer -range LspRangeFormat lua vim.lsp.buf.range_formatting()]])
 	end
@@ -103,7 +103,7 @@ local on_attach = function(client, bufnr)
         augroup END
     ]])
 
-	if client.resolved_capabilities.signature_help then
+	if client.server_capabilities.signatureHelp then
 		vim.cmd([[
             augroup lsp_signature_help
                 autocmd! * <buffer>
@@ -112,7 +112,7 @@ local on_attach = function(client, bufnr)
         ]])
 	end
 
-	if client.resolved_capabilities.document_highlight then
+	if client.server_capabilities.documentHighlightProvider then
 		vim.cmd([[
             augroup lsp_document_highlight
                 autocmd! * <buffer>
