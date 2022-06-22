@@ -18,10 +18,6 @@ brew 'pkg-config'
 brew 'tree-sitter'
 brew 'luajit'
 brew 'neovim'
-brew 'mas'
-brew 'mu'
-brew 'isync'
-brew 'msmtp'
 brew 'gpg2'
 brew 'starship'
 brew 'coreutils'
@@ -54,40 +50,25 @@ brew 'koekeishiya/formulae/skhd'
 brew 'cmacrae/formulae/spacebar'
 brew 'direnv'
 brew 'ruby-install'
-brew 'fnm'
 brew 'grep'
-brew 'graphviz'
-brew 'gnuplot'
-brew 'pyenv'
-brew 'sbcl'
-brew 'roswell'
 
 # cask installs
 cask '1password'
 cask 'google-chrome'
 cask 'firefox'
 cask 'spotify'
-cask 'steam'
 cask 'iterm2'
 cask 'discord'
 cask 'slack'
 cask 'emacs-mac'
 cask 'rectangle'
-cask 'hey'
 cask 'iina'
-cask 'cloudapp'
 cask 'visual-studio-code'
 cask 'adoptopenjdk8'
 cask 'adoptopenjdk16'
-cask 'kitty'
 cask 'raycast'
 cask 'tableplus'
+cask 'secretive'
 
 # font stuff
 cask 'font-juliamono'
-
-# mas installs
-# mas 'NextDNS', id: 1_464_122_853
-# mas 'Deliveries: a package tracker', id: 29_098_6013
-# Ignore installing Xcode through mas...it will often show up as 'updated' but it hasn't been and is instead just redownloading 13gigs of ~~Trash~~ Xcode
-# mas 'Xcode', id: 497_799_835
