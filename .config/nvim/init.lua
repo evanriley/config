@@ -6,8 +6,6 @@
 -- #+#         #+#+#+#  #+#     #+##+#   #+#+#
 --##########    ###    ###     ######    ####
 
--- Load coq_nvim settings first, just in case...
-require("plugins.coq")
 -- Load Plugins
 require('plugins')
 -- Set Colorscheme

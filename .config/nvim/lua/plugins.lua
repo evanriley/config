@@ -1,4 +1,3 @@
-local execute = vim.api.nvim_command
 local fn = vim.fn
 
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
@@ -69,28 +68,29 @@ return require('packer').startup(function()
       "jose-elias-alvarez/nvim-lsp-ts-utils",
     })
 
-    use({
-      "ms-jpq/coq_nvim",
-      branch = "coq",
-    })
 
     use({
-      "ms-jpq/coq.artifacts",
-      branch = "artifacts",
-    })
-
-    use({
-      "ms-jpq/coq.thirdparty",
-      branch = "3p",
+      "hrsh7th/nvim-cmp",
       config = function()
-        require("coq_3p")({
-          { src = "nvimlua", short_name = "nLUA"},
-          { src = "bc", short_name = "MATH", precision = 6},
-          { src = "figlet", short_name = "BIG"},
-        })
+        require("plugins.cmp")
       end,
+      requires = {
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-cmdline",
+        "petertriho/cmp-git"
+      }
     })
 
+    use({
+      "hrsh7th/vim-vsnip",
+      requires = {"hrsh7th/cmp-vsnip"}
+    })
+
+    use { "rafamadriz/friendly-snippets" }
+
+    use {"tzachar/cmp-tabnine", run="./install.sh", requires = "hrsh7th/nvim-cmp"}
 
     --------------------------------
     -- Fuzzy Finders and what not --
