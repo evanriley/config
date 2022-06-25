@@ -18,5 +18,6 @@ require "evan.illuminate"
 require "evan.lsp"
 require "evan.dap"
 require "evan.hop"
+require "evan.neogit"
 -- Don't source the default filetype.vim, use filtetype.nvim instead.
 vim.g.did_load_filetypes = 1
