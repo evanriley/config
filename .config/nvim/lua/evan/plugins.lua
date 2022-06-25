@@ -52,7 +52,6 @@ return packer.startup(function(use)
   use { "phaazon/hop.nvim", as = "hop", commit = "a3cf6684bcb9fc974609ae81424f285f05280d90" }
   use { "tpope/vim-surround", commit = "bf3480dc9ae7bea34c78fbba4c65b4548b5b1fea" }
   use { "wellle/targets.vim", commit = "8d6ff2984cdfaebe5b7a6eee8f226a6dd1226f2d" }
-  use { "p00f/nvim-ts-rainbow", commit = "5fa662e85f736f7ffce0e75b9d98a99f9aca0e4f" }
   use { "nathom/filetype.nvim", commit = "b522628a45a17d58fc0073ffd64f9dc9530a8027"}
   use {
     "direnv/direnv.vim",
@@ -61,9 +60,6 @@ return packer.startup(function(use)
     end,
     commit = "4c858b8cd8cbfac998534096e6ffb710d7a07358"
   }
-
-
-
 
   -- Colorschemes
   use { "folke/tokyonight.nvim", commit = "8223c970677e4d88c9b6b6d81bda23daf11062bb" }
@@ -126,10 +122,8 @@ return packer.startup(function(use)
 
 
   -- Treesitter
-  use {
-    "nvim-treesitter/nvim-treesitter",
-    commit = "518e27589c0463af15463c9d675c65e464efc2fe",
-  }
+  use { "nvim-treesitter/nvim-treesitter", commit = "518e27589c0463af15463c9d675c65e464efc2fe" }
+  use { "p00f/nvim-ts-rainbow", commit = "5fa662e85f736f7ffce0e75b9d98a99f9aca0e4f" }
   use {
     "windwp/nvim-ts-autotag",
     config = function()
@@ -141,11 +135,15 @@ return packer.startup(function(use)
 
   -- Git
   use { "lewis6991/gitsigns.nvim", commit = "c18e016864c92ecf9775abea1baaa161c28082c3" }
+  use { "rhysd/git-messenger.vim", commit = "8ece5c0c8a3cdecd8b03768ea7fe8f27b6144ad5"}
 
   -- DAP
   use { "mfussenegger/nvim-dap", commit = "014ebd53612cfd42ac8c131e6cec7c194572f21d" }
   use { "rcarriga/nvim-dap-ui", commit = "d76d6594374fb54abf2d94d6a320f3fd6e9bb2f7" }
   use { "ravenxrz/DAPInstall.nvim", commit = "8798b4c36d33723e7bba6ed6e2c202f84bb300de" }
+
+  -- Language Specific
+  use { "Olical/conjure", commit = "d88a3c8f911b92db5bf34b3b0e7a9e10692bafcb"}
 
   -- Automatically set up your configuration after cloning packer.nvim
   if PACKER_BOOTSTRAP then
