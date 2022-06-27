@@ -7,12 +7,10 @@ local actions = require "telescope.actions"
 
 telescope.setup {
   defaults = {
-
     prompt_prefix = " ",
     selection_caret = " ",
     path_display = { "smart" },
     file_ignore_patterns = { ".git/", "node_modules" },
-
     mappings = {
       i = {
         ["<Down>"] = actions.cycle_history_next,
@@ -22,4 +20,24 @@ telescope.setup {
       },
     },
   },
+  extensions = {
+    fzf = {
+      fuzzy = true,
+      override_generic_sorter = true,
+      override_file_sorter = true,
+      case_mode = "smart_case",
+    },
+    file_browser = {
+      theme = "ivy",
+      hijack_netrw = true,
+    },
+    frecency = {
+      disable_devicons = true,
+    },
+  },
 }
+
+require("telescope").load_extension("fzf")
+require("telescope").load_extension("file_browser")
+require("telescope").load_extension("frecency")
+require("telescope").load_extension("ui-select")

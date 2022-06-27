@@ -43,7 +43,7 @@ return packer.startup(function(use)
   use { "nvim-lua/plenary.nvim", commit = "968a4b9afec0c633bc369662e78f8c5db0eba249" } -- Useful lua functions used by lots of plugins
   use { "windwp/nvim-autopairs", commit = "fa6876f832ea1b71801c4e481d8feca9a36215ec" } -- Autopairs, integrates with both cmp and treesitter
   use { "numToStr/Comment.nvim", commit = "2c26a00f32b190390b664e56e32fd5347613b9e2" }
-  use { "JoosepAlviste/nvim-ts-context-commentstring", commit = "88343753dbe81c227a1c1fd2c8d764afb8d36269"}
+  use { "JoosepAlviste/nvim-ts-context-commentstring", commit = "88343753dbe81c227a1c1fd2c8d764afb8d36269" }
   use { "kyazdani42/nvim-tree.lua", commit = "bdb6d4a25410da35bbf7ce0dbdaa8d60432bc243" }
   use { "moll/vim-bbye", commit = "25ef93ac5a87526111f43e5110675032dbcacf56" }
   use { "nvim-lualine/lualine.nvim", commit = "3362b28f917acc37538b1047f187ff1b5645ecdd" }
@@ -53,7 +53,8 @@ return packer.startup(function(use)
   use { "phaazon/hop.nvim", as = "hop", commit = "a3cf6684bcb9fc974609ae81424f285f05280d90" }
   use { "tpope/vim-surround", commit = "bf3480dc9ae7bea34c78fbba4c65b4548b5b1fea" }
   use { "wellle/targets.vim", commit = "8d6ff2984cdfaebe5b7a6eee8f226a6dd1226f2d" }
-  use { "nathom/filetype.nvim", commit = "b522628a45a17d58fc0073ffd64f9dc9530a8027"}
+  use { "nathom/filetype.nvim", commit = "b522628a45a17d58fc0073ffd64f9dc9530a8027" }
+  use { "folke/todo-comments.nvim", commit = "98b1ebf198836bdc226c0562b9f906584e6c400e" }
   use {
     "direnv/direnv.vim",
     config = function()
@@ -75,7 +76,7 @@ return packer.startup(function(use)
   use { "hrsh7th/cmp-nvim-lua", commit = "d276254e7198ab7d00f117e88e223b4bd8c02d21" }
   use {
     "tzachar/cmp-tabnine",
-    run="./install.sh",
+    run = "./install.sh",
     requires = "hrsh7th/nvim-cmp",
     commit = "e23d32a76304496aade4e4b285751a6a8b505491"
   }
@@ -93,30 +94,16 @@ return packer.startup(function(use)
 
   -- Telescope
   use { "nvim-telescope/telescope.nvim", commit = "d96eaa914aab6cfc4adccb34af421bdd496468b0" }
+  use { "nvim-telescope/telescope-ui-select.nvim", commit = "62ea5e58c7bbe191297b983a9e7e89420f581369" }
   use {
     "nvim-telescope/telescope-fzf-native.nvim",
-    after = "telescope.nvim",
     run = "make",
-    config = function()
-      require("telescope").load_extension("fzf")
-    end,
     commit = "6a33ecefa9b3d9ade654f9a7a6396a00c3758ca6"
   }
-  use {
-    "nvim-telescope/telescope-file-browser.nvim",
-    after = "telescope.nvim",
-    config = function()
-      require("telescope").load_extension("file_browser")
-    end,
-    commit = "61a5521853ac739ae3d0d395f52c1178108e0114"
-  }
+  use { "nvim-telescope/telescope-file-browser.nvim", commit = "61a5521853ac739ae3d0d395f52c1178108e0114" }
   use {
     "nvim-telescope/telescope-frecency.nvim",
-    after = { "telescope.nvim", "sqlite.lua"},
-    config = function()
-      require("telescope").load_extension("frecency")
-    end,
-    requires = {"tami5/sqlite.lua"},
+    requires = { "tami5/sqlite.lua" },
     commit = "68ac8cfe6754bb656b4f84d6c3dafa421b6f9697"
   }
 
@@ -141,7 +128,7 @@ return packer.startup(function(use)
     requires = { "sindrets/diffview.nvim" }
   }
   use { "lewis6991/gitsigns.nvim", commit = "c18e016864c92ecf9775abea1baaa161c28082c3" }
-  use { "rhysd/git-messenger.vim", commit = "8ece5c0c8a3cdecd8b03768ea7fe8f27b6144ad5"}
+  use { "rhysd/git-messenger.vim", commit = "8ece5c0c8a3cdecd8b03768ea7fe8f27b6144ad5" }
 
   -- DAP
   use { "mfussenegger/nvim-dap", commit = "014ebd53612cfd42ac8c131e6cec7c194572f21d" }
@@ -149,7 +136,8 @@ return packer.startup(function(use)
   use { "ravenxrz/DAPInstall.nvim", commit = "8798b4c36d33723e7bba6ed6e2c202f84bb300de" }
 
   -- Language Specific
-  use { "Olical/conjure", commit = "d88a3c8f911b92db5bf34b3b0e7a9e10692bafcb"}
+  use { "Olical/conjure", commit = "d88a3c8f911b92db5bf34b3b0e7a9e10692bafcb" }
+  use { "fatih/vim-go", commit = "8f188b788a2f01c1ee54c8a48c585a771de734e6", run = ":GoUpdateBinaries" }
 
   -- Automatically set up your configuration after cloning packer.nvim
   if PACKER_BOOTSTRAP then
