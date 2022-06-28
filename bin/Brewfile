@@ -68,7 +68,6 @@ cask 'visual-studio-code'
 cask 'adoptopenjdk8'
 cask 'adoptopenjdk16'
 cask 'raycast'
-cask 'tableplus'
 cask 'secretive'
 
 # font stuff
