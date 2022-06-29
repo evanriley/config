@@ -13,9 +13,15 @@ if not dap_install_status_ok then
   return
 end
 
+local dap_go_status_ok, dap_go = pcall(require, "dap-go")
+if not dap_go_status_ok then
+  return
+end
+
 dap_install.setup {}
 
 dap_install.config("python", {})
+dap_install.config("go", {})
 -- add other configs here
 
 dapui.setup {
@@ -48,3 +54,5 @@ end
 dap.listeners.before.event_exited["dapui_config"] = function()
   dapui.close()
 end
+
+dap_go.setup()
