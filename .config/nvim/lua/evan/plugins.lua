@@ -146,7 +146,6 @@ return packer.startup(function(use)
 
   -- Language Specific
   use { "Olical/conjure", commit = "d88a3c8f911b92db5bf34b3b0e7a9e10692bafcb" }
-  use { "fatih/vim-go", commit = "8f188b788a2f01c1ee54c8a48c585a771de734e6", run = ":GoUpdateBinaries" }
 
   -- Automatically set up your configuration after cloning packer.nvim
   if PACKER_BOOTSTRAP then
