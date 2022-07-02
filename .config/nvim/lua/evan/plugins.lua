@@ -56,6 +56,8 @@ return packer.startup(function(use)
   use { "nathom/filetype.nvim", commit = "b522628a45a17d58fc0073ffd64f9dc9530a8027" }
   use { "folke/todo-comments.nvim", commit = "98b1ebf198836bdc226c0562b9f906584e6c400e" }
   use { "nacro90/numb.nvim", commit = "453c50ab921fa066fb073d2fd0f826cb036eaf7b" }
+  use { "tpope/vim-dadbod", commit = "136d82e1884f86b9f9bbbcc88bab6d199928a46e" }
+  use { "kristijanhusak/vim-dadbod-ui", commit = "50cbfc825bd58081f916f989d7ae78e5320e858b" }
   use {
     "direnv/direnv.vim",
     config = function()
