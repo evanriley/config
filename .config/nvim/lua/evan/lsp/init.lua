@@ -3,6 +3,6 @@ if not status_ok then
   return
 end
 
-require "evan.lsp.lsp-installer"
+require("evan.lsp.lsp-installer")
 require("evan.lsp.handlers").setup()
-require "evan.lsp.null-ls"
+require("evan.lsp.null-ls")

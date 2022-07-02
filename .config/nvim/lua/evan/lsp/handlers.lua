@@ -92,7 +92,7 @@ M.on_attach = function(client, bufnr)
   if not status_lsp_format_ok then
     return
   end
-  lsp_format.setup {}
+  lsp_format.setup({})
   lsp_format.on_attach(client)
 end
 
