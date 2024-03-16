@@ -82,6 +82,9 @@ alias lg 'exa --git'
 alias cat 'bat'
 alias du 'dust'
 
+## fast clj repl
+alias clj-repl 'clj "-J-Dclojure.server.repl={:port 5555 :accept clojure.core.server/repl :server-daemon false}"'
+
 # use pinentry-mac instead of pinentry on macos
 if test (uname) = "Darwin"
   alias pinentry 'pinentry-mac'
