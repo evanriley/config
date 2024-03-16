@@ -62,8 +62,8 @@
 
 
 ;; Set theme
-(setq doom-theme 'doom-wilmersdorf)
-;;(setq doom-theme 'doom-city-lights)
+;;(setq doom-theme 'doom-wilmersdorf)
+(setq doom-theme 'doom-city-lights)
 ;; (setq doom-theme 'doom-acario-light)
 ;; (setq doom-theme 'doom-tomorrow-day)
 ;; (setq doom-theme 'doom-opera-light)
