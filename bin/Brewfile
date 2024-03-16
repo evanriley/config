@@ -5,6 +5,7 @@ tap 'borkdude/brew'
 tap 'heroku/brew'
 tap 'AdoptOpenJDK/openjdk'
 tap 'koekeishiya/formulae'
+tap 'homebrew/cask-fonts'
 
 # Standard brew install
 brew 'curl'
@@ -82,8 +83,11 @@ cask 'kitty'
 cask 'raycast'
 cask 'tableplus'
 
+# font stuff
+cask 'font-juliamono'
+
 # mas installs
-mas 'NextDNS', id: 1_464_122_853
-mas 'Deliveries: a package tracker', id: 29_098_6013
+# mas 'NextDNS', id: 1_464_122_853
+# mas 'Deliveries: a package tracker', id: 29_098_6013
 # Ignore installing Xcode through mas...it will often show up as 'updated' but it hasn't been and is instead just redownloading 13gigs of ~~Trash~~ Xcode
 # mas 'Xcode', id: 497_799_835
