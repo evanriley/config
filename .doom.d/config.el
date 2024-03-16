@@ -166,4 +166,10 @@
 (after! org (setq org-insert-heading-respect-content nil))
 
 ;; start the initial frame maximized
-;; (add-to-list 'initial-frame-alist '(fullscreen . maximized))
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+
+(setq lsp-signature-auto-activate nil)
+(setq lsp-lens-enable nil)
+
+(setq lsp-rust-analyzer-server-display-inlay-hints t)
+(setq lsp-rust-analyzer-inlay-hints-mode t)
