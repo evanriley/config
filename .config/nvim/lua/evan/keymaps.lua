@@ -37,9 +37,6 @@ keymap('n', '<localleader>pu', ':PackerUpdate<CR>', opts)
 keymap('n', '<localleader>pc', ':PackerClean<CR>', opts)
 keymap('n', '<localleader>pi', ':PackerInstall<CR>', opts)
 
--- NvimTree
-keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
-
 -- Telescope
 keymap("n", "<leader>ff", ":Telescope git_files<CR>", opts)
 keymap("n", "<leader>fd", ":Telescope find_files<CR>", opts)
