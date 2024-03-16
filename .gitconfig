@@ -29,8 +29,8 @@
         # Setting to git 2.0 default to suppress warning message
         default = simple
 [user]
-        name = Evan Riley
-        email = git@evanriley.dev
+	name = Evan Riley
+	email = git@evanriley.dev
         signingkey = B61357FACF8C4B65
 [commit]
         gpgsign = true
