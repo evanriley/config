@@ -52,7 +52,6 @@ cmp.setup({
     { name = 'cmp_tabnine' },
     { name = 'buffer' },
     { name = 'vsnip' },
-    { name = 'orgmode' },
   },
   experimental = {
     ghost_text = true,

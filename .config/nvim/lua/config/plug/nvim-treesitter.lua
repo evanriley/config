@@ -14,7 +14,6 @@ require('nvim-treesitter.configs').setup({
     "nix",
     "ruby",
     "rust",
-    "org",
 	},
 	ignore_install = {},
 	highlight = {
