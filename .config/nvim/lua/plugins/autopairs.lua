@@ -3,7 +3,6 @@ local npairs = require('nvim-autopairs')
 
 npairs.setup({ map_bs = false, map_cr = false })
 
-vim.g.coq_settings = { keymap = { recommended = false } }
 
 -- these mappings are coq recommended mappings unrelated to nvim-autopairs
 remap('i', '<esc>', [[pumvisible() ? "<c-e><esc>" : "<esc>"]], { expr = true, noremap = true })
@@ -35,3 +34,6 @@ MUtils.BS = function()
   end
 end
 remap('i', '<bs>', 'v:lua.MUtils.BS()', { expr = true, noremap = true })
+
+npairs.add_rules(require('nvim-autopairs.rules.endwise-lua'))
+npairs.add_rules(require('nvim-autopairs.rules.endwise-ruby'))
