@@ -30,6 +30,7 @@ brew 'koekeishiya/formulae/skhd'
 brew 'direnv'
 brew 'tmux'
 brew 'node'
+brew 'starship'
 
 # cask installs
 cask 'iterm2'

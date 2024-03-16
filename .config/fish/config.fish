@@ -1,45 +1,3 @@
-#-------------------------------------------------------------------------------
-# SSH Agent
-#-------------------------------------------------------------------------------
-function __ssh_agent_is_started -d "check if ssh agent is already started"
-	if begin; test -f $SSH_ENV; and test -z "$SSH_AGENT_PID"; end
-		source $SSH_ENV > /dev/null
-	end
-
-	if test -z "$SSH_AGENT_PID"
-		return 1
-	end
-
-	ssh-add -l > /dev/null 2>&1
-	if test $status -eq 2
-		return 1
-	end
-end
-
-function __ssh_agent_start -d "start a new ssh agent"
-  ssh-agent -c | sed 's/^echo/#echo/' > $SSH_ENV
-  chmod 600 $SSH_ENV
-  source $SSH_ENV > /dev/null
-  ssh-add
-end
-
-if not test -d $HOME/.ssh
-    mkdir -p $HOME/.ssh
-    chmod 0700 $HOME/.ssh
-end
-
-if test -d $HOME/.gnupg
-    chmod 0700 $HOME/.gnupg
-end
-
-if test -z "$SSH_ENV"
-    set -xg SSH_ENV $HOME/.ssh/environment
-end
-
-if not __ssh_agent_is_started
-    __ssh_agent_start
-end
-
 set -g fish_greeting
 set -gx EDITOR nvim
 set -gx PATH ~/bin ~/.local/bin $NPM_PACKAGES/bin ~/.roswell/bin ~/.yarn/bin ~/.cargo/bin ~/.config/emacs/bin /opt/homebrew/bin  /opt/homebrew/sbin ~/go/bin /opt/homebrew/opt/grep/libexec/gnubin '/Applications/Sublime Text.app/Contents/SharedSupport/bin' /home/evan/.local/share/bob/nvim-bin $PATH
@@ -49,9 +7,6 @@ direnv hook fish | source
 
 #source zoxide
 zoxide init fish | source
-
-# opam configuration
-source /Users/evan/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 
 # Aliases
 # Use this to manage dotfiles
@@ -71,14 +26,10 @@ alias .4 'cd ../../../../'
 alias .5 'cd ../../../../..'
 
 ##wtf is my ip address...##
-alias myip "curl http://ipecho.net/plain; echo"
+alias myip "curl -6 https://ifconfig.co; echo"
 
 ## more util commands
-alias ls 'exa'
-alias l 'exa -l'
-alias ll 'exa -l | less'
-alias la 'exa -la'
-alias lg 'exa --git'
+alias ls 'eza'
 alias cat 'bat'
 alias du 'dust'
 
@@ -146,3 +97,5 @@ set -g fish_pager_color_description $comment
 
 source ~/.asdf/asdf.fish
 rtx activate fish | source
+
+starship init fish | source
