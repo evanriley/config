@@ -40,5 +40,5 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.PAT }}
           file: .github/docker/Dockerfile
-          registry: ghcr.io
+          registry: docker.pkg.github.com
           repository: evanriley/config/opensuse
