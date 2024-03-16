@@ -48,7 +48,7 @@ Speeds up this file /slightly/
 This information is used by numeration plugins, let's get it setup nice and early.
 #+begin_src emacs-lisp
 (setq user-full-name "Evan Riley"
-      user-mail-address "evanriley@hey.com")
+      user-mail-address "git@evanriley.me")
 #+end_src
 
 Tecosaur has a great point about the location of ~.authinfo.gpg~ let's follow his lead here and move it.
@@ -444,7 +444,6 @@ irc               ; how neckbeards socialize
 
 *** Visual
 **** Fonts
-# JetBrains Mono runs my life.
 Let's try JuliaMono
 #+begin_src emacs-lisp
 (setq
@@ -795,7 +794,7 @@ Then hook into =Info=
 *** Elcord
 Look, if people who use vim are going to bring it up every conversation, I'm going to do the same with emacs.
 #+begin_src emacs-lisp :tangle packages.el
-(package! elcord :pin "64545671174f9ae307c0bd0aa9f1304d04236421")
+(package! elcord :pin "eb4ae2e7e03a5fc26b054ba2fa9a1d308e239c76")
 #+end_src
 
 #+begin_src emacs-lisp
