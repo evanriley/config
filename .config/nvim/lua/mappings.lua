@@ -11,7 +11,7 @@ local opt = {} --empty opt for maps with no extra options
 
 vim.g.mapleader = ' ' -- Map leader key to space
 vim.g.maplocalleader = ',' -- Map localleader
-map('n', '<leader>ln', ':set rnu!<CR>', opt) -- toggle relative line numbers
+map('n', '<leader>ln', ':set nu!<CR>', opt) -- toggle relative line numbers
 
 map('n', '<esc>', ':nohlsearch<cr>', { silent = true})
 vim.cmd [[
