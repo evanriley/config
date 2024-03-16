@@ -7,11 +7,6 @@
     . /etc/os-release
   fi
 
-  if [[ $NAME != 'openSUSE Tumbleweed' ]]; then
-    echo "Sorry, this script currently only works on openSUSE Tumbleweed"
-    exit 1
-  fi
-
   sudo zypper --non-interactive in gcc git gh gpg2 fish \
     kitty
   sudo zypper --non-interactive in emacs neovim tree-sitter luajit fzf ripgrep \
