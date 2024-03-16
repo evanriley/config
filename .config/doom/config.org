@@ -134,6 +134,8 @@ emacs-lisp
 (erlang
  +lsp
  +tree-sitter)
+(fsharp
+ +lsp)
 (go
  +lsp
  +tree-sitter)
