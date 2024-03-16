@@ -1,6 +1,9 @@
 (local {: autoload} (require :nfnl.module))
 (local nvim (autoload :nvim))
 
+(local servers
+  ["gopls" "rust_analyzer" "html" "elixirls" "clojure_lsp" "lua_ls"])
+
 ;symbols to show for lsp diagnostics
 (fn define-signs
   [prefix]
@@ -16,11 +19,15 @@
 (define-signs "Diagnostic")
 
 [{1 :neovim/nvim-lspconfig
-    :dependencies [:lukas-reineke/lsp-format.nvim]
+    :dependencies [:lukas-reineke/lsp-format.nvim
+                   :williamboman/mason.nvim
+                   :williamboman/mason-lspconfig.nvim]
   :config (fn []
             (let [lsp (require :lspconfig)
                   lsp-format (require :lsp-format)
                   cmplsp (require :cmp_nvim_lsp)
+                  mason (require :mason)
+                  mason-lspconfig (require :mason-lspconfig)
                   handlers {"textDocument/publishDiagnostics"
                             (vim.lsp.with
                               vim.lsp.diagnostic.on_publish_diagnostics
@@ -59,13 +66,10 @@
                                 (nvim.buf_set_keymap bufnr :n :<leader>lr ":lua require('telescope.builtin').lsp_references()<cr>" {:noremap true})
                                 (nvim.buf_set_keymap bufnr :n :<leader>li ":lua require('telescope.builtin').lsp_implementations()<cr>" {:noremap true})))]
 
-              ;; Clojure
-              (lsp.clojure_lsp.setup {:on_attach on_attach
-                                      :handlers handlers
-                                      :before_init before_init
-                                      :capabilities capabilities})))}]
-              ;; Go
-              ; (lsp.gopls.setup {:on_attach lsp-format.on_attach
-              ;                   :handlers handlers
-              ;                   :before_init before_init
-              ;                   :capabilities capabilities})))}]
+              (mason.setup {})
+              (mason-lspconfig.setup {:ensure_installed servers})
+              (each [_ server (ipairs servers)]
+                ((. (. lsp server) :setup) {:on_attach on_attach
+                                            :before_init before_init
+                                            :handlers handlers
+                                            :capabilities capabilities}))))}]

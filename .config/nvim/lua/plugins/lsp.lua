@@ -2,6 +2,7 @@
 local _local_1_ = require("nfnl.module")
 local autoload = _local_1_["autoload"]
 local nvim = autoload("nvim")
+local servers = {"gopls", "rust_analyzer", "html", "elixirls", "clojure_lsp", "lua_ls"}
 local function define_signs(prefix)
   local error = (prefix .. "SignError")
   local warn = (prefix .. "SignWarn")
@@ -17,6 +18,8 @@ local function _2_()
   local lsp = require("lspconfig")
   local lsp_format = require("lsp-format")
   local cmplsp = require("cmp_nvim_lsp")
+  local mason = require("mason")
+  local mason_lspconfig = require("mason-lspconfig")
   local handlers = {["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {severity_sort = true, update_in_insert = true, underline = true, virtual_text = false}), ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {border = "single"}), ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {border = "single"})}
   local capabilities = cmplsp.default_capabilities()
   local before_init
@@ -45,6 +48,11 @@ local function _2_()
     return nvim.buf_set_keymap(bufnr, "n", "<leader>li", ":lua require('telescope.builtin').lsp_implementations()<cr>", {noremap = true})
   end
   on_attach = _4_
-  return lsp.clojure_lsp.setup({on_attach = on_attach, handlers = handlers, before_init = before_init, capabilities = capabilities})
+  mason.setup({})
+  mason_lspconfig.setup({ensure_installed = servers})
+  for _, server in ipairs(servers) do
+    lsp[server].setup({on_attach = on_attach, before_init = before_init, handlers = handlers, capabilities = capabilities})
+  end
+  return nil
 end
-return {{"neovim/nvim-lspconfig", dependencies = {"lukas-reineke/lsp-format.nvim"}, config = _2_}}
+return {{"neovim/nvim-lspconfig", dependencies = {"lukas-reineke/lsp-format.nvim", "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim"}, config = _2_}}
