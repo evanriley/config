@@ -63,11 +63,11 @@
 [user]
 	name = Evan Riley
 	email = git@evanriley.dev
-  signingkey = B61357FACF8C4B65
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO2YujIPUDxQV13gJ5Ygg2C39kguFxbsE2QzDlFGN9Du
 [commit]
   gpgsign = true
 [gpg]
-	program = /opt/homebrew/bin/gpg
+	format = ssh
 [credential]
   helper = osxkeychain
 [difftool "nvimdiff"]
