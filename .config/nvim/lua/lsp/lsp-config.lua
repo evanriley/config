@@ -1,144 +1,124 @@
-local lspconfig = require('lspconfig')
-local configs = require('lsp.servers')
-local coq = require "coq"
-local utils = require('lsp.utilities')
+local lspconfig = require("lspconfig")
 
--- Handlers override
+local borders = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" }
+
+
+-- Handlers Overrides
+
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-	silent = true,
-	max_height = "10",
-	border = "rounded",
+    silent = true,
+    max_height = "10",
+    border = borders,
 })
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-	border = "rounded",
+    border = borders,
 })
 
-vim.lsp.util.close_preview_autocmd = function(events, winnr)
-	events = vim.tbl_filter(function(v)
-		return v ~= "CursorMovedI" and v ~= "BufLeave"
-	end, events)
-	vim.api.nvim_command(
-		"autocmd "
-			.. table.concat(events, ",")
-			.. " <buffer> ++once lua pcall(vim.api.nvim_win_close, "
-			.. winnr
-			.. ", true)"
-	)
+vim.lsp.buf.rename = function(new_name, options)
+    options = options or {}
+
+    local filter = function(client)
+        return not vim.tbl_contains({ "null-ls" }, client.name)
+    end
+
+    options.filter = options.filter or filter
+
+    lsprename(new_name, options)
 end
 
 -- Capabilities
-local capabilities = vim.lsp.protocol.make_client_capabilities() --for coq
-capabilities.offsetEncoding = { "utf-16" }
-capabilities.textDocument.codeAction = {
-	dynamicRegistration = true,
-	codeActionLiteralSupport = {
-		codeActionKind = {
-			valueSet = (function()
-				local res = vim.tbl_values(vim.lsp.protocol.CodeActionKind)
-				table.sort(res)
-				return res
-			end)(),
-		},
-	},
-}
 
--- LSP Status
-require("lsp-status").register_progress()
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.workDoneProgress = true
-capabilities.window.workDoneProgress = true
-
 
 -- On Attach
-
 local on_attach = function(client, bufnr)
-	local function buf_set_keymap(...)
-		vim.api.nvim_buf_set_keymap(bufnr, ...)
-	end
-	local function buf_set_option(...)
-		vim.api.nvim_buf_set_option(bufnr, ...)
-	end
+    vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
+    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
-	require("lsp-status").on_attach(client)
-	-- mappings
-	local opts = {
-		noremap = true,
-		silent = true,
-	}
-	buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+-- Mappings
+    local opts = { noremap = true, silent = true, buffer = bufnr }
+    -- vim.keymap.set("n", "gd", require("telescope.builtin").lsp_defintions, { unpack(opts), desc = "Go to LSP definition"})
+    vim.keymap.set(
+        "n",
+        "gd",
+        require("telescope.builtin").lsp_definitions,
+        { unpack(opts), desc = "Go to LSP definition" }
+    )
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { unpack(opts), desc = "Go to LSP declaration"})
+    vim.keymap.set("n", "K",  vim.lsp.buf.hover, { unpack(opts), desc = "LSP Hover" })
+    vim.keymap.set("n", "gi", require("telescope.builtin").lsp_implementations, {  unpack(opts), desc = "Go to LSP implementations" })
+    vim.keymap.set({ "n", "i" }, "<C-k>", vim.lsp.buf.signature_help, { unpack(opts), desc = "Show LSP signature help" })
+    vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, { unpack(opts), desc = "Add LSP workspace folder" })
+    vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, { unpack(opts), desc = "Remove LSP workspace folder" })
+    vim.keymap.set("n", "<leader>wl", require("telescope.builtin").lsp_dynamic_workspace_symbols, { unpack(opts), desc = "List LSP workspace symbols" })
+    vim.keymap.set("n", "<leader>D", require("telescope.builtin").lsp_type_definitions, { unpack(opts), desc = "Go to LSP type definitions" })
+    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { unpack(opts), desc = "LSP rename" })
+    vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, { unpack(opts), desc = "Go to LSP references" })
+    vim.keymap.set("n", "ca", vim.lsp.buf.code_action, { unpack(opts), desc = "List LSP Code Actions" })
 
-	local opts = { noremap = true, silent = true }
-	buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-	buf_set_keymap('n', 'gd', '<Cmd>Telescope lsp_definitions<CR>', { noremap = true })
-	buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', { noremap = true })
-	buf_set_keymap('n', 'gi', '<Cmd>Telescope lsp_implementations<CR>', { noremap = true })
-	buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-	buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-	buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-	buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-	buf_set_keymap('n', '<space>D', '<Cmd>Telescope lsp_type_definitions<CR>', { noremap = true })
-	buf_set_keymap('n', '<space>rn', '<Cmd>lua vim.lsp.buf.rename()<CR>', opts)
-	buf_set_keymap('n', 'gr', '<Cmd>Telescope lsp_references<CR>', { noremap = true })
-	buf_set_keymap('n', 'ca', '<Cmd>Telescope lsp_code_actions<CR>', { noremap = true })
-	buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-	buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-	buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-	buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+    if client.server_capabilities.documentFormattingProvider then
+        -- set eventignore=all
+        vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { unpack(opts), desc = "LSP format" })
+        vim.api.nvim_buf_create_user_command(
+            bufnr,
+            "LspFormat",
+            vim.lsp.buf.format,
+            { range = false, desc = "LSP format" }
+        )
+    end
 
-	if client.server_capabilities.documentFormattingProvider then
-		buf_set_keymap("n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting_seq_sync()<CR>", opts)
-		vim.cmd([[command! -buffer LspFormat lua vim.lsp.buf.formatting_seq_sync()]])
-		vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()")
-	elseif client.server_capabilities.documentRangeFormattingProvider then
-		buf_set_keymap("x", "<leader>lf", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
-		vim.cmd([[command! -buffer -range LspRangeFormat lua vim.lsp.buf.range_formatting()]])
-	end
+    if client.server_capabilities.documentRangeFormattingProvider then
+        vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr(#{timeout_ms:250})")
+        vim.keymap.set("x", "<leader>lf", vim.lsp.buf.range_formatting, { unpack(opts), desc = "LSP range format" })
+        vim.api.nvim_buf_create_user_command(bufnr, "LspRangeFormat", vim.lsp.buf.range_formatting, { range = true, desc = "LSP range format" })
+    end
 
-	vim.cmd([[
-        augroup lsp_echo_diagnostics
-            autocmd! * <buffer>
-            autocmd CursorHold <buffer> lua require'lsp.utilities'.echo_cursor_diagnostic()
-            "autocmd CursorHold <buffer> lua vim.diagnostic.open_float(nil, {scope = "cursor", border = "rounded", focusable = false})
-            autocmd CursorMoved <buffer> echo ""
-        augroup END
-    ]])
+    if client.server_capabilities.documentHighlightProvider then
+        local lsp_references_au_id = vim.api.nvim_create_augroup("LSP_references", { clear = true })
+        vim.api.nvim_create_autocmd("CursorHold", { callback = vim.lsp.buf.document_highlight, buffer = bufnr, group = lsp_references_au_id, desc = "LSP document highlight", })
+        vim.api.nvim_create_autocmd("CursorMoved", { callback = vim.lsp.buf.clear_references, buffer = bufnr, group = lsp_references_au_id, desc = "Clear LSP document highlight", })
+    end
 
-	if client.server_capabilities.signatureHelp then
-		vim.cmd([[
-            augroup lsp_signature_help
-                autocmd! * <buffer>
-                "autocmd CursorHoldI <buffer> lua vim.lsp.buf.signature_help({focusable = false})
-            augroup END
-        ]])
-	end
-
-	if client.server_capabilities.documentHighlightProvider then
-		vim.cmd([[
-            augroup lsp_document_highlight
-                autocmd! * <buffer>
-                autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-                "autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
-                autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-            augroup END
-        ]])
-	end
 end
 
-for server, config in pairs(configs) do
-    config.capabilities = capabilities
-    config.on_attach = on_attach
-    lspconfig[server].setup(coq.lsp_ensure_capabilities(config)) -- for coq
+local function make_config(server_name)
+    local ok, config = pcall(require, "lsp.servers" .. server_name)
+    if not ok then
+        config = {}
+    end
+    local client_on_attach = config.on_attach
+    if client_on_attach then
+        config.on_attach = function(client, bufnr)
+            on_attach(client, bufnr)
+            client_on_attach(client, bufnr)
+        end
+    else
+        config.on_attach = on_attach
+    end
+    config.capabilites = capabilities
+    return config
 end
 
--- Commands
-vim.cmd([[
-command! -nargs=1 -complete=customlist,PythonInterpreterComplete PythonInterpreter lua require'lsp.utilities'.change_python_interpreter(<q-args>)
-function! PythonInterpreterComplete(A,L,P) abort
-  return v:lua.require('lsp.utilities').get_python_interpreters()
-endfunction
-]])
+local servers = {
+    "ccls",
+    "marksman",
+    "tsserver",
+    "gopls",
+    "rust_analyzer",
+}
 
-local M = {}
+for _, server in ipairs(servers) do
+    -- call make_config() before trying to access lspconfig[server] to ensure
+    -- registering custom servers
+    local config = make_config(server)
+    lspconfig[server].setup(config)
+end
+
+M = {}
 M.on_attach = on_attach
-M.capabilites = capabilities
+M.capabilities = capabilities
+M.borders = borders
 return M
