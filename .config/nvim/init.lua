@@ -1,7 +1,6 @@
 -- Load Plugins
 require('plugins')
 
-
 -- Load Options & Keymaps
 require('mappings')
 require('options')
@@ -12,8 +11,6 @@ require('options')
 local scheme = require('lib.scheme')
 scheme.load_shared_scheme('tokyonight')
 
-
 -- Load plugin configs
 require('config.plug')
 require('config.modules')
-

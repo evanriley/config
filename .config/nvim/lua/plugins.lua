@@ -8,13 +8,13 @@ return require('packer').startup(function()
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/nvim-cmp'
-  -- use 'hrsh7th/nvim-compe' -- Deprecated --
+  use 'onsails/lspkind-nvim'
 
 	-- Editor cstuff
 	use 'windwp/nvim-autopairs'
   use 'L3MON4D3/luasnip'
 	use {
-  		'hoob3rt/lualine.nvim',
+  		'nvim-lualine/lualine.nvim',
   		requires = { 'kyazdani42/nvim-web-devicons', opt = true } 
 	}
 	use {
@@ -40,15 +40,16 @@ return require('packer').startup(function()
 	  		'lewis6991/gitsigns.nvim',
 	  		requires = { 'nvim-lua/plenary.nvim'} 
 	}
-  use {
-      'TimUntersberger/neogit',
-      requires = 'nvim-lua/plenary.nvim'
-  }
+  -- use {
+  --     'TimUntersberger/neogit',
+  --     requires = 'nvim-lua/plenary.nvim'
+  -- }
 	use 'phaazon/hop.nvim'
   use 'machakann/vim-sandwich'
 
 	-- Themes
 	use 'folke/tokyonight.nvim'
+  use 'ayu-theme/ayu-vim'
 
   -- Stuff?
   use 'tpope/vim-dispatch'
@@ -56,7 +57,8 @@ return require('packer').startup(function()
   use 'clojure-vim/vim-jack-in'
 
   -- Terminals, amirite?
-  use 'voldikss/vim-floaterm'
+  -- use 'voldikss/vim-floaterm'
+  use 'akinsho/toggleterm.nvim'
 
   -- General Language
   use 'p00f/nvim-ts-rainbow'
