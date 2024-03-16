@@ -31,6 +31,3 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
     vim.highlight.on_yank({ higroup = "Visual", timeout = 200 })
   end,
 })
-
--- Auto format & auto import go files using go.nvim
-vim.api.nvim_exec([[ autocmd BufWritePre *.go :silent! lua require('go.format').goimport() ]], false)

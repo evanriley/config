@@ -1,25 +1,10 @@
-require("evan.options")
-require("evan.keymaps")
-require("evan.plugins")
-require("evan.autocommands")
-require("evan.colorscheme")
-require("evan.cmp")
-require("evan.telescope")
-require("evan.treesitter")
-require("evan.autopairs")
-require("evan.comment")
-require("evan.gitsigns")
-require("evan.lualine")
-require("evan.toggleterm")
-require("evan.project")
-require("evan.impatient")
-require("evan.illuminate")
-require("evan.lsp")
-require("evan.dap")
-require("evan.hop")
-require("evan.neogit")
-require("evan.numb")
-require("evan.go")
--- Don't source the default filetype.vim, use filtetype.nvim instead.
--- TODO: neovim now has `filetype.lua`, consider changing to it. PR: https://github.com/neovim/neovim/pull/16600
-vim.g.did_load_filetypes = 1
+-- TODO:
+-- Figure out why coq needs to be here
+-- mfussenegger/nvim-dap
+
+require("plugins.coq") -- Coq needs to be required right away, not sure why.
+require("plugins")
+require("mappings")
+require("options")
+require("autocommands")
+require("colors")
