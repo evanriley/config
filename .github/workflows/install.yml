@@ -31,14 +31,15 @@ jobs:
         with:
           access_token: ${{ github.token  }}
       - uses: actions/checkout@v2.3.3
-      - name: Docker setup
-        run: docker-compose up -d
-        working-directory: .github/docker
-      - name: Push to GitHub packages
-        uses: docker/build-push-action@v2
+      - name: Login to GitHub Container Registry
+      - uses: docker/login-action@v1
         with:
+          registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.PAT }}
-          file: .github/docker/Dockerfile
-          registry: docker.pkg.github.com
-          repository: evanriley/config/opensuse
+
+      - name: Build config Docker image
+          run: docker build .github/docker --tag ghcr.io/evanriley/config:latest
+          run: docker run ghcr.io/evanriley/config:latest
+          run: docker push ghcr.io/evanriley/config:latest
+
