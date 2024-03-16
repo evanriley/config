@@ -1,1241 +1,1253 @@
-#+title: Terrible, Horrrible, No Good, Very Bad (Doom) Emacs Literate Config
-#+author: Evan Riley
-#+description: An +stolen+ inspired emacs config
+#+property: header-args :exports code :results silent :tangle config.el :noweb no-export
 
-* Intro
-This is a literate (doom) emacs configuration.
-Normally when people do these they carefully explain what each block of line does.
-However I'm both lazy and new to emacs lisp, so I barely know what they do. Consider
-looking at any of these following emacs configurations to better understand what is
-happening in this file.
+* Preface
 
-- [[https://tecosaur.github.io/emacs-config/config.html][tecosaur]]
-- [[https://github.com/shaunsingh/nyoom.emacs][shaunsingh]]
-- [[https://github.com/slano-ls/Doom-Emacs-Config][slano-ls]]
+#+include: README.org
 
-You should, under no circumstance, carbon copy this file. It will only make your life worse.
+** How this all works.
+This document tangles into multipe files, =config.el=, =packages.el= and =init.el=. If you're reading this on the web or an exported version some code blocks may not be visible.
+If you plan on copying (which I can't recommend, I'm an idiot) please view the entire =config.org= file.
 
-* Configuration
-
-#+begin_src emacs-lisp
-;;; config.el -*- lexical-binding: t; -*-
-;; This file has been generated from config.org file. DO NOT EDIT.
-;; Sources are available from https://github.com/evanriley/config
-
-;; Copyright (C) 2023 Evan Riley
-
-;; This file is free software; you can redistribute it and/or modify
-;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation; either version 3, or (at your option)
-;; any later version.
-
-;; This file is distributed in the hope that it will be useful,
-;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;; GNU General Public License for more details.
-
-;; For a full copy of the GNU General Public License
-;; see <https://www.gnu.org/licenses/>.
-#+end_src
-
-That should please Mr. Stallman
-
-* Doom Configuration
-** Modules
+* Doom Modules
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle no
+:header-args: :tangle no :results silent :noweb-ref doom-modules
 :END:
 
-#+name: init.el
-#+attr_html: :collapsed t
-#+begin_src emacs-lisp :tangle "init.el" :noweb no-export :comments no
-;;; init.el -*- lexical-binding: t; -*-
-
-;; This file controls what Doom modules are enabled and what order they load in.
-;; Press 'K' on a module to view its documentation, and 'gd' to browse its directory.
-
-;; Auto-generated from config.org
-
-(doom! :completion
-       <<doom-completion>>
-
-       :ui
-       <<doom-ui>>
-
-       :editor
-       <<doom-editor>>
-
-       :emacs
-       <<doom-emacs>>
-
-       :term
-       <<doom-term>>
-
-       :checkers
-       <<doom-checkers>>
-
-       :tools
-       <<doom-tools>>
-
-       :os
-       <<doom-os>>
-
-       :lang
-       <<doom-lang>>
-
-       :email
-       <<doom-email>>
-
-       :app
-       <<doom-app>>
-
-       :config
-       <<doom-config>>)
+All of my used doom modules appear in the following sections.
+#+begin_src emacs-lisp :tangle init.el :noweb no-export :noweb-ref no
+(doom!
+ <<doom-modules>>
+ )
 #+end_src
 
-*** Doom Configuration
-
-#+name: doom-config
+** Completion
 #+begin_src emacs-lisp
+:completion
+(company
+ +childframe
+ +tng)
+
+(ivy
+ +fuzzy
+ +icons
+ +prescient)
+
+(vertico
+ +icons)
+#+end_src
+
+** UI
+:PROPERTIES:
+:CUSTOM_ID: doom-ui
+:END:
+
+#+begin_src emacs-lisp
+:ui
+deft
+doom
+doom-dashboard
+(emoji +unicode)
+hl-todo
+modeline
+nav-flash
+ophints
+(popup +defaults)
+(vc-gutter +pretty)
+vi-tilde-fringe
+workspaces
+#+end_src
+
+** Editor
+Evil keybindings (VIm) everywhere. Also snippets.
+#+begin_src emacs-lisp
+:editor
+(evil +everywhere)
+file-templates
+fold
+(format +onsave)
+rotate-text
+snippets
+#+end_src
+
+** Emacs
+~dired~ with icons, vc, and some great undo
+#+begin_src emacs-lisp
+:emacs
+(dired
+ +icons)
+electric
+undo
+vc
+#+end_src
+
+** Term
+~vterm~ is my emacs terminal emulator of choice.
+#+begin_src emacs-lisp
+:term
+vterm
+#+end_src
+
+** Checkers
+I only enable syntax checkers here.
+#+begin_src emacs-lisp
+:checkers
+(syntax +childframe)
+#+end_src
+
+** Tools
+Some lovely additions to emacs. I use eglot here since it will (soon) be included in emacs.
+#+begin_src emacs-lisp
+:tools
+direnv
+editorconfig
+ein
+(eval +overlay)
+lookup
+(lsp +eglot)
+(magit +forge)
+pdf
+tree-sitter
+#+end_src
+
+** OS
+Because I'm still (mostly) doing work in macos, I enable it here.
+#+begin_src emacs-lisp
+:os
+(:if IS-MAC macos)
+#+end_src
+
+** Languages
+:PROPERTIES:
+:CUSTOM_ID: doom-lang
+:END:
+I enable a lot of packages in this section. It is OK though as they aren't loaded until needed so there is no impact just enabling them.
+#+begin_src emacs-lisp
+:lang
+(cc
+ +lsp
+ +tree-sitter)
+(clojure
+ +lsp
+ +tree-sitter)
+common-lisp
+data
+(elixir
+ +lsp
+ +tree-sitter)
+emacs-lisp
+(erlang
+ +lsp
+ +tree-sitter)
+(go
+ +lsp
+ +tree-sitter)
+(java
+ +lsp
+ +tree-sitter)
+(javascript
+ +lsp
+ +tree-sitter)
+(lua
+ +fennel
+ +lsp
+ +tree-sitter)
+markdown
+(nix
+ +tree-sitter)
+(org
+ +journal
+ +pretty
+ +roam2)
+(php
+ +lsp
+ +tree-sitter)
+(python
+ +lsp
+ +tree-sitter
+ +poetry)
+rest
+(ruby
+ +rails
+ +tree-sitter)
+(rust
+ +lsp
+ +tree-sitter)
+sh
+(web
+ +lsp
+ +tree-sitter)
+yaml
+(zig
+ +lsp
+ +tree-sitter)
+#+end_src
+
+** Email
+None of these packages are enabled, but I keep this here in the event that one day I want to enable one of them.
+#+begin_src emacs-lisp
+:email
+;;(mu4e +org +gmail)
+;;notmuch
+;;(wanderlust +gmail)
+#+end_src
+
+** Apps
+Same goes for this section, I use other programs to handle these, but maybe one day I'll decide to never leave emacs.
+#+begin_src emacs-lisp
+;;calendar
+;;emms
+;;everywhere        ; *leave* Emacs!? You must be joking
+;;irc               ; how neckbeards socialize
+;;(rss +org)        ; emacs as an RSS reader
+;;twitter           ; twitter client https://twitter.com/vnought
+#+end_src
+
+** Config
+Enable bindings and tell doom emacs that this is a literate config.
+#+begin_src emacs-lisp
+:config
 literate
 (default +bindings +smartparens)
 #+end_src
 
-*** Interface
-
-#+name: doom-completion
-#+begin_src emacs-lisp
-(company                     ; the ultimate code completion backend
- +childframe)                 ; ... when your children are better than you
-(vertico +icons)             ; the search engine of the future
-#+end_src
-
-#+name: doom-ui
-#+begin_src emacs-lisp
-doom
-doom-dashboard               ; a nifty splash screen for Emacs
-(emoji +unicode)
-modeline
-ophints                      ; highlight the region an operation acts on
-(popup                       ; tame sudden yet inevitable temporary windows
- +all                        ; catch all popups that start with an asterix
- +defaults)                  ; default popup rules
-workspaces                   ; tab emulation, persistence & separate workspaces
-unicode
-(vc-gutter +diff-hl +pretty)
-vi-tilde-fringe
-window-select
-workspaces
-zen                          ; distraction-free coding or writing
-#+end_src
-
-#+name: doom-editor
-#+begin_src emacs-lisp
-(evil +everywhere)           ; come to the dark side, we have cookies
-file-templates
-fold
-(format +onsave)             ; automated prettiness
-snippets
-rotate-text
-word-wrap
-#+end_src
-
-#+name: doom-emacs
-#+begin_src emacs-lisp
-(dired +icons)               ; making dired pretty [functional]
-electric                     ; smarter, keyword-based electric-indent
-(ibuffer +icons)             ; interactive buffer management
-undo                         ; persistent, smarter undo for your inevitable mistakes
-vc                           ; version-control and Emacs, sitting in a tree
-#+end_src
-
-#+name: doom-term
-#+begin_src emacs-lisp
-vterm                        ; the best terminal emulation in Emacs
-#+end_src
-
-#+name: doom-checkers
-#+begin_src emacs-lisp
-syntax                       ; tasing you for every semicolon you forget
-(:if (executable-find "aspell") spell) ; tasing you for misspelling mispelling
-(:if (executable-find "languagetool") grammar) ; tasing grammar mistake every you make
-#+end_src
-
-#+name: doom-tools
-#+begin_src emacs-lisp
-(debugger +lsp)              ; FIXME stepping through code, to help you add bugs
-direnv
-docker
-editorconfig
-(eval +overlay)              ; run code, run (also, repls)
-gist
-(lookup                      ; helps you navigate your code and documentation
- +dictionary                 ; dictionary/thesaurus is nice
- +docsets)                   ; ...or in Dash docsets locally
-(lsp                          ; Language Server Protocol
- +eglot)
-(magit                       ; a git porcelain for Emacs
- +forge)                     ; interface with git forges
-pdf                          ; pdf enhancements
-rgb                          ; creating color strings
-tree-sitter                  ; Syntax and Parsing sitting in a tree
-#+end_src
-
-#+name: doom-os
-#+begin_src emacs-lisp
-(:if IS-MAC macos)           ; improve compatibility with macOS
-;;tty                          ; for when we need it
-#+end_src
-
-*** Languages
-
-#+name: doom-lang
-#+begin_src emacs-lisp
-;;agda                       ; types of types of types of types...
-;;beancount                  ; mind the GAAP
-(cc +lsp +tree-sitter)       ; C/C++/Obj-C madness
-(clojure +lsp)               ; java with a lisp
-common-lisp                ; if you've seen one lisp, you've seen them all
-;;coq                        ; proofs-as-programs
-;;crystal                    ; ruby at the speed of c
-;;csharp                     ; unity, .NET, and mono shenanigans
-data                         ; config/data formats
-;;(dart +flutter)            ; paint ui and not much else
-;;dhall                      ; JSON with FP sprinkles
-(elixir                     ; erlang done right
- +lsp
- +tree-sitter)
-;;elm                        ; care for a cup of TEA?
-emacs-lisp                   ; drown in parentheses
-(erlang                     ; an elegant language for a more civilized age
- +lsp
- +tree-sitter)
-;;ess                        ; emacs speaks statistics
-;;faust                      ; dsp, but you get to keep your soul
-;;fsharp                     ; ML stands for Microsoft's Language
-;;fstar                      ; (dependent) types and (monadic) effects and Z3
-;;gdscript                   ; the language you waited for
-(go +lsp)                    ; the hipster dialect
-;;(haskell +lsp)             ; a language that's lazier than I am
-;;hy                         ; readability of scheme w/ speed of python
-;;idris                      ;
-(json +lsp +tree-sitter)     ; At least it ain't XML
-(java +lsp +tree-sitter)     ; the poster child for carpal tunnel syndrome
-(javascript +lsp
-            +tree-sitter)    ; all(hope(abandon(ye(who(enter(here))))))
-;;(julia +lsp)               ; Python, R, and MATLAB in a blender
-;;(kotlin +lsp)              ; a better, slicker Java(Script)
-;;(latex                       ; writing papers in Emacs has never been so fun
- ;;+fold                     ; fold the clutter away nicities
- ;;+latexmk                    ; modern latex plz
- ;;+cdlatex                  ; quick maths symbols
- ;;+lsp)
-;;lean                       ; proof that mathematicians need help
-;;factor                     ; for when scripts are stacked against you
-;;ledger                     ; an accounting system in Emacs
-(lua +lsp +fennel)           ; one-based indices? one-based indices
-(markdown +grip)             ; writing docs for people to ignore
-;;nim                        ; python + lisp at the speed of c
-;;(nix +tree-sitter)         ; I hereby declare "nix geht mehr!"
-;;ocaml                      ; an objective camel
-(org                         ; organize your plain life in plain text
- ;+pretty                   ; yessss my pretties! (nice unicode symbols); using org-modern instead
- +dragndrop                  ; drag & drop files/images into org buffers
- ;;+hugo                     ; use Emacs for hugo blogging
- +noter                      ; enhanced PDF notetaking
- +jupyter                    ; ipython/jupyter support for babel
- +pandoc                     ; export-with-pandoc support
- ;; +gnuplot                    ; who doesn't like pretty pictures
- ;; +pomodoro                   ; be fruitful with the tomato technique
- ;; +present)                    ; using org-mode for presentations
- +roam2)                     ; wander around notes
-(php                        ; perl's insecure younger brother
- +lsp
- +tree-sitter)
-;;plantuml                   ; diagrams for confusing people more
-;;purescript                 ; javascript, but functional
-(python                      ; beautiful is better than ugly
- +lsp
- +poetry
- +tree-sitter)
-;;qt                         ; the 'cutest' gui framework ever
-;;racket                     ; a DSL for DSLs
-;;raku                       ; the artist formerly known as perl6
-rest                       ; Emacs as a REST client
-;;rst                        ; ReST in peace
-(ruby
- +rails                      ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
- +tree-sitter)
-(rust
-  +lsp
-  +tree-sitter)              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
-;;scala                      ; java, but good
-;;scheme                     ; a fully conniving family of lisps
-(sh +lsp +fish +tree-sitter) ; she sells {ba,z,fi}sh shells on the C xor
-;;sml                        ; no, the /other/ ML
-;;solidity                   ; do you need a blockchain? No.
-;;swift                      ; who asked for emoji variables?
-;;terra                      ; Earth and Moon in alignment for performance.
-(web
- +lsp                 ; the tubes
- +tree-sitte)
-(yaml +lsp)                  ; JSON, but readable
-(zig                        ; C, but simpler
- +lsp
- +tree-sitter)
-#+end_src
-
-*** Everything else
-#+name: doom-email
-#+begin_src emacs-lisp
-;;(:if (executable-find "mu") (mu4e +org +gmail))
-#+end_src
-
-#+name: doom-app
-#+begin_src emacs-lisp
-;;calendar                   ; A dated approach to timetabling
-;;emms                       ; Multimedia in Emacs is music to my ears
-;;everywhere                 ; *leave* Emacs!? You must be joking.
-;; (rss +org)                   ; emacs as an RSS reader
-#+end_src
-
-** Additional Doom Packages
-:PROPERTIES:
-:header-args:emacs-lisp: :tangle no
-:END:
-
-A place for additional things added in packages.el
-
-#+name: packages.el
-#+attr_html: :collapsed t
-#+begin_src emacs-lisp :tangle "packages.el" :noweb no-export :comments no
-;; -*- no-byte-compile: t; -*-
-;;; $DOOMDIR/packages.el
-
-;;org
-<<org>>
-
-;;programming
-<<programming>>
-
-;;looks
-<<looks>>
-
-;;emacs additions
-<<emacs>>
-
-;;fun
-<<fun>>
-#+end_src
-
-*** Org
-
-#+name: org
-#+begin_src emacs-lisp
-(package! doct)
-(package! websocket)
-(package! org-appear)
-(package! org-preview-html)
-(package! org-modern)
-(package! org-projectile)
-;;(package! org-pretty-table)
-;;(package! org-ol-tree)
-#+end_src
-
-*** Programming
-
-#+name: programming
-#+begin_src emacs-lisp
-;; Any other programming-specific packages can go here
-
-#+end_src
-
-
-*** Looks
-
-#+name: looks
-#+begin_src emacs-lisp
-(package! focus)
-(package! doom-themes)
-(package! solaire-mode)
-(package! svg-tag-mode)
-
-(package! vundo
-  :recipe (:host github
-           :repo "casouri/vundo")
-  :pin "10d5debe317b2244d19085151040f955dda4a9ab")
-#+end_src
-
-*** Emacs
-Emacs is missing just a few packages to improve things here and there. Mainly
-- better dictionary support
-- improved modal editing
-- ebook support
-- more colorful docs
-
-#+name: emacs
-#+begin_src emacs-lisp
-(package! nov)
-(package! lexic)
-(package! info-colors)
-(package! xit-mode)
-(package! magit-delta :recipe (:host github :repo "dandavison/magit-delta"))
-
-(package! magit-pretty-graph
-  :recipe (:host github
-           :repo "georgek/magit-pretty-graph")
-  :pin "26dc5535a20efe781b172bac73f14a5ebe13efa9")
-#+end_src
-
-*** Fun
-Some fun packages
-
-#+name: fun
-#+begin_src emacs-lisp
-(package! smudge)
-#+end_src
-
-* Basic Configuration
-** Temporary Bug Fix
-
-#+begin_src emacs-lisp
-(when (eq system-type 'darwin) (customize-set-variable 'native-comp-driver-options '("-Wl,-w")))
-#+end_src
-
-** Customizations
-
-#+begin_src emacs-lisp
-(setq-default custom-file (expand-file-name ".custom.el" doom-private-dir))
-(when (file-exists-p custom-file)
-  (load custom-file))
-#+end_src
-
-** Personal information
-
+* Personalization
+Setup name and email
 #+begin_src emacs-lisp
 (setq user-full-name "Evan Riley"
-      user-mail-address "evan@evanriley.net")
+      user-mail-address "evan@evanriley.dev")
 #+end_src
 
-#+begin_src emacs-lisp
-(setq-default
- gc-cons-threshold 134217738
- gc-cons-percentage 0.1
- window-combination-resize t                      ; take new window space from all other windows (not just current)
- x-stretch-cursor t)                              ; Stretch cursor to the glyph width
-
-#+end_src
-
-** Authinfo
-
+Store ~.authinfo.gpg~ in my home directory so that it isn't lost all the time.
 #+begin_src emacs-lisp
 (setq auth-sources '("~/.authinfo.gpg")
       auth-source-cache-expiry nil) ; default is 7200 (2h)
 #+end_src
 
-** Basic Theme
-
+Some simple default settings.
 #+begin_src emacs-lisp
-(setq doom-font (font-spec :family "CommitMono" :size 17)
-      doom-big-font (font-spec :family "CommitMono" :size 32)
-      doom-variable-pitch-font (font-spec :family "Victor Mono" :size 17)
-      doom-unicode-font (font-spec :family "JetBrainsMono Nerd Font")
-      doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
+(setq-default
+ delete-by-moving-to-trash t                      ; Delete files to trash
+ window-combination-resize t                      ; take new window space from all other windows (not just current)
+ x-stretch-cursor t)                              ; Stretch cursor to the glyph width
 
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. These are the defaults.
-;;(setq doom-theme 'doom-tomorrow-night)
+(setq undo-limit 80000000                         ; Raise undo-limit to 80Mb
+      evil-want-fine-undo t                       ; By default while in insert all changes are one big blob. Be more granular
+      auto-save-default t                         ; Nobody likes to loose work, I certainly don't
+      password-cache-expiry nil                   ; I can trust my computers ... can't I?
+      ;; scroll-preserve-screen-position 'always     ; Don't have `point' jump around
+      scroll-margin 2                             ; It's nice to maintain a little margin
+      display-time-default-load-average nil)      ; I don't think I've ever found this useful
 
-(use-package doom-themes
-  :ensure t
-  :config
-  ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t)); if nil, italics is universally disabled
+(display-time-mode 1)                             ; Enable time in the mode-line
 
-(setq doom-theme 'doom-tomorrow-night)
-
+(global-subword-mode 1)                           ; Iterate through CamelCase words
 #+end_src
 
-** Maximize
-
+By default changes made via a customisation interface are added to =init.el=.
+I prefer the idea of using a separate file for this. We just need to change a
+setting, and load it if it exists.
 #+begin_src emacs-lisp
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+(setq-default custom-file (expand-file-name ".custom.el" doom-private-dir))
+(when (file-exists-p custom-file)
+  (load custom-file))
 #+end_src
+* UI
+** General
+Some general settings to setup how emacs looks.
 
-** Line numbers
-
+Enable line numbers, and use relative line numbers
 #+begin_src emacs-lisp
 (setq display-line-numbers-type 'relative)
 #+end_src
 
-** Window management
-
+Setup the ~fill-column~ to be wider by default
+80 characters simply isn't wide enough today.
 #+begin_src emacs-lisp
-(setq evil-vsplit-window-right t
-      evil-split-window-below t)
+(setq-default fill-column 100)
+#+end_src
+
+Increase the amount of context lines when scrolling full-screen
+#+begin_src emacs-lisp
+(setq next-screen-context-lines 8)
+#+end_src
+
+Ensure ~dired-omit-mode~ is not started with dired. It hides some files transparently.
+#+begin_src emacs-lisp
+(after! dired
+  (remove-hook 'dired-mode-hook 'dired-omit-mode))
+#+end_src
+
+By default bookmarked lines are highlighted in an annoying orange background which often removes other formatting. This disables that.
+#+begin_src emacs-lisp
+(after! bookmark
+  (setq bookmark-fontify nil))
+#+end_src
+
+Start emacs in a bigger window.
+#+begin_src emacs-lisp
+(add-to-list 'default-frame-alist '(height . 40))
+(add-to-list 'default-frame-alist '(width . 90))
+#+end_src
+
+** Fonts
+Setup my preferred fonts.
+#+begin_src emacs-lisp
+(setq doom-font (font-spec :family "Liga SFMono Nerd Font" :size 17))
+#+end_src
+
+
+
+** Theme
+Unpin ~doom-themes~
+#+begin_src emacs-lisp :tangle packages.el
+(unpin! doom-themes)
 #+end_src
 
 #+begin_src emacs-lisp
-(defadvice! prompt-for-buffer (&rest _)
-  :after '(evil-window-split evil-window-vsplit)
-  (consult-buffer))
+(setq doom-theme 'doom-gruvbox)
 #+end_src
 
-** Vterm
+Let's delete the defaults, doom-themes is enough for me.
+#+begin_src emacs-lisp
+(delq! t custom-theme-load-path)
+#+end_src
+
+Fix loading order to prevent ansi-color errors
+#+begin_src emacs-lisp
+(remove-hook 'window-setup-hook #'doom-init-theme-h)
+(add-hook 'after-init-hook #'doom-init-theme-h 'append)
+#+end_src
+** Dashboard
+Let's go with a simple Emacs 'E'
+#+begin_src emacs-lisp
+(defvar fancy-splash-image-directory
+  (expand-file-name "misc/splash-images/" doom-private-dir)
+  "Directory in which to look for splash image templates.")
+
+(defvar fancy-splash-image-template
+  (expand-file-name "emacs-e-template.svg" fancy-splash-image-directory)
+  "Default template svg used for the splash image.
+Colours are substituted as per `fancy-splash-template-colours'.")
+#+end_src
+
+Special named colours can be used as the basis for theming, with a simple replacement system.
+#+begin_src emacs-lisp
+(defvar fancy-splash-template-colours
+  '(("#111112" :face default   :attr :foreground)
+    ("#8b8c8d" :face shadow)
+    ("#eeeeef" :face default   :attr :background)
+    ("#e66100" :face highlight :attr :background)
+    ("#1c71d8" :face font-lock-keyword-face)
+    ("#f5c211" :face font-lock-type-face)
+    ("#813d9c" :face font-lock-constant-face)
+    ("#865e3c" :face font-lock-function-name-face)
+    ("#2ec27e" :face font-lock-string-face)
+    ("#c01c28" :face error)
+    ("#000001" :face ansi-color-black)
+    ("#ff0000" :face ansi-color-red)
+    ("#ff00ff" :face ansi-color-magenta)
+    ("#00ff00" :face ansi-color-green)
+    ("#ffff00" :face ansi-color-yellow)
+    ("#0000ff" :face ansi-color-blue)
+    ("#00ffff" :face ansi-color-cyan)
+    ("#fffffe" :face ansi-color-white))
+  "Alist of colour-replacement plists.
+Each plist is of the form (\"$placeholder\" :doom-color 'key :face 'face).
+If the current theme is a doom theme :doom-color will be used,
+otherwise the colour will be face foreground.")
+#+end_src
+
+If we want to make sure an image is themed, we can look for unrecognised hex
+strings that are not greyscale (as greyscale can be expected in the form of a
+transparent overlay).
+#+begin_src emacs-lisp
+(defun fancy-splash-check-buffer ()
+  "Check the current SVG buffer for bad colours."
+  (interactive)
+  (when (eq major-mode 'image-mode)
+    (xml-mode))
+  (when (and (featurep 'rainbow-mode)
+             (not (bound-and-true-p rainbow-mode)))
+    (rainbow-mode 1))
+  (let* ((colours (mapcar #'car fancy-splash-template-colours))
+         (colourise-hex
+          (lambda (hex)
+            (propertize
+             hex
+             'face `((:foreground
+                      ,(if (< 0.5
+                              (cl-destructuring-bind (r g b) (x-color-values hex)
+                                ;; Values taken from `rainbow-color-luminance'
+                                (/ (+ (* .2126 r) (* .7152 g) (* .0722 b))
+                                   (* 256 255 1.0))))
+                           "white" "black")
+                      (:background ,hex))))))
+         (cn 96)
+         (colour-menu-entries
+          (mapcar
+           (lambda (colour)
+             (cl-incf cn)
+             (cons cn
+                   (cons
+                    (substring-no-properties colour)
+                    (format " (%s) %s %s"
+                            (propertize (char-to-string cn)
+                                        'face 'font-lock-keyword-face)
+                            (funcall colourise-hex colour)
+                            (propertize
+                             (symbol-name
+                              (plist-get
+                               (cdr (assoc colour fancy-splash-template-colours))
+                               :face))
+                             'face 'shadow)))))
+           colours))
+         (colour-menu-template
+          (format
+           "Colour %%s is unexpected! Should this be one of the following?\n
+%s
+ %s to ignore
+ %s to quit"
+           (mapconcat
+            #'cddr
+            colour-menu-entries
+            "\n")
+           (propertize "SPC" 'face 'font-lock-keyword-face)
+           (propertize "ESC" 'face 'font-lock-keyword-face)))
+         (colour-menu-choice-keys
+          (append (mapcar #'car colour-menu-entries)
+                  (list ?\s)))
+         (buf (get-buffer-create "*fancy-splash-lint-colours-popup*"))
+         (good-colour-p
+          (lambda (colour)
+            (or (assoc colour fancy-splash-template-colours)
+                ;; Check if greyscale
+                (or (and (= (length colour) 4)
+                         (= (aref colour 1)   ; r
+                            (aref colour 2)   ; g
+                            (aref colour 3))) ; b
+                    (and (= (length colour) 7)
+                         (string= (substring colour 1 3)       ; rr =
+                                  (substring colour 3 5))      ; gg
+                         (string= (substring colour 3 5)       ; gg =
+                                  (substring colour 5 7))))))) ; bb
+         (prompt-to-replace
+          (lambda (target)
+            (with-current-buffer buf
+              (erase-buffer)
+              (insert (format colour-menu-template
+                              (funcall colourise-hex target)))
+              (setq-local cursor-type nil)
+              (set-buffer-modified-p nil)
+              (goto-char (point-min)))
+            (save-window-excursion
+              (pop-to-buffer buf)
+              (fit-window-to-buffer (get-buffer-window buf))
+              (car (alist-get
+                    (read-char-choice
+                     (format "Select replacement, %s-%s or SPC: "
+                             (char-to-string (caar colour-menu-entries))
+                             (char-to-string (caar (last colour-menu-entries))))
+                     colour-menu-choice-keys)
+                    colour-menu-entries))))))
+    (save-excursion
+      (goto-char (point-min))
+      (while (re-search-forward "#[0-9A-Fa-f]\\{6\\}\\|#[0-9A-Fa-f]\\{3\\}" nil t)
+        (recenter)
+        (let* ((colour (match-string 0))
+               (replacement (and (not (funcall good-colour-p colour))
+                                 (funcall prompt-to-replace colour))))
+          (when replacement
+            (replace-match replacement t t))))
+      (message "Done"))))
+#+end_src
+
+Since we're going to be generating theme-specific versions of splash images, it
+would be good to have a cache directory.
+#+begin_src emacs-lisp
+(defvar fancy-splash-cache-dir (expand-file-name "theme-splashes/" doom-cache-dir))
+#+end_src
+
+To set up dynamic resizing, we'll use a list specifying the image height at
+various frame-height thresholds, with a few extra bells and whistles (such as
+the ability to change image too).
+#+begin_src emacs-lisp
+(defvar fancy-splash-sizes
+  `((:height 300 :min-height 50 :padding (0 . 2))
+    (:height 250 :min-height 42 :padding (2 . 4))
+    (:height 200 :min-height 35 :padding (3 . 3))
+    (:height 150 :min-height 28 :padding (3 . 3))
+    (:height 100 :min-height 20 :padding (2 . 2))
+    (:height 75  :min-height 15 :padding (2 . 1))
+    (:height 50  :min-height 10 :padding (1 . 0))
+    (:height 1   :min-height 0  :padding (0 . 0)))
+  "List of plists specifying image sizing states.
+Each plist should have the following properties:
+- :height, the height of the image
+- :min-height, the minimum `frame-height' for image
+- :padding, a `+doom-dashboard-banner-padding' (top . bottom) padding
+  specification to apply
+Optionally, each plist may set the following two properties:
+- :template, a non-default template file
+- :file, a file to use instead of template")
+#+end_src
+
+Now that's we've set up the customisation approach, we need to work out the
+mechanics for actually implementing this. To start with, a basic utility
+function to get the relevant file path.
+#+begin_src emacs-lisp
+(defun fancy-splash-filename (theme template height)
+  "Get the file name for the splash image with THEME and of HEIGHT."
+  (expand-file-name (format "%s-%s-%d.svg" theme (file-name-base template) height) fancy-splash-cache-dir))
+#+end_src
+
+Now to go about actually generating the images. To adjust the sizing on demand,
+we will offer two mechanisms:
+1. A special =$height= token which is replaced with the desired height
+2. Recognition of =height=100=, in which case =100= will be replaced with the
+   desired height and any =width= property will be removed.
 
 #+begin_src emacs-lisp
-(setq vterm-always-compile-module t)
+(defun fancy-splash-generate-image (template height)
+  "Create a themed image from TEMPLATE of HEIGHT.
+The theming is performed using `fancy-splash-template-colours'
+and the current theme."
+  (with-temp-buffer
+    (insert-file-contents template)
+    (goto-char (point-min))
+    (if (re-search-forward "$height" nil t)
+        (replace-match (number-to-string height) t t)
+      (if (re-search-forward "height=\"100\\(?:\\.0[0-9]*\\)?\"" nil t)
+          (progn
+            (replace-match (format "height=\"%s\"" height) t t)
+            (goto-char (point-min))
+            (when (re-search-forward "\\([ \t\n]\\)width=\"[\\.0-9]+\"[ \t\n]*" nil t)
+              (replace-match "\\1")))
+        (warn "Warning! fancy splash template: neither $height nor height=100 not found in %s" template)))
+    (dolist (substitution fancy-splash-template-colours)
+      (goto-char (point-min))
+      (let* ((replacement-colour
+              (face-attribute (plist-get (cdr substitution) :face)
+                              (or (plist-get (cdr substitution) :attr) :foreground)
+                              nil 'default))
+             (replacement-hex
+              (if (string-prefix-p "#" replacement-colour)
+                  replacement-colour
+                (apply 'format "#%02x%02x%02x"
+                       (mapcar (lambda (c) (ash c -8))
+                               (color-values replacement-colour))))))
+        (while (search-forward (car substitution) nil t)
+          (replace-match replacement-hex nil nil))))
+    (unless (file-exists-p fancy-splash-cache-dir)
+      (make-directory fancy-splash-cache-dir t))
+    (let ((inhibit-message t))
+      (write-region nil nil (fancy-splash-filename (car custom-enabled-themes) template height)))))
 #+end_src
+
+We may as well generate each theme's appropriate images in bulk.
+#+begin_src emacs-lisp
+(defun fancy-splash-generate-all-images ()
+  "Perform `fancy-splash-generate-image' in bulk."
+  (dolist (size fancy-splash-sizes)
+    (unless (plist-get size :file)
+      (fancy-splash-generate-image
+       (or (plist-get size :template)
+           fancy-splash-image-template)
+       (plist-get size :height)))))
+#+end_src
+
+It would be nice to have a simple check function which will just generate the
+set of relevant images if needed, and do nothing if they already exist.
+#+begin_src emacs-lisp
+(defun fancy-splash-ensure-theme-images-exist (&optional height)
+  "Ensure that the relevant images exist.
+Use the image of HEIGHT to check, defaulting to the height of the first
+specification in `fancy-splash-sizes'. If that file does not exist for
+the current theme, `fancy-splash-generate-all-images' is called. "
+  (unless (file-exists-p
+           (fancy-splash-filename
+            (car custom-enabled-themes)
+            fancy-splash-image-template
+            (or height (plist-get (car fancy-splash-sizes) :height))))
+    (fancy-splash-generate-all-images)))
+#+end_src
+
+In case we switch out the images used (or something else goes wrong), it would
+be good to have a convenient method to clear this cache.
+#+begin_src emacs-lisp
+(defun fancy-splash-clear-cache (&optional delete-files)
+  "Clear all cached fancy splash images.
+Optionally delete all cache files and regenerate the currently relevant set."
+  (interactive (list t))
+  (dolist (size fancy-splash-sizes)
+    (unless (plist-get size :file)
+      (let ((image-file
+             (fancy-splash-filename
+              (car custom-enabled-themes)
+              (or (plist-get size :template)
+                  fancy-splash-image-template)
+              (plist-get size :height))))
+        (image-flush (create-image image-file) t))))
+  (message "Fancy splash image cache cleared!")
+  (when delete-files
+    (delete-directory fancy-splash-cache-dir t)
+    (fancy-splash-generate-all-images)
+    (message "Fancy splash images cache deleted!")))
+#+end_src
+
+In a similar way, it could be fun to allow for switching the template used. We
+can support this by looking for files ending in =-template.svg= and running
+~image-flush~ via ~fancy-splash-clear-cache~.
+#+begin_src emacs-lisp
+(defun fancy-splash-switch-template ()
+  "Switch the template used for the fancy splash image."
+  (interactive)
+  (let ((new (completing-read
+              "Splash template: "
+              (mapcar
+               (lambda (template)
+                 (replace-regexp-in-string "-template\\.svg$" "" template))
+               (directory-files fancy-splash-image-directory nil "-template\\.svg\\'"))
+              nil t)))
+    (setq fancy-splash-image-template
+          (expand-file-name (concat new "-template.svg") fancy-splash-image-directory))
+    (fancy-splash-clear-cache)
+    (message "") ; Clear message from `fancy-splash-clear-cache'.
+    (setq fancy-splash--last-size nil)
+    (fancy-splash-apply-appropriate-image)))
+#+end_src
+
+Now we can ensure that the desired images exist, we need to work out which
+particular one we want. This is really just a matter of comparing the frame
+height to the set of presets.
+#+begin_src emacs-lisp
+(defun fancy-splash-get-appropriate-size ()
+  "Find the firt `fancy-splash-sizes' with min-height of at least frame height."
+  (let ((height (frame-height)))
+    (cl-some (lambda (size) (when (>= height (plist-get size :min-height)) size))
+             fancy-splash-sizes)))
+#+end_src
+
+We now want to apply the appropriate image to the dashboard. At the same time,
+we don't want to do so needlessly, so we may as well record the size and theme
+to determine when a refresh is actually needed.
+#+begin_src emacs-lisp
+(setq fancy-splash--last-size nil)
+(setq fancy-splash--last-theme nil)
+
+(defun fancy-splash-apply-appropriate-image (&rest _)
+  "Ensure the appropriate splash image is applied to the dashboard.
+This function's signature is \"&rest _\" to allow it to be used
+in hooks that call functions with arguments."
+  (let ((appropriate-size (fancy-splash-get-appropriate-size)))
+    (unless (and (equal appropriate-size fancy-splash--last-size)
+                 (equal (car custom-enabled-themes) fancy-splash--last-theme))
+      (unless (plist-get appropriate-size :file)
+        (fancy-splash-ensure-theme-images-exist (plist-get appropriate-size :height)))
+      (setq fancy-splash-image
+            (or (plist-get appropriate-size :file)
+                (fancy-splash-filename (car custom-enabled-themes)
+                                       fancy-splash-image-template
+                                       (plist-get appropriate-size :height)))
+            +doom-dashboard-banner-padding (plist-get appropriate-size :padding)
+            fancy-splash--last-size appropriate-size
+            fancy-splash--last-theme (car custom-enabled-themes))
+      (+doom-dashboard-reload))))
+#+end_src
+
+If we're operating in a terminal (or =emacclient=) we see an ascii banner instead
+of the graphical one. I'd also like to use something simple for this.
+#+begin_src emacs-lisp
+(defun doom-dashboard-draw-ascii-emacs-banner-fn ()
+  (let* ((banner
+          '(",---.,-.-.,---.,---.,---."
+            "|---'| | |,---||    `---."
+            "`---'` ' '`---^`---'`---'"))
+         (longest-line (apply #'max (mapcar #'length banner))))
+    (put-text-property
+     (point)
+     (dolist (line banner (point))
+       (insert (+doom-dashboard--center
+                +doom-dashboard--width
+                (concat
+                 line (make-string (max 0 (- longest-line (length line)))
+                                   32)))
+               "\n"))
+     'face 'doom-dashboard-banner)))
+#+end_src
+
+Now we just need this as Doom's ASCII banner function.
+#+begin_src emacs-lisp
+(unless (display-graphic-p) ; for some reason this messes up the graphical splash screen atm
+  (setq +doom-dashboard-ascii-banner-fn #'doom-dashboard-draw-ascii-emacs-banner-fn))
+#+end_src
+
+Having an aesthetically pleasing image is all very well and good, but I'm aiming
+for minimal, not clinical --- it would be good to inject some fun into the
+dashboard. After trawling around the internet for a bit, I've found three
+sources of fun phrases, namely:
++ a nonsense corporate jargon generator,
++ a selection of random developer excuses, and
++ a collection of fun but rather useless facts.
+
+I used to have a fancy method that used web APIs for these and inserted an
+invisible placeholder into the dashboard which was asynchronously replaced on
+the result of (debounced) requests to the APIs. While that actually worked quite
+well, I realised that it would be much better and simpler if I simply copied the
+phrases sources to local files and did the random selection / generation in
+elisp.
+
+Let's start off by setting the local folder to put the phrase source files in.
+#+begin_src emacs-lisp
+(defvar splash-phrase-source-folder
+  (expand-file-name "misc/splash-phrases" doom-private-dir)
+  "A folder of text files with a fun phrase on each line.")
+#+end_src
+
+Now we want to support two "phrase systems"
+1. A complete file of phrases, one phrase per line
+2. A collection of phrase-components, put together to form a phrase
+
+It would be good to specify/detect which of the two cases apply based on the
+file name alone. I've done this by setting the simple check that if the file
+name contains =-N-= (where =N= is some number) then it is taken as the =N=​th phrase
+component, with everything preceding the =-N-= token taken as the collection
+identifier, and everything after =-N-= ignored.
+#+begin_src emacs-lisp
+(defvar splash-phrase-sources
+  (let* ((files (directory-files splash-phrase-source-folder nil "\\.txt\\'"))
+         (sets (delete-dups (mapcar
+                             (lambda (file)
+                               (replace-regexp-in-string "\\(?:-[0-9]+-\\w+\\)?\\.txt" "" file))
+                             files))))
+    (mapcar (lambda (sset)
+              (cons sset
+                    (delq nil (mapcar
+                               (lambda (file)
+                                 (when (string-match-p (regexp-quote sset) file)
+                                   file))
+                               files))))
+            sets))
+  "A list of cons giving the phrase set name, and a list of files which contain phrase components.")
+#+end_src
+
+Let's fix the phrase set in use, and pick a random phrase source on startup.
+#+begin_src emacs-lisp
+(defvar splash-phrase-set
+  (nth (random (length splash-phrase-sources)) (mapcar #'car splash-phrase-sources))
+  "The default phrase set. See `splash-phrase-sources'.")
+#+end_src
+
+While having a random set of phrases is fantastic the vast majority of the time,
+I expect that occasionally I'll feel in the mood to change the phrase set or
+pick a particular one, so some functions for that would be nice.
+#+begin_src emacs-lisp
+(defun splash-phrase-set-random-set ()
+  "Set a new random splash phrase set."
+  (interactive)
+  (setq splash-phrase-set
+        (nth (random (1- (length splash-phrase-sources)))
+             (cl-set-difference (mapcar #'car splash-phrase-sources) (list splash-phrase-set))))
+  (+doom-dashboard-reload t))
+
+(defun splash-phrase-select-set ()
+  "Select a specific splash phrase set."
+  (interactive)
+  (setq splash-phrase-set (completing-read "Phrase set: " (mapcar #'car splash-phrase-sources)))
+  (+doom-dashboard-reload t))
+#+end_src
+
+If we're going to be selecting phrases from a large list of lines, it could be
+worth caching the list of lines.
+#+begin_src emacs-lisp
+(defvar splash-phrase--cached-lines nil)
+#+end_src
+
+Now let's write a function that will pick a random line from a file, using
+~splash-phrase--cached-lines~ if possible.
+#+begin_src emacs-lisp
+(defun splash-phrase-get-from-file (file)
+  "Fetch a random line from FILE."
+  (let ((lines (or (cdr (assoc file splash-phrase--cached-lines))
+                   (cdar (push (cons file
+                                     (with-temp-buffer
+                                       (insert-file-contents (expand-file-name file splash-phrase-source-folder))
+                                       (split-string (string-trim (buffer-string)) "\n")))
+                               splash-phrase--cached-lines)))))
+    (nth (random (length lines)) lines)))
+#+end_src
+
+With this, we now have enough to generate random phrases on demand.
+#+begin_src emacs-lisp
+(defun splash-phrase (&optional set)
+  "Construct a splash phrase from SET. See `splash-phrase-sources'."
+  (mapconcat
+   #'splash-phrase-get-from-file
+   (cdr (assoc (or set splash-phrase-set) splash-phrase-sources))
+   " "))
+#+end_src
+
+I originally thought this might be enough, but some phrases are a tad long, and
+this isn't exactly doom-dashboard appropriate. In such cases we need to split
+lines, re-centre them, and add some whitespace. While we're at it, we may as
+well make it that you can click on the phrase to replace it with new one.
+#+begin_src emacs-lisp
+(defun splash-phrase-dashboard-formatted ()
+  "Get a splash phrase, flow it over multiple lines as needed, and fontify it."
+  (mapconcat
+   (lambda (line)
+     (+doom-dashboard--center
+      +doom-dashboard--width
+      (with-temp-buffer
+        (insert-text-button
+         line
+         'action
+         (lambda (_) (+doom-dashboard-reload t))
+         'face 'doom-dashboard-menu-title
+         'mouse-face 'doom-dashboard-menu-title
+         'help-echo "Random phrase"
+         'follow-link t)
+        (buffer-string))))
+   (split-string
+    (with-temp-buffer
+      (insert (splash-phrase))
+      (setq fill-column (min 70 (/ (* 2 (window-width)) 3)))
+      (fill-region (point-min) (point-max))
+      (buffer-string))
+    "\n")
+   "\n"))
+#+end_src
+
+Almost there now, this just needs some centreing and newlines.
+#+begin_src emacs-lisp
+(defun splash-phrase-dashboard-insert ()
+  "Insert the splash phrase surrounded by newlines."
+  (insert "\n" (splash-phrase-dashboard-formatted) "\n"))
+#+end_src
+
+When using the dashboard, there are often a small number of actions I will take.
+As the dashboard is it's own major mode, there is no need to suffer the tyranny
+of unnecessary keystrokes --- we can simply bind common actions to a single key!
+#+begin_src emacs-lisp
+(defun +doom-dashboard-setup-modified-keymap ()
+  (setq +doom-dashboard-mode-map (make-sparse-keymap))
+  (map! :map +doom-dashboard-mode-map
+        :desc "Find file" :ng "f" #'find-file
+        :desc "Recent files" :ng "r" #'consult-recent-file
+        :desc "Config dir" :ng "C" #'doom/open-private-config
+        :desc "Open config.org" :ng "c" (cmd! (find-file (expand-file-name "config.org" doom-user-dir)))
+        :desc "Open org-mode root" :ng "O" (cmd! (find-file (expand-file-name "lisp/org/" doom-user-dir)))
+        :desc "Open dotfile" :ng "." (cmd! (doom-project-find-file "~/.config/"))
+        :desc "Notes (roam)" :ng "n" #'org-roam-node-find
+        :desc "Switch buffer" :ng "b" #'+vertico/switch-workspace-buffer
+        :desc "Switch buffers (all)" :ng "B" #'consult-buffer
+        :desc "IBuffer" :ng "i" #'ibuffer
+        :desc "Previous buffer" :ng "p" #'previous-buffer
+        :desc "Set theme" :ng "t" #'consult-theme
+        :desc "Quit" :ng "Q" #'save-buffers-kill-terminal
+        :desc "Show keybindings" :ng "h" (cmd! (which-key-show-keymap '+doom-dashboard-mode-map))))
+
+(add-transient-hook! #'+doom-dashboard-mode (+doom-dashboard-setup-modified-keymap))
+(add-transient-hook! #'+doom-dashboard-mode :append (+doom-dashboard-setup-modified-keymap))
+(add-hook! 'doom-init-ui-hook :append (+doom-dashboard-setup-modified-keymap))
+#+end_src
+
+Unfortunately the show keybindings help doesn't currently work as intended, but
+this is still quite nice overall.
+
+Now that the dashboard is so convenient, I'll want to make it easier to get to.
+#+begin_src emacs-lisp
+(map! :leader :desc "Dashboard" "d" #'+doom-dashboard/open)
+#+end_src
+
+With the splash image and phrase generation worked out, we can almost put
+together the desired dashboard from scratch, we just need to re-create the
+benchmark information by itself.
+#+begin_src emacs-lisp
+(defun +doom-dashboard-benchmark-line ()
+  "Insert the load time line."
+  (when doom-init-time
+    (insert
+     "\n\n"
+     (propertize
+      (+doom-dashboard--center
+       +doom-dashboard--width
+       (doom-display-benchmark-h 'return))
+      'face 'doom-dashboard-loaded))))
+#+end_src
+
+With ~doom-display-benchmark-h~ displayed here, I don't see the need for it to be
+shown in the minibuffer as well.
+#+begin_src emacs-lisp
+(remove-hook 'doom-after-init-hook #'doom-display-benchmark-h)
+#+end_src
+
+Now we can create the desired dashboard by setting ~+doom-dashboard-functions~ to
+just have:
++ The "widget banner" (splash image)
++ The benchmark line
++ A random phrase
+This gets rid of two segments I'm not particularly interested in seeing
++ The shortmenu
++ The footer (github link)
+#+begin_src emacs-lisp
+(setq +doom-dashboard-functions
+      (list #'doom-dashboard-widget-banner
+            #'+doom-dashboard-benchmark-line
+            #'splash-phrase-dashboard-insert))
+#+end_src
+
+At this point there are just a few minor tweaks I'd still like to make to the
+dashboard.
+#+begin_src emacs-lisp
+(defun +doom-dashboard-tweak (&optional _)
+  (with-current-buffer (get-buffer +doom-dashboard-name)
+    (setq-local line-spacing 0.2
+                mode-line-format nil
+                evil-normal-state-cursor (list nil))))
+#+end_src
+
+Now we can just add this as a mode hook.
+#+begin_src emacs-lisp
+(add-hook '+doom-dashboard-mode-hook #'+doom-dashboard-tweak)
+#+end_src
+
+Unfortunately, the initialisation of =doom-modeline= interferes with the set
+~mode-line-format~ value. To get around this, we can re-apply
+~+doom-dashboard-tweak~ as a slightly late init hook, after =doom-modeline= has been
+loaded.
+#+begin_src emacs-lisp
+(add-hook 'doom-after-init-hook #'+doom-dashboard-tweak 1)
+#+end_src
+
+Lastly, with the buffer name being shown in the frame title thanks to some [[Window title][other
+configuration]], we might as well display something a bit prettier than =*doom*=.
+#+begin_src emacs-lisp
+(setq +doom-dashboard-name "► Doom"
+      doom-fallback-buffer-name +doom-dashboard-name)
+#+end_src
+
+The end result is a minimal but rather nice splash screen.
+
+To keep the splash image up to date, we just need to check it every time the
+frame size or theme is changed.
 
 #+begin_src emacs-lisp
-(setq vterm-kill-buffer-on-exit t)
+(add-hook 'window-size-change-functions #'fancy-splash-apply-appropriate-image)
+(add-hook 'doom-load-theme-hook #'fancy-splash-apply-appropriate-image)
 #+end_src
-
+* Company
+Reduce prefix length and delay. This may cause performance issues.
 #+begin_src emacs-lisp
-(after! vterm
-  (setf (alist-get "magit-status" vterm-eval-cmds nil nil #'equal)
-        '((lambda (path)
-            (magit-status path)))))
+(after! company
+  (setq company-idle-delay 0.2
+        company-minimum-prefix-length 1))
 #+end_src
 
-** Solaire
-
-#+begin_src emacs-lisp
-(solaire-global-mode +1)
-#+end_src
-
-** Forge
-
-#+begin_src emacs-lisp
-(setq forge-owned-accounts '(("evanriley")))
-#+end_src
-
-** LSP
-
+Increase the file watch threshold from 1000 to 1500.
 #+begin_src emacs-lisp
 (after! lsp-mode
-  (setq lsp-enable-symbol-highlighting nil))
-
-(after! lsp-ui
-  (setq lsp-ui-sideline-enable nil  ; no more useful than flycheck
-        lsp-ui-doc-enable nil))     ; redundant with K
+  (setq lsp-file-watch-threshold 1500))
 #+end_src
 
-*** Elixir
-#+begin_src emacs-lisp
-(after! eglot
-    (add-hook 'elixir-mode-hook 'eglot-ensure)
-    (add-to-list 'eglot-server-programs '(elixir-mode "/opt/homebrew/bin/elixir-ls")))
-#+end_src
-
-
-*** Web Mode
-#+begin_src emacs-lisp
-(after! web-mode
-  (add-to-list 'auto-mode-alist '("\\.eex\\'" . web-mode)))
-#+end_src
-** Avy
+* Editing
+Enable easy use of ~avy~
 #+begin_src emacs-lisp
 (map! "C-'" #'avy-goto-char-timer)
+#+end_src
 
+Reduce avy timeout from 0.5. I'm an impatient person.
+#+begin_src emacs-lisp
 (after! avy
   (setq avy-timeout-seconds 0.3))
 #+end_src
-** Company
 
+Use better ~comment-dwim~
+#+begin_src emacs-lisp :tangle packages.el
+(package! comment-dwim-2 :pin "7cdafd6d98234a7402865b8abdae54a2f2551c94")
+#+end_src
 #+begin_src emacs-lisp
-(after! company
-  (setq company-idle-delay 0.1
-        company-selection-wrap-around t
-        company-require-match 'never
-        company-dabbrev-downcase nil
-        company-dabbrev-ignore-case t
-        company-dabbrev-other-buffers nil
-        company-tooltip-limit 5
-        company-tooltip-minimum-width 40)
-  (set-company-backend!
-    '(text-mode
-      markdown-mode
-      gfm-mode)
-    '(:seperate
-      company-files)))
+(use-package! comment-dwim-2
+  :bind ([remap comment-dwim] . comment-dwim-2)
+  :config (setq cd2/region-command 'cd2/comment-or-uncomment-region))
+#+end_src
+
+* Org-Mode
+** General
+#+begin_src emacs-lisp
+(setq org-directory "~/Documents/Org/")
+#+end_src
+
+Set the org-agenda files to be the org directory. This includes all the files in the base directory, but no sub-directories.
+#+begin_src emacs-lisp
+(defvar org-agenda-files nil)
+(add-to-list 'org-agenda-files org-directory)
 #+end_src
 
 #+begin_src emacs-lisp
-(setq company-global-modes
-      '(not erc-mode
-            circe-mode
-            message-mode
-            help-mode
-            gud-mode
-            vterm-mode
-            org-mode))
+(after! org
+  <<org-configuration>>
+  )
 #+end_src
 
-** Which Key
-
-First let's tweak the timing
-#+begin_src emacs-lisp
-(setq which-key-idle-delay 0.5)
+Setting up ~TODO~ states.
+#+begin_src emacs-lisp  :tangle no :noweb-ref org-configuration
+(setq org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "ONHOLD(h)" "|" "DONE(d)")
+                          (sequence "EMAIL(e)" "|" "SENT(s)")
+                          (sequence "|" "CANCELLED(c)")
+                          (sequence "|" "MOVED(m)")))
 #+end_src
 
-Let's also suppress all the evil- everywhre
-#+begin_src emacs-lisp
-(setq which-key-allow-multiple-replacements t)
-(after! which-key
-  (pushnew!
-   which-key-replacement-alist
-   '(("" . "\\`+?evil[-:]?\\(?:a-\\)?\\(.*\\)") . (nil . "◂\\1"))
-   '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . "◃\\1"))
-   ))
+Ensure that sub-tasks must be completed before the parent task can be marked done
+#+begin_src emacs-lisp :tangle no :noweb-ref org-configuration
+(setq org-enforce-todo-dependencies t)
 #+end_src
 
-** Messages Auto-Tail
-Make the messages buffer always scroll to the tail
+Pressing return over links will follow the link
+#+begin_src emacs-lisp :tangle no :noweb-ref org-configuration
+(setq org-return-follows-link t)
+#+end_src
 
+Archive to subdirectory and use datetree
 #+begin_src emacs-lisp
-(defvar +messages--auto-tail-enabled nil)
+(after! org-archive
+  (setq org-archive-location "archive/%s_archive::datetree/"))
+#+end_src
 
-(defun +messages--auto-tail-a (&rest arg)
-  "Make *Messages* buffer auto-scroll to the end after each message."
-  (let* ((buf-name (buffer-name (messages-buffer)))
-         ;; Create *Messages* buffer if it does not exist
-         (buf (get-buffer-create buf-name)))
-    ;; Activate this advice only if the point is _not_ in the *Messages* buffer
-    ;; to begin with. This condition is required; otherwise you will not be
-    ;; able to use `isearch' and other stuff within the *Messages* buffer as
-    ;; the point will keep moving to the end of buffer :P
-    (when (not (string= buf-name (buffer-name)))
-      ;; Go to the end of buffer in all *Messages* buffer windows that are
-      ;; *live* (`get-buffer-window-list' returns a list of only live windows).
-      (dolist (win (get-buffer-window-list buf-name nil :all-frames))
-        (with-selected-window win
-          (goto-char (point-max))))
-      ;; Go to the end of the *Messages* buffer even if it is not in one of
-      ;; the live windows.
-      (with-current-buffer buf
-        (goto-char (point-max))))))
+Highlight \LaTeX within ~org~
+#+begin_src emacs-lisp :tangle no :noweb-ref org-configuration
+(setq org-highlight-latex-and-related '(native script entities))
+#+end_src
 
-(defun +messages-auto-tail-toggle ()
-  "Auto tail the '*Messages*' buffer."
+No longer start with latex or inline images. This is often quite slow.
+#+begin_src emacs-lisp :tangle no :noweb-ref org-configuration
+(setq org-startup-with-latex-preview nil
+      org-startup-with-inline-images nil)
+#+end_src
+
+Remove empty clock lines, they achieve nothing.
+#+begin_src emacs-lisp
+(after! org-clock
+  (setq org-clock-out-remove-zero-time-clocks t))
+#+end_src
+
+Unmap keybind that I use for avy
+#+begin_src emacs-lisp :tangle no :noweb-ref org-configuration
+(map! :map org-mode-map "C-'" nil)
+#+end_src
+
+Editing around links is a real pain. This allows me to quickly exit the link.
+#+begin_src emacs-lisp :tangle no :noweb-ref org-configuration
+(defun tq/org-exit-link-forward ()
+  "Jump just outside a link forward"
   (interactive)
-  (if +messages--auto-tail-enabled
-      (progn
-        (advice-remove 'message '+messages--auto-tail-a)
-        (setq +messages--auto-tail-enabled nil)
-        (message "+messages-auto-tail: Disabled."))
-    (advice-add 'message :after '+messages--auto-tail-a)
-    (setq +messages--auto-tail-enabled t)
-    (message "+messages-auto-tail: Enabled.")))
+  (when (org-in-regexp org-link-any-re)
+    (goto-char (match-end 0))
+    (insert " ")))
+
+(defun tq/org-exit-link-backward ()
+  "Jump just outside a link backward"
+  (interactive)
+  (when (org-in-regexp org-link-any-re)
+    (goto-char (match-beginning 0))
+    (save-excursion (insert " "))))
+
+(map! :map (evil-org-mode-map org-mode-map)
+      :ni "C-k" #'tq/org-exit-link-forward
+      :ni "C-j" #'tq/org-exit-link-backward)
 #+end_src
 
-** Undo Improvements
-
-#+begin_src emacs-lisp
-;; Increase undo history limits even more
-(after! undo-fu
-  ;; Emacs undo defaults
-  (setq undo-limit        10000000    ;; 1MB   (default is 160kB, Doom's default is 400kB)
-        undo-strong-limit 100000000   ;; 100MB (default is 240kB, Doom's default is 3MB)
-        undo-outer-limit  1000000000) ;; 1GB   (default is 24MB,  Doom's default is 48MB)
-
-  ;; Undo-fu customization options
-  (setq undo-fu-allow-undo-in-region t ;; Undoing with a selection will use undo within that region.
-        undo-fu-ignore-keyboard-quit t)) ;; Use the `undo-fu-disable-checkpoint' command instead of Ctrl-G `keyboard-quit' for non-linear behavior.
-
-;; Evil undo
-(after! evil
-  (setq evil-want-fine-undo t)) ;; By default while in insert all changes are one big blob
-#+end_src
-
-** Visual Undo
-
-#+begin_src emacs-lisp
-(use-package! vundo
-  :defer t
-  :init
-  (defconst +vundo-unicode-symbols
-   '((selected-node   . ?●)
-     (node            . ?○)
-     (vertical-stem   . ?│)
-     (branch          . ?├)
-     (last-branch     . ?╰)
-     (horizontal-stem . ?─)))
-
-  (map! :leader
-        (:prefix ("o")
-         :desc "vundo" "v" #'vundo))
-
-  :config
-  (setq vundo-glyph-alist +vundo-unicode-symbols
-        vundo-compact-display t
-        vundo-window-max-height 6))
-#+end_src
-
-** Projectile
-Let's not include Emacs packages as projects to remember
-
-#+begin_src emacs-lisp
-(setq projectile-ignored-projects '("~/" "/tmp" "~/.emacs.d/.local/straight/repos/"))
-(setq projectile-project-search-path '("~/Code/personal/" "~/Code/work/" "~/Code/oss/"))
-(defun projectile-ignored-project-function (filepath)
-  "Return t if FILEPATH is within any of `projectile-ignored-projects'"
-  (or (mapcar (lambda (p) (s-starts-with-p p filepath)) projectile-ignored-projects)))
-#+end_src
-
-** Misc. Emacs Defaults
-#+begin_src emacs-lisp
-(setq scroll-margin 2
-      auto-save-default t
-      delete-by-moving-to-trash t
-      truncate-string-ellipsis "…"
-      browse-url-browser-function 'xwidget-webkit-browse-url)
-
-(fringe-mode 0)
-(global-subword-mode 1)
-#+end_src
-
-** Modeline
-
-#+begin_src emacs-lisp
-(defun doom-modeline-conditional-buffer-encoding ()
-  "We expect the encoding to be LF UTF-8, so only show the modeline when this is not the case"
-  (setq-local doom-modeline-buffer-encoding
-              (unless (and (memq (plist-get (coding-system-plist buffer-file-coding-system) :category)
-                                 '(coding-category-undecided coding-category-utf-8))
-                           (not (memq (coding-system-eol-type buffer-file-coding-system) '(1 2))))
-                t)))
-
-(add-hook 'after-change-major-mode-hook #'doom-modeline-conditional-buffer-encoding)
-
-(display-time-mode 1)                             ; Enable time in the mode-line
-#+end_src
-
-** Magit
-
-#+begin_src emacs-lisp
-(after! magit
-  (magit-delta-mode +1))
-
-(use-package! magit-pretty-graph
-  :after magit
-  :init
-  (setq magit-pg-command
-        (concat "git --no-pager log"
-                " --topo-order --decorate=full"
-                " --pretty=format:\"%H%x00%P%x00%an%x00%ar%x00%s%x00%d\""
-                " -n 2000")) ;; Increase the default 100 limit
-
-  (map! :localleader
-        :map (magit-mode-map)
-        :desc "Magit pretty graph" "p" (cmd! (magit-pg-repo (magit-toplevel)))))
-#+end_src
-
-** Info Colors
-
-#+begin_src emacs-lisp
-(use-package! info-colors
-  :commands (info-colors-fontify-node))
-
-(add-hook 'Info-selection-hook 'info-colors-fontify-node)
-#+end_src
-
-** Splash Screen Tweak
-
-#+begin_src emacs-lisp
-(setq fancy-splash-image "~/.config/doom/emacs.svg")
-#+end_src
-
-** Marginalia
-#+begin_src emacs-lisp
-(after! marginalia
-  (setq marginalia--ellipsis "…"    ; Nicer ellipsis
-        marginalia-align 'right     ; right alignment
-        marginalia-align-offset -1)) ; one space on the right
-#+end_src
-
-** Writeroom
-#+begin_src emacs-lisp
-(setq +zen-text-scale 0.8)
-#+end_src
-
-** Ebooks
-#+begin_src emacs-lisp
-(use-package! nov
-  :mode ("\\.epub\\'" . nov-mode)
-  :config
-  (map! :map nov-mode-map
-        :n "RET" #'nov-scroll-up)
-
-  (advice-add 'nov-render-title :override #'ignore)
-  (defun +nov-mode-setup ()
-    (face-remap-add-relative 'default :height 1.3)
-    (setq-local next-screen-context-lines 4
-                shr-use-colors nil)
-    (require 'visual-fill-column nil t)
-    (setq-local visual-fill-column-center-text t
-                visual-fill-column-width 81
-                nov-text-width 80)
-    (visual-fill-column-mode 1)
-    (add-to-list '+lookup-definition-functions #'+lookup/dictionary-definition)
-    (add-hook 'nov-mode-hook #'+nov-mode-setup)))
-#+end_src
-
-** Highlighting
-
-#+begin_src emacs-lisp
-(global-hl-line-mode 0)
-#+end_src
-
-* Org
-** Basic Configuration
-#+begin_src emacs-lisp
-(after! org
-  (setq org-directory "~/org"                     ; let's put files here
-        org-ellipsis "…"                          ; cute icon for folded org blocks
-        org-list-allow-alphabetical t             ; have a. A. a) A) list bullets
-        org-use-property-inheritance t            ; it's convenient to have properties inherited
-        org-catch-invisible-edits 'smart          ; try not to accidently do weird stuff in invisible regions
-        org-log-done 'time                        ; having the time a item is done sounds convenient
-        ;;org-roam-directory "~/org/roam/"          ; same thing, for roam
-
-        org-hide-emphasis-markers t
-        org-pretty-entities t
-        org-auto-align-tags nil
-        org-tags-column 0
-        org-catch-invisible-edits 'show-and-error
-        org-insert-heading-respect-content t
-
-        org-special-ctrl-a/e t
-        org-agenda-block-separator ?─
-
-        org-agenda-tags-column 0
-        ;;org-agenda-block-separator ?─
-        org-agenda-time-grid
-        '((daily today require-timed)
-          (800 1000 1200 1400 1600 1800 2000)
-          " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
-        org-agenda-current-time-string
-        "⭠ now ─────────────────────────────────────────────────"))
-
-(after! org-modern
-  (global-org-modern-mode))
-#+end_src
-
-#+begin_src emacs-lisp
-(after! org
-  (setq org-src-fontify-natively t
-        org-fontify-whole-heading-line t
-        org-inline-src-prettify-results '("⟨" . "⟩")
-        org-fontify-done-headline t
-        org-fontify-quote-and-verse-blocks t))
-#+end_src
-
-#+begin_src emacs-lisp
-(after! org
-  (setq org-babel-default-header-args
-        '((:session . "none")
-          (:results . "replace")
-          (:exports . "code")
-          (:cache . "no")
-          (:noweb . "no")
-          (:hlines . "no")
-          (:tangle . "no")
-          (:comments . "link"))))
-#+end_src
-
-#+begin_src emacs-lisp
-(after! ox
-  (org-link-set-parameters "yt" :export #'+org-export-yt)
-  (defun +org-export-yt (path desc backend _com)
-    (cond ((org-export-derived-backend-p backend 'html)
-           (format "<iframe width='440' \
-height='335' \
-src='https://www.youtube.com/embed/%s' \
-frameborder='0' \
-allowfullscreen>%s</iframe>" path (or "" desc)))
-          ((org-export-derived-backend-p backend 'latex)
-           (format "\\href{https://youtu.be/%s}{%s}" path (or desc "youtube")))
-          (t (format "https://youtu.be/%s" path)))))
-#+end_src
-
-** Some Aesthetic Enhancements
-
-#+begin_src emacs-lisp
-(custom-set-faces!
-  '(org-document-title :height 1.2))
-
-(custom-set-faces!
-  '(outline-1 :weight extra-bold :height 1.25)
-  '(outline-2 :weight bold :height 1.15)
-  '(outline-3 :weight bold :height 1.12)
-  '(outline-4 :weight semi-bold :height 1.09)
-  '(outline-5 :weight semi-bold :height 1.06)
-  '(outline-6 :weight semi-bold :height 1.03)
-  '(outline-8 :weight semi-bold)
-  '(outline-9 :weight semi-bold))
-#+end_src
-
-#+begin_src emacs-lisp
-(use-package! org-modern
-  :hook (org-mode . org-modern-mode)
-  :config
-  (setq org-modern-table-vertical 2
-        org-modern-table-horizontal 4
-        org-modern-list '((43 . "➤") (45 . "–") (42 . "•"))
-        org-modern-footnote (cons nil (cadr org-script-display))
-        org-modern-priority t
-        org-modern-block t
-        org-modern-block-fringe 1
-        org-modern-horizontal-rule t)
-
-  ;; Change faces
-  (custom-set-faces! '(org-modern-tag :inherit (region org-modern-label)))
-  (custom-set-faces! '(org-modern-statistics :inherit org-checkbox-statistics-todo)))
-
-;; Handle collision with Doom ligatures
-;;(when (modulep! :ui ligatures)
-;;  (defadvice! +org-init-appearance-h--no-ligatures-a ()
-;;    :after #'+org-init-appearance-h
-;;    (set-ligatures! 'org-mode
-;;                    :name nil
-;;                    :src_block nil
-;;                    :src_block_end nil
-;;                    :quote nil
-;;                    :quote_end nil)))
-#+end_src
-
-#+begin_src emacs-lisp
-(use-package! org-appear
-  :hook (org-mode . org-appear-mode)
-  :config
-  (setq org-appear-autoemphasis t
-        org-appear-autosubmarkers t
-        org-appear-autolinks nil)
-  ;; for proper first-time setup, `org-appear--set-elements'
-  ;; needs to be run after other hooks have acted.
-  (run-at-time nil nil #'org-appear--set-elements))
-
-;;(use-package! org-ol-tree :commands org-ol-tree)
-
-;;(map! :map org-mode-map
-;;      :after org
-;;      :localleader
-;;      :desc "Outline" "O" #'org-ol-tree)
-#+end_src
-
-#+begin_src emacs-lisp
+Add simple keybinding to toggle latex fragments in org mode
+#+begin_src emacs-lisp :tangle no :noweb-ref org-configuration
 (map! :map evil-org-mode-map
-      :after evil-org
-      :n "g <up>" #'org-backward-heading-same-level
-      :n "g <down>" #'org-forward-heading-same-level
-      :n "g <left>" #'org-up-element
-      :n "g <right>" #'org-down-element)
+      :n "zf" #'org-toggle-latex-fragment)
 #+end_src
 
-** Org-Roam
-#+begin_src emacs-lisp :tangle no
-(use-package! websocket
-  :after org-roam)
-
-(use-package! org-roam-ui
-  :after org-roam
-  :commands org-roam-ui-open
-  :config
-  (setq org-roam-ui-sync-theme t
-        org-roam-ui-follow t
-        org-roam-ui-update-on-save t
-        org-roam-ui-open-on-start t))
-#+end_src
-
-#+begin_src emacs-lisp :tangle no
-(after! org-roam
-  (setq +org-roam-open-buffer-on-find-file nil))
-#+end_src
-
-#+begin_src emacs-lisp :tangle no
-(defadvice! doom-modeline--buffer-file-name-roam-aware-a (orig-fun)
-  :around #'doom-modeline-buffer-file-name ; takes no args
-  (if (s-contains-p org-roam-directory (or buffer-file-name ""))
-      (replace-regexp-in-string
-       "\\(?:^\\|.*/\\)\\([0-9]\\{4\\}\\)\\([0-9]\\{2\\}\\)\\([0-9]\\{2\\}\\)[0-9]*-"
-       "🢔(\\1-\\2-\\3) "
-       (subst-char-in-string ?_ ?  buffer-file-name))
-    (funcall orig-fun)))
-#+end_src
-
-*** Prettier Labels
-#+begin_src emacs-lisp tangle :no
-;; Prettier labels for ROAM docs
-(defvar org-reference-contraction-max-words 3
-  "Maximum number of words in a reference reference.")
-(defvar org-reference-contraction-max-length 35
-  "Maximum length of resulting reference reference, including joining characters.")
-(defvar org-reference-contraction-stripped-words
-  '("the" "on" "in" "off" "a" "for" "by" "of" "and" "is" "to")
-  "Superfluous words to be removed from a reference.")
-(defvar org-reference-contraction-joining-char "-"
-  "Character used to join words in the reference reference.")
-
-(defun org-reference-contraction-truncate-words (words)
-  "Using `org-reference-contraction-max-length' as the total character 'budget' for the WORDS
-and truncate individual words to conform to this budget.
-
-To arrive at a budget that accounts for words undershooting their requisite average length,
-the number of characters in the budget freed by short words is distributed among the words
-exceeding the average length.  This adjusts the per-word budget to be the maximum feasable for
-this particular situation, rather than the universal maximum average.
-
-This budget-adjusted per-word maximum length is given by the mathematical expression below:
-
-max length = \\floor{ \\frac{total length - chars for seperators - \\sum_{word \\leq average length} length(word) }{num(words) > average length} }"
-  ;; trucate each word to a max word length determined by
-  ;;
-  (let* ((total-length-budget (- org-reference-contraction-max-length  ; how many non-separator chars we can use
-                                 (1- (length words))))
-         (word-length-budget (/ total-length-budget                      ; max length of each word to keep within budget
-                                org-reference-contraction-max-words))
-         (num-overlong (-count (lambda (word)                            ; how many words exceed that budget
-                                 (> (length word) word-length-budget))
-                               words))
-         (total-short-length (-sum (mapcar (lambda (word)                ; total length of words under that budget
-                                             (if (<= (length word) word-length-budget)
-                                                 (length word) 0))
-                                           words)))
-         (max-length (/ (- total-length-budget total-short-length)       ; max(max-length) that we can have to fit within the budget
-                        num-overlong)))
-    (mapcar (lambda (word)
-              (if (<= (length word) max-length)
-                  word
-                (substring word 0 max-length)))
-            words)))
-
-(defun org-reference-contraction (reference-string)
-  "Give a contracted form of REFERENCE-STRING that is only contains alphanumeric characters.
-Strips 'joining' words present in `org-reference-contraction-stripped-words',
-and then limits the result to the first `org-reference-contraction-max-words' words.
-If the total length is > `org-reference-contraction-max-length' then individual words are
-truncated to fit within the limit using `org-reference-contraction-truncate-words'."
-  (let ((reference-words
-         (-filter (lambda (word)
-                    (not (member word org-reference-contraction-stripped-words)))
-                  (split-string
-                   (->> reference-string
-                        downcase
-                        (replace-regexp-in-string "\\[\\[[^]]+\\]\\[\\([^]]+\\)\\]\\]" "\\1") ; get description from org-link
-                        (replace-regexp-in-string "[-/ ]+" " ") ; replace seperator-type chars with space
-                        puny-encode-string
-                        (replace-regexp-in-string "^xn--\\(.*?\\) ?-?\\([a-z0-9]+\\)$" "\\2 \\1") ; rearrange punycode
-                        (replace-regexp-in-string "[^A-Za-z0-9 ]" "") ; strip chars which need %-encoding in a uri
-                        ) " +"))))
-    (when (> (length reference-words)
-             org-reference-contraction-max-words)
-      (setq reference-words
-            (cl-subseq reference-words 0 org-reference-contraction-max-words)))
-
-    (when (> (apply #'+ (1- (length reference-words))
-                    (mapcar #'length reference-words))
-             org-reference-contraction-max-length)
-      (setq reference-words (org-reference-contraction-truncate-words reference-words)))
-
-    (string-join reference-words org-reference-contraction-joining-char)))
-#+end_src
-
-** Improved Org-Return
+** Capture
+Bind capture to something more convenient
 #+begin_src emacs-lisp
-(defun unpackaged/org-element-descendant-of (type element)
-  "Return non-nil if ELEMENT is a descendant of TYPE.
-TYPE should be an element type, like `item' or `paragraph'.
-ELEMENT should be a list like that returned by `org-element-context'."
-  ;; MAYBE: Use `org-element-lineage'.
-  (when-let* ((parent (org-element-property :parent element)))
-    (or (eq type (car parent))
-        (unpackaged/org-element-descendant-of type parent))))
-
-;;;###autoload
-(defun unpackaged/org-return-dwim (&optional default)
-  "A helpful replacement for `org-return-indent'.  With prefix, call `org-return-indent'.
-
-On headings, move point to position after entry content.  In
-lists, insert a new item or end the list, with checkbox if
-appropriate.  In tables, insert a new row or end the table."
-  ;; Inspired by John Kitchin: http://kitchingroup.cheme.cmu.edu/blog/2017/04/09/A-better-return-in-org-mode/
-  (interactive "P")
-  (if default
-      (org-return t)
-    (cond
-     ;; Act depending on context around point.
-
-     ;; NOTE: I prefer RET to not follow links, but by uncommenting this block, links will be
-     ;; followed.
-
-     ;; ((eq 'link (car (org-element-context)))
-     ;;  ;; Link: Open it.
-     ;;  (org-open-at-point-global))
-
-     ((org-at-heading-p)
-      ;; Heading: Move to position after entry content.
-      ;; NOTE: This is probably the most interesting feature of this function.
-      (let ((heading-start (org-entry-beginning-position)))
-        (goto-char (org-entry-end-position))
-        (cond ((and (org-at-heading-p)
-                    (= heading-start (org-entry-beginning-position)))
-               ;; Entry ends on its heading; add newline after
-               (end-of-line)
-               (insert "\n"))
-              (t
-               ;; Entry ends after its heading; back up
-               (forward-line -1)
-               (end-of-line)
-               (when (org-at-heading-p)
-                 ;; At the same heading
-                 (forward-line)
-                 (insert "\n")
-                 (forward-line -1))
-               (while (not (looking-back "\\(?:[[:blank:]]?\n\\)\\{3\\}" nil))
-                 (insert "\n"))
-               (forward-line -1)))))
-
-     ((org-at-item-checkbox-p)
-      ;; Checkbox: Insert new item with checkbox.
-      (org-insert-todo-heading nil))
-
-     ((org-in-item-p)
-      ;; Plain list.  Yes, this gets a little complicated...
-      (let ((context (org-element-context)))
-        (if (or (eq 'plain-list (car context))  ; First item in list
-                (and (eq 'item (car context))
-                     (not (eq (org-element-property :contents-begin context)
-                              (org-element-property :contents-end context))))
-                (unpackaged/org-element-descendant-of 'item context))  ; Element in list item, e.g. a link
-            ;; Non-empty item: Add new item.
-            (org-insert-item)
-          ;; Empty item: Close the list.
-          ;; TODO: Do this with org functions rather than operating on the text. Can't seem to find the right function.
-          (delete-region (line-beginning-position) (line-end-position))
-          (insert "\n"))))
-
-     ((when (fboundp 'org-inlinetask-in-task-p)
-        (org-inlinetask-in-task-p))
-      ;; Inline task: Don't insert a new heading.
-      (org-return t))
-
-     ((org-at-table-p)
-      (cond ((save-excursion
-               (beginning-of-line)
-               ;; See `org-table-next-field'.
-               (cl-loop with end = (line-end-position)
-                        for cell = (org-element-table-cell-parser)
-                        always (equal (org-element-property :contents-begin cell)
-                                      (org-element-property :contents-end cell))
-                        while (re-search-forward "|" end t)))
-             ;; Empty row: end the table.
-             (delete-region (line-beginning-position) (line-end-position))
-             (org-return t))
-            (t
-             ;; Non-empty row: call `org-return-indent'.
-             (org-return t))))
-     (t
-      ;; All other cases: call `org-return-indent'.
-      (org-return t)))))
-
-(map!
- :after evil-org
- :map evil-org-mode-map
- :i [return] #'unpackaged/org-return-dwim)
+(map! :leader "j" #'org-capture)
 #+end_src
 
-** Org Projectile
 
+Configure my capture templates.
 #+begin_src emacs-lisp
-(use-package org-projectile
-  :bind (("C-c n p" . org-projectile-project-todo-completing-read)
-         ("C-c c" . org-capture))
-  :config
-  (progn
-    (setq org-projectile-projects-file "~/org/projectile.org")
-    (setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
-    (push (org-projectile-project-todo-entry) org-capture-templates))
-  :ensure t)
+(defadvice! tq/setup-capture-templates ()
+  :after #'+org-init-capture-defaults-h
+  (setq org-default-notes-file (expand-file-name "inbox.org" org-directory))
+
+  (setq org-capture-templates
+        `(("t" "todo" entry (file org-default-notes-file)
+           "* TODO %?")
+          ("a" "appointment" entry (file org-default-notes-file)
+           "* %?")
+          ("j" "journal" plain (file+olp+datetree ,(concat org-directory "journal.org"))
+           (file ,(concat org-directory "templates/journal.org"))
+           :immediate-finish t :jump-to-captured t :tree-type 'week)
+          ("w" "workout" plain
+           (file+olp+datetree ,(concat org-directory "exercise.org") "Workouts")
+           (file ,(concat org-directory "templates/workout.org"))
+           :immediate-finish t :jump-to-captured t :tree-type 'week))))
 #+end_src
 
-** Elfeed
-
+** Exporting
 #+begin_src emacs-lisp
-(add-hook! 'elfeed-search-mode-hook #'elfeed-update)
-#+end_src
-
-** Font Display
-#+begin_src emacs-lisp
-(after! org
-  (setq org-agenda-deadline-faces
-        '((1.0 . error)
-          (1.0 . org-warning)
-          (0.5 . org-upcoming-deadline)
-          (0.0 . org-upcoming-distant-deadline))))
-#+end_src
-
-#+begin_src emacs-lisp
-(use-package! org-appear
+(use-package ox-extra
   :after org
-  :hook (org-mode . org-appear-mode)
   :config
-  (setq org-appear-autoemphasis t
-        org-appear-autolinks t
-        org-appear-autosubmarkers t))
+  (ox-extras-activate '(ignore-headlines)))
 #+end_src
 
-*** (sub|super)script characters
 #+begin_src emacs-lisp
-(setq org-export-with-sub-superscripts '{})
+(use-package ox-latex
+  :after org
+  :config
+  (add-to-list 'org-latex-classes '("a4article"
+                                    "\\documentclass[11pt,a4paper]{article}"
+                                    ("\\section{%s}" . "\\section*{%s}")
+                                    ("\\subsection{%s}" . "\\subsection*{%s}")
+                                    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                                    ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                                    ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+  (setq org-latex-default-class "a4article")
+  (setq org-latex-packages-alist '(("titletoc, title" "appendix" nil) ; Setup appendices
+                                   ("margin=25mm" "geometry")         ; Setup margins
+                                   ("" "tocbibind" nil)  ; Put bibliography in TOC
+                                   ("" "pdflscape" nil)  ; Allow landscape pages
+                                   ("" "pdfpages" nil)   ; Allow inclusion of pdfs
+                                   ("" "svg" nil)        ; Allow SVG images (req. inkscape?)
+                                   ("" "subcaption" nil) ; Allow subcaptions
+                                   ("" "listings" nil)   ; Source code listings
+                                   ("" "color" nil)      ; Color in source code listings
+                                   ("binary-units" "siunitx" t)))     ; SI units
+
+  (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
+
+  (setq org-latex-listings t)                                         ; Turn on source code inclusion
+  (setq org-latex-listings-options '(("basicstyle" "\\linespread{0.85}\\ttfamily")
+                                     ("numbers" "left")
+                                     ("numberstyle" "\\tiny")
+                                     ("frame" "tb")
+                                     ("tabsize" "4")
+                                     ("columns" "fixed")
+                                     ("showstringspaces" "false")
+                                     ("showtabs" "false")
+                                     ("keepspaces" "true")
+                                     ("commentstyle" "\\color{red}")
+                                     ("keywordstyle" "\\color{blue}")
+                                     ("breaklines" "true"))))
 #+end_src
 
-*** Make verbatim different to code
+Ensure that attachment links are properly expanded before export
 #+begin_src emacs-lisp
-(after! org
-  (setq org-latex-text-markup-alist
-        '((bold . "\\textbf{%s}")
-          (code . protectedtexttt)
-          (italic . "\\emph{%s}")
-          (strike-through . "\\sout{%s}")
-          (underline . "\\uline{%s}")
-          (verbatim . verb))))
+(after! org-attach
+  (add-hook 'org-export-before-parsing-hook #'org-attach-expand-links))
 #+end_src
 
-*** Org Capture Popup
+** Note Taking
+*** Roam(2)
+Set directory for my ~org-roam~ notes
+#+begin_src emacs-lisp
+(setq org-roam-directory (concat (file-name-as-directory org-directory) "Notes/"))
+#+end_src
 
+Put the database in the doom cache directory, rather than stored with the notes
+#+begin_src emacs-lisp
+(setq org-roam-db-location (concat doom-cache-dir "org-roam.db"))
+#+end_src
 
-#+begin_src emacs-lisp :tangle no
-(defun evanriley-func-make-capture-frame ()
-  "Create a new frame and run `org-capture'."
-  (interactive)
+Turn off verbosity.
+#+begin_src emacs-lisp
+(setq org-roam-verbose nil)
+#+end_src
 
-  (make-frame '((name . "capture")
-                (top . 300)
-                (left . 700)
-                (width . 80)
-                (height . 25)))
+Ensure tags come from both the directory and the ~roam_tag~ file property. The default is just the property.
+#+begin_src emacs-lisp
+(setq org-roam-tag-sources '(prop all-directories))
+#+end_src
 
-  (select-frame-by-name "capture")
+Set the dailies directory to be a subdirectory in my base ~org-roam~ directory
+#+begin_src emacs-lisp :tangle no :noweb-ref org-journal-configuration
+(setq org-roam-dailies-directory "daily/")
+#+end_src
 
-  (delete-other-windows)
+Set the capture template for my daily notes
+#+begin_src emacs-lisp :tangle no :noweb-ref org-journal-configuration
+(setq org-roam-dailies-capture-templates
+      '(("d" "default" entry "* %?"
+         :if-new (file+head
+                  "%<%Y-%m-%d>.org"
+                  "#+title: %<%Y-%m-%d>\n")
+         :unnarrowed t
+         :immediate-finish t
+         :jump-to-captured t)))
+#+end_src
 
-  (noflet ((switch-to-buffer-other-window (buf) (switch-to-buffer buf)))
-          (org-capture)))
+Update the database immediately on file changes. The alternative is to do it on an idle timer, but I've found that to be buggy and I haven't noticed the immediate updates to be very noticeable.
+#+begin_src emacs-lisp
+(setq org-roam-db-update-method 'immediate)
+#+end_src
 
+Set up an agenda view for nearby notes
+#+begin_src emacs-lisp
+(defun tq/org-agenda-nearby-notes (&optional distance)
+  (interactive "P")
+  (let ((org-agenda-files (org-roam-db--links-with-max-distance
+                           buffer-file-name (or distance 3)))
+        (org-agenda-custom-commands '(("e" "" ((alltodo ""))))))
+    (org-agenda nil "e")))
 
-(defadvice org-capture-finalize
-    (after delete-capture-frame activate)
-  "Advise capture-finalize to close the frame."
-  (if (equal "capture" (frame-parameter nil 'name))
-      (delete-frame)))
+(map! :leader :prefix "n" :desc "Agenda nearby" "a" #'tq/org-agenda-nearby-notes)
+#+end_src
 
+Setup case-insensitive completion in ~org-roam~ files
+#+begin_src emacs-lisp
+(add-hook! 'org-roam-file-setup-hook
+  (setq-local completion-ignore-case t))
+#+end_src
 
-(defadvice org-capture-destroy
-    (after delete-capture-frame activate)
-  "Advise capture-destroy to close the frame."
-  (if (equal "capture" (frame-parameter nil 'name))
-      (delete-frame)))
+Rename files when title is changed
+#+begin_src emacs-lisp
+(add-hook! 'after-save-hook
+           (defun org-rename-to-new-title ()
+             (when-let*
+                 ((old-file (buffer-file-name))
+                  (is-roam-file (org-roam-file-p old-file))
+                  (in-roam-base-directory? (string-equal
+                                            (expand-file-name org-roam-directory)
+                                            (file-name-directory old-file)))
+                  (file-node (save-excursion
+                               (goto-char 1)
+                               (org-roam-node-at-point)))
+                  (slug (org-roam-node-slug file-node))
+                  (new-file (expand-file-name (concat slug ".org")))
+                  (different-name? (not (string-equal old-file new-file))))
+               (rename-buffer new-file)
+               (rename-file old-file new-file)
+               (set-visited-file-name new-file)
+               (set-buffer-modified-p nil))))
+#+end_src
+
+Configure web ui
+#+begin_src emacs-lisp
+(use-package org-roam-ui
+  :after org-roam
+  :hook (after-init . org-roam-ui-mode))
+#+end_src
+
+* Languages
+Settings and extra packages not included in doom emacs.
+** Python
+Set up LSP to turn off some python warnings
+#+begin_src emacs-lisp
+(after! python
+  (setq! lsp-pylsp-plugins-pydocstyle-ignore t))
+#+end_src
+** Go
+#+begin_src emacs-lisp :tangle packages.el
+(package! go-eldoc :disable t)
+#+end_src
+
+#+begin_src emacs-lisp
+(setq gofmt-command "goimports")
+(add-hook 'before-save-hook 'gofmt-before-save)
 #+end_src
