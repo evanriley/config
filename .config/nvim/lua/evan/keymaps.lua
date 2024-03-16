@@ -49,7 +49,7 @@ keymap('n', '<leader><leader>', ':Telescope frecency frecency default_text=:CWD:
 
 -- Git
 -- keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
- keymap("n", "<leader>gg", ":Neogit<CR>", opts)
+keymap("n", "<leader>gg", ":Neogit<CR>", opts)
 
 -- Comment
 keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", opts)
@@ -76,4 +76,3 @@ keymap('x', 'SS', "<cmd>lua require'hop'.hint_lines()<cr>", opts)
 keymap('n', '<C-s>', "<cmd>lua require'hop'.hint_char2()<cr>", opts)
 keymap('x', '<C-s>', "<cmd>lua require'hop'.hint_char2()<cr>", opts)
 keymap('o', '<C-x>', "<cmd>lua require'hop'.hint_char2()<cr>", opts)
-
