@@ -1,7 +1,6 @@
 local g = vim.g
 local o = vim.o
 
-
 o.termguicolors    = true -- enable gui colors for terminal
 vim.opt.background = "dark"
 g.vimsyn_embed     = 'lPr'
@@ -33,7 +32,7 @@ o.smarttab         = true
 o.hlsearch         = true
 o.incsearch        = true
 o.hidden           = true
-vim.o.wildignore   = '*.swp,*.bak,*.pyc,*.class'
+o.wildignore   = '*.swp,*.bak,*.pyc,*.class'
 o.wildmode         = 'longest,full'
 o.wildmenu         = true
 o.wildcharm        = 26
@@ -42,7 +41,7 @@ o.clipboard        = 'unnamed,unnamedplus'
 o.showcmd          = true
 o.sidescroll       = 1
 o.conceallevel     = 2
-o.completeopt      = "menuone,noinsert,noselect"
+-- o.completeopt      = 'menuone,noinsert,noselect'
 o.pumheight        = 15
 o.inccommand       = 'split'
 o.cmdheight        = 1
