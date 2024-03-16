@@ -10,6 +10,7 @@ return {
 		"JoosepAlviste/nvim-ts-context-commentstring",
 		"mrjones2014/nvim-ts-rainbow",
 		"nvim-treesitter/nvim-treesitter-context",
+		"RRethy/nvim-treesitter-endwise",
 	},
 
 	config = function()
@@ -79,6 +80,9 @@ return {
 				max_file_lines = MAX_FILE_LINES,
 			},
 			autotag = {
+				enable = true,
+			},
+			endwise = {
 				enable = true,
 			},
 			indent = {
