@@ -141,5 +141,4 @@ set -g fish_pager_color_completion $foreground
 set -g fish_pager_color_description $comment
 
 
-starship init fish | source
 rtx activate fish | source
