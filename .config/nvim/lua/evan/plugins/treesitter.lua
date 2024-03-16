@@ -10,7 +10,6 @@ return {
 		"JoosepAlviste/nvim-ts-context-commentstring",
 		"mrjones2014/nvim-ts-rainbow",
 		"nvim-treesitter/nvim-treesitter-context",
-		"RRethy/nvim-treesitter-endwise",
 	},
 
 	config = function()
