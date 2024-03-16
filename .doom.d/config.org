@@ -426,7 +426,7 @@ yaml                ; JSON, but readable
 Imagine having to open something other than Emacs...Couldn't be me.
 #+name: doom-email
 #+begin_src emacs-lisp
-(mu4e +org +gmail)
+;;(mu4e +org +gmail)
 ;;notmuch
 ;;(wanderlust +gmail)
 #+end_src
@@ -443,7 +443,7 @@ Imagine having to open something other than Emacs...Couldn't be me.
 
 *** Visual
 **** Fonts
-Let's try JuliaMono
+JuliaMono
 #+begin_src emacs-lisp
 (setq
  doom-font (font-spec :family "JuliaMono" :size 16)
