@@ -3,14 +3,16 @@
    :conjure "conj"
    :nvim_lsp "lsp"
    :vsnip "vsnp"
-   :luasnip "lsnp"})
+   :luasnip "lsnp"
+   :copilot "cpl"})
 
 (local cmp-srcs
   [{:name :nvim_lsp}
    {:name :conjure}
    {:name :buffer}
    {:name :vsnip}
-   {:name :luasnip}])
+   {:name :luasnip
+    :name :copilot}])
 
 (fn has-words-before []
   (let [(line col) (unpack (vim.api.nvim_win_get_cursor 0))]
@@ -24,10 +26,13 @@
                  :PaterJason/cmp-conjure
                  :L3MON4D3/LuaSnip
                  :saadparwaiz1/cmp_luasnip
-                 :rafamadriz/friendly-snippets]
+                 :rafamadriz/friendly-snippets
+                 :zbirenbaum/copilot-cmp]
   :config (fn []
             (let [cmp (require :cmp)
-                  luasnip (require :luasnip)]
+                  luasnip (require :luasnip)
+                  copilot_cmp (require :copilot_cmp)]
+              (copilot_cmp.setup {})
               (cmp.setup {:formatting {:format (fn [entry item]
                                                  (set item.menu (or (. cmp-src-menu-items entry.source.name) ""))
                                                  item)}
