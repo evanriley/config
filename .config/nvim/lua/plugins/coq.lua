@@ -11,7 +11,7 @@ vim.g.coq_settings = {
 	},
 	display = {
 		pum = {
-			fast_close = true,
+			fast_close = false,
 		},
 		icons = {
 			mode = "none",

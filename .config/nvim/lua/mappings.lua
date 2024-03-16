@@ -71,3 +71,7 @@ keymap("v", "<C-a>", require("dial.map").inc_visual(), opts)
 keymap("v", "<C-x>", require("dial.map").dec_visual(), opts)
 keymap("v", "g<C-a>", require("dial.map").inc_gvisual(), opts)
 keymap("v", "g<C-x>", require("dial.map").dec_gvisual(), opts)
+
+-- Toggleterm
+-- LazyGit toggle
+keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
