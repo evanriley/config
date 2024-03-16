@@ -13,7 +13,10 @@ local clojure_lsp = {}
 local gopls = {}
 
 local jsonls = {}
+
 local sumneko_lua = {}
+
+local fsautocomplete = {}
 
 local configs = {}
 
@@ -25,5 +28,6 @@ configs.gopls = gopls
 configs.clojure_lsp = clojure_lsp
 configs.jsonls = jsonls
 configs.sumneko_lua = sumneko_lua
+configs.fsautocomplete = fsautocomplete
 
 return configs

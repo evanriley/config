@@ -117,11 +117,9 @@ return require('packer').startup(function()
       config = function()
         require("telescope").load_extension("frecency")
       end,
+      requires = {"tami5/sqlite.lua"}
     })
 
-    use ({
-      "tami5/sqlite.lua",
-    })
 
 
     --------------------------
@@ -259,5 +257,7 @@ return require('packer').startup(function()
     use({ "tpope/vim-bundler" })
     use({ "tpope/vim-rails" })
 
+    -- F#
+    use({ "adelarsq/neofsharp.vim" })
 
 end)
