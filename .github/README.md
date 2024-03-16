@@ -1,14 +1,9 @@
-- OS - macOS
-- Shell - Fish
-- Terminal - iTerm2
-- Editors - neovim/emacs
-
 # Setup
 
 1. Install the dotfiles into a bare repo.
 
 ```shell
-curl -sL https://evanriley.dev/macdots | bash
+curl -SL https://ecr.lol/macdots |  bash
 ```
 
 2. Install dependecies and enable services
