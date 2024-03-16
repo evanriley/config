@@ -40,9 +40,13 @@
 (add-to-list 'default-frame-alist '(height . 40))
 (add-to-list 'default-frame-alist '(width . 90))
 
-(setq doom-font (font-spec :family "Liga SFMono Nerd Font" :size 17))
+(setq doom-font (font-spec :family "0xProto" :size 17)
+      doom-big-font (font-spec :family "OxProto" :size 32)
+      doom-variable-pitch-font (font-spec :family "Overpass" :size 17)
+      doom-unicode-font (font-spec :family "JuliaMono")
+      doom-serif-font (font-spec :family "IBM Plex Mono" :size 22 :weight 'light))
 
-(setq doom-theme 'doom-gruvbox)
+(setq doom-theme 'doom-vibrant)
 
 (delq! t custom-theme-load-path)
 

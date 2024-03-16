@@ -24,6 +24,7 @@
  (vc-gutter +pretty)
  vi-tilde-fringe
  workspaces
+ ligatures
  :editor
  (evil +everywhere)
  file-templates
@@ -115,6 +116,7 @@
  ;;(mu4e +org +gmail)
  ;;notmuch
  ;;(wanderlust +gmail)
+ :app
  ;;calendar
  ;;emms
  ;;everywhere        ; *leave* Emacs!? You must be joking

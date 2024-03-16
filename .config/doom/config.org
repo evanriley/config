@@ -55,6 +55,7 @@ ophints
 (vc-gutter +pretty)
 vi-tilde-fringe
 workspaces
+ligatures
 #+end_src
 
 ** Editor
@@ -194,6 +195,7 @@ None of these packages are enabled, but I keep this here in the event that one d
 ** Apps
 Same goes for this section, I use other programs to handle these, but maybe one day I'll decide to never leave emacs.
 #+begin_src emacs-lisp
+:app
 ;;calendar
 ;;emms
 ;;everywhere        ; *leave* Emacs!? You must be joking
@@ -292,7 +294,11 @@ Start emacs in a bigger window.
 ** Fonts
 Setup my preferred fonts.
 #+begin_src emacs-lisp
-(setq doom-font (font-spec :family "Liga SFMono Nerd Font" :size 17))
+(setq doom-font (font-spec :family "0xProto" :size 17)
+      doom-big-font (font-spec :family "OxProto" :size 32)
+      doom-variable-pitch-font (font-spec :family "Overpass" :size 17)
+      doom-unicode-font (font-spec :family "JuliaMono")
+      doom-serif-font (font-spec :family "IBM Plex Mono" :size 22 :weight 'light))
 #+end_src
 
 
@@ -304,7 +310,7 @@ Unpin ~doom-themes~
 #+end_src
 
 #+begin_src emacs-lisp
-(setq doom-theme 'doom-gruvbox)
+(setq doom-theme 'doom-vibrant)
 #+end_src
 
 Let's delete the defaults, doom-themes is enough for me.
