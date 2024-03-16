@@ -1,6 +1,7 @@
 local lspconfig = require('lspconfig')
 local lsp_installer = require("nvim-lsp-installer")
 local configs = require('lsp.servers')
+local coq = require "coq"
 local utils = require('lsp.utilities')
 
 -- Handlers override
