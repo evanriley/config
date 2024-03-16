@@ -16,7 +16,7 @@
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": false,
 
-  "workbench.colorTheme": "Kanagawa",
+  "workbench.colorTheme": "Ayu Dark",
   "editor.fontFamily": "JuliaMono",
   "editor.fontSize": 16,
   "window.titleBarStyle": "custom",
@@ -153,5 +153,6 @@
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "editor.inlayHints.enabled": false
+  "editor.inlayHints.enabled": false,
+  "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim"
 }

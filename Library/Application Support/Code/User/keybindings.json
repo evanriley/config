@@ -1,188 +1,188 @@
 [
-    /**
-    * Panels
-    **/
-    {
-        "key": "cmd+k cmd+e",
-        "command": "workbench.view.explorer",
-        "when": "isMac"
-    },
-    {
-        "key": "ctrl+k ctrl+e",
-        "command": "workbench.view.explorer",
-        "when": "isWindows || isLinux"
-    },
-    {
-        "key": "cmd+k cmd+g",
-        "command": "workbench.view.scm",
-        "when": "isMac"
-    },
-    {
-        "key": "ctrl+k ctrl+g",
-        "command": "workbench.view.scm",
-        "when": "isWindows || isLinux"
-    },
-    {
-        "key": "cmd+k cmd+d",
-        "command": "workbench.view.debug",
-        "when": "isMac"
-    },
-    {
-        "key": "ctrl+k ctrl+d",
-        "command": "workbench.view.debug",
-        "when": "isWindows || isLinux"
-    },
-    {
-        "key": "cmd+k cmd+x",
-        "command": "workbench.extensions.action.showInstalledExtensions",
-        "when": "isMac"
-    },
-    {
-        "key": "ctrl+k ctrl+x",
-        "command": "workbench.extensions.action.showInstalledExtensions",
-        "when": "isWindows || isLinux"
-    },
-    {
-        "key": "cmd+k cmd+b",
-        "command": "workbench.action.toggleSidebarVisibility",
-        "when": "isMac"
-    },
-    {
-        "key": "ctrl+k ctrl+b",
-        "command": "workbench.action.toggleSidebarVisibility",
-        "when": "isWindows || isLinux"
-    },
-    {
-        "key": "cmd+e",
-        "command": "workbench.action.focusActiveEditorGroup",
-        "when": "isMac"
-    },
-    {
-        "key": "ctrl+e",
-        "command": "workbench.action.focusActiveEditorGroup",
-        "when": "isWindows || isLinux"
-    },
-    {
-        "key": "ctrl+t",
-        "command": "workbench.action.terminal.toggleTerminal",
-    },
-    // File Explorer
-    {
-        "key": "cmd+d",
-        "command": "duplicate.execute",
-        "when": "isMac && explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !inputFocus"
-    },
-    {
-        "key": "ctrl+d",
-        "command": "duplicate.execute",
-        "when": "isWindows || isLinux && explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !inputFocus"
-    },
-    {
-        "key": "cmd+n",
-        "command": "explorer.newFile",
-        "when": "isMac && explorerViewletVisible && filesExplorerFocus && !inputFocus"
-    },
-    {
-        "key": "ctrl+n",
-        "command": "explorer.newFile",
-        "when": "isWindows || isLinux && explorerViewletVisible && filesExplorerFocus && !inputFocus"
-    },
-    {
-        "key": "shift+cmd+n",
-        "command": "explorer.newFolder",
-        "when": "isMac && explorerViewletVisible && filesExplorerFocus && !inputFocus"
-    },
-    {
-        "key": "shift+ctrl+n",
-        "command": "explorer.newFolder",
-        "when": "isWindows || isLinux && explorerViewletVisible && filesExplorerFocus && !inputFocus"
-    },
-    // terminal stuff
-    {
-        "key": "ctrl+n",
-        "command": "workbench.action.terminal.split",
-        "when": "terminalFocus"
-    },
-    {
-        "key": "ctrl+l",
-        "command": "workbench.action.terminal.focusNextPane",
-        "when": "terminalFocus"
-    },
-    {
-        "key": "ctrl+h",
-        "command": "workbench.action.terminal.focusPrevPane",
-        "when": "terminalFocus"
-    },
-    {
-        "key": "ctrl+w",
-        "command": "workbench.action.terminal.kill",
-        "when": "terminalFocus"
-    },
-    // edmagit bindings
-    {
-        "key": "tab",
-        "command": "extension.vim_tab",
-        "when": "editorFocus && vim.active && !inDebugRepl && vim.mode != 'Insert' && editorLangId != 'magit'"
-    },
-    {
-        "key": "tab",
-        "command": "-extension.vim_tab",
-        "when": "editorFocus && vim.active && !inDebugRepl && vim.mode != 'Insert'"
-    },
-    {
-        "key": "x",
-        "command": "magit.discard-at-point",
-        "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"
-    },
-    {
-        "key": "k",
-        "command": "-magit.discard-at-point"
-    },
-    {
-        "key": "-",
-        "command": "magit.reverse-at-point",
-        "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"
-    },
-    {
-        "key": "v",
-        "command": "-magit.reverse-at-point"
-    },
-    {
-        "key": "shift+-",
-        "command": "magit.reverting",
-        "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"
-    },
-    {
-        "key": "shift+v",
-        "command": "-magit.reverting"
-    },
-    {
-        "key": "shift+o",
-        "command": "magit.resetting",
-        "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"
-    },
-    {
-        "key": "shift+x",
-        "command": "-magit.resetting"
-    },
-    {
-        "key": "x",
-        "command": "-magit.reset-mixed"
-    },
-    {
-        "key": "ctrl+u x",
-        "command": "-magit.reset-hard"
-    },
-    // Calva
-    {
-        "key": "escape",
-        "command": "-calva.clearInlineResults"
-    },
-    {
-        "key": "shift+escape",
-        "command": "calva.clearInlineResults",
-        "when": "editorTextFocus && !editorHasMultipleSelections && !editorReadOnly && !hasOtherSuggestions && !suggestWidgetVisible && editorLangId == 'clojure'"
-    },
+  /**
+   * Panels
+   **/
+  {
+    "key": "cmd+k cmd+e",
+    "command": "workbench.view.explorer",
+    "when": "isMac"
+  },
+  {
+    "key": "ctrl+k ctrl+e",
+    "command": "workbench.view.explorer",
+    "when": "isWindows || isLinux"
+  },
+  {
+    "key": "cmd+k cmd+g",
+    "command": "workbench.view.scm",
+    "when": "isMac"
+  },
+  {
+    "key": "ctrl+k ctrl+g",
+    "command": "workbench.view.scm",
+    "when": "isWindows || isLinux"
+  },
+  {
+    "key": "cmd+k cmd+d",
+    "command": "workbench.view.debug",
+    "when": "isMac"
+  },
+  {
+    "key": "ctrl+k ctrl+d",
+    "command": "workbench.view.debug",
+    "when": "isWindows || isLinux"
+  },
+  {
+    "key": "cmd+k cmd+x",
+    "command": "workbench.extensions.action.showInstalledExtensions",
+    "when": "isMac"
+  },
+  {
+    "key": "ctrl+k ctrl+x",
+    "command": "workbench.extensions.action.showInstalledExtensions",
+    "when": "isWindows || isLinux"
+  },
+  {
+    "key": "cmd+k cmd+b",
+    "command": "workbench.action.toggleSidebarVisibility",
+    "when": "isMac"
+  },
+  {
+    "key": "ctrl+k ctrl+b",
+    "command": "workbench.action.toggleSidebarVisibility",
+    "when": "isWindows || isLinux"
+  },
+  {
+    "key": "cmd+e",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "isMac"
+  },
+  {
+    "key": "ctrl+e",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "isWindows || isLinux"
+  },
+  {
+    "key": "ctrl+t",
+    "command": "workbench.action.terminal.toggleTerminal"
+  },
+  // File Explorer
+  {
+    "key": "cmd+d",
+    "command": "duplicate.execute",
+    "when": "isMac && explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !inputFocus"
+  },
+  {
+    "key": "ctrl+d",
+    "command": "duplicate.execute",
+    "when": "isWindows || isLinux && explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !inputFocus"
+  },
+  {
+    "key": "cmd+n",
+    "command": "explorer.newFile",
+    "when": "isMac && explorerViewletVisible && filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "ctrl+n",
+    "command": "explorer.newFile",
+    "when": "isWindows || isLinux && explorerViewletVisible && filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "shift+cmd+n",
+    "command": "explorer.newFolder",
+    "when": "isMac && explorerViewletVisible && filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "shift+ctrl+n",
+    "command": "explorer.newFolder",
+    "when": "isWindows || isLinux && explorerViewletVisible && filesExplorerFocus && !inputFocus"
+  },
+  // terminal stuff
+  {
+    "key": "ctrl+n",
+    "command": "workbench.action.terminal.split",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "workbench.action.terminal.focusNextPane",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+h",
+    "command": "workbench.action.terminal.focusPrevPane",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+w",
+    "command": "workbench.action.terminal.kill",
+    "when": "terminalFocus"
+  },
+  // edmagit bindings
+  {
+    "key": "tab",
+    "command": "extension.vim_tab",
+    "when": "editorFocus && vim.active && !inDebugRepl && vim.mode != 'Insert' && editorLangId != 'magit'"
+  },
+  {
+    "key": "tab",
+    "command": "-extension.vim_tab",
+    "when": "editorFocus && vim.active && !inDebugRepl && vim.mode != 'Insert'"
+  },
+  {
+    "key": "x",
+    "command": "magit.discard-at-point",
+    "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"
+  },
+  {
+    "key": "k",
+    "command": "-magit.discard-at-point"
+  },
+  {
+    "key": "-",
+    "command": "magit.reverse-at-point",
+    "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"
+  },
+  {
+    "key": "v",
+    "command": "-magit.reverse-at-point"
+  },
+  {
+    "key": "shift+-",
+    "command": "magit.reverting",
+    "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"
+  },
+  {
+    "key": "shift+v",
+    "command": "-magit.reverting"
+  },
+  {
+    "key": "shift+o",
+    "command": "magit.resetting",
+    "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"
+  },
+  {
+    "key": "shift+x",
+    "command": "-magit.resetting"
+  },
+  {
+    "key": "x",
+    "command": "-magit.reset-mixed"
+  },
+  {
+    "key": "ctrl+u x",
+    "command": "-magit.reset-hard"
+  },
+  // Calva
+  {
+    "key": "escape",
+    "command": "-calva.clearInlineResults"
+  },
+  {
+    "key": "shift+escape",
+    "command": "calva.clearInlineResults",
+    "when": "editorTextFocus && !editorHasMultipleSelections && !editorReadOnly && !hasOtherSuggestions && !suggestWidgetVisible && editorLangId == 'clojure'"
+  },
   {
     "key": "tab",
     "command": "selectNextSuggestion",
@@ -193,7 +193,7 @@
     "command": "-selectNextSuggestion",
     "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
   },
-    {
+  {
     "key": "ctrl+tab",
     "command": "selectPrevSuggestion",
     "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
