@@ -1,28 +1,22 @@
 return require('packer').startup(function()
-	-- Let packer manage itself
 	use 'wbthomason/packer.nvim'	
 
-	-- LSP stuff
-	use 'neovim/nvim-lspconfig'
-	use 'kabouzeid/nvim-lspinstall'
-  use 'ms-jpq/coq_nvim'
-  use {
-    'ms-jpq/coq.artifacts',
-    branch = 'artifacts'
+	use {
+      'neovim/nvim-lspconfig',
+      'williamboman/nvim-lsp-installer'
   }
-  use {
-    'ms-jpq/coq.thirdparty',
-    branch = '3p'
-  }
-  -- use 'hrsh7th/cmp-nvim-lsp'
-  -- use 'hrsh7th/cmp-buffer'
-  -- use 'hrsh7th/nvim-cmp'
-  -- use 'onsails/lspkind-nvim'
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/nvim-cmp'
+  use 'onsails/lspkind-nvim'
 
-	-- Editor cstuff
 	use 'windwp/nvim-autopairs'
-  -- use 'L3MON4D3/luasnip'
-  -- use 'saadparwaiz1/cmp_luasnip'
+  use "rafamadriz/friendly-snippets"
+  use 'hrsh7th/vim-vsnip'
+  use 'hrsh7th/cmp-vsnip'
+  use 'hrsh7th/vim-vsnip-integ'
+  use 'mattn/emmet-vim'
+  
 	use {
   		'nvim-lualine/lualine.nvim',
   		requires = { 'kyazdani42/nvim-web-devicons', opt = true } 
@@ -51,31 +45,20 @@ return require('packer').startup(function()
 	  		'lewis6991/gitsigns.nvim',
 	  		requires = { 'nvim-lua/plenary.nvim'} 
 	}
-  -- use {
-  --     'TimUntersberger/neogit',
-  --     requires = 'nvim-lua/plenary.nvim'
-  -- }
 	use 'phaazon/hop.nvim'
   use 'machakann/vim-sandwich'
 
-	-- Themes
 	use 'folke/tokyonight.nvim'
   use 'ayu-theme/ayu-vim'
 
-  -- Stuff?
   use 'tpope/vim-dispatch'
   use 'radenling/vim-dispatch-neovim'
   use 'clojure-vim/vim-jack-in'
 
-  -- Terminals, amirite?
-  -- use 'voldikss/vim-floaterm'
   use 'akinsho/toggleterm.nvim'
 
-  -- General Language
   use 'p00f/nvim-ts-rainbow'
 
-  -- Specific Lang Stuff --
-  -- Clojure
   use {
       'eraserhd/parinfer-rust',
       run = 'cargo build --release'
@@ -84,12 +67,10 @@ return require('packer').startup(function()
       'Olical/conjure',
       tag = 'v4.24.1'
   }
-  -- Lisp --
   use {
       'kovisoft/slimv'
   }
 
-  --  Go
   use {
     'fatih/vim-go',
     run = ':GoUpdateBinaries'

@@ -1,13 +1,4 @@
--- require'lspinstall'.setup()
--- local servers = require'lspinstall'.installed_servers()
--- for _, server in pairs(servers) do
---   require'lspconfig'[server].setup{}
--- end
-vim.cmd [[
- let g:coq_settings = { 'auto_start': 'shut-up' }
-]]
-local coq = require "coq"
-
+local nvim_lsp = require('lspconfig')
 
 -- keymaps
 local on_attach = function(client, bufnr)
@@ -61,106 +52,24 @@ local on_attach = function(client, bufnr)
 	end
 end
 
--- Configure lua language server for neovim development
-local lua_settings = {
-	Lua = {
-		runtime = {
-			-- LuaJIT in the case of Neovim
-			version = 'LuaJIT',
-			path = vim.split(package.path, ';'),
-		},
-		diagnostics = {
-			enable = false,
-			-- Get the language server to recognize the `vim` global
-			globals = { 'vim' },
-			disable = { 'lowercase-global' },
-		},
-		workspace = {
-			-- Make the server aware of Neovim runtime files
-			library = {
-				[vim.fn.expand('$VIMRUNTIME/lua')] = true,
-				[vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-			},
-		},
-		completion = {
-			keywordSnippet = 'Disable',
-		},
-	},
-}
 
-local ruby_settings = {
-  solargraph = {
-    autoformat = true,
-    completion = true,
-    formatting = true,
+-- Setup cmp and snippets
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+-- Use loop to covenietly call 'seup' on multiple servers and
+-- map buffer local keybindings when the language server attaches.
+local servers = { 'pyright', 'rls', 'tsserver', 'clojure_lsp' }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = {
+      debounce_text_changes = 150,
+    }
   }
-}
-
-local typescript_settings = {
-  autoformat = true,
-  completion = true,
-  formatting = true,
-  filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript", "javascriptreact", "javascript.jsx" }
-}
-
-local html_settings = {}
-
--- config that activates keymaps and enables snippet support
-local function make_config()
-	local capabilities = vim.lsp.protocol.make_client_capabilities()
-	capabilities.textDocument.completion.completionItem.snippetSupport = true
-	return {
-		-- enable snippet support
-		capabilities = capabilities,
-		-- map buffer local keybindings when the language server attaches
-		on_attach = on_attach,
-	}
 end
 
--- lsp-install
-local function setup_servers()
-	require('lspinstall').setup()
 
-	-- get all installed servers
-	local servers = require('lspinstall').installed_servers()
-	-- ... and add manually installed servers
-	-- table.insert(servers, "clangd")
-	-- table.insert(servers, "sourcekit")
 
-	for _, server in pairs(servers) do
-		local config = make_config()
-
-		-- language specific config
-		if server == 'lua' then
-			config.settings = lua_settings
-		end
-
-    if server == 'ruby' then
-      config.settings = ruby_settings
-    end
-
-    if server == 'tsserver' then
-      config.settings = typescript_settings
-    end
-
-    if server == emmet then
-      config.settings = emmet_settings
-    end
-		-- if server == "sourcekit" then
-		-- config.filetypes = {"swift", "objective-c", "objective-cpp"}; -- we don't want c and cpp!
-		-- end
-		-- if server == "clangd" then
-		-- config.filetypes = {"c", "cpp"}; -- we don't want objective-c and objective-cpp!
-		-- end
-
-		require('lspconfig')[server].setup(coq.lsp_ensure_capabilities(config))
-	end
-end
-
-setup_servers()
-
--- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require('lspinstall').post_install_hook = function()
-	setup_servers() -- reload installed servers
-	vim.cmd('bufdo e') -- this triggers the FileType autocmd that starts the server
-end
