@@ -1524,6 +1524,17 @@ is selected, only the bare key is returned."
         (when buffer (kill-buffer buffer))))))
 (advice-add 'org-mks :override #'org-mks-pretty)
 #+end_src
+
+Let's add the ability to capture recipes from common sites and org-ify them.
+#+begin_src emacs-lisp :tangle packages.el
+(package! org-chef :pin "6a786e77e67a715b3cd4f5128b59d501614928af")
+#+end_src
+
+Load it when we try to use it or try to capture a recipe
+#+begin_src emacs-lisp
+(use-package! org-chef
+  :commands (org-chef-insert-recipe org-chef-get-recipe-from-url))
+#+end_src
 ** Exporting
 #+begin_src emacs-lisp
 (use-package ox-extra
@@ -1681,7 +1692,7 @@ Let's set up mu4e
   (setq mu4e-get-mail-command (concat (executable-find "mbsync") " -a"))
 
 ;; how often to call it in seconds:
-  (setq mu4e-update-interval 300)
+  (setq mu4e-update-interval 60)
 
 ;; save attachment to desktop by default
   (setq mu4e-attachment-dir "~/Desktop")
