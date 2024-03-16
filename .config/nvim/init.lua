@@ -16,3 +16,4 @@ scheme.load_shared_scheme('tokyonight')
 -- Load plugin configs
 require('config.plug')
 require('config.modules')
+

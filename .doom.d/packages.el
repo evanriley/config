@@ -57,3 +57,5 @@
 (package! direnv)
 ;; (package! tree-sitter)
 ;; (package! tree-sitter-langs)
+;; :Sadge: maybe one day this will work on macos.
+;; (package! screenshot :recipe (:host github :repo "tecosaur/screenshot" :build (:not compile)))
