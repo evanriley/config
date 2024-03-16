@@ -2,9 +2,8 @@ local null_ls = require("null-ls")
 
 local sources = {
   -- For js,ts,jsx,tsx,etc
-  null_ls.builtins.diagnostics.eslint_d,
-  null_ls.builtins.code_actions.eslint_d,
-  null_ls.builtins.formatting.prettier,
+  null_ls.builtins.code_actions.eslint,
+  null_ls.builtins.formatting.prettierd,
 
   null_ls.builtins.diagnostics.write_good,
 
