@@ -35,12 +35,12 @@ for _, server in pairs(servers) do
   }
 
   if server == "sumneko_lua" then
-    local sumneko_opts = require "evan.lsp.settings.sumneko_lua"
+    local sumneko_opts = require("evan.lsp.settings.sumneko_lua")
     opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
   end
 
   if server == "pyright" then
-    local pyright_opts = require "evan.lsp.settings.pyright"
+    local pyright_opts = require("evan.lsp.settings.pyright")
     opts = vim.tbl_deep_extend("force", pyright_opts, opts)
   end
 

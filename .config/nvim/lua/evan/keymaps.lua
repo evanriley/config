@@ -37,9 +37,9 @@ keymap("n", "<leader>ya", ":%y+<CR>", opts)
 -- Plugins --
 
 -- Packer
-keymap('n', '<localleader>pu', ':PackerUpdate<CR>', opts)
-keymap('n', '<localleader>pc', ':PackerClean<CR>', opts)
-keymap('n', '<localleader>pi', ':PackerInstall<CR>', opts)
+keymap("n", "<localleader>pu", ":PackerUpdate<CR>", opts)
+keymap("n", "<localleader>pc", ":PackerClean<CR>", opts)
+keymap("n", "<localleader>pi", ":PackerInstall<CR>", opts)
 
 -- Telescope
 keymap("n", "<leader>ff", ":Telescope git_files<CR>", opts)
@@ -49,7 +49,7 @@ keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
 keymap("n", "<leader>bb", ":Telescope buffers<CR>", opts)
 keymap("n", "<leader>fG", ":Telescope git_branches<CR>", opts)
 keymap("n", "<leader>fb", "<cmd>lua require 'telescope'.extensions.file_browser.file_browser()<CR>", opts)
-keymap('n', '<leader><leader>', ':Telescope frecency frecency default_text=:CWD:<CR>', opts)
+keymap("n", "<leader><leader>", ":Telescope frecency frecency default_text=:CWD:<CR>", opts)
 
 -- Git
 -- keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
@@ -71,12 +71,12 @@ keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
 keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
 
 -- Hop
-keymap('n', 's', "<cmd>lua require'hop'.hint_char1()<cr>", opts)
-keymap('x', 's', "<cmd>lua require'hop'.hint_char1()<cr>", opts)
-keymap('o', 'x', "<cmd>lua require'hop'.hint_char1()<cr>", opts)
-keymap('n', 'S', "<cmd>lua require'hop'.hint_lines()<cr>", opts)
-keymap('o', 'X', "<cmd>lua require'hop'.hint_lines()<cr>", opts)
-keymap('x', 'SS', "<cmd>lua require'hop'.hint_lines()<cr>", opts)
-keymap('n', '<C-s>', "<cmd>lua require'hop'.hint_char2()<cr>", opts)
-keymap('x', '<C-s>', "<cmd>lua require'hop'.hint_char2()<cr>", opts)
-keymap('o', '<C-x>', "<cmd>lua require'hop'.hint_char2()<cr>", opts)
+keymap("n", "s", "<cmd>lua require'hop'.hint_char1()<cr>", opts)
+keymap("x", "s", "<cmd>lua require'hop'.hint_char1()<cr>", opts)
+keymap("o", "x", "<cmd>lua require'hop'.hint_char1()<cr>", opts)
+keymap("n", "S", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
+keymap("o", "X", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
+keymap("x", "SS", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
+keymap("n", "<C-s>", "<cmd>lua require'hop'.hint_char2()<cr>", opts)
+keymap("x", "<C-s>", "<cmd>lua require'hop'.hint_char2()<cr>", opts)
+keymap("o", "<C-x>", "<cmd>lua require'hop'.hint_char2()<cr>", opts)

@@ -9,16 +9,32 @@ local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
 
 -- https://github.com/prettier-solidity/prettier-plugin-solidity
-null_ls.setup {
+null_ls.setup({
   debug = false,
   sources = {
-    formatting.prettierd.with {
+    formatting.prettierd.with({
       extra_filetypes = { "toml" },
       extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
-    },
+    }),
     formatting.stylua,
     formatting.goimports,
     formatting.gofmt,
     diagnostics.write_good,
   },
-}
+
+  -- Null-lsp format on save
+  on_attach = function(client, bufnr)
+    local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+    if client.supports_method("textDocument/formatting") then
+      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        group = augroup,
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.buf.format({ bufnr = bufnr })
+          -- if nvim version < 0.8 use vim.lsp.buf.formatting_sync()
+        end,
+      })
+    end
+  end,
+})
