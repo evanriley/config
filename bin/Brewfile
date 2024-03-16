@@ -4,6 +4,7 @@ tap 'railwaycat/emacsmacport'
 tap 'borkdude/brew'
 tap 'heroku/brew'
 tap 'AdoptOpenJDK/openjdk'
+tap 'jesseduffield/lazygit/lazygit'
 
 # Standard brew install
 brew 'curl'
@@ -39,6 +40,7 @@ brew 'pngpaste'
 brew 'bat'
 brew 'heroku'
 brew 'frum'
+brwe 'lazygit'
 
 # cask installs
 cask 'google-chrome'
