@@ -3,8 +3,7 @@
 
 [{1 :guns/vim-sexp
   :dependencies [:tpope/vim-sexp-mappings-for-regular-people
-                 :tpope/vim-repeat
-                 :tpope/vim-surround]
+                 :tpope/vim-repeat]
   :lazy true
   :ft [:clojure :scheme :lisp :timl :fennel :janet]
   :init (fn []

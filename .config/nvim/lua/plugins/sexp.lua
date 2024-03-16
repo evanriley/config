@@ -6,4 +6,4 @@ local function _2_()
   nvim.g.sexp_filetypes = "clojure,scheme,lisp,timl,fennel,janet"
   return nil
 end
-return {{"guns/vim-sexp", dependencies = {"tpope/vim-sexp-mappings-for-regular-people", "tpope/vim-repeat", "tpope/vim-surround"}, lazy = true, ft = {"clojure", "scheme", "lisp", "timl", "fennel", "janet"}, init = _2_}}
+return {{"guns/vim-sexp", dependencies = {"tpope/vim-sexp-mappings-for-regular-people", "tpope/vim-repeat"}, lazy = true, ft = {"clojure", "scheme", "lisp", "timl", "fennel", "janet"}, init = _2_}}
