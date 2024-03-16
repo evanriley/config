@@ -1,12 +1,15 @@
 set -g simple_ass_prompt_greeting ""
 set -g fish_greeting
 set -gx EDITOR nvim
-set -gx PATH ~/bin ~/.local/bin $NPM_PACKAGES/bin ~/.roswell/bin ~/.yarn/bin ~/.cargo/bin ~/.emacs.d/bin /opt/homebrew/bin  /opt/homebrew/sbin ~/go/bin /opt/homebrew/opt/grep/libexec/gnubin '/Applications/Sublime Text.app/Contents/SharedSupport/bin' $PATH
+set -gx PATH ~/bin ~/.local/bin $NPM_PACKAGES/bin ~/.roswell/bin ~/.yarn/bin ~/.cargo/bin ~/.config/emacs/bin /opt/homebrew/bin  /opt/homebrew/sbin ~/go/bin /opt/homebrew/opt/grep/libexec/gnubin '/Applications/Sublime Text.app/Contents/SharedSupport/bin' $PATH
 set -gx GPG_TTY (tty)
 ## Source asdf
 source ~/.asdf/asdf.fish
 ## use asdf direnv plugin and hook into it
 direnv hook fish | source
+
+#source zoxide
+zoxide init fish | source
 
 ## Secretive.app Secret Agent.
 set -x SSH_AUTH_SOCK /Users/evan/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
@@ -65,3 +68,6 @@ if test (uname) = "Darwin"
 end
 
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /Users/evan/.ghcup/bin $PATH # ghcup-env
+
+
+starship init fish | source
