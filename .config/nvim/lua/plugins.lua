@@ -244,6 +244,7 @@ return require('packer').startup(function()
     })
 
     use({ "rhysd/git-messenger.vim" })
+    use({ "p00f/nvim-ts-rainbow" })
 
 
     use({ "tpope/vim-dispatch" })
@@ -350,15 +351,21 @@ return require('packer').startup(function()
       tag = 'v4.28.0',
       ft = {"clojure", "clojurescript"}
     })
-    use({ "p00f/nvim-ts-rainbow" })
 
     -- Ruby/Rails
-    use({ "tpope/vim-bundler" })
-    use({ "tpope/vim-rails" })
+    use({
+      "tpope/vim-bundler",
+      ft = {"ruby", "eruby"}
+    })
+    use({
+      "tpope/vim-rails",
+      ft = {"ruby", "eruby"}
+    })
 
     --  Rust
     use({
       'simrat39/rust-tools.nvim',
+      ft = {"rust"},
       config = function()
         require('rust-tools').setup({})
       end,
@@ -366,7 +373,16 @@ return require('packer').startup(function()
 
     -- JS/JSX/TS/TSX
     -- TreeSitter...kind of sucks sometimes
-    use({ "maxmellon/vim-jsx-pretty" })
-    use({ "HerringtonDarkholme/yats.vim" })
-    use({ "yuezk/vim-js" })
+    use({
+      "yuezk/vim-js",
+      ft = {"javascript"}
+    })
+    use({
+      "maxmellon/vim-jsx-pretty",
+      ft = {"javascriptreact", "typescriptreact"},
+    })
+    use({
+      "HerringtonDarkholme/yats.vim",
+      ft = {"typescript", "typescriptreact"},
+    })
 end)
