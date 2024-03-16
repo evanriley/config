@@ -10,6 +10,9 @@ vim.g.coq_settings = {
     icons = {
       mode = 'none',
     },
+    ghost_text = {
+      enabled = false,
+    },
   },
   clients = {
     tabnine = {
