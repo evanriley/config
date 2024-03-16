@@ -8,8 +8,8 @@ local tsserver = {
     ts_utils.setup({})
     ts_utils.setup_client(client)
 
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_formatting = false
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentFormattingProvider = false
     on_attach(client)
   end,
 }
