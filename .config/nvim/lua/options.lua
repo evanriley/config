@@ -21,5 +21,6 @@ opt.ignorecase = true
 opt.splitbelow = true
 opt.splitright = true
 o.completeopt = 'menuone,noselect'
+opt.wrap = false
 
 vim.opt.termguicolors = true
