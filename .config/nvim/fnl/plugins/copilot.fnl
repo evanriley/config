@@ -6,4 +6,5 @@
   :event "InsertEnter"
   :config (fn []
             (let [copilot (require :copilot)]
-              (copilot.setup {})))}]
+              (copilot.setup {:suggestion {:enabled false}
+                              :panel {:enabled false}})))}]

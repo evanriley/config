@@ -4,6 +4,6 @@ local autoload = _local_1_["autoload"]
 local nvim = autoload("nvim")
 local function _2_()
   local copilot = require("copilot")
-  return copilot.setup({})
+  return copilot.setup({suggestion = {enabled = false}, panel = {enabled = false}})
 end
 return {{"zbirenbaum/copilot.lua", cmd = "Copilot", event = "InsertEnter", config = _2_}}
