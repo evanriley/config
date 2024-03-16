@@ -21,7 +21,7 @@
                            :component_separators ["" ""]}
                  :sections {:lualine_a []
                             :lualine_b [[:mode {:upper true}]]
-                            :lualine_c [["FugitiveHead"]
+                            :lualine_c [["branch"]
                                         {1 :filename
                                          :file_status true
                                          :path 1
