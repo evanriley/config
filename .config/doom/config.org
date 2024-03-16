@@ -288,8 +288,8 @@ Start emacs in a bigger window.
 ** Fonts
 Setup my preferred fonts.
 #+begin_src emacs-lisp
-(setq doom-font (font-spec :family "JuliaMono" :size 17)
-      doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font"))
+(setq doom-font (font-spec :family "CommitMono" :size 17)
+      doom-unicode-font (font-spec :family "JetBrainsMono Nerd Font"))
 #+end_src
 
 ** Theme
