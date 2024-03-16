@@ -341,7 +341,7 @@ return require('packer').startup(function()
     })
     use({
       "Olical/conjure",
-      tag = 'v4.28.0',
+      tag = 'v4.30.1',
       ft = {"clojure", "clojurescript"}
     })
 
