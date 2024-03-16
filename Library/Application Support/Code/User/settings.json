@@ -151,7 +151,7 @@
   "rust-analyzer.hover.actions.run.enable": false,
   "rust-analyzer.lens.run.enable": false,
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.json-language-features"
   },
   "editor.inlayHints.enabled": false,
   "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim"
