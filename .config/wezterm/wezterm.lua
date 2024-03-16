@@ -5,6 +5,6 @@ return {
     "JuliaMono",
     "JetBrainsMono Nerd Font Mono Regular",
   }),
-  font_size = 14.0,
-  color_scheme = "kanagawabones",
+  font_size = 12.0,
+  color_scheme = "Gruvbox dark, medium (base16)",
 }

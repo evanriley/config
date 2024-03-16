@@ -1,17 +1,6 @@
-EndeavourOS i3wm Keybindings cheat sheet:
+ = super/windows key
 
---> to update this run the following command:
-wget --backups=1 https://raw.githubusercontent.com/endeavouros-team/endeavouros-i3wm-setup/main/.config/i3/keybindings -P ~/.config/i3/
-
-All sources and updates are available at GitHub:
-https://github.com/endeavouros-team/endeavouros-i3wm-setup
-
-For reference consult our WIKI:
-https://discovery.endeavouros.com/window-tiling-managers/i3-wm/
-
- = windows key
-
-# start xfce4-terminal
+# start Terminal
 +Return 
 
 # kill focused window
@@ -101,6 +90,6 @@ F1
 +p
 
 ## App shortcuts
-+w starts Firefox
++w starts Firefox (Deeveloper Edition)
 +n starts Thunar
  Button screenshot
