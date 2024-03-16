@@ -8,22 +8,21 @@ output DP-5
 off
 output DP-4
 crtc 1
-mode 3840x2160
+mode 2560x1440
 pos 0x0
-rate 60.00
-transform 0.740616,0.000000,0.000000,0.000000,0.740738,0.000000,0.000000,0.000000,1.000000
+rate 59.95
 x-prop-non_desktop 0
 output DP-2
 crtc 0
 mode 2560x1440
-pos 2844x0
+pos 2560x0
 primary
-rate 154.85
+rate 59.95
 x-prop-non_desktop 0
 output HDMI-0
 crtc 2
 mode 1920x1080
-pos 5404x0
+pos 5120x0
 rate 60.00
 rotate right
 x-prop-non_desktop 0
