@@ -49,8 +49,9 @@ cmp.setup({
   },
   sources = {
     { name = 'nvim_lsp' },
-    { name = 'vsnip' },
+    { name = 'cmp_tabnine' },
     { name = 'buffer' },
+    { name = 'vsnip' },
     { name = 'orgmode' },
   },
   experimental = {
