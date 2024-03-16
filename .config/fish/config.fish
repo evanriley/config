@@ -47,6 +47,12 @@ alias la 'exa -la'
 alias lg 'exa --git'
 alias cat 'bat'
 
+# use pinentry-mac instead of pinentry on  mac...
+if test (uname) = "Darwin"
+  alias pinentry 'pinentry-mac'
+end
+
+
 if test (uname) = "Darwin"
   # the -CC argument is take advantage of iTerm2s tmux features
  function tma # tmux attach to either last session or if given an argument connect to named session
