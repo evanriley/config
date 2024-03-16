@@ -144,6 +144,7 @@ return packer.startup(function(use)
 
 	-- Language Specific
 	use({ "Olical/conjure", commit = "d88a3c8f911b92db5bf34b3b0e7a9e10692bafcb" })
+	use({ "ray-x/go.nvim", commit = "a2d0bbee53a9a1fc1d1e98b57219f8c0f2fc617a" })
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	if PACKER_BOOTSTRAP then
