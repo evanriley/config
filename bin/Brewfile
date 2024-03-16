@@ -56,7 +56,6 @@ cask 'cloudapp'
 cask 'visual-studio-code'
 cask 'adoptopenjdk8'
 cask 'adoptopenjdk16'
-cask 'mactex'
 cask 'alacritty'
 cask 'obs'
 
