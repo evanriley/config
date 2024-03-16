@@ -10,7 +10,7 @@
     {
         "key": "ctrl+k ctrl+e",
         "command": "workbench.view.explorer",
-        "when": "isWindows"
+        "when": "isWindows || isLinux"
     },
     {
         "key": "cmd+k cmd+g",
@@ -20,7 +20,7 @@
     {
         "key": "ctrl+k ctrl+g",
         "command": "workbench.view.scm",
-        "when": "isWindows"
+        "when": "isWindows || isLinux"
     },
     {
         "key": "cmd+k cmd+d",
@@ -30,7 +30,7 @@
     {
         "key": "ctrl+k ctrl+d",
         "command": "workbench.view.debug",
-        "when": "isWindows"
+        "when": "isWindows || isLinux"
     },
     {
         "key": "cmd+k cmd+x",
@@ -40,7 +40,7 @@
     {
         "key": "ctrl+k ctrl+x",
         "command": "workbench.extensions.action.showInstalledExtensions",
-        "when": "isWindows"
+        "when": "isWindows || isLinux"
     },
     {
         "key": "cmd+k cmd+b",
@@ -50,7 +50,7 @@
     {
         "key": "ctrl+k ctrl+b",
         "command": "workbench.action.toggleSidebarVisibility",
-        "when": "isWindows"
+        "when": "isWindows || isLinux"
     },
     {
         "key": "cmd+e",
@@ -60,7 +60,7 @@
     {
         "key": "ctrl+e",
         "command": "workbench.action.focusActiveEditorGroup",
-        "when": "isWindows"
+        "when": "isWindows || isLinux"
     },
     {
         "key": "ctrl+t",
@@ -75,7 +75,7 @@
     {
         "key": "ctrl+d",
         "command": "duplicate.execute",
-        "when": "isWindows && explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !inputFocus"
+        "when": "isWindows || isLinux && explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !inputFocus"
     },
     {
         "key": "cmd+n",
@@ -85,7 +85,7 @@
     {
         "key": "ctrl+n",
         "command": "explorer.newFile",
-        "when": "isWindows && explorerViewletVisible && filesExplorerFocus && !inputFocus"
+        "when": "isWindows || isLinux && explorerViewletVisible && filesExplorerFocus && !inputFocus"
     },
     {
         "key": "shift+cmd+n",
@@ -95,7 +95,7 @@
     {
         "key": "shift+ctrl+n",
         "command": "explorer.newFolder",
-        "when": "isWindows && explorerViewletVisible && filesExplorerFocus && !inputFocus"
+        "when": "isWindows || isLinux && explorerViewletVisible && filesExplorerFocus && !inputFocus"
     },
     // terminal stuff
     {

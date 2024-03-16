@@ -15,7 +15,7 @@
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": false,
 
-    "workbench.colorTheme": "Ayu Dark",
+    "workbench.colorTheme": "Tokyo Night",
     "editor.fontFamily": "JuliaMono",
     "editor.fontSize": 16,
     "window.titleBarStyle": "custom",
@@ -78,55 +78,7 @@
     "vim.useSystemClipboard": true,
     "settingsSync.keybindingsPerPlatform": false,
     "vim.leader": "<space>",
-    // "alive.format.closeParenOwnLine": "always",
-    // "alive.autoLoadOnSave": false,
-    // "alive.swank.checkForLatest": true,
-    // "alive.swank.startupCommand": [
-    //     "ros",
-    //     "run",
-    //     "--eval",
-    //     "(require :asdf)",
-    //     "--eval",
-    //     "(asdf:load-system :swank)",
-    //     "--eval",
-    //     "(swank:create-server)"
-    // ],
     "vim.normalModeKeyBindings": [
-        // {
-        //     "before":["leader", "e", "a"],
-        //     "commands": [
-        //         "alive.startReplAndAttach",
-        //     ]
-
-        // },
-        // {
-        //     "before":["leader", "e", "e"],
-        //     "commands": [
-        //         "alive.inlineEval",
-        //     ]
-
-        // },
-        // {
-        //     "before":["leader", "e", "r"],
-        //     "commands": [
-        //         "alive.sendToRepl",
-        //     ]
-
-        // },
-        // {
-        //     "before":["leader", "e", "s"],
-        //     "commands": [
-        //         "alive.selecSexpr",
-        //     ]
-
-        // },
-        // {
-        //     "before":["leader", "e", "f"],
-        //     "commands": [
-        //         "alive.loadFile",
-        //     ]
-
-        // },
         //Calva Binds
         {
             "before":["leader", "e", "j"],
@@ -191,11 +143,13 @@
         },
     ],
     "tabnine.experimentalAutoImports": true,
-    "workbench.iconTheme": "material-icon-theme",
+    "workbench.iconTheme": "vscode-icons",
     "gitlens.currentLine.enabled": false,
     "git.confirmSync": false,
     "security.workspace.trust.untrustedFiles": "open",
     "go.toolsManagement.autoUpdate": true,
-    "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
     "editor.accessibilitySupport": "off",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "gopls": { "ui.semanticTokens": true }
 }
