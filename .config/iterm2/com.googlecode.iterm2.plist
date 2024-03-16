@@ -617,7 +617,9 @@
 			<key>Blinking Cursor</key>
 			<false/>
 			<key>Blur</key>
-			<false/>
+			<true/>
+			<key>Blur Radius</key>
+			<real>0.10000000000000001</real>
 			<key>Bold Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -1024,6 +1026,8 @@
 			<true/>
 			<key>Normal Font</key>
 			<string>JuliaMono-Regular 15</string>
+			<key>Only The Default BG Color Uses Transparency</key>
+			<false/>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -1146,6 +1150,8 @@
 	<false/>
 	<key>SoundForEsc</key>
 	<false/>
+	<key>TabStyleWithAutomaticOption</key>
+	<integer>5</integer>
 	<key>VisualIndicatorForEsc</key>
 	<false/>
 </dict>
