@@ -29,27 +29,27 @@
         # Setting to git 2.0 default to suppress warning message
         default = simple
 [user]
-       name = Evan Riley
-       email = git@evanriley.dev
-       signingkey = B61357FACF8C4B65
+        name = Evan Riley
+        email = git@evanriley.dev
+        signingkey = B61357FACF8C4B65
 [commit]
         gpgsign = true
 [gpg]
-	program = gpg
+	      program = gpg
 [credential]
-       helper = osxkeychain
+        helper = osxkeychain
 [difftool "nvimdiff"]
-       cmd = nvim -d $LOCAL $REMOTE
+        cmd = nvim -d $LOCAL $REMOTE
 [mergetool "nvimmerge"]
-       cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c 'winc J | winc ='
-       trustExitCode = true
+        cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c 'winc J | winc ='
+        trustExitCode = true
 [fsck]
-       zeroPaddedFilemode = ignore
+        zeroPaddedFilemode = ignore
 [init]
-      defaultBranch = main
+        defaultBranch = main
 [pull]
-       rebase = true
+        rebase = true
 [fetch]
-       prune = true
+        prune = true
 [branch]
-	autosetupRebase = always
+	      autosetupRebase = always
