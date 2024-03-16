@@ -921,6 +921,17 @@ defaults write com.twitter.twitter-mac HideInBackground -bool true
 # Bypass the annoyingly slow t.co URL shortener
 defaults write com.tapbots.TweetbotMac OpenURLsDirectly -bool true
 
+
+###############################################################################
+# Emacs                                                                       #
+###############################################################################
+
+# Enable natural title bar for emacs (dark themes)
+defaults write org.gnu.Emacs TransparentTitleBar DARK
+
+# Enable natural title bars for light themes
+# defaults write org.gnu.Emacs TransparentTitleBar LIGHT
+
 ###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
