@@ -36,4 +36,4 @@ jobs:
       - name: Install packages
         run: brew install coreutils
       - name: System defaults
-        run: bash .macos
+        run: bash macos
