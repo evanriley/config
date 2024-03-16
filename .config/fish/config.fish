@@ -3,8 +3,6 @@ set -g fish_greeting
 set -gx EDITOR nvim
 set -gx PATH ~/bin ~/.local/bin $NPM_PACKAGES/bin ~/.roswell/bin ~/.yarn/bin ~/.cargo/bin ~/.config/emacs/bin /opt/homebrew/bin  /opt/homebrew/sbin ~/go/bin /opt/homebrew/opt/grep/libexec/gnubin '/Applications/Sublime Text.app/Contents/SharedSupport/bin' $PATH
 set -gx GPG_TTY (tty)
-## Source asdf
-source /opt/homebrew/opt/asdf/libexec/asdf.fish
 ## use asdf direnv plugin and hook into it
 direnv hook fish | source
 
@@ -41,6 +39,7 @@ alias ll 'exa -l | less'
 alias la 'exa -la'
 alias lg 'exa --git'
 alias cat 'bat'
+alias du 'dust'
 
 # use pinentry-mac instead of pinentry on macos
 if test (uname) = "Darwin"
@@ -71,3 +70,4 @@ set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; se
 
 
 starship init fish | source
+rtx activate fish | source

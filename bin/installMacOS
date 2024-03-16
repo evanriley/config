@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-# curl -fsSL https://raw.githubusercontent.com/evanriley/dotfiles/master/bin/installMacOS | bash
-# or
-# wget -qO- https://raw.githubusercontent.com/evanriley/dotfiles/master/bin/installMacOS | bash
-
 { # to make sure the entire script downloads
   basedir=$HOME/.dotfiles
   repourl=https://github.com/evanriley/config
@@ -48,5 +44,27 @@
     fi
     echo "Checked out dotfiles."
     config config --local status.showUntrackedFiles no
+  fi
+
+
+  if [[ -x $(command -v rustup) ]]; then
+    # Rustup is already installed, check for updates.
+    echo "Rustup is already installed"
+    rustup update
+  else
+    # Rustup will be installed.
+    /bin/bash -c "(curl https://sh.rustup.rs -sSf | sh -s -- -y --profile default --default-toolchain nightly)"
+    source $HOME/.cargo/env
+  fi
+
+
+  if [[ -x $(command -v cargo) ]]; then
+    # Install favorite rust tools through cargo. First install binstall, then install tools through binstall
+    cargo install cargo-binstall
+    cargo binstall --no-confirm exa bat zoxide starship nu rm-improved rtx-cli coreutils du-dust zellij mprocs ripgrep gitui
+  else
+    # Rustup will be installed.
+    echo "Error, we've somehow reached this point without cargo installed?"
+    exit 1
   fi
 }
