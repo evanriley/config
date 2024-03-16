@@ -11,14 +11,13 @@
     /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
   }
 
-  if [[ $(uname -s) == Darwin ]]; then
-    if [[ -x $(command -v brew) ]]; then
-      # Homebrew is already installed, check for updates.
-      brew upgrade && brew update
-    else
-      # Homebrew will install Xcode command line tools and brew.
-      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    fi
+  if [[ -x $(command -v brew) ]]; then
+    # Homebrew is already installed, check for updates.
+    brew upgrade && brew update
+    brew bundle --file=~/bin/Brewfile
+  else
+    # Homebrew will install Xcode command line tools and brew.
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
 
   if [[ ! -x $(command -v git) ]]; then
@@ -46,6 +45,32 @@
     config config --local status.showUntrackedFiles no
   fi
 
+  if [ "$(uname -m)" = "arm64" ]
+    then
+    # checks if Rosetta is already installed
+    if ! pkgutil --pkg-info=com.apple.pkg.RosettaUpdateAuto > /dev/null 2>&1
+    then
+      echo "Installing Rosetta"
+      # Installs Rosetta2
+      softwareupdate --install-rosetta --agree-to-license
+    else
+      echo "Rosetta is installed"
+    fi
+  fi
+
+  if [ $SHELL != "/opt/homebrew/bin/fish" ]; then
+    shell_path="$(command -v fish)"
+    echo "Changing your shell to fish"
+    sudo sh -c "echo $shell_path >> /etc/shells"
+  else
+    echo "shell is already fish"
+  fi
+
+  if [ -d "$HOME/.tmux/plugins/tpm" ]; then
+    echo "tpm already exist"
+  else
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  fi
 
   if [[ -x $(command -v rustup) ]]; then
     # Rustup is already installed, check for updates.
