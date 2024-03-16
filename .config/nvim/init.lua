@@ -82,6 +82,15 @@ require('lazy').setup({
       vim.keymap.set('', 'T', function()
         hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
       end, { remap = true })
+      vim.keymap.set("n", "s", "<cmd>lua require'hop'.hint_char1()<cr>", { noremap = true, silent = true })
+      vim.keymap.set("x", "s", "<cmd>lua require'hop'.hint_char1()<cr>", { noremap = true, silent = true })
+      vim.keymap.set("o", "x", "<cmd>lua require'hop'.hint_char1()<cr>", { noremap = true, silent = true })
+      vim.keymap.set("n", "S", "<cmd>lua require'hop'.hint_lines()<cr>", { noremap = true, silent = true })
+      vim.keymap.set("o", "X", "<cmd>lua require'hop'.hint_lines()<cr>", { noremap = true, silent = true })
+      vim.keymap.set("x", "SS", "<cmd>lua require'hop'.hint_lines()<cr>", { noremap = true, silent = true })
+      vim.keymap.set("n", "<C-s>", "<cmd>lua require'hop'.hint_char2()<cr>", { noremap = true, silent = true })
+      vim.keymap.set("x", "<C-s>", "<cmd>lua require'hop'.hint_char2()<cr>", { noremap = true, silent = true })
+      vim.keymap.set("o", "<C-x>", "<cmd>lua require'hop'.hint_char2()<cr>", { noremap = true, silent = true })
       require('hop').setup {
         teasing = false,
       }
