@@ -35,6 +35,8 @@ table.insert(plugins, require("evan.plugins.surround"))
 table.insert(plugins, require("evan.plugins.targets"))
 table.insert(plugins, require("evan.plugins.todocomments"))
 table.insert(plugins, require("evan.plugins.oil"))
+table.insert(plugins, require("evan.plugins.neorg"))
+table.insert(plugins, require("evan.plugins.dressing"))
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -60,7 +62,7 @@ require("lazy").setup(plugins, {
 	},
 	checker = { enabled = false, notify = false },
 	change_detection = {
-		enabled = true,
+		enabled = false,
 		notify = false,
 	},
 	performance = {
