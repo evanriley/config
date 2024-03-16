@@ -1,62 +1,60 @@
-#+TITLE: Wonderful World of Emacs, or my likely broken config.
-#+AUTHOR: Evan Riley
-#+PROPERTY: header-args :tangle yes
+#+title: DOOM Emacs
+#+subtitle:  I've stolen from so many people...
+#+author: Evan Riley
+#+description: A GNU Emacs configuration
+#+startup: show2levels indent hidestars
+#+options: coverpage:yes
+#+property: header-args:emacs-lisp :tangle yes :comments link
 
-* Configuration
-:VISIBILITY: children
-:END:
-
-** Table of Contents :TOC_3_gh:
-- [[#configuration][Configuration]]
-  - [[#about-this-file][About this file]]
-  - [[#system-requirements][System Requirements]]
-  - [[#notable-issues][Notable Issues]]
-  - [[#unsorted-configurations][Unsorted Configurations]]
-  - [[#configuration-file-headers][Configuration File Headers]]
-    - [[#initel-header][init.el header]]
-    - [[#packagesel-header][packages.el header]]
-    - [[#configel-header][config.el header]]
-  - [[#defaults][Defaults]]
-    - [[#simple-settings][Simple Settings]]
-    - [[#frame-sizing][Frame Sizing]]
-    - [[#auto-customizations][Auto-customizations]]
-    - [[#windows][Windows]]
-    - [[#mouse-buttons][Mouse Buttons]]
-    - [[#smooth-scrolling][Smooth Scrolling]]
-  - [[#doom-modules][Doom Modules]]
-  - [[#personal-information][Personal Information]]
-    - [[#authinfogpg][Authinfo.gpg]]
-  - [[#package-installation--configuration][Package Installation & Configuration]]
-    - [[#rotate][Rotate]]
-    - [[#pinentry][Pinentry]]
-    - [[#tabnine][Tabnine]]
-    - [[#doom-themes][Doom Themes]]
-    - [[#lambda-themes][Lambda Themes]]
-    - [[#info-colors][Info Colors]]
-    - [[#magit][Magit]]
-    - [[#smerge][Smerge]]
-    - [[#which-key][Which-key]]
-    - [[#eros][Eros]]
-    - [[#evil][Evil]]
-    - [[#consult][Consult]]
+* Table of Contents :TOC_3_gh:
+- [[#intro][Intro]]
+  - [[#about-this-config][About This Config]]
+  - [[#notes-for-the-unwary-adventurer][Notes for the unwary adventurer]]
+  - [[#lets-begin][Let's Begin!]]
+- [[#doom-configuration][Doom Configuration]]
+  - [[#modules][Modules]]
+  - [[#packages][Packages]]
+- [[#basic-configuration][Basic Configuration]]
+  - [[#customizations][Customizations]]
+  - [[#personal-information][Personal information]]
+  - [[#window-management][Window management]]
+  - [[#shell][Shell]]
+  - [[#fonts][Fonts]]
+  - [[#lsp][LSP]]
     - [[#company][Company]]
-    - [[#projectile][Projectile]]
-    - [[#auto-activating-snippets][Auto Activating Snippets]]
-    - [[#yasnippet][YASnippet]]
+  - [[#better-defaults][Better Defaults]]
+  - [[#evil][Evil]]
+  - [[#mu4e][Mu4e]]
+  - [[#magit][Magit]]
+  - [[#monkeytype][Monkeytype]]
+  - [[#smudge][Smudge]]
+- [[#visual-configuration][Visual configuration]]
+  - [[#dashboard][Dashboard]]
+  - [[#info-colors][Info Colors]]
+  - [[#minibuffer][Minibuffer]]
+  - [[#mini-frame][Mini-Frame]]
+  - [[#minad-suite][Minad Suite]]
+    - [[#vertico][Vertico]]
     - [[#marginalia][Marginalia]]
-    - [[#elfeed][Elfeed]]
-    - [[#org][Org]]
-    - [[#org-roam][Org Roam]]
-    - [[#org-visual-settings][Org Visual Settings]]
-  - [[#visual-settings][Visual Settings]]
-    - [[#font][Font]]
+  - [[#pixel-scroll][Pixel-scroll]]
+  - [[#nano][Nano]]
+    - [[#window-padding][Window Padding]]
     - [[#colorscheme][Colorscheme]]
-    - [[#modeline][Modeline]]
-    - [[#window-title][Window Title]]
-    - [[#splash-screen][Splash Screen]]
-    - [[#emojify][Emojify]]
+  - [[#svg-tag-mode][SVG-tag-mode]]
+  - [[#dimming][Dimming]]
+  - [[#rss][RSS]]
+  - [[#ebooks][Ebooks]]
+- [[#org][Org]]
+  - [[#org-mode][Org-Mode]]
+    - [[#html-export][HTML export]]
+  - [[#org-roam][Org-Roam]]
+  - [[#org-agenda][Org-Agenda]]
+  - [[#font-display][Font Display]]
+    - [[#subsuperscript-characters][(sub|super)script characters]]
+    - [[#make-verbatim-different-to-code][Make verbatim different to code]]
 
-** About this file
+* Intro
+** About This Config
 Hi, I see you've found my personal Doom Emacs configuration. Before we get started, I feel I need to be respectful of your time here.
 Do not copy this config. It is likely broken. If we're being honest I'm not sure I would feel comfortable telling you to even
 take pieces from here.
@@ -72,469 +70,495 @@ This configuration would not be possible without these people, who I have +stole
 
 and probably countless more.
 
-** System Requirements
-- [[https://github.com/doomemacs/doomemacs][Doom Emacs]]
-- [[https://juliamono.netlify.app/][JuliaMono]]
-- And a number of LSPs, which can be figured out by going through the ~init.el~ and looking for ~+lsp~ flag.
-** Notable Issues
-TODO: List issues.
-** Unsorted Configurations
+** Notes for the unwary adventurer
+The lovely ~doom doctor~ is good at diagnosing most missing things, but a few extras packages might be needed.
+
+** Let's Begin!
+Make this file run (slightly) faster with lexical binding
 #+begin_src emacs-lisp
+;;; config.el -*- lexical-binding: t; -*-
+;; This file has been generated from config.org file. DO NOT EDIT.
+;; Sources are available from https://github.com/evanriley/config
 #+end_src
-** Configuration File Headers
-*** init.el header
-#+begin_src emacs-lisp :tangle init.el
+
+* Doom Configuration
+** Modules
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle no
+:END:
+Doom has this lovely /modular configuration base/ that takes a lot of work out of
+configuring Emacs. Each module (when enabled) can provide a list of packages to
+install (on ~doom sync~) and configuration to be applied. The modules can also
+have flags applied to tweak their behaviour.
+
+#+name: init.el
+#+attr_html: :collapsed t
+#+begin_src emacs-lisp :tangle "init.el" :noweb no-export :comments no
 ;;; init.el -*- lexical-binding: t; -*-
 
-;; DO NOT EDIT THIS FILE DIRECTLY
-;; This is a file generated from a literate programing source file.
+;; This file controls what Doom modules are enabled and what order they load in.
+;; Press 'K' on a module to view its documentation, and 'gd' to browse its directory.
 
-;; This file controls what Doom modules are enabled and what order they load
-;; in. Remember to run 'doom sync' after modifying it!
+(doom! :completion
+       <<doom-completion>>
 
-;; NOTE Press 'SPC h d h' (or 'C-h d h' for non-vim users) to access Doom's
-;;      documentation. There you'll find a "Module Index" link where you'll find
-;;      a comprehensive list of Doom's modules and what flags they support.
+       :ui
+       <<doom-ui>>
 
-;; NOTE Move your cursor over a module's name (or its flags) and press 'K' (or
-;;      'C-c c k' for non-vim users) to view its documentation. This works on
-;;      flags as well (those symbols that start with a plus).
-;;
-;;      Alternatively, press 'gd' (or 'C-c c d') on a module to browse its
-;;      directory (for easy access to its source code).
+       :editor
+       <<doom-editor>>
+
+       :emacs
+       <<doom-emacs>>
+
+       :term
+       <<doom-term>>
+
+       :checkers
+       <<doom-checkers>>
+
+       :tools
+       <<doom-tools>>
+
+       :os
+       <<doom-os>>
+
+       :lang
+       <<doom-lang>>
+
+       :email
+       <<doom-email>>
+
+       :app
+       <<doom-app>>
+
+       :config
+       <<doom-config>>)
 #+end_src
 
-*** packages.el header
-#+begin_src emacs-lisp :tangle packages.el
+***** Structure
+As you may have noticed by this point, this is a [[https://en.wikipedia.org/wiki/Literate_programming][literate]] configuration. Doom
+has good support for this which we access though the ~literate~ module.
+
+While we're in the ~:config~ section, we'll use Dooms nicer defaults,
+along with the bindings and smartparens behaviour (the flags aren't documented,
+but they exist).
+#+name: doom-config
+#+begin_src emacs-lisp
+literate
+(default +bindings +smartparens)
+#+end_src
+
+***** Interface
+There's a lot that can be done to enhance Emacs' capabilities.
+I reckon enabling half the modules Doom provides should do it.
+#+name: doom-completion
+#+begin_src emacs-lisp
+(company                     ; the ultimate code completion backend
+ +childframe)                ; ... when your children are better than you
+(vertico +icons)             ; the search engine of the future
+#+end_src
+
+#+name: doom-ui
+#+begin_src emacs-lisp
+doom-dashboard               ; a nifty splash screen for Emacs
+doom-quit                    ; DOOM quit-message prompts when you quit Emacs
+(emoji +unicode)             ; 🙂
+hl-todo                      ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
+(ligatures                   ; ligatures and symbols to make your code pnoretty again
+ +extra)                     ; for those who dislike letters
+ophints                      ; highlight the region an operation acts on
+(popup                       ; tame sudden yet inevitable temporary windows
+ +all                        ; catch all popups that start with an asterix
+ +defaults)                  ; default popup rules
+(vc-gutter +pretty)          ; vcs diff in the fringe
+vi-tilde-fringe              ; fringe tildes to mark beyond EOB
+workspaces                   ; tab emulation, persistence & separate workspaces
+zen                          ; distraction-free coding or writing
+#+end_src
+
+#+name: doom-editor
+#+begin_src emacs-lisp
+(evil +everywhere)           ; come to the dark side, we have cookies
+(format +onsave)             ; automated prettiness
+lispy
+parinfer
+snippets
+#+end_src
+
+#+name: doom-emacs
+#+begin_src emacs-lisp
+(dired +icons)               ; making dired pretty [functional]
+electric                     ; smarter, keyword-based electric-indent
+(ibuffer +icons)             ; interactive buffer management
+undo                         ; persistent, smarter undo for your inevitable mistakes
+vc                           ; version-control and Emacs, sitting in a tree
+#+end_src
+
+#+name: doom-term
+#+begin_src emacs-lisp
+vterm                        ; the best terminal emulation in Emacs
+#+end_src
+
+#+name: doom-checkers
+#+begin_src emacs-lisp
+syntax                       ; tasing you for every semicolon you forget
+(:if (executable-find "aspell") spell) ; tasing you for misspelling mispelling
+(:if (executable-find "languagetool") grammar) ; tasing grammar mistake every you make
+#+end_src
+
+#+name: doom-tools
+#+begin_src emacs-lisp
+direnv
+editorconfig
+(debugger +lsp)              ; FIXME stepping through code, to help you add bugs
+(eval +overlay)              ; run code, run (also, repls)
+(lookup                      ; helps you navigate your code and documentation
+ +dictionary                 ; dictionary/thesaurus is nice
+ +docsets)                   ; ...or in Dash docsets locally
+lsp                          ; Language Server Protocol
+(magit                       ; a git porcelain for Emacs
+ +forge)                     ; interface with git forges
+make                         ; run make tasks from emacs
+pdf                          ; pdf enhancements
+rgb                          ; creating color strings
+tree-sitter                  ; Syntax and Parsing sitting in a tree
+#+end_src
+
+#+name: doom-os
+#+begin_src emacs-lisp
+(:if IS-MAC macos)           ; improve compatibility with macOS
+#+end_src
+
+***** Language support
+We can be rather liberal with enabling support for languages as the associated
+packages/configuration are (usually) only loaded when first opening an
+associated file.
+
+#+name: doom-lang
+#+begin_src emacs-lisp
+;;agda                       ; types of types of types of types...
+(beancount +lsp)             ; mind the GAAP
+(cc +lsp +tree-sitter)       ; C/C++/Obj-C madness
+(clojure +lsp)               ; java with a lisp
+;;common-lisp                ; if you've seen one lisp, you've seen them all
+;;coq                        ; proofs-as-programs
+;;crystal                    ; ruby at the speed of c
+;;csharp                     ; unity, .NET, and mono shenanigans
+data                         ; config/data formats
+;;(dart +flutter)            ; paint ui and not much else
+;;dhall                      ; JSON with FP sprinkles
+;;elixir                     ; erlang done right
+;;elm                        ; care for a cup of TEA?
+emacs-lisp                   ; drown in parentheses
+;;erlang                     ; an elegant language for a more civilized age
+;;ess                        ; emacs speaks statistics
+;;faust                      ; dsp, but you get to keep your soul
+;;fsharp                     ; ML stands for Microsoft's Language
+;;fstar                      ; (dependent) types and (monadic) effects and Z3
+;;gdscript                   ; the language you waited for
+(go                          ; the hipster dialect
+ +lsp
+ +tree-sitter)
+;;(haskell +lsp)             ; a language that's lazier than I am
+;;hy                         ; readability of scheme w/ speed of python
+;;idris                      ;
+(json                        ; At least it ain't XML
+ +lsp
+ +tree-sitter)
+;;(java +lsp)                ; the poster child for carpal tunnel syndrome
+(javascript +lsp)            ; all(hope(abandon(ye(who(enter(here))))))
+;;(julia +lsp)               ; Python, R, and MATLAB in a blender
+;;(kotlin +lsp)              ; a better, slicker Java(Script)
+(latex                       ; writing papers in Emacs has never been so fun
+ ;;+fold                     ; fold the clutter away nicities
+ +latexmk                    ; modern latex plz
+ ;;+cdlatex                  ; quick maths symbols
+ +lsp)
+;;lean                       ; proof that mathematicians need help
+;;factor                     ; for when scripts are stacked against you
+;;ledger                     ; an accounting system in Emacs
+(lua +lsp +fennel)           ; one-based indices? one-based indices
+(markdown +grip)             ; writing docs for people to ignore
+;;nim                        ; python + lisp at the speed of c
+(nix +tree-sitter)           ; I hereby declare "nix geht mehr!"
+;;ocaml                      ; an objective camel
+(org                         ; organize your plain life in plain text
+ +pretty                     ; yessss my pretties! (nice unicode symbols)
+ +dragndrop                  ; drag & drop files/images into org buffers
+ ;;+hugo                     ; use Emacs for hugo blogging
+ +noter                      ; enhanced PDF notetaking
+ +pandoc                     ; export-with-pandoc support
+ +gnuplot                    ; who doesn't like pretty pictures
+ +pomodoro                   ; be fruitful with the tomato technique
+ +present                    ; using org-mode for presentations
+ +roam2)                     ; wander around notes
+;;php                        ; perl's insecure younger brother
+;;plantuml                   ; diagrams for confusing people more
+;;purescript                 ; javascript, but functional
+(python                      ; beautiful is better than ugly
+ +lsp
+ +pyright
+ +tree-sitter
+ +conda)
+;;qt                         ; the 'cutest' gui framework ever
+;;racket                     ; a DSL for DSLs
+;;raku                       ; the artist formerly known as perl6
+;;rest                       ; Emacs as a REST client
+;;rst                        ; ReST in peace
+;;(ruby +rails)              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
+(rust
+  +lsp
+  +tree-sitter)              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+;;scala                      ; java, but good
+;;scheme                     ; a fully conniving family of lisps
+(sh +lsp +fish +tree-sitter) ; she sells {ba,z,fi}sh shells on the C xor
+;;sml                        ; no, the /other/ ML
+;;solidity                   ; do you need a blockchain? No.
+;;swift                      ; who asked for emoji variables?
+;;terra                      ; Earth and Moon in alignment for performance.
+(web                         ; the tubes
+ +lsp
+ +tree-sitter)
+yaml                         ; JSON, but readable
+(zig                         ; C, but simpler
+ +lsp
+ +tree-sitter)
+#+end_src
+
+***** Everything in Emacs
+It's just too convenient being able to have everything in Emacs.
+I couldn't resist the Email and Feed modules.
+#+name: doom-email
+#+begin_src emacs-lisp
+(:if (executable-find "mu") (mu4e +org))
+#+end_src
+
+#+name: doom-app
+#+begin_src emacs-lisp
+;;calendar                   ; A dated approach to timetabling
+;;emms                       ; Multimedia in Emacs is music to my ears
+;;everywhere                 ; *leave* Emacs!? You must be joking.
+(rss +org)                   ; emacs as an RSS reader
+#+end_src
+
+** Packages
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle no
+:END:
+Unlike most literate configurations I +am lazy+ like to keep all my packages in
+one place
+#+name: packages.el
+#+attr_html: :collapsed t
+#+begin_src emacs-lisp :tangle "packages.el" :noweb no-export :comments no
 ;; -*- no-byte-compile: t; -*-
 ;;; $DOOMDIR/packages.el
 
-;; DO NOT EDIT THIS FILE DIRECTLY
-;; This is a file generated from a literate programing source file.
+;;org
+<<org>>
+
+;;looks
+<<looks>>
+
+;;emacs additions
+<<emacs>>
+
+;; prog-tools
+<<prog-tools>>
+
+;;fun
+<<fun>>
 #+end_src
 
-*** config.el header
-#+begin_src emacs-lisp :tangle config.el
-;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
-
-;; DO NOT EDIT THIS FILE DIRECTLY
-;; This is a file generated from a literate programing source file.
-
-#+end_src
-
-** Defaults
-*** Simple Settings
-
+***** Org:
+Make Org as comfie as possible.
+#+name: org
 #+begin_src emacs-lisp
-(setq-default
- delete-by-moving-to-trash t                      ; Delete files to trash
- window-combination-resize t                      ; take new window space from all other windows (not just current)
- x-stretch-cursor t)                              ; Stretch cursor to the glyph width
-
-(setq undo-limit 80000000                         ; Raise undo-limit to 80Mb
-      evil-want-fine-undo t                       ; By default while in insert all changes are one big blob. Be more granular
-      auto-save-default t                         ; Nobody likes to loose work, I certainly don't
-      truncate-string-ellipsis "…"                ; Unicode ellispis are nicer than "...", and also save /precious/ space
-      password-cache-expiry nil                   ; I can trust my computers ... can't I?
-      scroll-preserve-screen-position 'always     ; Don't have `point' jump around
-      scroll-margin 2)                            ; It's nice to maintain a little margin
-
-(display-time-mode 1)                             ; Enable time in the mode-line
-
-(unless (string-match-p "^Power N/A" (battery))   ; On laptops...
-  (display-battery-mode 1))                       ; it's nice to know how much power you have
-
-(global-subword-mode 1)                           ; Iterate through CamelCase words
+(package! doct)
+(package! websocket)
+(package! org-appear)
+(package! org-roam-ui)
+(package! org-preview-html)
 #+end_src
 
-*** Frame Sizing
-Control the size emacs on launch.
-It doesn't really matter, yabai will handle all the sizing, but in the event yabai is broken
-I have keybinds that will handle the sizing.
+***** Looks:
+Gotta look good while you code.
+#+name: looks
 #+begin_src emacs-lisp
-(add-to-list 'default-frame-alist '(height . 24))
-(add-to-list 'default-frame-alist '(width . 80))
+(package! focus)
+(package! dimmer)
+(package! minions)
+(package! mini-frame)
+(package! solaire-mode :disable t)
+
+;; nano stuff
+(package! nano-theme)
+(package! svg-tag-mode)
+(package! nano-modeline)
 #+end_src
 
-*** Auto-customizations
-By default customizations made by the GUI interface are placed in init.el. Let's move those to a seperate file.
-Doom actually recommends against using ~M-x customize~, but this just takes care of this in the off chance I do use it.
+***** Emacs Tweaks:
+Emacs is missing just a few packages to improve things here and there. Mainly
+- better dictionary support
+- improved modal editing
+- ebook support
+- more colorful docs
+#+name: emacs
+#+begin_src emacs-lisp
+(package! nov)
+(package! lexic)
+(package! info-colors)
+(package! magit-delta :recipe (:host github :repo "dandavison/magit-delta"))
+(package! pinentry)
+#+end_src
+
+***** Programming Tools:
+Some tools that may help me while programming.
+#+name: prog-tools
+#+begin_src emacs-lisp
+(package! company-tabnine :recipe (:host github :repo "TommyX12/company-tabnine"))
+#+end_src
+
+***** Fun:
+Just for fun.
+#+name: fun
+#+begin_src emacs-lisp
+(package! md4rd)
+(package! smudge)
+(package! elcord)
+(package! monkeytype)
+#+end_src
+
+* Basic Configuration
+** Customizations
+Customizations done through the emacs gui should go into their own file, in my doom-dir.
 #+begin_src emacs-lisp
 (setq-default custom-file (expand-file-name ".custom.el" doom-private-dir))
 (when (file-exists-p custom-file)
   (load custom-file))
 #+end_src
 
-*** Windows
-Ask which buffer to open after splitting the window.
+** Personal information
+Tell Emacs who I am
 #+begin_src emacs-lisp
-;; First enter the new window
+(setq user-full-name "Evan Riley"
+      user-mail-address "evan@evanriley.dev")
+#+end_src
+
+** Window management
+First, we'll enter the new window
+#+begin_src emacs-lisp
 (setq evil-vsplit-window-right t
       evil-split-window-below t)
-;; Pull up buffer prompt
+#+end_src
+
+Then, we'll pull up a buffer prompt.
+#+begin_src emacs-lisp
 (defadvice! prompt-for-buffer (&rest _)
   :after '(evil-window-split evil-window-vsplit)
   (consult-buffer))
 #+end_src
 
-Window rotation, inspired by tmux.
+** Shell
+Vterm is my terminal emulator of choice. We can tell it to use ligatures, and also tell it to compile automatically
+Vterm clearly wins the terminal war. Also doesn't need much configuration out of
+the box, although the shell integration does.
+
+Fixes a weird bug with native-comp
 #+begin_src emacs-lisp
-;; (map! :map evil-window-map
-;;       "SPC" #'rotate-layout
-;;       ;; Navigation
-;;       "<left>"     #'evil-window-left
-;;       "<down>"     #'evil-window-down
-;;       "<up>"       #'evil-window-up
-;;       "<right>"    #'evil-window-right
-;;       ;; Swapping windows
-;;       "C-<left>"       #'+evil/window-move-left
-;;       "C-<down>"       #'+evil/window-move-down
-;;       "C-<up>"         #'+evil/window-move-up
-;;       "C-<right>"      #'+evil/window-move-right)
+(setq vterm-always-compile-module t)
 #+end_src
 
-*** Mouse Buttons
-I sometimes explore with my mouse, use the mouse buttons to go back and forward
+If the process exits, kill the =vterm= buffer
 #+begin_src emacs-lisp
-(map! :n [mouse-8] #'better-jumper-jump-backward
-      :n [mouse-9] #'better-jumper-jump-forward)
+(setq vterm-kill-buffer-on-exit t)
 #+end_src
-*** Smooth Scrolling
+
+Useful functions for the shell-side integration provided by vterm.
 #+begin_src emacs-lisp
-(setq-default scroll-conservatively 101       ; Avoid recentering when scrolling far
-              scroll-margin 2                 ; Add a margin when scrolling vertically
-              recenter-positions '(5 bottom)) ; Set re-centering positions
+(after! vterm
+  (setf (alist-get "magit-status" vterm-eval-cmds nil nil #'equal)
+        '((lambda (path)
+            (magit-status path)))))
 #+end_src
-** Doom Modules
-This code is written to the =init.el= to select which modules to load.
 
-#+begin_src emacs-lisp :tangle init.el
-(doom! :input
-       ;;bidi              ; (tfel ot) thgir etirw uoy gnipleh
-       ;;chinese
-       ;;japanese
-       ;;layout            ; auie,ctsrnm is the superior home row
-
-       :completion
-       company           ; the ultimate code completion backend
-       ;;helm              ; the *other* search engine for love and life
-       ;;ido               ; the other *other* search engine...
-       ;;ivy               ; a search engine for love and life
-       vertico           ; the search engine of the future
-
-       :ui
-       ;;deft              ; notational velocity for Emacs
-       doom              ; what makes DOOM look the way it does
-       doom-dashboard    ; a nifty splash screen for Emacs
-       doom-quit         ; DOOM quit-message prompts when you quit Emacs
-       (emoji +unicode)  ; 🙂
-       hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
-       ;;hydra
-       ;;indent-guides     ; highlighted indent columns
-       ;;ligatures         ; ligatures and symbols to make your code pretty again
-       ;;minimap           ; show a map of the code on the side
-       modeline          ; snazzy, Atom-inspired modeline, plus API
-       nav-flash         ; blink cursor line after big motions
-       ;;neotree           ; a project drawer, like NERDTree for vim
-       ophints           ; highlight the region an operation acts on
-       (popup +defaults)   ; tame sudden yet inevitable temporary windows
-       ;;tabs              ; a tab bar for Emacs
-       ;;treemacs          ; a project drawer, like neotree but cooler
-       ;;unicode           ; extended unicode support for various languages
-       (vc-gutter +pretty) ; vcs diff in the fringe
-       vi-tilde-fringe   ; fringe tildes to mark beyond EOB
-       ;;window-select     ; visually switch windows
-       workspaces        ; tab emulation, persistence & separate workspaces
-       ;;zen               ; distraction-free coding or writing
-
-       :editor
-       (evil +everywhere); come to the dark side, we have cookies
-       file-templates    ; auto-snippets for empty files
-       fold              ; (nigh) universal code folding
-       (format +onsave)  ; automated prettiness
-       ;;god               ; run Emacs commands without modifier keys
-       lispy             ; vim for lisp, for people who don't like vim
-       ;;multiple-cursors  ; editing in many places at once
-       ;;objed             ; text object editing for the innocent
-       parinfer          ; turn lisp into python, sort of
-       ;;rotate-text       ; cycle region at point between text candidates
-       snippets          ; my elves. They type so I don't have to
-       ;;word-wrap         ; soft wrapping with language-aware indent
-
-       :emacs
-       dired             ; making dired pretty [functional]
-       electric          ; smarter, keyword-based electric-indent
-       ;;ibuffer         ; interactive buffer management
-       undo              ; persistent, smarter undo for your inevitable mistakes
-       vc                ; version-control and Emacs, sitting in a tree
-
-       :term
-       ;;eshell            ; the elisp shell that works everywhere
-       ;;shell             ; simple shell REPL for Emacs
-       ;;term              ; basic terminal emulator for Emacs
-       vterm             ; the best terminal emulation in Emacs
-
-       :checkers
-       syntax              ; tasing you for every semicolon you forget
-       (spell +flyspell) ; tasing you for misspelling mispelling
-       ;;grammar           ; tasing grammar mistake every you make
-
-       :tools
-       ;;ansible
-       ;;biblio            ; Writes a PhD for you (citation needed)
-       ;;debugger          ; FIXME stepping through code, to help you add bugs
-       direnv
-       docker
-       editorconfig      ; let someone else argue about tabs vs spaces
-       ;;ein               ; tame Jupyter notebooks with emacs
-       (eval +overlay)     ; run code, run (also, repls)
-       gist              ; interacting with github gists
-       lookup              ; navigate your code and its documentation
-       lsp               ; M-x vscode
-       (magit             ; a git porcelain for Emacs
-        +forge)
-       make              ; run make tasks from Emacs
-       ;;pass              ; password manager for nerds
-       ;;pdf               ; pdf enhancements
-       ;;prodigy           ; FIXME managing external services & code builders
-       ;;rgb               ; creating color strings
-       ;;taskrunner        ; taskrunner for all your projects
-       ;;terraform         ; infrastructure as code
-       ;;tmux              ; an API for interacting with tmux
-       tree-sitter       ; syntax and parsing, sitting in a tree...
-       ;;upload            ; map local to remote projects via ssh/ftp
-
-       :os
-       (:if IS-MAC macos)  ; improve compatibility with macOS
-       ;;tty               ; improve the terminal Emacs experience
-
-       :lang
-       ;;agda              ; types of types of types of types...
-       (beancount         ; mind the GAAP
-        +lsp)
-       ;;(cc +lsp)         ; C > C++ == 1
-       (clojure           ; java with a lisp
-        +lsp)
-       ;;common-lisp       ; if you've seen one lisp, you've seen them all
-       ;;coq               ; proofs-as-programs
-       ;;crystal           ; ruby at the speed of c
-       ;;csharp            ; unity, .NET, and mono shenanigans
-       data              ; config/data formats
-       ;;(dart +flutter)   ; paint ui and not much else
-       ;;dhall
-       ;;elixir            ; erlang done right
-       ;;elm               ; care for a cup of TEA?
-       emacs-lisp        ; drown in parentheses
-       ;;erlang            ; an elegant language for a more civilized age
-       ;;ess               ; emacs speaks statistics
-       ;;factor
-       ;;faust             ; dsp, but you get to keep your soul
-       ;;fortran           ; in FORTRAN, GOD is REAL (unless declared INTEGER)
-       ;;fsharp            ; ML stands for Microsoft's Language
-       ;;fstar             ; (dependent) types and (monadic) effects and Z3
-       ;;gdscript          ; the language you waited for
-       (go               ; the hipster dialect
-        +lsp
-        +tree-sitter)
-       ;;(graphql +lsp)    ; Give queries a REST
-       ;;(haskell +lsp)    ; a language that's lazier than I am
-       ;;hy                ; readability of scheme w/ speed of python
-       ;;idris             ; a language you can depend on
-       (json              ; At least it ain't XML
-        +lsp
-        +tree-sitter)
-       ;;(java +lsp)       ; the poster child for carpal tunnel syndrome
-       (javascript        ; all(hope(abandon(ye(who(enter(here))))))
-        +lsp
-        +tree-sitter)
-       ;;julia             ; a better, faster MATLAB
-       ;;kotlin            ; a better, slicker Java(Script)
-       ;;latex             ; writing papers in Emacs has never been so fun
-       ;;lean              ; for folks with too much to prove
-       ;;ledger            ; be audit you can be
-       (lua               ; one-based indices? one-based indices
-        +fennel
-        +moonscript
-        +lsp)
-       markdown          ; writing docs for people to ignore
-       ;;nim               ; python + lisp at the speed of c
-       ;;nix               ; I hereby declare "nix geht mehr!"
-       ;;ocaml             ; an objective camel
-       (org               ; organize your plain life in plain text
-        +pomodoro
-        +dragndrop
-        +noter
-        +pandoc
-        +pretty
-        +present
-        +roam2)
-       ;;php               ; perl's insecure younger brother
-       ;;plantuml          ; diagrams for confusing people more
-       ;;purescript        ; javascript, but functional
-       (python            ; beautiful is better than ugly
-        +lsp
-        +pyright
-        +tree-sitter)
-       ;;qt                ; the 'cutest' gui framework ever
-       ;;racket            ; a DSL for DSLs
-       ;;raku              ; the artist formerly known as perl6
-       ;;rest              ; Emacs as a REST client
-       ;;rst               ; ReST in peace
-       ;;(ruby +rails)     ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
-       (rust +lsp)       ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
-       (scala             ; java, but good
-        +lsp
-        +tree-sitter)
-       ;;(scheme +guile)   ; a fully conniving family of lisps
-       (sh                ; she sells {ba,z,fi}sh shells on the C xor
-        +fish)
-       ;;sml
-       ;;solidity          ; do you need a blockchain? No.
-       ;;swift             ; who asked for emoji variables?
-       ;;terra             ; Earth and Moon in alignment for performance.
-       (web               ; the tubes
-        +lsp
-        +tree-sitter)
-       yaml              ; JSON, but readable
-       (zig               ; C, but simpler
-        +lsp
-        +tree-sitter)
-
-       :email
-       ;;(mu4e +org)
-       ;;notmuch
-       ;;(wanderlust +gmail)
-
-       :app
-       ;;calendar
-       ;;emms
-       ;;everywhere        ; *leave* Emacs!? You must be joking
-       ;;irc               ; how neckbeards socialize
-       (rss +org)        ; emacs as an RSS reader
-       ;;twitter           ; twitter client https://twitter.com/vnought
-
-       :config
-       literate
-       (default +bindings +smartparens))
-#+end_src
-** Personal Information
-Personal information, this is used by GPG and some other stuff.
+Use ligatures from within vterm, we do this by redefining the variable where /not/ to show ligatures. On the other hand, in select modes we want to use extra ligatures, so lets enable that.
 #+begin_src emacs-lisp
-(setq user-full-name "Evan Riley"
-      user-mail-addrss "git@evanriley.dev")
+(setq +ligatures-in-modes t)
 #+end_src
-*** Authinfo.gpg
-Use my home directory for authinfo.gpg. I delete my .emacs.d fairly often (for no good reason).
-It's safer in ~ and also. Cache a lot. It won't matter.
+
+** Fonts
+Here I use JuliaMono, and IBM Plex Sans for the proportional stuff.
 #+begin_src emacs-lisp
-(setq auth-sources '("~/.authinfo.gpg")
-      auth-source-cache-expiry nil) ; default is 7200 (2h)
+;;  fonts
+(setq doom-font (font-spec :family "JuliaMono" :size 16)
+      doom-big-font (font-spec :family "JuliaMono" :size 20)
+      doom-variable-pitch-font (font-spec :family "IBM Plex Sans" :size 16)
+      doom-unicode-font (font-spec :family "JuliaMono")
+      doom-serif-font (font-spec :family "IBM Plex Sans" :size 16 :weight 'medium))
 #+end_src
 
-** Package Installation & Configuration
-Let's install packages that aren't provided by doom, and unpin some that are.
-*** Rotate
-Rotate windows, inspired by tmux
-#+begin_src emacs-lisp :tangle packages.el
-(package! rotate)
-#+end_src
-
-*** Pinentry
-#+begin_src emacs-lisp :tangle packages.el
-(package! pinentry)
-#+end_src
-
-*** Tabnine
-Tabnine, AI code recommendations. It's OK.
-Probably will stop using it once my yearly subscription is over.
-#+begin_src emacs-lisp :tangle packages.el
-(package! company-tabnine :recipe (:host github :repo "TommyX12/company-tabnine"))
-#+end_src
-
-*** Doom Themes
-Don't pin doom-themes. I usually want to try out new additions as soon as possible.
-#+begin_src emacs-lisp :tangle packages.el
-(unpin! doom-themes)
-#+end_src
-
-*** Lambda Themes
-Beautiful themes inspired by Nicolas Rougier's Nano Emacs
-#+begin_src emacs-lisp :tangle packages.el
-(package! lambda-themes
-  :recipe (:host github :repo "lambda-emacs/lambda-themes"))
-#+end_src
-
-*** Info Colors
-Give manual pages a nice face lift.
-#+begin_src emacs-lisp :tangle packages.el
-(package! info-colors :pin "47ee73cc19b1049eef32c9f3e264ea7ef2aaf8a5")
-#+end_src
-
-Hook into ~Info~
+** LSP
+Make LSP behave a little.
 #+begin_src emacs-lisp
-(use-package! info-colors
-  :commands (info-colors-fontify-node))
+(after! lsp-mode
+  (setq lsp-enable-symbol-highlighting nil))
 
-(add-hook 'Info-selection-hook 'info-colors-fontify-node)
+(after! lsp-ui
+  (setq lsp-ui-sideline-enable nil  ; no more useful than flycheck
+        lsp-ui-doc-enable nil))     ; redundant with K
 #+end_src
 
-*** Magit
-Unpin what is probably the greatest emacs package
-#+begin_src emacs-lisp :tangle packages.el
-(unpin! magit)
-#+end_src
-
-*** Smerge
+*** Company
+Prevent company from recommending something when it doesn't know anything.
 #+begin_src emacs-lisp
-(defun smerge-repeatedly ()
-  "Perform smerge actions again and again"
-  (interactive)
-  (smerge-mode 1)
-  (smerge-transient))
-(after! transient
-  (transient-define-prefix smerge-transient ()
-    [["Move"
-      ("n" "next" (lambda () (interactive) (ignore-errors (smerge-next)) (smerge-repeatedly)))
-      ("p" "previous" (lambda () (interactive) (ignore-errors (smerge-prev)) (smerge-repeatedly)))]
-     ["Keep"
-      ("b" "base" (lambda () (interactive) (ignore-errors (smerge-keep-base)) (smerge-repeatedly)))
-      ("u" "upper" (lambda () (interactive) (ignore-errors (smerge-keep-upper)) (smerge-repeatedly)))
-      ("l" "lower" (lambda () (interactive) (ignore-errors (smerge-keep-lower)) (smerge-repeatedly)))
-      ("a" "all" (lambda () (interactive) (ignore-errors (smerge-keep-all)) (smerge-repeatedly)))
-      ("RET" "current" (lambda () (interactive) (ignore-errors (smerge-keep-current)) (smerge-repeatedly)))]
-     ["Diff"
-      ("<" "upper/base" (lambda () (interactive) (ignore-errors (smerge-diff-base-upper)) (smerge-repeatedly)))
-      ("=" "upper/lower" (lambda () (interactive) (ignore-errors (smerge-diff-upper-lower)) (smerge-repeatedly)))
-      (">" "base/lower" (lambda () (interactive) (ignore-errors (smerge-diff-base-lower)) (smerge-repeatedly)))
-      ("R" "refine" (lambda () (interactive) (ignore-errors (smerge-refine)) (smerge-repeatedly)))
-      ("E" "ediff" (lambda () (interactive) (ignore-errors (smerge-ediff)) (smerge-repeatedly)))]
-     ["Other"
-      ("c" "combine" (lambda () (interactive) (ignore-errors (smerge-combine-with-next)) (smerge-repeatedly)))
-      ("r" "resolve" (lambda () (interactive) (ignore-errors (smerge-resolve)) (smerge-repeatedly)))
-      ("k" "kill current" (lambda () (interactive) (ignore-errors (smerge-kill-current)) (smerge-repeatedly)))
-      ("q" "quit" (lambda () (interactive) (smerge-auto-leave)))]]))
+(after! company
+  (setq company-idle-delay 0.1
+        company-selection-wrap-around t
+        company-require-match 'never
+        company-dabbrev-downcase nil
+        company-dabbrev-ignore-case t
+        company-dabbrev-other-buffers nil
+        company-tooltip-limit 5
+        company-tooltip-minimum-width 40)
+  (set-company-backend!
+    '(text-mode
+      markdown-mode
+      gfm-mode)
+    '(:seperate
+      company-files)))
 #+end_src
 
-*** Which-key
-Make it popup faster.
+** Better Defaults
+The defaults for emacs aren't so good nowadays. Lets fix that up a bit
 #+begin_src emacs-lisp
-(setq which-key-idle-delay 0.5)
-(after! which-key
-  (pushnew!
-   which-key-replacement-alist
-   '(("" . "\\`+?evil[-:]?\\(?:a-\\)?\\(.*\\)") . (nil . "◂\\1"))
-   '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . "◃\\1"))
-   ))
+(setq scroll-margin 2
+      auto-save-default t
+      display-line-numbers-type 'relative
+      delete-by-moving-to-trash t
+      truncate-string-ellipsis "…"
+      browse-url-browser-function 'xwidget-webkit-browse-url)
+
+(fringe-mode 0)
+(global-subword-mode 1)
 #+end_src
 
-*** Eros
-Provide a nicer look prefix.
+There's issues with emacs flickering on mac (and sometimes wayland). This should
+fix it
 #+begin_src emacs-lisp
-(setq eros-eval-result-prefix "⟹ ")
+(add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
 #+end_src
 
-*** Evil
-Make substitution global by default.
+Heres some fixes for yabai, we obviously only want that under darwin (macOS) though
+#+begin_src emacs-lisp
+(cond
+ ((string-equal system-type "darwin")
+  (setq frame-resize-pixelwise  t
+        window-resize-pixelwise t)))
+#+end_src
+
+** Evil
+When we do =s/../..= I usually want a global =/g= at the end, so lets make that the default (along with some other tweaks)
 #+begin_src emacs-lisp
 (after! evil
   (setq evil-ex-substitute-global t     ; I like my s/../.. to by global by default
@@ -542,93 +566,711 @@ Make substitution global by default.
         evil-kill-on-visual-paste nil)) ; Don't put overwritten text in the kill ring
 #+end_src
 
-*** Consult
-No need for a seperate face between buffers and files
+Which key shows those extra =evil-= hints, feels redundant
 #+begin_src emacs-lisp
-(after! consult
-  (set-face-attribute 'consult-file nil :inherit 'consult-buffer)
-  (setf (plist-get (alist-get 'perl consult-async-split-styles-alist) :initial) ";"))
+(setq which-key-allow-multiple-replacements t
+      which-key-idle-delay 0.5) ;; I need the help, I really do
+(after! which-key
+  (pushnew!
+   which-key-replacement-alist
+   '(("" . "\\`+?evil[-:]?\\(?:a-\\)?\\(.*\\)") . (nil . " \\1"))
+   '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . " \\1"))))
 #+end_src
 
-*** Company
-Reduce the delay on completions. Gotta save those keystrokes!
+** Mu4e
+I'm mostly in Mail.app, but let's setup Mu4e on the off chance I use it.
 #+begin_src emacs-lisp
-(after! company
-  (setq company-idle-delay 0.5
-        company-minimum-prefix-length 2)
-  (setq company-show-numbers t)
-  (add-hook 'evil-normal-state-entry-hook #'company-abort)) ;; make aborting less annoying.
+(after! mu4e
+  (setq mu4e-index-cleanup nil
+        mu4e-index-lazy-check t
+        mu4e-update-interval 300)
+  (set-email-account! "evan"
+                      '((mu4e-sent-folder       . "/Personal/Sent")
+                        (mu4e-drafts-folder     . "/Personal/Drafts")
+                        (mu4e-trash-folder      . "/Personal/Trash")
+                        (mu4e-refile-folder     . "/Personal/All Mail")
+                        (smtpmail-smtp-user     . "evan@evanriley.dev"))))
 #+end_src
 
-Improve history
+We can also send messages using msmtp
 #+begin_src emacs-lisp
-(setq-default history-length 1000)
-(setq-default prescient-history-length 1000)
+(after! mu4e
+  (setq sendmail-program "msmtp"
+        send-mail-function #'smtpmail-send-it
+        message-sendmail-f-is-evil t
+        message-sendmail-extra-arguments '("--read-envelope-from")
+        message-send-mail-function #'message-send-mail-with-sendmail))
 #+end_src
 
-*** Projectile
-Don't add documentation via ~SPC h f~ and ~SPC h V~ to projectile.
+** Magit
+Delta is a git diff syntax highlighter written in rust.
+The author also wrote a package to hook this into the magit diff view (which doesn't get any syntax highlighting by default).
+This requires the delta binary. It’s packaged on some distributions, but most reliably installed through Rust’s package manager cargo.
 #+begin_src emacs-lisp
-(setq projectile-ignored-projects '("~/" "/tmp" "~/.emacs.d/.local/straight/repos/"))
-(defun projectile-ignored-project-function (filepath)
-  "Return t if FILEPATH is within any of `projectile-ignored-projects'"
-  (or (mapcar (lambda (p) (s-starts-with-p p filepath)) projectile-ignored-projects)))
+(after! magit
+  (magit-delta-mode +1))
 #+end_src
 
-*** Auto Activating Snippets
-#+begin_src emacs-lisp :tangle packages.el
-(package! aas :recipe (:host github :repo "ymarco/auto-activating-snippets"))
+** Monkeytype
+Monkeytype clone for when I'm bored
+#+begin_src emacs-lisp
+(use-package! monkeytype
+  :commands (monkeytype-region monkeytype-buffer monkeytype-region-as-words)
+  :config
+  (setq monkeytype-directory "~/.config/monkeytype"
+        monkeytype-file-name "%a-%d-%b-%Y-%H-%M-%S"
+        monkeytype-randomize t
+        monkeytype-delete-trailing-whitespace t
+        monkeytype-excluded-chars-regexp "[^[:alnum:]']"))
 #+end_src
 
+** Smudge
+Change these keys if you want to use this.
 #+begin_src emacs-lisp
-(use-package! aas
-  :commands aas-mode)
+(use-package! smudge
+  :commands global-smudge-remote-mode
+  :config
+  (setq smudge-transport 'connect
+        smudge-oauth2-client-secret "7186547722a24dbab82b37115b7a6ad2"
+        smudge-oauth2-client-id "26eb217f4d884074981325cf9c9c54b7")
+  (map! :map smudge-mode-map "C-c ." #'smudge-command-map))
 #+end_src
 
-*** YASnippet
-Enable nested snippets
+* Visual configuration
+** Dashboard
+Nice simple dashboard
 #+begin_src emacs-lisp
-(setq yas-triggers-in-field t)
+(setq fancy-splash-image (expand-file-name "misc/splash-images/emacs-e-template.svg" doom-private-dir)
+      +doom-dashboard-banner-padding '(0 . 0))
+
+(defvar splash-phrase-source-folder
+  (expand-file-name "misc/splash-phrases" doom-private-dir)
+  "A folder of text files with a fun phrase on each line.")
+
+(defvar splash-phrase-sources
+  (let* ((files (directory-files splash-phrase-source-folder nil "\\.txt\\'"))
+         (sets (delete-dups (mapcar
+                             (lambda (file)
+                               (replace-regexp-in-string "\\(?:-[0-9]+-\\w+\\)?\\.txt" "" file))
+                             files))))
+    (mapcar (lambda (sset)
+              (cons sset
+                    (delq nil (mapcar
+                               (lambda (file)
+                                 (when (string-match-p (regexp-quote sset) file)
+                                   file))
+                               files))))
+            sets))
+  "A list of cons giving the phrase set name, and a list of files which contain phrase components.")
+
+(defvar splash-phrase-set
+  (nth (random (length splash-phrase-sources)) (mapcar #'car splash-phrase-sources))
+  "The default phrase set. See `splash-phrase-sources'.")
+
+(defun splase-phrase-set-random-set ()
+  "Set a new random splash phrase set."
+  (interactive)
+  (setq splash-phrase-set
+        (nth (random (1- (length splash-phrase-sources)))
+             (cl-set-difference (mapcar #'car splash-phrase-sources) (list splash-phrase-set))))
+  (+doom-dashboard-reload t))
+
+(defvar splase-phrase--cache nil)
+
+(defun splash-phrase-get-from-file (file)
+  "Fetch a random line from FILE."
+  (let ((lines (or (cdr (assoc file splase-phrase--cache))
+                   (cdar (push (cons file
+                                     (with-temp-buffer
+                                       (insert-file-contents (expand-file-name file splash-phrase-source-folder))
+                                       (split-string (string-trim (buffer-string)) "\n")))
+                               splase-phrase--cache)))))
+    (nth (random (length lines)) lines)))
+
+(defun splash-phrase (&optional set)
+  "Construct a splash phrase from SET. See `splash-phrase-sources'."
+  (mapconcat
+   #'splash-phrase-get-from-file
+   (cdr (assoc (or set splash-phrase-set) splash-phrase-sources))
+   " "))
+
+(defun doom-dashboard-phrase ()
+  "Get a splash phrase, flow it over multiple lines as needed, and make fontify it."
+  (mapconcat
+   (lambda (line)
+     (+doom-dashboard--center
+      +doom-dashboard--width
+      (with-temp-buffer
+        (insert-text-button
+         line
+         'action
+         (lambda (_) (+doom-dashboard-reload t))
+         'face 'doom-dashboard-menu-title
+         'mouse-face 'doom-dashboard-menu-title
+         'help-echo "Random phrase"
+         'follow-link t)
+        (buffer-string))))
+   (split-string
+    (with-temp-buffer
+      (insert (splash-phrase))
+      (setq fill-column (min 70 (/ (* 2 (window-width)) 3)))
+      (fill-region (point-min) (point-max))
+      (buffer-string))
+    "\n")
+   "\n"))
+
+(defadvice! doom-dashboard-widget-loaded-with-phrase ()
+  :override #'doom-dashboard-widget-loaded
+  (setq line-spacing 0.2)
+  (insert
+   "\n\n"
+   (propertize
+    (+doom-dashboard--center
+     +doom-dashboard--width
+     (doom-display-benchmark-h 'return))
+    'face 'doom-dashboard-loaded)
+   "\n"
+   (doom-dashboard-phrase)
+   "\n"))
+
+;; remove useless dashboard info
+(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
+(add-hook! '+doom-dashboard-mode-hook (hide-mode-line-mode 1) (hl-line-mode -1))
+(setq-hook! '+doom-dashboard-mode-hook evil-normal-state-cursor (list nil))
+#+end_src
+
+** Info Colors
+Make the Info pages look a little nicer.
+
+To use this we'll just hook it into =Info=.
+#+begin_src emacs-lisp
+(use-package! info-colors
+  :commands (info-colors-fontify-node))
+
+(add-hook 'Info-selection-hook 'info-colors-fontify-node)
+#+end_src
+
+** Minibuffer
+Make the minibuffer look closer to Nano Emacs
+#+begin_src emacs-lisp
+(setq minibuffer-prompt-properties '(read-only t
+                                     cursor-intangible t
+                                     face minibuffer-prompt)
+      enable-recursive-minibuffers t)
+
+(defun my/minibuffer-header ()
+  "Minibuffer header"
+  (let ((depth (minibuffer-depth)))
+    (concat
+     (propertize (concat "  " (if (> depth 1)
+                                   (format "Minibuffer (%d)" depth)
+                                 "Minibuffer ")
+                         "\n")
+                 'face `(:inherit (nano-subtle nano-strong)
+                         :box (:line-width (1 . 3)
+                               :color ,(face-background 'nano-subtle)
+                               :style flat)
+                         :extend t)))))
+
+(defun my/mini-frame-reset (frame)
+  "Reset FRAME size and position.
+
+  Move frame at the top of parent frame and resize it
+  horizontally to fit the width of current selected window."
+  (interactive)
+  (let* ((border (frame-parameter frame 'internal-border-width))
+         (height (frame-parameter frame 'height)))
+    (with-selected-frame (frame-parent frame)
+      (let* ((edges (window-pixel-edges))
+             (body-edges (window-body-pixel-edges))
+             (top (nth 1 edges))
+             (bottom (nth 3 body-edges))
+             (left (- (nth 0 edges) (or left-fringe-width 0)))
+             (right (+ (nth 2 edges) (or right-fringe-width 0)))
+             (width (- right left))
+             (y (- top border)))
+        (set-frame-width frame width nil t)
+        (set-frame-height frame height)
+        (set-frame-position frame (- left border) y)))))
+
+(defun my/mini-frame-shrink (frame &optional delta)
+  "Make the FRAME DELTA lines smaller.
+
+  If no argument is given, make the frame one line smaller. If
+  DELTA is negative, enlarge frame by -DELTA lines."
+  (interactive)
+  (let ((delta (or delta -1)))
+    (when (and (framep frame)
+               (frame-live-p frame)
+               (frame-visible-p frame))
+      (set-frame-parameter frame 'height
+                           (+ (frame-parameter frame 'height) delta)))))
+
+(defun my/minibuffer-setup ()
+  "Install a header line in the minibuffer via an overlay (and a hook)"
+  (set-window-margins nil 0 0)
+  (set-fringe-style '(0 . 0))
+  (cursor-intangible-mode t)
+  (face-remap-add-relative 'default
+                           :inherit 'highlight)
+ (let* ((overlay (make-overlay (+ (point-min) 0) (+ (point-min) 0)))
+        (inhibit-read-only t))
+
+    (save-excursion
+      (goto-char (point-min))
+      (insert (propertize
+               (concat (my/minibuffer-header)
+                       (propertize "\n" 'face `(:height 0.33))
+                       (propertize " "))
+               'cursor-intangible t
+               'read-only t
+               'field t
+               'rear-nonsticky t
+               'front-sticky t)))))
+
+
+(add-hook 'minibuffer-setup-hook #'my/minibuffer-setup)
+#+end_src
+
+** Mini-Frame
+Place our minibuffer in a posframe, and clean it up.
+#+begin_src emacs-lisp
+(use-package! mini-frame
+  :hook (after-init . mini-frame-mode)
+  :config
+  (defcustom my/minibuffer-position 'bottom
+    "Minibuffer position, one of 'top or 'bottom"
+    :type '(choice (const :tag "Top"    top)
+                   (const :tag "Bottom" bottom))
+    :group 'nano-minibuffer)
+
+  (defun my/minibuffer--frame-parameters ()
+    "Compute minibuffer frame size and position."
+
+    ;; Quite precise computation to align the minibuffer and the
+    ;; modeline when they are both at top position
+    (let* ((edges (window-pixel-edges)) ;; (left top right bottom)
+           (body-edges (window-body-pixel-edges)) ;; (left top right bottom)
+           (left (nth 0 edges)) ;; Take margins into account
+           (top (nth 1 edges)) ;; Drop header line
+           (right (nth 2 edges)) ;; Take margins into account
+           (bottom (nth 3 body-edges)) ;; Drop header line
+           (left (if (eq left-fringe-width 0)
+                     left
+                   (- left (frame-parameter nil 'left-fringe))))
+           (right (nth 2 edges))
+           (right (if (eq right-fringe-width 0)
+                      right
+                    (+ right (frame-parameter nil 'right-fringe))))
+           (border 1)
+           (width (- right left (* 0 border)))
+
+           ;; Window divider mode
+           (width (- width (if (and (bound-and-true-p window-divider-mode)
+                                    (or (eq window-divider-default-places 'right-only)
+                                        (eq window-divider-default-places t))
+                                    (window-in-direction 'right (selected-window)))
+                               window-divider-default-right-width
+                             0)))
+           (y (- top border)))
+
+      (append `((left-fringe . 0)
+                (right-fringe . 0)
+                (user-position . t)
+                (foreground-color . ,(face-foreground 'highlight nil 'default))
+                (background-color . ,(face-background 'highlight nil 'default)))
+              (cond ((and (eq my/minibuffer-position 'bottom))
+                     `((top . -1)
+                       (left . 0)
+                       (width . 1.0)
+                       (child-frame-border-width . 0)
+                       (internal-border-width . 0)))
+                    (t
+                     `((left . ,(- left border))
+                       (top . ,y)
+                       (width . (text-pixels . ,width))
+                       (child-frame-border-width . ,border)
+                       (internal-border-width . ,border)))))))
+
+    (set-face-background 'child-frame-border (face-foreground 'nano-faded))
+    (setq mini-frame-default-height 3)
+    (setq mini-frame-create-lazy t)
+    (setq mini-frame-show-parameters 'my/minibuffer--frame-parameters)
+    (setq mini-frame-ignore-commands
+          '("edebug-eval-expression" debugger-eval-expression))
+    (setq mini-frame-internal-border-color (face-foreground 'nano-faded))
+    (setq mini-frame-resize-min-height 3)
+    (setq mini-frame-resize t)
+
+  (defun my/mini-frame (&optional height foreground background border)
+    "Create a child frame positionned over the header line whose
+  width corresponds to the width of the current selected window.
+
+  The HEIGHT in lines can be specified, as well as the BACKGROUND
+  color of the frame. BORDER width (pixels) and color (FOREGROUND)
+  can be also specified."
+    (interactive)
+    (let* ((foreground (or foreground
+                           (face-foreground 'font-lock-comment-face nil t)))
+           (background (or background (face-background 'highlight nil t)))
+           (border (or border 1))
+           (height (round (* (or height 8) (window-font-height))))
+           (edges (window-pixel-edges))
+           (body-edges (window-body-pixel-edges))
+           (top (nth 1 edges))
+           (bottom (nth 3 body-edges))
+           (left (- (nth 0 edges) (or left-fringe-width 0)))
+           (right (+ (nth 2 edges) (or right-fringe-width 0)))
+           (width (- right left))
+
+           ;; Window divider mode
+           (width (- width (if (and (bound-and-true-p window-divider-mode)
+                                    (or (eq window-divider-default-places 'right-only)
+                                        (eq window-divider-default-places t))
+                                  (window-in-direction 'right (selected-window)))
+                               window-divider-default-right-width
+                             0)))
+           (y (- top border))
+           (child-frame-border (face-attribute 'child-frame-border :background)))
+      (set-face-attribute 'child-frame-border t :background foreground)
+      (let ((frame (make-frame
+                    `((parent-frame . ,(window-frame))
+                      (delete-before . ,(window-frame))
+                      (minibuffer . nil)
+                      (modeline . nil)
+                      (left . ,(- left border))
+                      (top . ,y)
+                      (width . (text-pixels . ,width))
+                      (height . (text-pixels . ,height))
+                      ;; (height . ,height)
+                      (child-frame-border-width . ,border)
+                      (internal-border-width . ,border)
+                      (background-color . ,background)
+                      (horizontal-scroll-bars . nil)
+                      (menu-bar-lines . 0)
+                      (tool-bar-lines . 0)
+                      (desktop-dont-save . t)
+                      (unsplittable . nil)
+                      (no-other-frame . t)
+                      (undecorated . t)
+                      (pixelwise . t)
+                      (visibility . t)))))
+        (set-face-attribute 'child-frame-border t :background child-frame-border)
+        frame))))
+#+end_src
+
+** Minad Suite
+Clean up these great packages a little.
+*** Vertico
+Small tweaks, just some themeing here and there to better fit with our minibuffer changes
+#+begin_src emacs-lisp
+(after! vertico
+  ;; settings
+  (setq vertico-resize nil        ; How to resize the Vertico minibuffer window.
+        vertico-count 10          ; Maximal number of candidates to show.
+        vertico-count-format nil) ; No prefix with number of entries
+
+  ;; looks
+  (setq vertico-grid-separator
+        #("  |  " 2 3 (display (space :width (1))
+                               face (:background "#ECEFF1")))
+        vertico-group-format
+        (concat #(" " 0 1 (face vertico-group-title))
+                #(" " 0 1 (face vertico-group-separator))
+                #(" %s " 0 4 (face vertico-group-title))
+                #(" " 0 1 (face vertico-group-separator
+                            display (space :align-to (- right (-1 . right-margin) (- +1)))))))
+  (set-face-attribute 'vertico-group-separator nil
+                      :strike-through t)
+  (set-face-attribute 'vertico-current nil
+                      :inherit '(nano-strong nano-subtle))
+  (set-face-attribute 'completions-first-difference nil
+                      :inherit '(nano-default))
+
+  ;; minibuffer tweaks
+  (defun my/vertico--resize-window (height)
+    "Resize active minibuffer window to HEIGHT."
+      (setq-local truncate-lines t
+                  resize-mini-windows 'grow-only
+                  max-mini-window-height 1.0)
+    (unless (frame-root-window-p (active-minibuffer-window))
+      (unless vertico-resize
+        (setq height (max height vertico-count)))
+      (let* ((window-resize-pixelwise t)
+             (dp (- (max (cdr (window-text-pixel-size))
+                         (* (default-line-height) (1+ height)))
+                    (window-pixel-height))))
+        (when (or (and (> dp 0) (/= height 0))
+                  (and (< dp 0) (eq vertico-resize t)))
+          (window-resize nil dp nil nil 'pixelwise)))))
+
+  (advice-add #'vertico--resize-window :override #'my/vertico--resize-window)
+
+  ;; completion at point
+  (setq completion-in-region-function
+        (lambda (&rest args)
+          (apply (if vertico-mode
+                     #'consult-completion-in-region
+                   #'completion--in-region)
+                 args)))
+  (defun minibuffer-format-candidate (orig cand prefix suffix index _start)
+    (let ((prefix (if (= vertico--index index)
+                      "  "
+                    "   ")))
+      (funcall orig cand prefix suffix index _start)))
+  (advice-add #'vertico--format-candidate
+             :around #'minibuffer-format-candidate)
+  (defun vertico--prompt-selection ()
+    "Highlight the prompt"
+
+    (let ((inhibit-modification-hooks t))
+      (set-text-properties (minibuffer-prompt-end) (point-max)
+                           '(face (nano-strong nano-salient)))))
+  (defun minibuffer-vertico-setup ()
+    (setq truncate-lines t)
+    (setq completion-in-region-function
+          (if vertico-mode
+              #'consult-completion-in-region
+            #'completion--in-region)))
+
+  (add-hook 'vertico-mode-hook #'minibuffer-vertico-setup)
+  (add-hook 'minibuffer-setup-hook #'minibuffer-vertico-setup))
 #+end_src
 
 *** Marginalia
+More small tweaks
 #+begin_src emacs-lisp
 (after! marginalia
-  (setq marginalia-censor-variables nil)
-
-  (defadvice! +marginalia--anotate-local-file-colorful (cand)
-    "Just a more colourful version of `marginalia--anotate-local-file'."
-    :override #'marginalia--annotate-local-file
-    (when-let (attrs (file-attributes (substitute-in-file-name
-                                       (marginalia--full-candidate cand))
-                                      'integer))
-      (marginalia--fields
-       ((marginalia--file-owner attrs)
-        :width 12 :face 'marginalia-file-owner)
-       ((marginalia--file-modes attrs))
-       ((+marginalia-file-size-colorful (file-attribute-size attrs))
-        :width 7)
-       ((+marginalia--time-colorful (file-attribute-modification-time attrs))
-        :width 12))))
-
-  (defun +marginalia--time-colorful (time)
-    (let* ((seconds (float-time (time-subtract (current-time) time)))
-           (color (doom-blend
-                   (face-attribute 'marginalia-date :foreground nil t)
-                   (face-attribute 'marginalia-documentation :foreground nil t)
-                   (/ 1.0 (log (+ 3 (/ (+ 1 seconds) 345600.0)))))))
-      ;; 1 - log(3 + 1/(days + 1)) % grey
-      (propertize (marginalia--time time) 'face (list :foreground color))))
-
-  (defun +marginalia-file-size-colorful (size)
-    (let* ((size-index (/ (log10 (+ 1 size)) 7.0))
-           (color (if (< size-index 10000000) ; 10m
-                      (doom-blend 'orange 'green size-index)
-                    (doom-blend 'red 'orange (- size-index 1)))))
-      (propertize (file-size-human-readable size) 'face (list :foreground color)))))
+  (setq marginalia--ellipsis "…"    ; Nicer ellipsis
+        marginalia-align 'right     ; right alignment
+        marginalia-align-offset -1)) ; one space on the right
 #+end_src
-*** Elfeed
-Keybindings
+
+** Pixel-scroll
+Default doom scrolling is pretty slow, so lets improve on that with pixel-scrolling. However, =emacs-mac= has its own version of pixel scroll, and so does =emacs29=, so we want to enable this under specific cases
+#+begin_src emacs-lisp
+(if (boundp 'mac-mouse-wheel-smooth-scroll)
+    (setq  mac-mouse-wheel-smooth-scroll t))
+
+(if (> emacs-major-version 28)
+    (pixel-scroll-precision-mode))
+#+end_src
+
+** Nano
+Some UI tweaks to make emacs comfier
+Lets start off by just giving the text a little more space to breathe
+#+begin_src emacs-lisp
+(setq-default line-spacing 0.24)
+#+end_src
+*** Window Padding
+Making things spacier. Add padding around emacs and between splits
+#+begin_src emacs-lisp
+;; Vertical window divider
+(setq-default window-divider-default-right-width 24
+              window-divider-default-places 'right-only
+              left-margin-width 0
+              right-margin-width 0
+              window-combination-resize nil) ; Do not resize windows proportionally
+
+(window-divider-mode 1)
+#+end_src
+
+#+begin_src emacs-lisp
+;; Default frame settings
+(setq default-frame-alist '((min-height . 1)  '(height . 45)
+                            (min-width  . 1)  '(width  . 81)
+                            (vertical-scroll-bars . nil)
+                            (internal-border-width . 24)
+                            (left-fringe . 0)
+                            (right-fringe . 0)
+                            (tool-bar-lines . 0)
+                            (menu-bar-lines . 0)))
+
+(setq initial-frame-alist default-frame-alist)
+#+end_src
+
+*** Colorscheme
+Use the great nano theme here.
+#+begin_src emacs-lisp
+(defun evanriley/apply-nano-theme (appearance)
+  "Load theme, taking current system APPEARANCE into consideration."
+  (mapc #'disable-theme custom-enabled-themes)
+  (pcase appearance
+    ('light (nano-light))
+    ('dark (nano-dark))))
+#+end_src
+
+Set up the theme here.
+#+begin_src emacs-lisp
+(use-package nano-theme
+  :hook (after-init . nano-light)
+  :config
+  ;; If emacs has been built with system appearance detection
+  ;; add a hook to change the theme to match the system
+  ;; (if (boundp 'ns-system-appearance-change-functions)
+  ;;     (add-hook 'ns-system-appearance-change-functions #'evanriley/apply-nano-theme))
+  ;; Now to add some missing faces
+  (custom-set-faces
+   `(flyspell-incorrect ((t (:underline (:color ,nano-light-salient :style line)))))
+   `(flyspell-duplicate ((t (:underline (:color ,nano-light-salient :style line)))))
+
+   `(git-gutter:modified ((t (:foreground ,nano-light-salient))))
+   `(git-gutter-fr:added ((t (:foreground ,nano-light-popout))))
+   `(git-gutter-fr:modified ((t (:foreground ,nano-light-salient))))
+
+   `(lsp-ui-doc-url:added ((t (:background ,nano-light-highlight))))
+   `(lsp-ui-doc-background:modified ((t (:background ,nano-light-highlight))))
+
+   `(vterm-color-red ((t (:foreground ,nano-light-critical))))
+   `(vterm-color-blue ((t (:foreground ,nano-light-salient))))
+   `(vterm-color-green ((t (:foreground ,nano-light-popout))))
+   `(vterm-color-yellow ((t (:foreground ,nano-light-popout))))
+   `(vterm-color-magenta ((t (:foreground ,nano-light-salient))))
+
+   `(scroll-bar ((t (:background ,nano-light-background))))
+   `(child-frame-border ((t (:foreground ,nano-light-faded))))
+
+   `(avy-lead-face-1 ((t (:foreground ,nano-light-subtle))))
+   `(avy-lead-face ((t (:foreground ,nano-light-popout :weight bold))))
+   `(avy-lead-face-0 ((t (:foreground ,nano-light-salient :weight bold))))))
+#+end_src
+
+And setup nano-modeline
+#+begin_src emacs-lisp
+(use-package! nano-modeline
+  :hook (after-init . nano-modeline-mode)
+  :config
+  (setq nano-modeline-prefix 'status
+        nano-modeline-prefix-padding 1
+        nano-modeline-position 'top))
+
+;; (use-package! minions
+;;   :hook (after-init . minions-mode))
+
+;; Add a zero-width tall character to add padding to modeline
+;; (setq-default mode-line-format
+;;              (cons (propertize "\u200b" 'display '((raise -0.35) (height 1.4))) mode-line-format))
+#+end_src
+
+** SVG-tag-mode
+Replace org-modern, some what heavier but looks way better.
+#+begin_src emacs-lisp
+(use-package svg-tag-mode
+  :commands svg-tag-mode
+  :config
+  (defconst date-re "[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}")
+  (defconst time-re "[0-9]\\{2\\}:[0-9]\\{2\\}")
+  (defconst day-re "[A-Za-z]\\{3\\}")
+  (defconst day-time-re (format "\\(%s\\)? ?\\(%s\\)?" day-re time-re))
+
+  (defun svg-progress-percent (value)
+    (svg-image (svg-lib-concat
+                (svg-lib-progress-bar (/ (string-to-number value) 100.0)
+                                  nil :margin 0 :stroke 2 :radius 3 :padding 2 :width 11)
+                (svg-lib-tag (concat value "%")
+                             nil :stroke 0 :margin 0)) :ascent 'center))
+
+  (defun svg-progress-count (value)
+    (let* ((seq (mapcar #'string-to-number (split-string value "/")))
+           (count (float (car seq)))
+           (total (float (cadr seq))))
+    (svg-image (svg-lib-concat
+                (svg-lib-progress-bar (/ count total) nil
+                                      :margin 0 :stroke 2 :radius 3 :padding 2 :width 11)
+                (svg-lib-tag value nil
+                             :stroke 0 :margin 0)) :ascent 'center)))
+
+  (setq svg-tag-tags
+        `(
+          ;; Org tags
+          (":\\([A-Za-z0-9]+\\)" . ((lambda (tag) (svg-tag-make tag))))
+          (":\\([A-Za-z0-9]+[ \-]\\)" . ((lambda (tag) tag)))
+
+          ;; Task priority
+          ("\\[#[A-Z]\\]" . ( (lambda (tag)
+                                (svg-tag-make tag :face 'org-priority
+                                              :beg 2 :end -1 :margin 0))))
+
+          ;; Progress
+          ("\\(\\[[0-9]\\{1,3\\}%\\]\\)" . ((lambda (tag)
+                                              (svg-progress-percent (substring tag 1 -2)))))
+          ("\\(\\[[0-9]+/[0-9]+\\]\\)" . ((lambda (tag)
+                                            (svg-progress-count (substring tag 1 -1)))))
+
+          ;; TODO / DONE
+          ("TODO" . ((lambda (tag) (svg-tag-make "TODO" :face 'org-todo :inverse t :margin 0))))
+          ("DONE" . ((lambda (tag) (svg-tag-make "DONE" :face 'org-done :margin 0))))
+
+
+          ;; Citation of the form [cite:@Knuth:1984]
+          ("\\(\\[cite:@[A-Za-z]+:\\)" . ((lambda (tag)
+                                            (svg-tag-make tag
+                                                          :inverse t
+                                                          :beg 7 :end -1
+                                                          :crop-right t))))
+          ("\\[cite:@[A-Za-z]+:\\([0-9]+\\]\\)" . ((lambda (tag)
+                                                  (svg-tag-make tag
+                                                                :end -1
+                                                                :crop-left t))))
+
+
+          ;; Active date (with or without day name, with or without time)
+          (,(format "\\(<%s>\\)" date-re) .
+           ((lambda (tag)
+              (svg-tag-make tag :beg 1 :end -1 :margin 0))))
+          (,(format "\\(<%s \\)%s>" date-re day-time-re) .
+           ((lambda (tag)
+              (svg-tag-make tag :beg 1 :inverse nil :crop-right t :margin 0))))
+          (,(format "<%s \\(%s>\\)" date-re day-time-re) .
+           ((lambda (tag)
+              (svg-tag-make tag :end -1 :inverse t :crop-left t :margin 0))))
+
+          ;; Inactive date  (with or without day name, with or without time)
+           (,(format "\\(\\[%s\\]\\)" date-re) .
+            ((lambda (tag)
+               (svg-tag-make tag :beg 1 :end -1 :margin 0 :face 'org-date))))
+           (,(format "\\(\\[%s \\)%s\\]" date-re day-time-re) .
+            ((lambda (tag)
+               (svg-tag-make tag :beg 1 :inverse nil :crop-right t :margin 0 :face 'org-date))))
+           (,(format "\\[%s \\(%s\\]\\)" date-re day-time-re) .
+            ((lambda (tag)
+               (svg-tag-make tag :end -1 :inverse t :crop-left t :margin 0 :face 'org-date)))))))
+#+end_src
+
+** Dimming
+#+begin_src emacs-lisp
+;; Dim inactive windows
+(use-package! dimmer
+  :hook (after-init . dimmer-mode)
+  :config
+  (setq dimmer-fraction 0.5
+        dimmer-adjustment-mode :foreground
+        dimmer-use-colorspace :rgb
+        dimmer-watch-frame-focus-events nil)
+  (dimmer-configure-which-key)
+  (dimmer-configure-magit)
+  (dimmer-configure-posframe))
+#+end_src
+
+Similar to that, I want to dim surrounding text using the focus package
+#+begin_src emacs-lisp
+(defun add-list-to-list (dst src)
+  "Similar to `add-to-list', but accepts a list as 2nd argument"
+  (set dst
+       (append (eval dst) src)))
+
+(use-package! focus
+  :commands focus-mode
+  :config
+  ;; add whatever lsp servers you use to this list
+  (add-list-to-list 'focus-mode-to-thing
+                    '((lua-mode . lsp-folding-range)
+                      (rust-mode . lsp-folding-range)
+                      (python-mode . lsp-folding-range))))
+#+end_src
+
+** RSS
+RIP Google Reader.
 #+begin_src emacs-lisp
 (map! :map elfeed-search-mode-map
       :after elfeed-search
@@ -662,10 +1304,7 @@ Keybindings
       :nm "-" #'elfeed-show-untag
       :nm "s" #'elfeed-show-new-live-search
       :nm "y" #'elfeed-show-yank)
-#+end_src
 
-Usability
-#+begin_src emacs-lisp
 (after! elfeed-search
   (set-evil-initial-state! 'elfeed-search-mode 'normal))
 (after! elfeed-show-mode
@@ -674,14 +1313,11 @@ Usability
 (after! evil-snipe
   (push 'elfeed-show-mode   evil-snipe-disabled-modes)
   (push 'elfeed-search-mode evil-snipe-disabled-modes))
-#+end_src
 
-Visuals
-#+begin_src emacs-lisp
 (after! elfeed
-
   (elfeed-org)
   (use-package! elfeed-link)
+  (setq rmh-elfeed-org-files '("~/org/elfeed.org"))
 
   (setq elfeed-search-filter "@1-week-ago +unread"
         elfeed-search-print-entry-function '+rss/elfeed-search-print-entry
@@ -746,8 +1382,7 @@ Visuals
 
       (insert (propertize feed-column 'face 'elfeed-search-feed-face) " ")
       (insert (propertize tag-column 'face 'elfeed-search-tag-face) " ")
-      (insert (propertize title 'face title-faces 'kbd-help title))
-      (setq-local line-spacing 0.2)))
+      (insert (propertize title 'face title-faces 'kbd-help title))))
 
   (defun +rss/elfeed-show-refresh--better-style ()
     "Update the buffer to match the selected entry, using a mail-style."
@@ -788,13 +1423,8 @@ Visuals
               (elfeed-insert-html content base)
             (insert content))
         (insert (propertize "(empty)\n" 'face 'italic)))
-      (goto-char (point-min))))
+      (goto-char (point-min)))))
 
-  )
-#+end_src
-
-Functionality
-#+begin_src emacs-lisp
 (after! elfeed-show
   (require 'url)
 
@@ -836,181 +1466,227 @@ Functionality
             (unless (file-exists-p (file-name-directory file))
               (make-directory (file-name-directory file) t))
             (url-copy-file pdf file)
-            (funcall file-view-function file))))))
-
-  )
+            (funcall file-view-function file)))))))
 #+end_src
 
-*** Org
-#+begin_src emacs-lisp :tangle packages.el
-(package! org-contrib :recipe (:host nil :repo "https://git.sr.ht/~bzg/org-contrib"))
-(package! ob-http :pin "b1428ea2a63bcb510e7382a1bf5fe82b19c104a7")
-(package! org-chef :pin "6a786e77e67a715b3cd4f5128b59d501614928af")
-(package! org-super-agenda :pin "3108bc3f725818f0e868520d2c243abe9acbef4e")
+** Ebooks
+
+Use nov to read ebooks.
+#+begin_src emacs-lisp
+(use-package! nov
+  :mode ("\\.epub\\'" . nov-mode)
+  :config
+  (map! :map nov-mode-map
+        :n "RET" #'nov-scroll-up)
+
+  (advice-add 'nov-render-title :override #'ignore)
+  (defun +nov-mode-setup ()
+    (face-remap-add-relative 'default :height 1.3)
+    (setq-local next-screen-context-lines 4
+                shr-use-colors nil)
+    (require 'visual-fill-column nil t)
+    (setq-local visual-fill-column-center-text t
+                visual-fill-column-width 81
+                nov-text-width 80)
+    (visual-fill-column-mode 1)
+    (add-to-list '+lookup-definition-functions #'+lookup/dictionary-definition)
+    (add-hook 'nov-mode-hook #'+nov-mode-setup)))
 #+end_src
+
+* Org
+** Org-Mode
+I really like org mode, I've given some thought to why, and below is the result.
+#+attr_latex: :align *{8}{p{0.105\linewidth}} :font \small
+| Format            | Fine-grained control | Initial ease of use | Syntax simplicity | Editor Support | Integrations | Ease-of-referencing | Versatility |
+|-------------------+----------------------+---------------------+-------------------+----------------+--------------+---------------------+-------------|
+| Word              |                    2 |                   4 |                 4 |              2 |            3 |                   2 |           2 |
+| LaTeX             |                    4 |                   1 |                 1 |              3 |            2 |                   4 |           3 |
+| Org Mode          |                    4 |                   2 |               3.5 |              1 |            4 |                   4 |           4 |
+| Markdown          |                    1 |                   3 |                 3 |              4 |            3 |                   3 |           1 |
+| Markdown + Pandoc |                  2.5 |                 2.5 |               2.5 |              3 |            3 |                   3 |           2 |
+
+
+Beyond the elegance in the markup language, tremendously rich integrations with
+Emacs allow for some fantastic [[https://orgmode.org/features.html][features]], such as what seems to be the best
+support for [[https://en.wikipedia.org/wiki/Literate_programming][literate programming]] of any currently available technology.
+
+I prefer /org as my directory. Lets change some other defaults too
+#+begin_src emacs-lisp
+(after! org
+  (setq org-directory "~/Documents/org/"          ; let's put files here
+        org-ellipsis "  ﬋"                        ; cute icon for folded org blocks
+        org-list-allow-alphabetical t             ; have a. A. a) A) list bullets
+        org-use-property-inheritance t            ; it's convenient to have properties inherited
+        org-catch-invisible-edits 'smart          ; try not to accidently do weird stuff in invisible regions
+        org-log-done 'time                        ; having the time a item is done sounds convenient
+        org-roam-directory "~/Documents/org/Notes/"))        ; same thing, for roam
+#+end_src
+
+And some extra fontification doesn't hurt
+#+begin_src emacs-lisp
+(after! org
+  (setq org-src-fontify-natively t
+        org-fontify-whole-heading-line t
+        org-inline-src-prettify-results '("⟨" . "⟩")
+        org-fontify-done-headline t
+        org-fontify-quote-and-verse-blocks t))
+#+end_src
+
+I want to slightly change the default args for babel
+#+begin_src emacs-lisp
+(after! org
+  (setq org-babel-default-header-args
+        '((:session . "none")
+          (:results . "replace")
+          (:exports . "code")
+          (:cache . "no")
+          (:noweb . "no")
+          (:hlines . "no")
+          (:tangle . "no")
+          (:comments . "link"))))
+#+end_src
+
+I also want to change the order of bullets
+#+begin_src emacs-lisp
+(after! org
+  (setq org-list-demote-modify-bullet '(("+" . "-") ("-" . "+") ("*" . "+") ("1." . "a."))))
+#+end_src
+
+And the default dashes and =+= signs just don't cut it anymore. Lets make them fancy bullets instead
+#+begin_src emacs-lisp
+(font-lock-add-keywords 'org-mode
+                        '(("^ *\\([-]\\) "
+                           (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+(font-lock-add-keywords 'org-mode
+                        '(("^ *\\([+]\\) "
+                           (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "◦"))))))
+#+end_src
+
+The =[[yt:...]]= links preview nicely, but don’t export nicely. Thankfully, we can fix that.
+#+begin_src emacs-lisp
+(after! ox
+  (org-link-set-parameters "yt" :export #'+org-export-yt)
+  (defun +org-export-yt (path desc backend _com)
+    (cond ((org-export-derived-backend-p backend 'html)
+           (format "<iframe width='440' \
+height='335' \
+src='https://www.youtube.com/embed/%s' \
+frameborder='0' \
+allowfullscreen>%s</iframe>" path (or "" desc)))
+          ((org-export-derived-backend-p backend 'latex)
+           (format "\\href{https://youtu.be/%s}{%s}" path (or desc "youtube")))
+          (t (format "https://youtu.be/%s" path)))))
+#+end_src
+
+*** HTML export
+Inspired by Tecosaur's amazing org-css, I wanted to make my own, but with fewer features and slightly cleaner overall.
+#+begin_src emacs-lisp
+(defun org-inline-css-hook (exporter)
+  "Insert custom inline css"
+  (when (eq exporter 'html)
+    (let* ((dir (ignore-errors (file-name-directory (buffer-file-name))))
+           (path (concat dir "style.css"))
+           (homestyle (or (null dir) (null (file-exists-p path))))
+           (final (if homestyle (expand-file-name "misc/org-css/style.css" doom-private-dir) path)))
+      (setq org-html-head-include-default-style nil)
+      (setq org-html-head (concat
+                           "<style type=\"text/css\">\n"
+                           "<!--/*--><![CDATA[/*><!--*/\n"
+                           (with-temp-buffer
+                             (insert-file-contents final)
+                             (buffer-string))
+                           "/*]]>*/-->\n"
+                           "</style>\n")))))
+
+(defun org-inline-js-hook (exporter)
+  "Insert custom inline css"
+  (when (eq exporter 'html)
+    (let* ((dir (ignore-errors (file-name-directory (buffer-file-name))))
+           (path (concat dir "style.js"))
+           (homestyle (or (null dir) (null (file-exists-p path))))
+           (final (if homestyle (expand-file-name "misc/org-css/style.js" doom-private-dir) path)))
+      (setq org-html-head-include-default-style nil)
+      (setq org-html-head (concat
+                          "<script type=\"text/javascript\">\n"
+                           "<!--/*--><![CDATA[/*><!--*/\n"
+                           (with-temp-buffer
+                             (insert-file-contents final)
+                             (buffer-string))
+                           "/*]]>*/-->\n"
+                           "</script>\n")))))
+
+(defun org-inline-html-hook (exporter)
+  "Insert custom inline css"
+  (when (eq exporter 'html)
+    (let* ((dir (ignore-errors (file-name-directory (buffer-file-name))))
+           (path (concat dir "style.html"))
+           (homestyle (or (null dir) (null (file-exists-p path))))
+           (final (if homestyle (expand-file-name "misc/org-css/style.html" doom-private-dir) path)))
+      (setq org-html-head-include-default-style nil)
+      (setq org-html-head (concat
+                           (with-temp-buffer
+                             (insert-file-contents final)
+                             (buffer-string))
+                           "\n")))))
+
+(add-hook 'org-export-before-processing-hook 'org-inline-css-hook)
+(add-hook 'org-export-before-processing-hook 'org-inline-js-hook)
+(add-hook 'org-export-before-processing-hook 'org-inline-html-hook)
+#+end_src
+
+If MathJax is used, we want to use version 3 instead of the default version 2.
+Looking at a [[https://www.intmath.com/cg5/katex-mathjax-comparison.php][comparison]] we seem to find that it is ~5 times as fast, uses a
+single file instead of multiple, but seems to be a bit bigger unfortunately.
+Thankfully this can be mitigated my adding the ~async~ attribute to defer loading.
 
 #+begin_src emacs-lisp
-(use-package! ob-http
-  :commands org-babel-execute:http)
-(use-package! org-chef
-  :commands (org-chef-insert-recipe org-chef-get-recipe-from-url))
-(use-package! org-super-agenda
-  :commands org-super-agenda-mode)
+(after! ox-html
+  (setq org-html-mathjax-options
+        '((path "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" )
+          (scale "1")
+          (autonumber "ams")
+          (multlinewidth "85%")
+          (tagindent ".8em")
+          (tagside "right")))
+
+  (setq org-html-mathjax-template
+        "<script>
+     MathJax = {
+       chtml: {
+         scale: %SCALE
+       },
+       svg: {
+         scale: %SCALE,
+         fontCache: \"global\"
+       },
+       tex: {
+         tags: \"%AUTONUMBER\",
+         multlineWidth: \"%MULTLINEWIDTH\",
+         tagSide: \"%TAGSIDE\",
+         tagIndent: \"%TAGINDENT\"
+       }
+     };
+     </script>
+     <script id=\"MathJax-script\" async
+             src=\"%PATH\"></script>"))
 #+end_src
 
-**** Set up org for success
-Basic settings
+And now to preview that export live
 #+begin_src emacs-lisp
-(setq org-directory "~/Documents/org"             ; let's put files here
-      org-use-property-inheritance t              ; it's convenient to have properties inherited
-      org-log-done 'time                          ; having the time a item is done sounds convenient
-      org-list-allow-alphabetical t               ; have a. A. a) A) list bullets
-      org-export-in-background t                  ; run export processes in external emacs process
-      org-catch-invisible-edits 'smart            ; try not to accidently do weird stuff in invisible regions
-      org-export-with-sub-superscripts '{})       ; don't treat lone _ / ^ as sub/superscripts, require _{} / ^{}
+(use-package! org-preview-html
+  :commands org-preview-html-mode
+  :config
+  (setq org-preview-html-refresh-configuration 'save
+        org-preview-html-viewer 'xwidget))
 #+end_src
 
-make :comments header arguments a default
+I like to preview images inline too
 #+begin_src emacs-lisp
-(setq org-babel-default-header-args
-      '((:session . "none")
-        (:results . "replace")
-        (:exports . "code")
-        (:cache . "no")
-        (:noweb . "no")
-        (:hlines . "no")
-        (:tangle . "no")
-        (:comments . "link")))
+(setq org-startup-with-inline-images t)
 #+end_src
 
-Disable ~visual-line-mode~ to prevent messing with tables.
-#+begin_src emacs-lisp
-(remove-hook 'text-mode-hook #'visual-line-mode)
-(add-hook 'text-mode-hook #'auto-fill-mode)
-#+end_src
-
-List bullet squence change with depth.
-#+begin_src emacs-lisp
-(setq org-list-demote-modify-bullet '(("+" . "-") ("-" . "+") ("*" . "+") ("1." . "a.")))
-#+end_src
-
-Enable flyspell in orgmode
-#+begin_src emacs-lisp
-(add-hook 'org-mode-hook 'turn-on-flyspell)
-#+end_src
-
-Enable LSP support in src blocks
-#+begin_src emacs-lisp
-(cl-defmacro lsp-org-babel-enable (lang)
-  "Support LANG in org source code block."
-  (setq centaur-lsp 'lsp-mode)
-  (cl-check-type lang stringp)
-  (let* ((edit-pre (intern (format "org-babel-edit-prep:%s" lang)))
-         (intern-pre (intern (format "lsp--%s" (symbol-name edit-pre)))))
-    `(progn
-       (defun ,intern-pre (info)
-         (let ((file-name (->> info caddr (alist-get :file))))
-           (unless file-name
-             (setq file-name (make-temp-file "babel-lsp-")))
-           (setq buffer-file-name file-name)
-           (lsp-deferred)))
-       (put ',intern-pre 'function-documentation
-            (format "Enable lsp-mode in the buffer of org source block (%s)."
-                    (upcase ,lang)))
-       (if (fboundp ',edit-pre)
-           (advice-add ',edit-pre :after ',intern-pre)
-         (progn
-           (defun ,edit-pre (info)
-             (,intern-pre info))
-           (put ',edit-pre 'function-documentation
-                (format "Prepare local buffer environment for org source block (%s)."
-                        (upcase ,lang))))))))
-(defvar org-babel-lang-list
-  '("go" "python" "ipython" "bash" "sh" "clojure"))
-(dolist (lang org-babel-lang-list)
-  (eval `(lsp-org-babel-enable ,lang)))
-#+end_src
-
-Setup Super Agenda
-#+begin_src emacs-lisp
-(after! org-agenda
-  (org-super-agenda-mode))
-
-(setq org-agenda-skip-scheduled-if-done t
-      org-agenda-skip-deadline-if-done t
-      org-agenda-include-deadlines t
-      org-agenda-block-separator nil
-      org-agenda-tags-column 100 ;; from testing this seems to be a good value
-      org-agenda-compact-blocks t)
-
-(setq org-agenda-custom-commands
-      '(("o" "Overview"
-         ((agenda "" ((org-agenda-span 'day)
-                      (org-super-agenda-groups
-                       '((:name "Today"
-                          :time-grid t
-                          :date today
-                          :todo "TODAY"
-                          :scheduled today
-                          :order 1)))))
-          (alltodo "" ((org-agenda-overriding-header "")
-                       (org-super-agenda-groups
-                        '((:name "Next to do"
-                           :todo "NEXT"
-                           :order 1)
-                          (:name "Important"
-                           :tag "Important"
-                           :priority "A"
-                           :order 6)
-                          (:name "Due Today"
-                           :deadline today
-                           :order 2)
-                          (:name "Due Soon"
-                           :deadline future
-                           :order 8)
-                          (:name "Overdue"
-                           :deadline past
-                           :face error
-                           :order 7)
-                          (:name "Assignments"
-                           :tag "Assignment"
-                           :order 10)
-                          (:name "Issues"
-                           :tag "Issue"
-                           :order 12)
-                          (:name "Emacs"
-                           :tag "Emacs"
-                           :order 13)
-                          (:name "Projects"
-                           :tag "Project"
-                           :order 14)
-                          (:name "Research"
-                           :tag "Research"
-                           :order 15)
-                          (:name "To read"
-                           :tag "Read"
-                           :order 30)
-                          (:name "Waiting"
-                           :todo "WAITING"
-                           :order 20)
-                          (:name "University"
-                           :tag "uni"
-                           :order 32)
-                          (:name "Trivial"
-                           :priority<= "E"
-                           :tag ("Trivial" "Unimportant")
-                           :todo ("SOMEDAY" )
-                           :order 90)
-                          (:discard (:tag ("Chore" "Routine" "Daily")))))))))))
-#+end_src
-
-*** Org Roam
-#+begin_src emacs-lisp :tangle packages.el
-(unpin! org-roam)
-(package! websocket)
-(package! org-roam-ui :recipe (:host github :repo "org-roam/org-roam-ui" :files ("*.el" "out")))
-#+end_src
-
+** Org-Roam
+Lets set up =org-roam-ui=
 #+begin_src emacs-lisp
 (use-package! websocket
   :after org-roam)
@@ -1018,280 +1694,88 @@ Setup Super Agenda
 (use-package! org-roam-ui
   :after org-roam
   :commands org-roam-ui-open
-  :hook (org-roam . org-roam-ui-mode)
   :config
-  (require 'org-roam) ; in case autoloaded
-  (defun org-roam-ui-open ()
-    "Ensure the server is active, then open the roam graph."
-    (interactive)
-    (unless org-roam-ui-mode (org-roam-ui-mode 1))
-    (browse-url-xdg-open (format "http://localhost:%d" org-roam-ui-port))))
+  (setq org-roam-ui-sync-theme t
+        org-roam-ui-follow t
+        org-roam-ui-update-on-save t
+        org-roam-ui-open-on-start t))
 #+end_src
 
-Basic Org Roam settings.
+Now, I want to replace the org-roam buffer with org-roam-ui, to do that, we need
+to disable the regular buffer
 #+begin_src emacs-lisp
-(setq org-roam-directory "~/Documents/org/Notes/")
+(after! org-roam
+  (setq +org-roam-open-buffer-on-find-file nil))
 #+end_src
 
-Remove all those numbers
+** Org-Agenda
+Set the directory
 #+begin_src emacs-lisp
-(defadvice! doom-modeline--buffer-file-name-roam-aware-a (orig-fun)
-  :around #'doom-modeline-buffer-file-name ; takes no args
-  (if (s-contains-p org-roam-directory (or buffer-file-name ""))
-      (replace-regexp-in-string
-       "\\(?:^\\|.*/\\)\\([0-9]\\{4\\}\\)\\([0-9]\\{2\\}\\)\\([0-9]\\{2\\}\\)[0-9]*-"
-       "🢔(\\1-\\2-\\3) "
-       (subst-char-in-string ?_ ?  buffer-file-name))
-    (funcall orig-fun)))
+(after! org-agenda
+  (setq org-agenda-files (list "~/Documents/org/work.org"
+                               "~/Documents/org/todo.org"))
+  (setq org-agenda-window-setup 'current-window
+        org-agenda-restore-windows-after-quit t
+        org-agenda-show-all-dates nil
+        org-agenda-time-in-grid t
+        org-agenda-show-current-time-in-grid t
+        org-agenda-start-on-weekday 1
+        org-agenda-span 7
+        org-agenda-tags-column 0
+        org-agenda-block-separator nil
+        org-agenda-category-icon-alist nil
+        org-agenda-sticky t)
+  (setq org-agenda-prefix-format
+        '((agenda . "%i %?-12t%s")
+          (todo .   "%i")
+          (tags .   "%i")
+          (search . "%i")))
+  (setq org-agenda-sorting-strategy
+        '((agenda deadline-down scheduled-down todo-state-up time-up
+                  habit-down priority-down category-keep)
+          (todo   priority-down category-keep)
+          (tags   timestamp-up priority-down category-keep)
+          (search category-keep))))
 #+end_src
 
-Translate Capital Keywords (Old) to Lower Case (New)
+** Font Display
+It seems reasonable to have deadlines in the error face when they're passed.
 #+begin_src emacs-lisp
-(defun org-syntax-convert-keyword-case-to-lower ()
-  "Convert all #+KEYWORDS to #+keywords."
-  (interactive)
-  (save-excursion
-    (goto-char (point-min))
-    (let ((count 0)
-          (case-fold-search nil))
-      (while (re-search-forward "^[ \t]*#\\+[A-Z_]+" nil t)
-        (unless (s-matches-p "RESULTS" (match-string 0))
-          (replace-match (downcase (match-string 0)) t)
-          (setq count (1+ count))))
-      (message "Replaced %d occurances" count))))
+(after! org
+  (setq org-agenda-deadline-faces
+        '((1.0 . error)
+          (1.0 . org-warning)
+          (0.5 . org-upcoming-deadline)
+          (0.0 . org-upcoming-distant-deadline))))
 #+end_src
 
-*** Org Visual Settings
-Setting specific to org mode.
+And lets conceal *those* /syntax/ +markers+.
 #+begin_src emacs-lisp
-(add-hook 'org-mode-hook #'+org-pretty-mode)
+(use-package! org-appear
+  :after org
+  :hook (org-mode . org-appear-mode)
+  :config
+  (setq org-appear-autoemphasis t
+        org-appear-autolinks t
+        org-appear-autosubmarkers t))
 #+end_src
 
-Make headlines a bit bigger
+*** (sub|super)script characters
+Annoying having to gate these, so let's fix that
 #+begin_src emacs-lisp
-(custom-set-faces!
-  '(outline-1 :weight extra-bold :height 1.25)
-  '(outline-2 :weight bold :height 1.15)
-  '(outline-3 :weight bold :height 1.12)
-  '(outline-4 :weight semi-bold :height 1.09)
-  '(outline-5 :weight semi-bold :height 1.06)
-  '(outline-6 :weight semi-bold :height 1.03)
-  '(outline-8 :weight semi-bold)
-  '(outline-9 :weight semi-bold))
+(setq org-export-with-sub-superscripts '{})
 #+end_src
 
-Make titles bigger as well.
+*** Make verbatim different to code
+=verbatim= use ~verb~ instead of ~protectedtexttt~ (default).
 #+begin_src emacs-lisp
-(custom-set-faces!
-  '(org-document-title :height 1.2))
+(after! org
+  (setq org-latex-text-markup-alist
+        '((bold . "\\textbf{%s}")
+          (code . protectedtexttt)
+          (italic . "\\emph{%s}")
+          (strike-through . "\\sout{%s}")
+          (underline . "\\uline{%s}")
+          (verbatim . verb))))
 #+end_src
 
-If a deadline has passed, show it with the error face.
-#+begin_src emacs-lisp
-(setq org-agenda-deadline-faces
-      '((1.001 . error)
-        (1.0 . org-warning)
-        (0.5 . org-upcoming-deadline)
-        (0.0 . org-upcoming-distant-deadline)))
-#+end_src
-
-Have quote blocks stand out more.
-#+begin_src emacs-lisp
-(setq org-fontify-quote-and-verse-blocks t)
-#+end_src
-
-Defer font lock
-#+begin_src emacs-lisp
-(defun locally-defer-font-lock ()
-  "Set jit-lock defer and stealth, when buffer is over a certain size."
-  (when (> (buffer-size) 50000)
-    (setq-local jit-lock-defer-time 0.05
-                jit-lock-stealth-time 1)))
-
-(add-hook 'org-mode-hook #'locally-defer-font-lock)
-#+end_src
-
-Symbols
-#+begin_src emacs-lisp
-(after! org-superstar
-  (setq org-superstar-headline-bullets-list '("◉" "○" "✸" "✿" "✤" "✜" "◆" "▶")
-        org-superstar-prettify-item-bullets t ))
-
-(setq org-ellipsis " ▾ "
-      org-hide-leading-stars t
-      org-priority-highest ?A
-      org-priority-lowest ?E
-      org-priority-faces
-      '((?A . 'all-the-icons-red)
-        (?B . 'all-the-icons-orange)
-        (?C . 'all-the-icons-yellow)
-        (?D . 'all-the-icons-green)
-        (?E . 'all-the-icons-blue)))
-#+end_src
-
-** Visual Settings
-*** Font
-'JuliaMono' is my go to font.
-#+begin_src emacs-lisp
-(setq
- doom-font (font-spec :family "JuliaMono" :size 16)
- doom-big-font (font-spec :family "JuliaMono" :size 24)
- doom-variable-pitch-font (font-spec :family "JuliaMono" :size 16)
- doom-serif-font (font-spec :family "JuliaMono" :weight 'light))
-#+end_src
-
-*** Colorscheme
-Currently set to use Lambda Themes, beautiful themes inspired by Nano Emacs
-
-This will automatically switch betwen light and dark themes, based on my system. This requires
-d12frosted/emacs-mac-plus (min version 28).
-#+begin_src emacs-lisp
-(defun my/apply-theme (appearance)
-  "Load theme, taking current system APPEARANCE into consideration."
-  (mapc #'disable-theme custom-enabled-themes)
-  (pcase appearance
-    ('light (load-theme 'lambda-light t))
-    ('dark (load-theme 'lambda-dark t))))
-
-(add-hook 'ns-system-appearance-change-functions #'my/apply-theme)
-#+end_src
-
-*** Modeline
-
-~LF UTF-8~ is the default file encoding, we don't need to see it in the modeline when editing files.
-#+begin_src emacs-lisp
-(defun doom-modeline-conditional-buffer-encoding ()
-  (setq-local doom-modeline-buffer-encoding
-        (unless (and (memq (plist-get (coding-system-plist buffer-file-coding-system) :category)
-                           '(coding-category-undecided coding-category-utf-8))
-                     (not (memq (coding-system-eol-type buffer-file-coding-system) '(1 2))))
-          t)))
-
-(add-hook 'after-change-major-mode-hook #'doom-modeline-conditional-buffer-encoding)
-#+end_src
-
-*** Window Title
-
-Have just the buffer name, but if I'm in a project, also have the folder name.
-#+begin_src emacs-lisp
-(setq frame-title-format
-      '(""
-        (:eval
-         (if (s-contains-p org-roam-directory (or buffer-file-name ""))
-             (replace-regexp-in-string
-              ".*/[0-9]*-?" "☰ "
-              (subst-char-in-string ?_ ?  buffer-file-name))
-           "%b"))
-        (:eval
-         (let ((project-name (projectile-project-name)))
-           (unless (string= "-" project-name)
-             (format (if (buffer-modified-p)  " ◉ %s" "  ●  %s") project-name))))))
-#+end_src
-
-*** Splash Screen
-#+begin_src emacs-lisp
-(defvar fancy-splash-image-template
-  (expand-file-name "misc/splash-images/emacs-e-template.svg" doom-private-dir)
-  "Default template svg used for the splash image, with substitutions from ")
-
-(defvar fancy-splash-sizes
-  `((:height 300 :min-height 50 :padding (0 . 2))
-    (:height 250 :min-height 42 :padding (2 . 4))
-    (:height 200 :min-height 35 :padding (3 . 3))
-    (:height 150 :min-height 28 :padding (3 . 3))
-    (:height 100 :min-height 20 :padding (2 . 2))
-    (:height 75  :min-height 15 :padding (2 . 1))
-    (:height 50  :min-height 10 :padding (1 . 0))
-    (:height 1   :min-height 0  :padding (0 . 0)))
-  "list of plists with the following properties
-  :height the height of the image
-  :min-height minimum `frame-height' for image
-  :padding `+doom-dashboard-banner-padding' (top . bottom) to apply
-  :template non-default template file
-  :file file to use instead of template")
-
-(defvar fancy-splash-template-colours
-  '(("$colour1" . keywords) ("$colour2" . type) ("$colour3" . base5) ("$colour4" . base8))
-  "list of colour-replacement alists of the form (\"$placeholder\" . 'theme-colour) which applied the template")
-
-(unless (file-exists-p (expand-file-name "theme-splashes" doom-cache-dir))
-  (make-directory (expand-file-name "theme-splashes" doom-cache-dir) t))
-
-(defun fancy-splash-filename (theme-name height)
-  (expand-file-name (concat (file-name-as-directory "theme-splashes")
-                            theme-name
-                            "-" (number-to-string height) ".svg")
-                    doom-cache-dir))
-
-(defun fancy-splash-clear-cache ()
-  "Delete all cached fancy splash images"
-  (interactive)
-  (delete-directory (expand-file-name "theme-splashes" doom-cache-dir) t)
-  (message "Cache cleared!"))
-
-(defun fancy-splash-generate-image (template height)
-  "Read TEMPLATE and create an image if HEIGHT with colour substitutions as
-   described by `fancy-splash-template-colours' for the current theme"
-  (with-temp-buffer
-    (insert-file-contents template)
-    (re-search-forward "$height" nil t)
-    (replace-match (number-to-string height) nil nil)
-    (dolist (substitution fancy-splash-template-colours)
-      (goto-char (point-min))
-      (while (re-search-forward (car substitution) nil t)
-        (replace-match (doom-color (cdr substitution)) nil nil)))
-    (write-region nil nil
-                  (fancy-splash-filename (symbol-name doom-theme) height) nil nil)))
-
-(defun fancy-splash-generate-images ()
-  "Perform `fancy-splash-generate-image' in bulk"
-  (dolist (size fancy-splash-sizes)
-    (unless (plist-get size :file)
-      (fancy-splash-generate-image (or (plist-get size :template)
-                                       fancy-splash-image-template)
-                                   (plist-get size :height)))))
-
-(defun ensure-theme-splash-images-exist (&optional height)
-  (unless (file-exists-p (fancy-splash-filename
-                          (symbol-name doom-theme)
-                          (or height
-                              (plist-get (car fancy-splash-sizes) :height))))
-    (fancy-splash-generate-images)))
-
-(defun get-appropriate-splash ()
-  (let ((height (frame-height)))
-    (cl-some (lambda (size) (when (>= height (plist-get size :min-height)) size))
-             fancy-splash-sizes)))
-
-(setq fancy-splash-last-size nil)
-(setq fancy-splash-last-theme nil)
-(defun set-appropriate-splash (&rest _)
-  (let ((appropriate-image (get-appropriate-splash)))
-    (unless (and (equal appropriate-image fancy-splash-last-size)
-                 (equal doom-theme fancy-splash-last-theme)))
-    (unless (plist-get appropriate-image :file)
-      (ensure-theme-splash-images-exist (plist-get appropriate-image :height)))
-    (setq fancy-splash-image
-          (or (plist-get appropriate-image :file)
-              (fancy-splash-filename (symbol-name doom-theme) (plist-get appropriate-image :height))))
-    (setq +doom-dashboard-banner-padding (plist-get appropriate-image :padding))
-    (setq fancy-splash-last-size appropriate-image)
-    (setq fancy-splash-last-theme doom-theme)
-    (+doom-dashboard-reload)))
-
-(add-hook 'window-size-change-functions #'set-appropriate-splash)
-(add-hook 'doom-load-theme-hook #'set-appropriate-splash)
-#+end_src
-
-And disable the "doom usefull commands section"
-#+begin_src emacs-lisp
-(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
-(add-hook! '+doom-dashboard-mode-hook (hide-mode-line-mode 1) (hl-line-mode -1))
-(setq-hook! '+doom-dashboard-mode-hook evil-normal-state-cursor (list nil))
-#+end_src
-
-*** Emojify
-Use Twitter's emojis instead of the default ones.
-#+begin_src emacs-lisp
-(setq emojify-emoji-set "twemoji-v2")
-#+end_src
