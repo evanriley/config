@@ -8,8 +8,7 @@ return require('packer').startup(function()
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/nvim-cmp'
-  -- Deprecated 
-  -- use 'hrsh7th/nvim-compe'
+  -- use 'hrsh7th/nvim-compe' -- Deprecated --
 
 	-- Editor cstuff
 	use 'windwp/nvim-autopairs'
@@ -51,6 +50,11 @@ return require('packer').startup(function()
 	-- Themes
 	use 'folke/tokyonight.nvim'
 
+  -- Stuff?
+  use 'tpope/vim-dispatch'
+  use 'radenling/vim-dispatch-neovim'
+  use 'clojure-vim/vim-jack-in'
+
   -- Terminals, amirite?
   use 'voldikss/vim-floaterm'
 
@@ -62,6 +66,10 @@ return require('packer').startup(function()
   use {
       'eraserhd/parinfer-rust',
       run = 'cargo build --release'
+  }
+  use  {
+      'Olical/conjure',
+      tag = 'v4.24.1'
   }
 
 end)

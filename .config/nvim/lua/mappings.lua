@@ -57,7 +57,8 @@ map('n', '<leader>bl', ':bl<CR>', { noremap = true })
 map('n', '<leader>bd', ':bd<CR>', { noremap = true })
 
 -- telescope pullup
-map('n', '<leader>ff', ':Telescope find_files<CR>', { noremap = true })
+map('n', '<leader>ff', ':Telescope git_files<CR>', { noremap = true })
+map('n', '<leader>fd', ':Telescope find_files<CR>', { noremap = true })
 map('n', '<leader>fF', ':Telescope file_browser<CR>', { noremap = true })
 map('n', '<leader>fg', ':Telescope git_commits<CR>', { noremap = true })
 map('n', '<leader>fG', ':Telescope git_branches<CR>', { noremap = true })
