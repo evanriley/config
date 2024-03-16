@@ -2,7 +2,7 @@
 
 # whatever you want to autostart
 autorandr -l default &
-picom &
+picom --experimental-backends &
 sxhkd &
 
 # bar & dwm, required...
