@@ -52,10 +52,5 @@
 (package! org-fancy-priorities)
 (package! org-super-agenda)
 (package! rotate)
-(unpin! parinfer-rust-mode)
 (package! pinentry)
 (package! direnv)
-;; (package! tree-sitter)
-;; (package! tree-sitter-langs)
-;; :Sadge: maybe one day this will work on macos.
-;; (package! screenshot :recipe (:host github :repo "tecosaur/screenshot" :build (:not compile)))
