@@ -53,3 +53,6 @@
 (package! org-super-agenda)
 (package! rotate)
 (package! parinfer-rust-mode)
+(package! pinentry)
+;; (package! tree-sitter)
+;; (package! tree-sitter-langs)
