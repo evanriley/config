@@ -49,14 +49,14 @@ return require('packer').startup(function()
     })
 
     use 'nvim-lua/lsp-status.nvim'
-    use ({
-      "onsails/lspkind-nvim",
-      config = function()
-        require("lspkind").init({
-          with_text = true,
-        })
-      end
-    })
+    -- use ({
+    --   "onsails/lspkind-nvim",
+    --   config = function()
+    --     require("lspkind").init({
+    --       with_text = true,
+    --     })
+    --   end
+    -- })
 
     use({
         "folke/trouble.nvim",
@@ -360,7 +360,11 @@ return require('packer').startup(function()
       'simrat39/rust-tools.nvim',
       ft = {"rust"},
       config = function()
-        require('rust-tools').setup({})
+        require('rust-tools').setup({
+          tools = {
+            autoSetHints = false,
+        },
+      })
       end,
     })
 
