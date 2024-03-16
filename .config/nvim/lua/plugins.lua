@@ -13,6 +13,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
     execute("packadd packer.nvim")
 end
 
+
 -- Autocompile
 vim.cmd([[
   augroup packer_user_config
@@ -37,30 +38,8 @@ return require('packer').startup(function()
     use 'nathom/filetype.nvim'
 
     ----------------------------------------
-    -- LSP, Copmletions and related items --
+    -- LSP, Completions and related items --
     ----------------------------------------
-    use({
-      "ms-jpq/coq_nvim",
-      branch = "coq",
-    })
-
-    use({
-      "ms-jpq/coq.artifacts",
-      branch = "artifacts",
-    })
-
-    use({
-      "ms-jpq/coq.thirdparty",
-      branch = "3p",
-      config = function()
-        require("coq_3p")({
-          { src = "nvimlua", short_name = "nLUA"},
-          { src = "bc", short_name = "MATH", precision = 6},
-          { src = "figlet", short_name = "BIG"},
-          { src = "dap"}
-        })
-      end,
-    })
 
     use({
 	    'neovim/nvim-lspconfig',
@@ -97,6 +76,58 @@ return require('packer').startup(function()
     use({
       "jose-elias-alvarez/nvim-lsp-ts-utils",
     })
+
+    -- nvim-cmp completion
+    -- use({ "hrsh7th/cmp-nvim-lsp" })
+    -- use({ "hrsh7th/cmp-buffer" })
+    -- use({ "hrsh7th/cmp-path" })
+    -- use({ "hrsh7th/cmp-cmdline" })
+    -- use({
+    --   "tzachar/cmp-tabnine",
+    --   run = "./install.sh",
+    --   requires = "hrsh7th/nvim-cmp"
+    -- })
+    --
+    -- use({
+    --   "hrsh7th/nvim-cmp",
+    --   config = function()
+    --     require("plugins.cmp")
+    --   end,
+    -- })
+    --
+    -- use({ "rafamadriz/friendly-snippets" })
+    -- use({
+    --   "L3MON4D3/LuaSnip",
+    --   config = function()
+    --     require("luasnip/loaders/from_vscode").load({ paths = { "~/.local/share/nvim/site/pack/packer/start/friendly-snippets" } })
+    --   end,
+    -- })
+    -- use({ "saadparwaiz1/cmp_luasnip" })
+
+    -- Coq completion
+    use({
+      "ms-jpq/coq_nvim",
+      branch = "coq",
+    })
+
+    use({
+      "ms-jpq/coq.artifacts",
+      branch = "artifacts",
+    })
+
+    use({
+      "ms-jpq/coq.thirdparty",
+      branch = "3p",
+      config = function()
+        require("coq_3p")({
+          { src = "nvimlua", short_name = "nLUA"},
+          { src = "bc", short_name = "MATH", precision = 6},
+          { src = "figlet", short_name = "BIG"},
+          { src = "dap"}
+        })
+      end,
+    })
+
 
     --------------------------------
     -- Fuzzy Finders and what not --
@@ -198,7 +229,6 @@ return require('packer').startup(function()
     ------------------------
     use({
 	    "windwp/nvim-autopairs",
-	    after = {"hop", "coq_nvim"},
 	    config = function()
 	      require("plugins.autopairs")
       end,
@@ -245,7 +275,6 @@ return require('packer').startup(function()
 
     use({ "rhysd/git-messenger.vim" })
     use({ "p00f/nvim-ts-rainbow" })
-
 
     use({ "tpope/vim-dispatch" })
     use({ "radenling/vim-dispatch-neovim" })
