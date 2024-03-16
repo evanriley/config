@@ -8,11 +8,11 @@ yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 yabai -m config layout bsp
 
 
-yabai -m config top_padding 20
-yabai -m config bottom_padding 20
-yabai -m config left_padding 20
-yabai -m config right_padding 20
-yabai -m config window_gap 20
+yabai -m config top_padding 10
+yabai -m config bottom_padding 10
+yabai -m config left_padding  10
+yabai -m config right_padding 10
+yabai -m config window_gap 10
 
 yabai -m config mouse_follows_focus on
 # yabai -m config focus_follows_mouse autoraise
@@ -33,8 +33,8 @@ yabai -m space 3 --label general
 yabai -m space 4 --label notes
 yabai -m space 5 --label media
 yabai -m space 6 --label games
-yabai -m space 7 --label social
-yabai -m space 8 --label web
+yabai -m space 7 --label web
+yabai -m space 8 --label social
 
 yabai -m config --space mail layout stack
 yabai -m config --space games layout float
