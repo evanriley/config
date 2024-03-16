@@ -3,6 +3,7 @@ if status is-interactive
 end
 
 set -gx PATH ~/bin $NPM_PACKAGES/bin ~/.cargo/bin ~/.emacs.d/bin $PATH
+set -gx GPG_TTY (tty)
 
 set -g fish_greeting
 
