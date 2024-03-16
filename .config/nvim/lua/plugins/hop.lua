@@ -17,4 +17,4 @@ local function _3_()
   nvim.set_keymap("x", "<C-s>", "<cmd>lua require'hop'.hint_char2()<cr>", {noremap = true})
   return nvim.set_keymap("o", "<C-x>", "<cmd>lua require'hop'.hint_char2()<cr>", {noremap = true})
 end
-return {{"phaazon/hop.nvim", lazy = true, event = "BufReadPost", config = _2_, init = _3_}}
+return {{"phaazon/hop.nvim", lazy = true, event = "BufReadPost", config = _2_, init = _3_, enabled = false}}

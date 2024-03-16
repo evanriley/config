@@ -4,6 +4,7 @@
 [{1 :phaazon/hop.nvim
   :lazy true
   :event "BufReadPost"
+  :enabled false
   :config (fn []
             (let [hop (require :hop)]
               (hop.setup {:teasing false})))
