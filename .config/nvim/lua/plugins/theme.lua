@@ -3,8 +3,8 @@ local _local_1_ = require("nfnl.module")
 local autoload = _local_1_["autoload"]
 local nvim = autoload("nvim")
 local function _2_()
-  local theme = require("no-clown-fiesta")
-  theme.setup({transparent = false})
-  return vim.cmd("colorscheme no-clown-fiesta")
+  local theme = require("kanagawa")
+  theme.setup({theme = "wave", background = {dark = "wave", light = "lotus"}, undercurl = false})
+  return vim.cmd("colorscheme kanagawa")
 end
-return {{"no-clown-fiesta/no-clown-fiesta.nvim", priority = 1000, config = _2_, lazy = false}}
+return {{"rebelot/kanagawa.nvim", priority = 1000, name = "kanagawa", config = _2_, lazy = false}}

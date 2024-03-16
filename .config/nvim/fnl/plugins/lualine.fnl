@@ -15,7 +15,7 @@
   :config (fn []
             (let [lualine (require :lualine)]
               (lualine.setup
-                {:options {:theme "no-clown-fiesta"
+                {:options {:theme "kanagawa"
                            :icons_enabled true
                            :section_separators ["" ""]
                            :component_separators ["" ""]}
