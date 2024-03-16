@@ -1,0 +1,17 @@
+#+title: Doom Emacs Config
+#+author: evanriley
+
+Here is my emacs config. literate-ized(?)
+
+
+* Installation
+
+This should NOT be copied Things WILL break, and I am not smart enough to help you fix them.
+
+In order for this to work, you need to generate the =init.el= at least once.
+
+#+begin_src shell :eval query
+# Install doom emacs
+emacs --batch --eval "(progn (require 'org) (setq org-confirm-babel-evaluate nil) (org-babel-tangle-file \"~/.doom.d/config.org\"))"
+doom install
+#+end_src
