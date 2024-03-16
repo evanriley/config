@@ -48,3 +48,8 @@ alias l='lsd -l'
 alias ll='lsd -l | less'
 alias la='lsd -la'
 alias cat='bat'
+
+# tidy
+alias tidy=/opt/homebrew/bin/tidy
+
+starship init fish | source

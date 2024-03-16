@@ -54,5 +54,6 @@
 (package! rotate)
 (package! parinfer-rust-mode)
 (package! pinentry)
+(package! direnv)
 ;; (package! tree-sitter)
 ;; (package! tree-sitter-langs)
