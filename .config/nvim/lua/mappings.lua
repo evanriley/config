@@ -39,10 +39,10 @@ map('n', '<leader>ya', ':%y+<CR>', opt) -- Copy content of entire buffer to syst
 map('n', '<leader>yl', '"+yy', opt) -- yank current line into system clipboard
 
 -- completion keybinds
-map('i', '<Tab>', 'v:lua.tab_complete()', { expr = true })
-map('s', '<Tab>', 'v:lua.tab_complete()', { expr = true })
-map('i', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
-map('s', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
+-- map('i', '<Tab>', 'v:lua.tab_complete()', { expr = true })
+-- map('s', '<Tab>', 'v:lua.tab_complete()', { expr = true })
+-- map('i', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
+-- map('s', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
 
 -- Easily reachable Packer commands
 map('n', '<localleader>pu', ':PackerUpdate<cr>', opt)
@@ -57,9 +57,10 @@ map('n', '<leader>bl', ':bl<CR>', { noremap = true })
 map('n', '<leader>bd', ':bd<CR>', { noremap = true })
 
 -- Neogit
-map('n', '<leader>gg', ':Neogit<CR>', {noremap = true})
-map('n', '<leader>gl', ':Neogit log<CR>', {noremap = true})
-map('n', '<leader>gp', ':Neogit push<CR>', {noremap = true})
+-- map('n', '<leader>gg', ':Neogit<CR>', {noremap = true})
+-- map('n', '<leader>gl', ':Neogit log<CR>', {noremap = true})
+-- map('n', '<leader>gp', ':Neogit push<CR>', {noremap = true})
+
 -- telescope pullup
 map('n', '<leader>ff', ':Telescope git_files<CR>', { noremap = true })
 map('n', '<leader>fd', ':Telescope find_files<CR>', { noremap = true })

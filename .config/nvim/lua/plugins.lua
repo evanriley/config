@@ -40,10 +40,10 @@ return require('packer').startup(function()
 	  		'lewis6991/gitsigns.nvim',
 	  		requires = { 'nvim-lua/plenary.nvim'} 
 	}
-  use {
-      'TimUntersberger/neogit',
-      requires = 'nvim-lua/plenary.nvim'
-  }
+  -- use {
+  --     'TimUntersberger/neogit',
+  --     requires = 'nvim-lua/plenary.nvim'
+  -- }
 	use 'phaazon/hop.nvim'
   use 'machakann/vim-sandwich'
 
