@@ -2,7 +2,7 @@
 local function _1_()
   do
     local treesitter = require("nvim-treesitter.configs")
-    treesitter.setup({highlight = {enable = true}, indent = {enable = true}, ensure_installed = "all", autotag = {enable = true}, endwise = {enable = true}, contet_commentstring = {enable = true}})
+    treesitter.setup({highlight = {enable = true}, indent = {enable = true}, ensure_installed = "all", autotag = {enable = true}, endwise = {enable = true}, context_commentstring = {enable = true}})
   end
   local treesitter_context = require("treesitter-context")
   return treesitter_context.setup({enable = true})

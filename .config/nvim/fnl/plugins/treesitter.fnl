@@ -13,6 +13,6 @@
                                  :ensure_installed :all
                                  :autotag {:enable true}
                                  :endwise {:enable true}
-                                 :contet_commentstring {:enable true}}))
+                                 :context_commentstring {:enable true}}))
             (let [treesitter-context (require :treesitter-context)]
               (treesitter-context.setup {:enable true})))}]
