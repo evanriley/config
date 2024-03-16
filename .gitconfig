@@ -45,7 +45,7 @@
   ui = true
 [core]
   excludesfile = /Users/evan/.gitignore
-  editor = nvim
+  editor = emacsclient -c -a emacs
 [apply]
   whitespace = fix
 [mergetool]
@@ -55,19 +55,15 @@
 [help]
   autocorrect = 1
 [push]
-  # See `git help config` (search for push.default)
-  # for more information on different options of the below setting.
-  #
-  # Setting to git 2.0 default to suppress warning message
   default = simple
 [user]
-	name = Evan Riley
-	email = evan@evanriley.net
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO2YujIPUDxQV13gJ5Ygg2C39kguFxbsE2QzDlFGN9Du
+  name = Evan Riley
+  email = evan@evanriley.net
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO2YujIPUDxQV13gJ5Ygg2C39kguFxbsE2QzDlFGN9Du
 [commit]
   gpgsign = true
 [gpg]
-	format = ssh
+  format = ssh
 [credential]
   helper = osxkeychain
 [difftool "nvimdiff"]
@@ -84,6 +80,6 @@
 [fetch]
   prune = true
 [branch]
-	autosetupRebase = always
+  autosetupRebase = always
 [github]
-	user = evanriley
+  user = evanriley
