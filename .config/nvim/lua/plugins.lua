@@ -21,6 +21,8 @@ vim.cmd([[
   augroup end
 ]])
 
+
+require("plugins.coq") -- I need these settings to load before anything else.
 require("packer").init({
 	max_jobs = 50,
 })
@@ -39,9 +41,6 @@ return require('packer').startup(function()
     use ({
 	    'ms-jpq/coq_nvim',
 	    branch = 'coq',
-	    config = function()
-		    require("plugins.coq")
-	    end,
     })
     use({
 	    'ms-jpq/coq.artifacts',

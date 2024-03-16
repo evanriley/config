@@ -1,5 +1,5 @@
 vim.g.coq_settings = {
-  clients = {
-    tabnine = true,
-  }
+  ["auto_start"] = "shut-up",
+  ["display.icons.mode"] = "short",
+  ["clients.tabnine.enabled"] = true
 }
