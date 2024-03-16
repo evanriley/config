@@ -1,7 +1,6 @@
 FROM opensuse/tumbleweed:latest
-RUN zypper clean --all
-RUN zypper update
-RUN zypper --non-interactive install git curl sudo shadow
+RUN zypper update -y
+RUN zypper --non-interactive install git curl sudo shadow -y
 RUN groupadd wheel
 RUN useradd --create-home --shell /bin/bash cirun
 RUN gpasswd -a cirun wheel
