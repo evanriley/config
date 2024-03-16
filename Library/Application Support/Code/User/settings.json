@@ -151,5 +151,10 @@
     "editor.accessibilitySupport": "off",
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
-    "gopls": { "ui.semanticTokens": true }
+    "gopls": {
+      "ui.semanticTokens": true
+    },
+    "rust-analyzer.lens.enable": false,
+    "rust-analyzer.inlayHints.chainingHints.enable": false,
+    "editor.inlayHints.enabled": false
 }
