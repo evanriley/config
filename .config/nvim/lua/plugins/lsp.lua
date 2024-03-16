@@ -20,7 +20,7 @@ local function _2_()
   local cmplsp = require("cmp_nvim_lsp")
   local mason = require("mason")
   local mason_lspconfig = require("mason-lspconfig")
-  local handlers = {["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {severity_sort = true, update_in_insert = true, underline = true, virtual_text = false}), ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {border = "single"}), ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {border = "single"})}
+  local handlers = {["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {severity_sort = true, update_in_insert = true, underline = true, virtual_text = true}), ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {border = "single"}), ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {border = "single"})}
   local capabilities = cmplsp.default_capabilities()
   local before_init
   local function _3_(params)
@@ -44,14 +44,14 @@ local function _2_()
     nvim.buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", {noremap = true})
     nvim.buf_set_keymap(bufnr, "v", "<leader>la", "<cmd>lua vim.lsp.buf.range_code_action()<CR> ", {noremap = true})
     nvim.buf_set_keymap(bufnr, "n", "<leader>lw", ":lua require('telescope.builtin').diagnostics()<cr>", {noremap = true})
-    nvim.buf_set_keymap(bufnr, "n", "<leader>lr", ":lua require('telescope.builtin').lsp_references()<cr>", {noremap = true})
-    return nvim.buf_set_keymap(bufnr, "n", "<leader>li", ":lua require('telescope.builtin').lsp_implementations()<cr>", {noremap = true})
+    nvim.buf_set_keymap(bufnr, "n", "gr", ":lua require('telescope.builtin').lsp_references()<cr>", {noremap = true})
+    return nvim.buf_set_keymap(bufnr, "n", "gI", ":lua require('telescope.builtin').lsp_implementations()<cr>", {noremap = true})
   end
   on_attach = _4_
   mason.setup({})
   mason_lspconfig.setup({ensure_installed = servers})
   for _, server in ipairs(servers) do
-    lsp[server].setup({on_attach = on_attach, before_init = before_init, handlers = handlers, capabilities = capabilities})
+    lsp[server].setup({on_attach = lsp_format.on_attach, before_init = before_init, handlers = handlers, capabilities = capabilities})
   end
   return nil
 end

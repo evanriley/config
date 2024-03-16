@@ -34,7 +34,7 @@
                               {:severity_sort true
                                :update_in_insert true
                                :underline true
-                               :virtual_text false})
+                               :virtual_text true})
                             "textDocument/hover"
                             (vim.lsp.with
                               vim.lsp.handlers.hover
@@ -63,13 +63,13 @@
                                 (nvim.buf_set_keymap bufnr :v :<leader>la "<cmd>lua vim.lsp.buf.range_code_action()<CR> " {:noremap true})
                                 ;telescope
                                 (nvim.buf_set_keymap bufnr :n :<leader>lw ":lua require('telescope.builtin').diagnostics()<cr>" {:noremap true})
-                                (nvim.buf_set_keymap bufnr :n :<leader>lr ":lua require('telescope.builtin').lsp_references()<cr>" {:noremap true})
-                                (nvim.buf_set_keymap bufnr :n :<leader>li ":lua require('telescope.builtin').lsp_implementations()<cr>" {:noremap true})))]
+                                (nvim.buf_set_keymap bufnr :n :gr ":lua require('telescope.builtin').lsp_references()<cr>" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :n :gI ":lua require('telescope.builtin').lsp_implementations()<cr>" {:noremap true})))]
 
               (mason.setup {})
               (mason-lspconfig.setup {:ensure_installed servers})
               (each [_ server (ipairs servers)]
-                ((. (. lsp server) :setup) {:on_attach on_attach
+                ((. (. lsp server) :setup) {:on_attach lsp-format.on_attach
                                             :before_init before_init
                                             :handlers handlers
                                             :capabilities capabilities}))))}]
