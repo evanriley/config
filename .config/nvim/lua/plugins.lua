@@ -24,7 +24,6 @@ vim.cmd([[
 
 require("packer").init({
 	max_jobs = 50,
-	compile_path = vim.fn.stdpath('config')..'/lua/packer_compiled.lua'
 })
 
 return require('packer').startup(function()
@@ -34,8 +33,6 @@ return require('packer').startup(function()
     use 'nvim-lua/plenary.nvim'
 
     use 'nvim-lua/popup.nvim'
-
-    use "lewis6991/impatient.nvim"
 
     ----------------------------------------
     -- LSP, Copmletions and related items --
