@@ -1,6 +1,0 @@
-This is my (literate) [[https://github.com/doomemacs/doomemacs][doom emacs]] config. The configuration is within =config.org=.
-
-* Installation
-
-These files should exist within the =~/.config/doom= folder. The =config.org= needs to be tangled before the doom installation.
-This can be achived by running doom's own =org-tangle= executable.
