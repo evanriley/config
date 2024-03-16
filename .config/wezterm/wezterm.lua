@@ -2,10 +2,10 @@ local wezterm = require("wezterm")
 
 return {
 	font = wezterm.font_with_fallback({
-		"JuliaMono",
+		"CommitMono",
 		"JetBrainsMono Nerd Font Mono Regular",
 	}),
-	font_size = 12.0,
+	font_size = 14.0,
 	colors = {
 		foreground = "#ffffff",
 		background = "#161616",
