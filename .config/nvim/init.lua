@@ -206,9 +206,9 @@ require('lazy').setup({
     config = function()
       require('kanagawa').setup {
         undercurl = false,
-        theme = 'dragon',
+        theme = 'wave',
         background = {
-          dark = 'dragon',
+          dark = 'wave',
           light = 'lotus',
         },
       }
@@ -308,8 +308,8 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Clear highlights with Esc (and enter becasue muscle memory is weird)
-vim.keymap.set('n', '<Esc>', "<Cmd>nohlsearch|diffupdate|normal! <C-l><CR>", { silent = true })
-vim.keymap.set('n', '<CR>', "<Cmd>nohlsearch|diffupdate|normal! <C-l><CR>", { silent = true })
+vim.keymap.set('n', '<Esc>', ":noh<CR>", { silent = true })
+vim.keymap.set('n', '<CR>', ":noh<CR>", { silent = true })
 
 
 -- Better window navigation
@@ -375,8 +375,13 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics)
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
-  -- Add languages to be installed here that you want installed for treesitter
   ensure_installed = 'all',
+
+  sync_install = true,
+
+  ignore_install = {},
+
+  auto_install = true,
 
   highlight = { enable = true },
   indent = { enable = true },
