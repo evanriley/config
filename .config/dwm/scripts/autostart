@@ -1,11 +1,11 @@
 #!/bin/sh
 
 # whatever you want to autostart
-autorandr -l default &
-picom --experimental-backends &
-sxhkd &
-feh --bg-fill ~/.wallpaper/Wallpaper-Moon.png &
+exec picom --experimental-backends &
+exec sxhkd &
+exec playerctld daemon &
+exec feh --bg-fill /home/evan/.wallpaper/Wallpaper-Moon.jpg &
 
 # bar & dwm, required...
-dwmblocks &
+~/.config/dwm/scripts/./bar.sh &
 dwm
