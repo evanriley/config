@@ -29,7 +29,6 @@ end
 
 -- Capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities() --for coq
--- local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())  -- for nvim-cmp
 capabilities.textDocument.codeAction = {
 	dynamicRegistration = true,
 	codeActionLiteralSupport = {
@@ -127,7 +126,6 @@ end
 for server, config in pairs(configs) do
     config.capabilities = capabilities
     config.on_attach = on_attach
-    -- lspconfig[server].setup(config) -- for nvim-cmp
     lspconfig[server].setup(coq.lsp_ensure_capabilities(config)) -- for coq
 end
 
