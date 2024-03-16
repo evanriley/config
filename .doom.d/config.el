@@ -1,13 +1,11 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; Place your private configuration here! Remember, you do not need to run 'doom
-;; sync' after modifying this file!
-
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Evan Riley"
       user-mail-address "git@evanriley.dev")
+
 
 (setq auth-sources '("~/.authinfo.gpg")
       auth-source-cache-expiry nil)
@@ -36,7 +34,6 @@
 (display-time-mode 1)
 (global-subword-mode 1)
 
-
 (setq display-line-numbers-type t)
 
 (setq org-directory "~/Documents/Notes/")
@@ -50,7 +47,7 @@
   (+ivy/switch-buffer))
 
 
-(setq doom-theme 'doom-tokyo-night)
+(setq doom-theme 'doom-flatwhite)
 
 (setq
  doom-font (font-spec :family "JuliaMono" :size 16)
@@ -72,12 +69,11 @@
                      (not (memq (coding-system-eol-type buffer-file-coding-system) '(1 2))))
           t)))
 
+
 (add-hook 'after-change-major-mode-hook #'doom-modeline-conditional-buffer-encoding)
 
 (setq doom-fallback-buffer-name "► Doom"
       +doom-dashboard-name "► Doom")
-
-
 (map! :map +doom-dashboard-mode-map
       :ne "f" #'find-file
       :ne "r" #'consult-recent-file
@@ -87,7 +83,6 @@
       :ne "b" #'+vertico/switch-workspace-buffer
       :ne "B" #'consult-buffer
       :ne "q" #'save-buffers-kill-terminal)
-
 
 (map! :n [mouse-8] #'better-jumper-jump-backward
       :n [mouse-9] #'better-jumper-jump-forward)
@@ -124,6 +119,7 @@
      'face 'doom-dashboard-banner)))
 
 (setq +doom-dashboard-ascii-banner-fn #'doom-dashboard-draw-ascii-emacs-banner-fn)
+
 
 (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
 (add-hook! '+doom-dashboard-mode-hook (hide-mode-line-mode 1) (hl-line-mode -1))
@@ -168,3 +164,6 @@
 (after! org (setq org-hide-emphasis-markers t))
 ;; Insert Org Headings At Point.
 (after! org (setq org-insert-heading-respect-content nil))
+
+;; start the initial frame maximized
+;; (add-to-list 'initial-frame-alist '(fullscreen . maximized))

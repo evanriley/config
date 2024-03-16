@@ -20,10 +20,3 @@
         org-roam-ui-open-on-start t))
 
 (unpin! doom-themes)
-
-(package! info-colors :pin "47ee73cc19b1049eef32c9f3e264ea7ef2aaf8a5")
-
-(use-package! info-colors
-  :commands (info-colors-fontify-node))
-
-(add-hook 'Info-selection-hook 'info-colors-fontify-node)
