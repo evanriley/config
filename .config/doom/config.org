@@ -1,9 +1,6 @@
 #+property: header-args :exports code :results silent :tangle config.el :noweb no-export
-
 * Preface
-
 #+include: README.org
-
 ** How this all works.
 This document tangles into multipe files, =config.el=, =packages.el= and =init.el=. If you're reading this on the web or an exported version some code blocks may not be visible.
 If you plan on copying (which I can't recommend, I'm an idiot) please view the entire =config.org= file.
@@ -12,7 +9,6 @@ If you plan on copying (which I can't recommend, I'm an idiot) please view the e
 :PROPERTIES:
 :header-args: :tangle no :results silent :noweb-ref doom-modules
 :END:
-
 All of my used doom modules appear in the following sections.
 #+begin_src emacs-lisp :tangle init.el :noweb no-export :noweb-ref no
 (doom!
@@ -183,10 +179,10 @@ yaml
 #+end_src
 
 ** Email
-None of these packages are enabled, but I keep this here in the event that one day I want to enable one of them.
+Let's use mu4e for email.
 #+begin_src emacs-lisp
 :email
-;;(mu4e +org +gmail)
+(:if (executable-find "mu") (mu4e +org))
 ;;notmuch
 ;;(wanderlust +gmail)
 #+end_src
@@ -214,7 +210,7 @@ literate
 Setup name and email
 #+begin_src emacs-lisp
 (setq user-full-name "Evan Riley"
-      user-mail-address "evan@evanriley.dev")
+      user-mail-address "evan@evanriley.net")
 #+end_src
 
 Store ~.authinfo.gpg~ in my home directory so that it isn't lost all the time.
@@ -297,8 +293,17 @@ Setup my preferred fonts.
 #+end_src
 
 ** Theme
+Use auto-dark to switch between light and dark themes.
+#+begin_src emacs-lisp :tangle packages.el
+(package! auto-dark)
+#+end_src
+
 #+begin_src emacs-lisp
-(setq doom-theme 'doom-vibrant)
+(after! doom-themes
+  ;; set  your favorite themes
+  (setq! auto-dark-dark-theme 'doom-tomorrow-night
+        auto-dark-light-theme 'doom-earl-grey)
+  (auto-dark-mode 1))
 #+end_src
 
 Let's delete the defaults, doom-themes is enough for me.
@@ -938,7 +943,6 @@ Increase the file watch threshold from 1000 to 1500.
 #+end_src
 
 * Projectile
-
 Set the projectile directory correctly.
 #+begin_src emacs-lisp
 (setq projectile-project-search-path '("~/Code/personal/" "~/Code/work/" "~/Code/oss/"))
@@ -1228,6 +1232,118 @@ Configure web ui
   :hook (after-init . org-roam-ui-mode))
 #+end_src
 
+* Email
+Let's set up mu4e
+#+begin_src emacs-lisp
+(after! mu4e
+  (setq mu4e-mu-binary (executable-find "mu"))
+
+  (setq mu4e-maildir "~/.maildir")
+
+;; this command is called to sync imap servers:
+  (setq mu4e-get-mail-command (concat (executable-find "mbsync") " -a"))
+
+;; how often to call it in seconds:
+  (setq mu4e-update-interval 300)
+
+;; save attachment to desktop by default
+  (setq mu4e-attachment-dir "~/Desktop")
+
+;; rename files when moving - needed for mbsync:
+  (setq mu4e-change-filenames-when-moving t)
+  
+  ;; list of your email adresses:
+  (setq mu4e-user-mail-address-list '("evan@evanriley.net"))
+  
+  (setq   mu4e-maildir-shortcuts
+          '(("/migadu/INBOX" . ?i)
+            ("/migadu/Sent" . ?s)
+            ("/migadu/Archive" . ?a)
+            ("/migadu/Drafts" . ?d)
+            ("/migadu/Important" . ?I)
+            ("/migadu/Junk" . ?j)
+            ("/migadu/Trash" . ?t)))
+  
+  (setq mu4e-contexts
+        `(,(make-mu4e-context
+            :name "Personal"
+            :enter-func
+            (lambda () (mu4e-message "Enter evan@evanriley.net context"))
+            :leave-func
+            (lambda () (mu4e-message "Leave evan@evanriley.net context"))
+            :match-func
+            (lambda (msg)
+              (when msg
+                (mu4e-message-contact-field-matches msg
+                                                    :to "evan@evanriley.net")))
+            :vars '((user-mail-address . "evan@evanriley.net" )
+                    (user-full-name . "Evan Riley")
+                    (mu4e-drafts-folder . "/migadu/Drafts")
+                    (mu4e-refile-folder . "/migadu/Archive")
+                    (mu4e-sent-folder . "/migadu/Sent")
+                    (mu4e-trash-folder . "/migadu/Trash")))))
+  
+  ;; gpg encryptiom & decryption:
+  ;; this can be left alone
+  (require 'epa-file)
+  
+  (epa-file-enable)
+  (setq epa-pinentry-mode 'loopback)
+  (auth-source-forget-all-cached)
+  ;; don't keep message compose buffers around after sending:
+  (setq message-kill-buffer-on-exit t)
+  ;; send function:
+  (setq send-mail-function 'message-send-mail-with-sendmail
+        message-send-mail-function 'message-send-mail-with-sendmail)
+  ;; send program:
+  (setq sendmail-program (executable-find "msmtp"))
+  ;; select the right sender email from the context.
+  (setq message-sendmail-envelope-from 'header)
+  ;; chose from account before sending
+  ;; this is a custom function that works for me.
+  ;; well I stole it somewhere long ago.
+  (defun timu/set-msmtp-account ()
+    (if (message-mail-p)
+        (save-excursion
+          (let*
+              ((from (save-restriction
+                       (message-narrow-to-headers)
+                       (message-fetch-field "from")))
+               (account
+                (cond
+                 ((string-match "evan@evanriley.net" from) "migadu"))))
+            (setq message-sendmail-extra-arguments (list '"-a" account))))))
+  (add-hook 'message-send-mail-hook 'timu/set-msmtp-account)
+  ;; mu4e cc & bcc
+  (add-hook 'mu4e-compose-mode-hook
+            (defun timu/add-cc-and-bcc ()
+              (save-excursion (message-add-header "Cc:\n"))
+              (save-excursion (message-add-header "Bcc:\n"))))
+  ;; mu4e address completion
+  (add-hook 'mu4e-compose-mode-hook 'company-mode)
+  
+  ;; store link to message if in header view, not to header query:
+  (setq org-mu4e-link-query-in-headers-mode nil)
+  ;; don't have to confirm when quitting:
+  (setq mu4e-confirm-quit nil)
+  ;; number of visible headers in horizontal split view:
+  (setq mu4e-headers-visible-lines 20)
+  ;; don't show threading by default:
+  (setq mu4e-headers-show-threads nil)
+  ;; hide annoying "mu4e Retrieving mail..." msg in mini buffer:
+  (setq mu4e-hide-index-messages t)
+  ;; customize the reply-quote-string:
+(setq message-citation-line-format "%N @ %Y-%m-%d %H:%M :\n")
+;; M-x find-function RET message-citation-line-format for docs:
+(setq message-citation-line-function 'message-insert-formatted-citation-line)
+;; by default do not show related emails:
+(setq mu4e-headers-include-related nil)
+;; by default do not show threads:
+(setq mu4e-headers-show-threads nil)
+;; copy sent email to the sent folder
+(setq mu4e-sent-messages-behavior 'sent))
+#+end_src
+
 * Languages
 Settings and extra packages not included in doom emacs.
 ** Python
@@ -1239,4 +1355,12 @@ Set up LSP to turn off some python warnings
 ** Go
 #+begin_src emacs-lisp :tangle packages.el
 (package! go-eldoc :disable t)
+#+end_src
+
+* Fixes
+** mu4e/evil-collection
+The current pinned version in doom emacs is not up to date with the pinned version in mu4e.
+So we need to unpin evil-collection so that we can use VIm keys in mu4e
+#+begin_src emacs-lisp :tangle packages.el
+(unpin! evil-collection)
 #+end_src
