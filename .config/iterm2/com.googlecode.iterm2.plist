@@ -2916,6 +2916,8 @@
 	<true/>
 	<key>SeparateStatusBarsPerPane</key>
 	<true/>
+	<key>ShowFullScreenTabBar</key>
+	<true/>
 	<key>ShowMetalFPSmeter</key>
 	<false/>
 	<key>SoundForEsc</key>
