@@ -6,7 +6,7 @@ Here is my emacs config. literate-ized(?)
 
 * Installation
 
-This is 100% should not be copied, things WILL break, and I am not smart enough to help you unbreak them.
+This should NOT be copied Things WILL break, and I am not smart enough to help you fix them.
 
 In order for this to work, you need to generate the =init.el= at least once.
 
