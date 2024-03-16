@@ -1,4 +1,4 @@
-set -gx PATH ~/bin $NPM_PACKAGES/bin ~/.cargo/bin ~/.emacs.d/bin /opt/homebrew/bin $PATH
+set -gx PATH ~/bin $NPM_PACKAGES/bin ~/.cargo/bin ~/.emacs.d/bin /opt/homebrew/bin ~/go/bin $PATH
 set -gx GPG_TTY (tty)
 
 frum init | source

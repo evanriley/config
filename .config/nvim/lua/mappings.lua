@@ -56,6 +56,10 @@ map('n', '<leader>bj', ':bp<CR>', { noremap = true })
 map('n', '<leader>bl', ':bl<CR>', { noremap = true })
 map('n', '<leader>bd', ':bd<CR>', { noremap = true })
 
+-- Neogit
+map('n', '<leader>gg', ':Neogit<CR>', {noremap = true})
+map('n', '<leader>gl', ':Neogit log<CR>', {noremap = true})
+map('n', '<leader>gp', ':Neogit push<CR>', {noremap = true})
 -- telescope pullup
 map('n', '<leader>ff', ':Telescope git_files<CR>', { noremap = true })
 map('n', '<leader>fd', ':Telescope find_files<CR>', { noremap = true })
