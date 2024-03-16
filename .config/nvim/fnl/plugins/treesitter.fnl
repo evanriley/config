@@ -12,7 +12,7 @@
                                  :indent {:enable true}
                                  :ensure_installed :all
                                  :autotag {:enable true}
-                                 :endiwse {:enable true}
+                                 :endwise {:enable true}
                                  :contet_commentstring {:enable true}}))
             (let [treesitter-context (require :treesitter-context)]
               (treesitter-context.setup {:enable true})))}]
