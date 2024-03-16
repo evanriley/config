@@ -22,10 +22,6 @@ return require('packer').startup(function()
   		requires = { 'kyazdani42/nvim-web-devicons', opt = true } 
 	}
 	use {
-		'akinsho/bufferline.nvim',
-		requires = 'kyazdani42/nvim-web-devicons'
-	}
-	use {
   		'nvim-telescope/telescope.nvim',
   		requires = {'nvim-lua/plenary.nvim'}
 	}
@@ -50,6 +46,7 @@ return require('packer').startup(function()
 
 	use 'folke/tokyonight.nvim'
   use 'ayu-theme/ayu-vim'
+  use 'tiagovla/tokyodark.nvim'
 
   use 'tpope/vim-dispatch'
   use 'radenling/vim-dispatch-neovim'
@@ -75,4 +72,19 @@ return require('packer').startup(function()
     'fatih/vim-go',
     run = ':GoUpdateBinaries'
   } 
+  use {
+    'kristijanhusak/orgmode.nvim',
+    branch = 'tree-sitter',
+    config = function()
+        require('orgmode').setup{}
+    end
+  }
+  use {
+    'akinsho/org-bullets.nvim',
+    config = function()
+      require('org-bullets').setup {
+        sumbols = { "◉", "○", "✸", "✿" }
+      }
+    end
+  }
 end)
