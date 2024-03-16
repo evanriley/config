@@ -15,7 +15,7 @@
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": false,
 
-    "workbench.colorTheme": "Tokyo Night",
+    "workbench.colorTheme": "Kary Pro Colors － Light",
     "editor.fontFamily": "JuliaMono",
     "editor.fontSize": 16,
     "window.titleBarStyle": "custom",
@@ -156,5 +156,6 @@
     },
     "rust-analyzer.lens.enable": false,
     "rust-analyzer.inlayHints.chainingHints.enable": false,
-    "editor.inlayHints.enabled": false
+    "editor.inlayHints.enabled": false,
+    "vsicons.dontShowNewVersionMessage": true
 }
