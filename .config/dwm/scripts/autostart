@@ -5,6 +5,7 @@ exec picom --experimental-backends &
 exec sxhkd &
 exec playerctld daemon &
 exec feh --bg-fill /home/evan/.wallpaper/Wallpaper-Bridge.jpg &
+exec /usr/lib/geoclue-2.0/demos/agent &
 
 # notifications
 # starts tiramisu script that writes to a file...yes, yes, I know
