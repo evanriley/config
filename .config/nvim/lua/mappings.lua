@@ -63,3 +63,11 @@ keymap("x", "SS", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
 keymap("n", "<C-s>", "<cmd>lua require'hop'.hint_char2()<cr>", opts)
 keymap("x", "<C-s>", "<cmd>lua require'hop'.hint_char2()<cr>", opts)
 keymap("o", "<C-x>", "<cmd>lua require'hop'.hint_char2()<cr>", opts)
+
+-- Dial
+keymap("n", "<C-a>", require("dial.map").inc_normal(), opts)
+keymap("n", "<C-x>", require("dial.map").dec_normal(), opts)
+keymap("v", "<C-a>", require("dial.map").inc_visual(), opts)
+keymap("v", "<C-x>", require("dial.map").dec_visual(), opts)
+keymap("v", "g<C-a>", require("dial.map").inc_gvisual(), opts)
+keymap("v", "g<C-x>", require("dial.map").dec_gvisual(), opts)

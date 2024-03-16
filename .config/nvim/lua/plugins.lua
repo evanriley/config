@@ -107,11 +107,13 @@ return packer.startup(function(use)
 			require("nvim-ts-autotag").setup()
 		end,
 	})
+  use({ "nvim-treesitter/nvim-treesitter-context" })
 
   -- Helpers
   use({ "tpope/vim-surround" })
 	use({ "wellle/targets.vim" })
   use({ "folke/todo-comments.nvim" })
+  use({ "monaqa/dial.nvim" })
   use({
     "windwp/nvim-autopairs",
     config = function()

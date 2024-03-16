@@ -1,5 +1,5 @@
 vim.g.coq_settings = {
-	auto_start = 'shut-up',
+	auto_start = "shut-up",
 	clients = {
 		tabnine = {
 			enabled = true,
@@ -7,14 +7,14 @@ vim.g.coq_settings = {
 	},
 	keymap = {
 		pre_select = false,
-		recommended = true,
+		recommended = false,
 	},
 	display = {
 		pum = {
 			fast_close = true,
 		},
 		icons = {
-			mode = 'long',
+			mode = "none",
 		},
 		ghost_text = {
 			enabled = true,
