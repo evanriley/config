@@ -52,7 +52,11 @@
        ;force all vertical splits to go to the right of the current window.
        :splitright true
        ;display long lines as-is
-       :wrap false}]
+       :wrap false
+       ; required settings for nvim-ufo
+       :foldcolumn "auto:1"
+       :foldlevel 99
+       :foldlevelstart 99}]
        
   (each [option value (pairs options)]
     (core.assoc nvim.o option value)))

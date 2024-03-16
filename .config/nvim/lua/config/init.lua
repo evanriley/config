@@ -10,7 +10,7 @@ nvim.set_keymap("n", "<C-j>", "<C-w>j", {noremap = true})
 nvim.set_keymap("n", "<C-k>", "<C-w>k", {noremap = true})
 nvim.set_keymap("n", "<C-l>", "<C-w>l", {noremap = true})
 do
-  local options = {expandtab = true, tabstop = 2, shiftwidth = 2, softtabstop = 2, completeopt = "menuone,noselect", ignorecase = true, smartcase = true, clipboard = "unnamedplus", number = true, relativenumber = true, ruler = true, signcolumn = "number", cmdheight = 1, conceallevel = 0, pumheight = 10, splitbelow = true, splitright = true, wrap = false, backup = false}
+  local options = {expandtab = true, tabstop = 2, shiftwidth = 2, softtabstop = 2, completeopt = "menuone,noselect", ignorecase = true, smartcase = true, clipboard = "unnamedplus", number = true, relativenumber = true, ruler = true, signcolumn = "number", cmdheight = 1, conceallevel = 0, pumheight = 10, splitbelow = true, splitright = true, foldcolumn = "auto:1", foldlevel = 99, foldlevelstart = 99, backup = false, wrap = false}
   for option, value in pairs(options) do
     core.assoc(nvim.o, option, value)
   end
