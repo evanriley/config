@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  dotfiles:
+    image: evanriley/config:latest
+    container_name: config
+    volumes:
+      - .:/usr/src/
+    environment:
+      - CI=1

@@ -6,7 +6,7 @@
 
 { # to make sure the entire script downloads
   basedir=$HOME/.dotfiles
-  repourl=https://github.com/evanriley/dotfiles
+  repourl=https://github.com/evanriley/config
   savedir=("bin" ".config" ".github" ".vim")
   current=$(date +"%Y.%m.%d.%H.%M.%S")
   backup=$HOME/.dotfiles_backup/$current
