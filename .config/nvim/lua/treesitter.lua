@@ -25,7 +25,7 @@ require("nvim-treesitter.configs").setup({
 		},
 	},
 	indent = {
-		enable = false,
+		enable = true,
 		disable = { "javascript", "javascriptreact", "typescript", "typescriptreact" }, -- list of language that will be disabled
 	},
 	matchup = {
