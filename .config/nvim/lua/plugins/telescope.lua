@@ -40,7 +40,7 @@ require('telescope').setup({
 -- Telescope Mappings
 vim.api.nvim_set_keymap('n', '<leader>ff', ':Telescope git_files<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>fd', ':Telescope find_files<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>fb', ':Telescope file_browser<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>fb', "<cmd>lua require 'telescope'.extensions.file_browser.file_browser()<CR>", { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>fg', "<cmd>lua require 'telescope'.extensions.file_browser.file_browser()<CR>", { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>fG', ':Telescope git_branches<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>fs', ':Telescope live_grep<CR>', { noremap = true })
