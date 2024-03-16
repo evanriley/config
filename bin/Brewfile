@@ -38,6 +38,7 @@ brew 'cmake'
 brew 'pngpaste'
 brew 'bat'
 brew 'heroku'
+brew 'frum'
 
 # cask installs
 cask 'google-chrome'

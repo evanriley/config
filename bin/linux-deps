@@ -16,7 +16,7 @@
     echo "Bash is running on WSL"
   fi
 
-  cargo install xsv lsd exa bat
+  cargo install xsv lsd exa bat frum
 
   echo "Deps have been installed."
 
