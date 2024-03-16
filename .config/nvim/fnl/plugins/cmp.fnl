@@ -43,7 +43,7 @@
                                     :<C-Space> (cmp.mapping.complete)
                                     :<C-e> (cmp.mapping.close)
                                     :<CR> (cmp.mapping.confirm {:behavior cmp.ConfirmBehavior.Insert
-                                                                :select true})
+                                                                :select false})
                                     :<Tab> (cmp.mapping (fn [fallback]
                                                           (if
                                                             (cmp.visible) (cmp.select_next_item)
@@ -59,4 +59,5 @@
                                                           {1 :i 2 :s})}
                           :snippet {:expand (fn [args]
                                               (luasnip.lsp_expand args.body))}
-                          :sources cmp-srcs})))}]
+                          :sources cmp-srcs
+                          :preselect cmp.PreselectMode.None})))}]
