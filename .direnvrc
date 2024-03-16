@@ -1,21 +1,11 @@
+# Ruby
 use_ruby() {
-    RUBY_VERSION="$1"
-
-    RUBIES_DIR="$HOME/.rubies"
-    RUBY_PREFIX="$RUBIES_DIR/ruby-$RUBY_VERSION"
-    if [ -s "$RUBY_PREFIX" ]; then
-        load_prefix "$RUBY_PREFIX"
-    else
-        tput setaf 1
-        echo "Ruby $RUBY_VERSION not available; using default"
-        echo "See http://blog.differentpla.net/blog/2019/01/30/ruby-install/"
-        tput sgr0
-    fi
-
-    # TODO: If relevant, remind the user to do the following:
-    # gem install bundler && bundle install
+  local ruby_root=$HOME/.rubes/$1
+  load_prefix "$ruby_root"
+  layout_ruby
 }
 
+# NodeJS
 use_nodejs() {
     NODE_VERSION="$1"
 
@@ -41,6 +31,7 @@ use_fnm() {
    fi
 }
 
+# Java
 use_java() {
     # Install jabba for management of Java versions
     if ! has jabba; then

@@ -22,5 +22,6 @@ vim.api.nvim_set_keymap('n', '<leader>fd', ':Telescope find_files<CR>', { norema
 vim.api.nvim_set_keymap('n', '<leader>fF', ':Telescope file_browser<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>fg', ':Telescope git_commits<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>fG', ':Telescope git_branches<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>fs', ':Telescope live_grep<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>bb', ':Telescope buffers<CR>', { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>fb', ':Telescope buffers<CR>', { noremap = true })

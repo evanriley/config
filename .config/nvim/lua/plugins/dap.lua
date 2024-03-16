@@ -1,4 +1,5 @@
 local dap = require("dap")
+local dap_install = require("dap-install")
 
 vim.fn.sign_define('DapBreakpoint', {text=' ', texthl='debugBreakpoint', linehl='', numhl=''})
 vim.fn.sign_define('DapBreakpointCondition', {text=' ', texthl='DiagnosticWarn', linehl='', numhl=''})
@@ -8,6 +9,15 @@ vim.fn.sign_define('DapStopped', {text='', texthl='debugBreakpoint', linehl='
 
 vim.cmd [[au FileType dap-repl lua require('dap.ext.autocompl').attach()]]
 
+-- DAPInstall 
+dap_install.setup({
+  installation_path = vim.fn.stdpath("data") .. "/dapinstall/"
+})
+dap_install.config("ruby_vsc", {})
+dap_install.config("go_delve", {})
+dap_install.config("chrome", {})
+dap_install.config("lua", {})
+dap_install.config("ccppr_vsc", {})
 
 local M = {}
 function M.DapEditConfig()
