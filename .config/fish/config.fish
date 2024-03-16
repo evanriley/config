@@ -29,19 +29,6 @@ alias ..... 'cd ../../../../'
 alias .4 'cd ../../../../'
 alias .5 'cd ../../../../..'
 
-alias gac 'git add . && git commit -a -m '
-alias gl 'git pull --prune'
-alias glog "git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
-alias gp 'git push origin HEAD'
-alias gd 'git diff --color | sed "s/^\([^-+ ]*\)[-+ ]/\\1/" | less -r'
-alias gc 'git commit'
-alias gca 'git commit -a'
-alias gco 'git checkout'
-alias gcb 'git copy-branch-name'
-alias gb 'git branch'
-alias gs 'git status -sb'
-alias ge 'git-edit-new'
-
 ##wtf is my ip address...##
 alias myip "curl http://ipecho.net/plain; echo"
 
@@ -53,12 +40,12 @@ alias la 'exa -la'
 alias lg 'exa --git'
 alias cat 'bat'
 
-# use pinentry-mac instead of pinentry on  mac
+# use pinentry-mac instead of pinentry on macos
 if test (uname) = "Darwin"
   alias pinentry 'pinentry-mac'
 end
 
-
+# iTerm2 (on MacOS) has a nice tmux intergration. This commands just make it easier to use.
 if test (uname) = "Darwin"
   # the -CC argument is take advantage of iTerm2's tmux features
  function tma # tmux attach to either the last session or if given an argument connect to named session
