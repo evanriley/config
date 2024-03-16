@@ -15,7 +15,7 @@
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": false,
 
-    "workbench.colorTheme": "Tokyo Night",
+    "workbench.colorTheme": "Ayu Dark",
     "editor.fontFamily": "JuliaMono",
     "editor.fontSize": 16,
     "window.titleBarStyle": "custom",

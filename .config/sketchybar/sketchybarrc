@@ -130,36 +130,7 @@ sketchybar -m --add item clock right                                            
               --set clock         update_freq=10                                                      \
                                   script="~/.config/sketchybar/plugins/clock.sh"                      \
                                                                                                       \
-              --add item mailIndicator right                                                          \
-              --set mailIndicator associated_space=1,2,3                                              \
-                                  update_freq=30                                                      \
-                                  script="~/.config/sketchybar/plugins/mailIndicator.sh"              \
-                                  icon.font="JetBrainsMono Nerd Font:Bold:20.0"                       \
-                                  icon=                                                              \
-                                  click_script="osascript -e 'tell application \"Mail\" to activate'"
 
-# Creating Graphs
-sketchybar -m --add graph cpu_user right 200                                        \
-              --set cpu_user     graph.color=0xffffffff                             \
-                                 update_freq=2                                      \
-                                 width=0                                            \
-                                 associated_space=1                                 \
-                                 label.padding_left=0                               \
-                                 icon=                                             \
-                                 script="~/.config/sketchybar/plugins/cpu_graph.sh" \
-                                 lazy=on                                            \
-                                                                                    \
-              --add graph cpu_sys right 200                                         \
-              --set cpu_sys      label.padding_left=0                               \
-                                 associated_space=1                                 \
-                                 icon=                                             \
-                                 graph.color=0xff238fba                             \
-                                                                                    \
-              --add item topproc right                                              \
-              --set topproc      associated_space=1                                 \
-                                 label.padding_right=10                             \
-                                 update_freq=15                                     \
-                                 script="~/.config/sketchybar/plugins/topproc.sh"
 
 ###################### CENTER ITEMS ###################
 

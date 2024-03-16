@@ -8,9 +8,6 @@ local sources = {
   null_ls.builtins.formatting.goimports,
   null_ls.builtins.formatting.gofmt,
 
-  -- C++
-  null_ls.builtins.formatting.clang_format,
-
   -- English is hard.
   null_ls.builtins.diagnostics.write_good.with({
     filetypes = { "markdown", "gitmessage" }
