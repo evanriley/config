@@ -1,23 +1,22 @@
---      :::::::::::::     :::    :::    ::::    :::
---     :+:       :+:     :+:  :+: :+:  :+:+:   :+:
---    +:+       +:+     +:+ +:+   +:+ :+:+:+  +:+
---   +#++:++#  +#+     +:++#++:++#++:+#+ +:+ +#+
---  +#+        +#+   +#+ +#+     +#++#+  +#+#+#
--- #+#         #+#+#+#  #+#     #+##+#   #+#+#
---##########    ###    ###     ######    ####
-
--- Load Plugins
-require('plugins')
--- Set Colorscheme
-require('colorschemes.kanagawa')
--- Load Options
-require('options')
--- Load mappings
-require('mappings')
--- Diagnostics
-require("diagnostics")
--- Autocommands
-vim.cmd "source ~/.config/nvim/viml/autocommands.vim"
--- Don't use the default filetype.vim, speed up neovim a bit by using filetype.nvim
+require "evan.options"
+require "evan.keymaps"
+require "evan.plugins"
+require "evan.autocommands"
+require "evan.colorscheme"
+require "evan.cmp"
+require "evan.telescope"
+require "evan.treesitter"
+require "evan.autopairs"
+require "evan.comment"
+require "evan.gitsigns"
+require "evan.bufferline"
+require "evan.lualine"
+require "evan.toggleterm"
+require "evan.project"
+require "evan.impatient"
+require "evan.illuminate"
+require "evan.lsp"
+require "evan.dap"
+require "evan.hop"
+-- Don't source the default filetype.vim, use filtetype.nvim instead.
 vim.g.did_load_filetypes = 1
-
