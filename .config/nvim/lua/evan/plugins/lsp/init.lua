@@ -7,7 +7,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 
 		-- Status updates for LSP
-		"j-hui/fidget.nvim",
+		{ "j-hui/fidget.nvim", tag = "legacy", },
 
 		"folke/neodev.nvim",
 	},
