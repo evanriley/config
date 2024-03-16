@@ -6,6 +6,10 @@ require("nvim-treesitter.configs").setup({
 		disable = { "vim", "sh", "bash" }, -- list of language that will be disabled
 		additional_vim_regex_highlighting = false,
 	},
+	autotag = {
+	  enable = true,
+	  filetypes = {"html", "javascript", "javascriptreact", "typescriptreact", "svelte", "vue", "eruby", "erb"}
+	},
 	rainbow = {
     enable = true,
     extended_mode = true,
