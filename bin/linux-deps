@@ -17,8 +17,19 @@
   sudo zypper --non-interactive in emacs neovim tree-sitter luajit fzf ripgrep \
     fd clojure leiningen
 
+  if [[ $(grep Microsoft /proc/version) ]]; then
+    echo "Bash is running on WSL"
+  fi
+
   cargo install xsv lsd exa bat
 
-  echo "Dpes have been installed."
+  echo "Deps have been installed."
+
+  if [[ -n "$IS_WSL" || -n "$WSL_DISTRO_NAME" ]]; then
+    echo "WSL detected, certain packages will not be installed."
+  else
+    sudo zypper --non-interactive in sway swaybg swaylock swayidle wlr-randr waybar \
+      bemenu mako
+  fi
 
 }
