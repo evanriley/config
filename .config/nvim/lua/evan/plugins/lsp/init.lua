@@ -56,15 +56,13 @@ return {
 			rust_analyzer = {},
 			cssls = {},
 			html = {},
-			hls = {},
 			tsserver = {},
 			bashls = {},
 			yamlls = {},
 			clojure_lsp = {},
 			clangd = {},
 			elixirls = {},
-
-			sumneko_lua = {
+			lua_ls = {
 				Lua = {
 					workspace = { checkThirdParty = false },
 					telemetry = { enable = false },
