@@ -30,7 +30,6 @@ null_ls.setup({
 				buffer = bufnr,
 				callback = function()
 					vim.lsp.buf.format({ bufnr = bufnr })
-					-- if nvim version < 0.8 use vim.lsp.buf.formatting_sync()
 				end,
 			})
 		end
