@@ -10,3 +10,6 @@
 [submodule ".config/st/st"]
 	path = .config/st/st
 	url = git@github.com:evanriley/st.git
+[submodule ".config/dmenu/dmenu"]
+	path = .config/dmenu/dmenu
+	url = git@github.com:evanriley/dmenu.git
