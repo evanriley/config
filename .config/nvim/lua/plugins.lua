@@ -41,4 +41,11 @@ return require('packer').startup(function()
 	-- Themes
 	use 'folke/tokyonight.nvim'
 
+  -- Specific Lang Stuff --
+  -- Clojure
+  use {
+      'eraserhd/parinfer-rust',
+      run = 'cargo build --release'
+  }
+
 end)
