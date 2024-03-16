@@ -34,11 +34,6 @@ keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
 keymap("v", "p", '"_dP', opts)
 keymap("n", "<leader>ya", ":%y+<CR>", opts)
 
--- Packer
-keymap("n", "<localleader>pu", ":PackerUpdate<CR>", opts)
-keymap("n", "<localleader>pc", ":PackerClean<CR>", opts)
-keymap("n", "<localleader>pi", ":PackerInstall<CR>", opts)
-
 -- Telescope
 keymap("n", "<leader>ff", ":Telescope git_files<CR>", opts)
 keymap("n", "<leader>fd", ":Telescope find_files<CR>", opts)
@@ -48,10 +43,6 @@ keymap("n", "<leader>bb", ":Telescope buffers<CR>", opts)
 keymap("n", "<leader>fG", ":Telescope git_branches<CR>", opts)
 keymap("n", "<leader>fb", "<cmd>lua require 'telescope'.extensions.file_browser.file_browser()<CR>", opts)
 keymap("n", "<leader><leader>", ":Telescope frecency frecency default_text=:CWD:<CR>", opts)
-
--- Comment
-keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", opts)
-keymap("x", "<leader>/", '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>')
 
 -- Hop
 keymap("n", "s", "<cmd>lua require'hop'.hint_char1()<cr>", opts)
@@ -63,11 +54,3 @@ keymap("x", "SS", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
 keymap("n", "<C-s>", "<cmd>lua require'hop'.hint_char2()<cr>", opts)
 keymap("x", "<C-s>", "<cmd>lua require'hop'.hint_char2()<cr>", opts)
 keymap("o", "<C-x>", "<cmd>lua require'hop'.hint_char2()<cr>", opts)
-
--- Dial
-keymap("n", "<C-a>", require("dial.map").inc_normal(), opts)
-keymap("n", "<C-x>", require("dial.map").dec_normal(), opts)
-keymap("v", "<C-a>", require("dial.map").inc_visual(), opts)
-keymap("v", "<C-x>", require("dial.map").dec_visual(), opts)
-keymap("v", "g<C-a>", require("dial.map").inc_gvisual(), opts)
-keymap("v", "g<C-x>", require("dial.map").dec_gvisual(), opts)
