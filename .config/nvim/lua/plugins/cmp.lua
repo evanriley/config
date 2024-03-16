@@ -6,6 +6,7 @@ local lspkind = require("lspkind")
 local luasnip = require("luasnip")
 local cmp = require("cmp")
 local tabnine = require("cmp_tabnine.config")
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
 local source_mapping = {
 	buffer = "[Buffer]",
@@ -67,8 +68,7 @@ cmp.setup({
     { name = "nvim_lsp" },
     { name = "cmp_tabnine" },
     { name = "luasnip" },
-  }, {
-    { name = "buffer" },
+    { name = "buffer", keyword_length = 5 },
   }),
 	formatting = {
 		format = function(entry, vim_item)
@@ -84,6 +84,10 @@ cmp.setup({
 			return vim_item
 		end
 	},
+	experimental = {
+    native_menu = false,
+    ghost_text = true,
+	},
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
@@ -92,6 +96,9 @@ cmp.setup.cmdline("/", {
     { name = "buffer" }
   }
 })
+
+-- for nvim-autopairs
+cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({ map_char = { text = '' } }))
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 --[[ cmp.setup.cmdline(':', {
