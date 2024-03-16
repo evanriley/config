@@ -1,12 +1,8 @@
--- load scheme wrapper library
-local scheme = require('lib.scheme')
-
--- lualine setup config
 require('lualine').setup({
 	options = {
-		section_separators = scheme.lualine_style,
-		component_separators = scheme.lualine_seperator,
-		theme = 'tokyonight',
+		section_separators = { left = '', right = '' },
+		component_separators = { left = '', right = '' },
+		theme = 'kanagawa',
 	},
 	sections = {
 		lualine_a = { 'mode' },

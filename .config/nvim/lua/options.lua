@@ -1,28 +1,54 @@
-local cmd = vim.cmd
-local opt = vim.opt
 local g = vim.g
 local o = vim.o
 
-cmd('syntax enable')
-o.nu = true
-o.mouse = 'a'
-o.modeline = true
-o.modelines = 5
 
--- Tab settings
-o.tabstop = 2
-o.shiftwidth = 2
-o.expandtab = true
-
-opt.undofile = true
-opt.ruler = false
-opt.hidden = true
-opt.ignorecase = true
-opt.splitbelow = true
-opt.splitright = true
-o.completeopt = 'menuone,noinsert,noselect'
-opt.wrap = false
-o.clipboard = 'unnamedplus'
-o.signcolumn = 'auto:2'
-
-vim.opt.termguicolors = true
+o.termguicolors    = true -- enable gui colors for terminal
+vim.opt.background = "dark"
+g.vimsyn_embed     = 'lPr'
+g.tex_flavor       = 'latex'
+o.encoding         = "utf-8"
+o.modeline         = true
+o.errorbells       = false
+o.mouse            = 'a'
+o.visualbell       = false
+o.history          = 1000
+o.undolevels       = 1000
+o.title            = true
+o.backup           = false
+o.swapfile         = false
+o.undofile         = true
+o.wrap             = false
+o.tabstop          = 2
+o.shiftwidth       = o.tabstop
+o.shiftround       = true
+o.expandtab        = true
+o.backspace        = 'indent,eol,start'
+o.autoindent       = true
+o.copyindent       = true
+o.number           = true
+o.showmatch        = true
+o.ignorecase       = true
+o.smartcase        = true
+o.smarttab         = true
+o.hlsearch         = true
+o.incsearch        = true
+o.hidden           = true
+vim.o.wildignore   = '*.swp,*.bak,*.pyc,*.class'
+o.wildmode         = 'longest,full'
+o.wildmenu         = true
+o.wildcharm        = 26
+o.wildignorecase   = true
+o.clipboard        = 'unnamed,unnamedplus'
+o.showcmd          = true
+o.sidescroll       = 1
+o.conceallevel     = 2
+o.completeopt      = "menuone,noinsert,noselect"
+o.pumheight        = 15
+o.inccommand       = 'split'
+o.cmdheight        = 1
+o.listchars        = "tab:|.,trail:_,extends:>,precedes:<,nbsp:~,eol:¬"
+o.signcolumn       = 'yes'
+o.splitbelow       = true
+o.splitright       = true
+vim.opt.shortmess:append({ c = true })
+vim.opt.wildoptions:append({'pum'})

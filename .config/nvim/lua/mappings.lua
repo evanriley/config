@@ -36,12 +36,5 @@ map('n', '<leader>bj', ':bp<CR>', { noremap = true })
 map('n', '<leader>bl', ':bl<CR>', { noremap = true })
 map('n', '<leader>bd', ':bd<CR>', { noremap = true })
 
-map('n', '<leader>ff', ':Telescope git_files<CR>', { noremap = true })
-map('n', '<leader>fd', ':Telescope find_files<CR>', { noremap = true })
-map('n', '<leader>fF', ':Telescope file_browser<CR>', { noremap = true })
-map('n', '<leader>fg', ':Telescope git_commits<CR>', { noremap = true })
-map('n', '<leader>fG', ':Telescope git_branches<CR>', { noremap = true })
-map('n', '<leader>bb', ':Telescope buffers<CR>', { noremap = true })
-
 map('n', '<leader>hH', ':HopWord<CR>', opt)
 map('n', '<leader>hh', ':HopLine<CR>', opt)

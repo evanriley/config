@@ -231,7 +231,7 @@ The section in which I enable most doom modules.
 #+name: doom-completion
 #+begin_src emacs-lisp
 (company
- +childframe)       ; the ultimate code completion backend
+ +childframe)           ; the ultimate code completion backend
 ;;helm              ; the *other* search engine for love and life
 ;;ido               ; the other *other* search engine...
 ;;ivy               ; a search engine for love and life
@@ -378,13 +378,13 @@ json                ; At least it ain't XML
 (javascript         ; all(hope(abandon(ye(who(enter(here))))))
  +lsp)
 ;;julia             ; a better, faster MATLAB
-;;kotlin            ; a better, slicker Java(Script)
+kotlin            ; a better, slicker Java(Script)
 ;;latex             ; writing papers in Emacs has never been so fun
 ;;lean              ; for folks with too much to prove
 ;;ledger            ; be audit you can be
 ;;lua               ; one-based indices? one-based indices
 markdown            ; writing docs for people to ignore
-;;nim               ; python + lisp at the speed of c
+nim               ; python + lisp at the speed of c
 ;;nix               ; I hereby declare "nix geht mehr!"
 ;;ocaml             ; an objective camel
 (org                ; organize your plain life in plain text
@@ -409,8 +409,8 @@ markdown            ; writing docs for people to ignore
 (ruby               ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
  +lsp
  +rails)
-(rust               ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
- +lsp)
+(rust
+ +lsp)               ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
 ;;scala             ; java, but good
 ;;(scheme +guile)   ; a fully conniving family of lisps
 ;;sh                ; she sells {ba,z,fi}sh shells on the C xor
@@ -682,8 +682,6 @@ Make the prefix slightly nicer
 Save keystrokes more often, because who doesn't want to be a /little/ lazier?
 #+begin_src emacs-lisp
 (after! company
-  (setq company-idle-delay 0.5
-        company-minimum-prefix-length 2)
   (setq company-show-numbers t)
   (add-hook 'evil-normal-state-entry-hook #'company-abort)) ;; make aborting less annoying.
 #+end_src
@@ -694,6 +692,11 @@ Improve the memory a bit.
 (setq-default prescient-history-length 1000)
 #+end_src
 
+*** LSP
+Disable the ui-doc childframe
+#+begin_src emacs-lisp
+(setq lsp-ui-doc-enable nil)
+#+end_src
 *** YASnippet
 Nested snippets are cool, yo
 #+begin_src emacs-lisp
