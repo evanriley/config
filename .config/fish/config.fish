@@ -1,8 +1,11 @@
+set -g fish_greeting
 set -gx EDITOR nvim
 set -gx PATH ~/bin ~/.local/bin $NPM_PACKAGES/bin ~/.roswell/bin ~/.yarn/bin ~/.cargo/bin ~/.emacs.d/bin /opt/homebrew/bin  /opt/homebrew/sbin ~/go/bin /opt/homebrew/opt/grep/libexec/gnubin $PATH
 set -gx GPG_TTY (tty)
-
-set -g fish_greeting
+## Source asdf
+source ~/.asdf/asdf.fish
+## use asdf direnv plugin and hook into it
+direnv hook fish | source
 
 # Aliases
 # Use this to manage dotfiles
@@ -45,7 +48,7 @@ alias la 'exa -la'
 alias lg 'exa --git'
 alias cat 'bat'
 
-# use pinentry-mac instead of pinentry on  mac...
+# use pinentry-mac instead of pinentry on  mac
 if test (uname) = "Darwin"
   alias pinentry 'pinentry-mac'
 end
@@ -69,20 +72,3 @@ if test (uname) = "Darwin"
     end
  end
 end
-
-# tidy
-alias tidy /opt/homebrew/bin/tidy
-
-# pyenv
-status is-login; and pyenv init --path | source
-status is-interactive; and pyenv init - | source
-
-# frum
-frum init | source
-
-# fnm
-fnm env | source
-
-starship init fish | source
-
-[ -s "/Users/evan/.jabba/jabba.fish" ]; and source "/Users/evan/.jabba/jabba.fish"
