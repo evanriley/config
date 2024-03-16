@@ -39,7 +39,7 @@ end
 if not __ssh_agent_is_started
     __ssh_agent_start
 end
-set -g simple_ass_prompt_greeting ""
+
 set -g fish_greeting
 set -gx EDITOR nvim
 set -gx PATH ~/bin ~/.local/bin $NPM_PACKAGES/bin ~/.roswell/bin ~/.yarn/bin ~/.cargo/bin ~/.config/emacs/bin /opt/homebrew/bin  /opt/homebrew/sbin ~/go/bin /opt/homebrew/opt/grep/libexec/gnubin '/Applications/Sublime Text.app/Contents/SharedSupport/bin' /home/evan/.local/share/bob/nvim-bin $PATH
@@ -90,24 +90,22 @@ end
 # iTerm2 (on MacOS) has a nice tmux intergration. This commands just make it easier to use.
 if test (uname) = "Darwin"
   # the -CC argument is take advantage of iTerm2's tmux features
- function tma # tmux attach to either the last session or if given an argument connect to named session
-    if [ -z "$argv" ];
-      tmux -CC attach
-    else
-      tmux -CC attach -t $argv
-    end
- end
-
- function tmn # tmux new either create the 'main' session or new one named by the given argument
+ function tm # either create a new session or attach to if possible. "-A" makes new behave like attach-session if the session-name already exist
     if [ -z "$argv" ];
       tmux -CC new -A -s main
     else
       tmux -CC new -A -s $argv
     end
  end
-end
 
-set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /Users/evan/.ghcup/bin $PATH # ghcup-env
+  function remote-dev
+    if [ -z "$argv" ]; # connects to a remote developer server through eternal terminal. Requires tailscale installation (server is the MagicDNS name for my server).
+      et -c "tmux -CC new -A -s main" server
+    else
+      et -c "tmux -CC new -A -s main" $argv
+    end
+  end
+end
 
 # Kanagawa Theme
 set -l foreground DCD7BA normal
