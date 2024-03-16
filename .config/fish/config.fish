@@ -41,7 +41,7 @@ if not __ssh_agent_is_started
 end
 set -g simple_ass_prompt_greeting ""
 set -g fish_greeting
-set -gx EDITOR emacsclient -c -a emacs
+set -gx EDITOR nvim
 set -gx PATH ~/bin ~/.local/bin $NPM_PACKAGES/bin ~/.roswell/bin ~/.yarn/bin ~/.cargo/bin ~/.config/emacs/bin /opt/homebrew/bin  /opt/homebrew/sbin ~/go/bin /opt/homebrew/opt/grep/libexec/gnubin '/Applications/Sublime Text.app/Contents/SharedSupport/bin' $PATH
 set -gx GPG_TTY (tty)
 ## use asdf direnv plugin and hook into it

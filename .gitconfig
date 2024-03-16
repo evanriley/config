@@ -45,7 +45,7 @@
   ui = true
 [core]
   excludesfile = /Users/evan/.gitignore
-  editor = emacsclient -c -a emacs
+  editor = nvim
 [apply]
   whitespace = fix
 [mergetool]
