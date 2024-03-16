@@ -937,6 +937,12 @@ Increase the file watch threshold from 1000 to 1500.
   (setq lsp-file-watch-threshold 1500))
 #+end_src
 
+* Projectile
+
+Set the projectile directory correctly.
+#+begin_src emacs-lisp
+(setq projectile-project-search-path '("~/Code/personal/" "~/Code/work/" "~/Code/oss/"))
+#+end_src
 * Editing
 Enable easy use of ~avy~
 #+begin_src emacs-lisp
