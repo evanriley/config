@@ -43,6 +43,7 @@ return packer.startup(function(use)
   use { "nvim-lua/plenary.nvim", commit = "968a4b9afec0c633bc369662e78f8c5db0eba249" } -- Useful lua functions used by lots of plugins
   use { "windwp/nvim-autopairs", commit = "fa6876f832ea1b71801c4e481d8feca9a36215ec" } -- Autopairs, integrates with both cmp and treesitter
   use { "numToStr/Comment.nvim", commit = "2c26a00f32b190390b664e56e32fd5347613b9e2" }
+  use { "JoosepAlviste/nvim-ts-context-commentstring", commit = "88343753dbe81c227a1c1fd2c8d764afb8d36269"}
   use { "kyazdani42/nvim-tree.lua", commit = "bdb6d4a25410da35bbf7ce0dbdaa8d60432bc243" }
   use { "moll/vim-bbye", commit = "25ef93ac5a87526111f43e5110675032dbcacf56" }
   use { "nvim-lualine/lualine.nvim", commit = "3362b28f917acc37538b1047f187ff1b5645ecdd" }
@@ -134,6 +135,11 @@ return packer.startup(function(use)
 
 
   -- Git
+  use {
+    "TimUntersberger/neogit",
+    commit = "2b33d2edba011799c496a2dc7c77ebbe1b3c5b76",
+    requires = { "sindrets/diffview.nvim" }
+  }
   use { "lewis6991/gitsigns.nvim", commit = "c18e016864c92ecf9775abea1baaa161c28082c3" }
   use { "rhysd/git-messenger.vim", commit = "8ece5c0c8a3cdecd8b03768ea7fe8f27b6144ad5"}
 

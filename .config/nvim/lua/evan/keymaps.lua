@@ -51,7 +51,8 @@ keymap("n", "<leader>fb", "<cmd>lua require 'telescope'.extensions.file_browser.
 keymap('n', '<leader><leader>', ':Telescope frecency frecency default_text=:CWD:<CR>', opts)
 
 -- Git
-keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
+-- keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
+ keymap("n", "<leader>gg", ":Neogit<CR>", opts)
 
 -- Comment
 keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", opts)
