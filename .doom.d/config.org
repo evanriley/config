@@ -442,24 +442,33 @@ irc               ; how neckbeards socialize
 ;;twitter           ; twitter client https://twitter.com/vnought
 #+end_src
 
-*** Visual Settings
+*** Visual
 **** Fonts
-JetBrains Mono runs my life.
+# JetBrains Mono runs my life.
+Let's try JuliaMono
 #+begin_src emacs-lisp
 (setq
- doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 16)
- doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 36)
- doom-variable-pitch-font (font-spec :fammily "Overpass" :size 16)
- doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
+ doom-font (font-spec :family "JuliaMono" :size 16)
+ doom-big-font (font-spec :family "JuliaMono" :size 36)
+ doom-variable-pitch-font (font-spec :family "JuliaMono" :size 16)
+ doom-serif-font (font-spec :family "JuliaMono" :weight 'light))
 #+end_src
 
 
 **** Theme and Modeline
-I'm really enjoying ~doom-tokyo-night~ as my theme.
 #+begin_src emacs-lisp
-(setq doom-theme 'doom-city-lights)
+(setq doom-theme 'doom-tokyo-night)
 #+end_src
 
+But lets make make org blocks a little more...enjoyable to look at.
+#+begin_src emacs-lisp
+(custom-set-faces!
+  `(org-block :background ,(doom-darken 'bg 0.3)))
+(custom-set-faces!
+  `(org-block-begin-line :background ,(doom-darken 'bg 0.2)))
+(custom-set-faces!
+  `(org-block-end-line :background ,(doom-darken 'bg 0.2)))
+#+end_src
 
 =LF UTF-8= is the default file encoding, and I would rather it not show up on the modeline when editing files.
 #+begin_src emacs-lisp
@@ -550,7 +559,6 @@ And then disable the "doom useful commands" section
 (add-hook! '+doom-dashboard-mode-hook (hide-mode-line-mode 1) (hl-line-mode -1))
 (setq-hook! '+doom-dashboard-mode-hook evil-normal-state-cursor (list nil))
 #+end_src
-
 
 * Packages
 ** Loading Instructions
@@ -664,20 +672,6 @@ It also fails to pick up the correct binary. Let's help it out a bit.
 (setq parinfer-rust-library "~/.emacs.d/.local/etc/parinfer-rust/parinfer-rust-darwin.so")
 #+end_src
 
-*** Very large files
-Allow us to open ridiculously large files. By doing it in chunks.
-#+begin_src emacs-lisp :tangle packages.el
-(package! vlf :recipe (:host github :repo "m00natic/vlfi" :files ("*.el"))
-  :pin "cc02f2533782d6b9b628cec7e2dcf25b2d05a27c" :disable t)
-#+end_src
-
-Make VLF available without delaying startup.
-#+begin_src emacs-lisp
-(use-package! vlf-setup
-  :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
-#+end_src
-
-
 *** Eros
 Make the prefix slightly nicer
 #+begin_src emacs-lisp
@@ -737,6 +731,12 @@ Then set it all up
         org-roam-ui-open-on-start t))
 #+end_src
 ** Visual packages
+
+*** Doom themes
+#+begin_src emacs-lisp :tangle packages.el
+(unpin! doom-themes)
+#+end_src
+
 *** Info colors
 Make manual pages look a bit nicer.
 #+begin_src emacs-lisp :tangle packages.el
@@ -787,7 +787,6 @@ Then hook into =Info=
                     (doom-blend 'red 'orange (- size-index 1)))))
       (propertize (file-size-human-readable size) 'face (list :foreground color)))))
 #+end_src
-
 
 ** Some Fun
 *** Elcord
