@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+
+{ # to make sure the entire script downloads
+  basedir=$HOME/.dotfiles
+  repourl=https://github.com/evanriley/config
+  savedir=("bin" ".config" ".github" ".vim")
+  current=$(date +"%Y.%m.%d.%H.%M.%S")
+  backup=$HOME/.dotfiles_backup/$current
+
+  function config {
+    /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
+  }
+
+  if [[ -x $(command -v yay) ]]; then
+    # yay is already installed - update system and install packages
+    yay -Syyu
+    yay -S neovim-git luajit fish-git fzf jq zlib direnv tmux kitty bitwarden librewolf-bin yubico-authenticator-bin otf-commitmono-nerd-font 
+
+  else
+    # yay is not installed, install it here - I don't want to build yay
+    pacman -S --needed git base-devel
+    git clone https://aur.archlinux.org/yay-bin.git
+    cd yay-bin
+    makepkg -si
+    yay -S neovim-git luajit fish-git fzf jq zlib direnv tmux kitty bitwarden librewolf-bin yubico-authenticator-bin otf-commitmono-nerd-font 
+  fi
+
+  if [[ ! -x $(command -v git) ]]; then
+    echo "Error: Git is not installed!"
+    exit 1
+  fi
+
+  if [[ -d $basedir ]]; then
+    config pull --quiet --rebase origin master || exit 1
+    echo "Updated dotfiles."
+  else
+    rm -rf "$basedir"
+    git clone --bare --quiet --depth=1 "$repourl" "$basedir"
+    config checkout 2>/dev/null
+    if [[ $? != 0 ]]; then
+      echo "Backing up pre-existing dotfiles to $current."
+      mkdir -p "$backup"
+      for d in "${savedir[@]}"; do
+        [[ -d $HOME/$d ]] && cp -R "$HOME/$d" "$backup"
+      done
+      config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} "$backup/"{}
+      config checkout -f
+    fi
+    echo "Checked out dotfiles."
+    config config --local status.showUntrackedFiles no
+  fi
+
+  if [ $SHELL != "/usr/bin/fish" ]; then
+    shell_path="$(command -v fish)"
+    echo "Changing your shell to fish"
+    chsh -s /usr/bin/fish
+  else
+    echo "shell is already fish"
+  fi
+
+  if [ -d "$HOME/.tmux/plugins/tpm" ]; then
+    echo "tpm already exist"
+  else
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  fi
+
+  if [[ -x $(command -v rustup) ]]; then
+    # Rustup is already installed, check for updates.
+    echo "Rustup is already installed"
+    rustup update
+  else
+    # Rustup will be installed.
+    /bin/bash -c "(curl https://sh.rustup.rs -sSf | sh -s -- -y --profile default --default-toolchain nightly)"
+    source $HOME/.cargo/env
+  fi
+
+
+  if [[ -x $(command -v cargo) ]]; then
+    # Install favorite rust tools through cargo. First install binstall, then install tools through binstall
+    cargo install cargo-binstall
+    cargo binstall --no-confirm fd-find exa bat zoxide starship nu rm-improved rtx-cli coreutils du-dust zellij mprocs ripgrep gitui
+  else
+    # Rustup will be installed.
+    echo "Error, we've somehow reached this point without cargo installed?"
+    exit 1
+  fi
+}
