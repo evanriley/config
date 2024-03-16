@@ -3,3 +3,9 @@
 *~
 *.swp
 .config/coc
+.rustup
+.vim
+.local
+.npm
+.cargo
+.cache
