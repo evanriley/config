@@ -23,7 +23,6 @@ local servers = {
   "rust_analyzer",
   "gopls",
   "clojure_lsp",
-  "zls",
   "clangd",
 }
 
