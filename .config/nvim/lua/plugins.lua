@@ -156,9 +156,9 @@ return require('packer').startup(function()
     use 'folke/tokyonight.nvim'
 
     use({
-      "nvim-lualine/lualine.nvim",
+      "ojroques/nvim-hardline",
       config = function()
-        require("plugins.lualine")
+        require("plugins.hardline")
       end,
     })
 
