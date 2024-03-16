@@ -5,11 +5,11 @@ local colors = {
   green = {gui = "#76946A"},
   grey_comment = {gui = "#C8C093"},
   grey_cursor = {gui = "#16161D"},
-  grey_menu = {gui = "#54546D"},
+  grey_menu = {gui = "#2A2A37"},
   purple = {gui = "#957FB8"},
   red = {gui = "#C34043"},
   white = {gui = "#DCD7BA"},
-  yellow = {gui = "#FF9E3B"},
+  yellow = {gui = "#DCA561"},
 }
 
 local inactive = {
