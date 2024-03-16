@@ -62,6 +62,7 @@ brew 'sbcl'
 brew 'roswell'
 
 # cask installs
+cask '1password'
 cask 'google-chrome'
 cask 'firefox'
 cask 'spotify'
@@ -83,7 +84,6 @@ cask 'tableplus'
 
 # mas installs
 mas 'NextDNS', id: 1_464_122_853
-mas 'Bitwarden', id: 1_352_778_147
 mas 'Deliveries: a package tracker', id: 29_098_6013
 # Ignore installing Xcode through mas...it will often show up as 'updated' but it hasn't been and is instead just redownloading 13gigs of ~~Trash~~ Xcode
 # mas 'Xcode', id: 497_799_835
