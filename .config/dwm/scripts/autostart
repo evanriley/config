@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# whatever you want to autostart
+picom &
+autorandr -l default &
+feh --bg-fill ~/Pictures/Wallpaper-Tree.png &
+
+# bar & dwm, required...
+~/.config/dwm/scripts/./bar.sh &
+dwm
