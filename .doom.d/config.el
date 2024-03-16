@@ -50,7 +50,7 @@
 
 ;; Set theme
 ;; (setq doom-theme 'doom-wilmersdorf)
-;; (setq doom-theme 'doom-city-lights)
+(setq doom-theme 'doom-city-lights)
 ;; (setq doom-theme 'doom-acario-light)
 ;; (setq doom-theme 'doom-tomorrow-day)
 ;; (setq doom-theme 'doom-opera-light)
@@ -58,7 +58,7 @@
 ;; (setq doom-theme 'doom-challenger-deep)
 ;; (setq doom-theme 'doom-gruvbox)
 ;; (setq doom-theme 'doom-xcode)
-(setq doom-theme 'doom-sourcerer)
+;; (setq doom-theme 'doom-sourcerer)
 
 ;; Modeline Settings
 (defun doom-modeline-conditional-buffer-encoding ()
@@ -145,3 +145,8 @@
   (setq lsp-ui-sideline-enable nil)
   (setq lsp-ui-doc-show-with-cursor nil)
   (setq lsp-ui-doc-show-with-mouse t))
+
+;; Parinfer Rust Mode
+;; Auto download parinfer-rust to keep it in sync
+(setq parinfer-rust-auto-download t)
+(add-hook 'emacs-lisp-mode 'parinfer-rust-mode)
