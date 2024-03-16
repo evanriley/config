@@ -101,6 +101,7 @@ return packer.startup(function(use)
   -- Telescope
   use { "nvim-telescope/telescope.nvim", commit = "d96eaa914aab6cfc4adccb34af421bdd496468b0" }
   use { "nvim-telescope/telescope-ui-select.nvim", commit = "62ea5e58c7bbe191297b983a9e7e89420f581369" }
+  use { "nvim-telescope/telescope-dap.nvim", commit = "b4134fff5cbaf3b876e6011212ed60646e56f060" }
   use {
     "nvim-telescope/telescope-fzf-native.nvim",
     run = "make",
@@ -140,6 +141,7 @@ return packer.startup(function(use)
   use { "mfussenegger/nvim-dap", commit = "014ebd53612cfd42ac8c131e6cec7c194572f21d" }
   use { "rcarriga/nvim-dap-ui", commit = "d76d6594374fb54abf2d94d6a320f3fd6e9bb2f7" }
   use { "ravenxrz/DAPInstall.nvim", commit = "8798b4c36d33723e7bba6ed6e2c202f84bb300de" }
+  use { "leoluz/nvim-dap-go", commit = "fca8bf90bf017e8ecb3a3fb8c3a3c05b60d1406d" }
 
   -- Language Specific
   use { "Olical/conjure", commit = "d88a3c8f911b92db5bf34b3b0e7a9e10692bafcb" }
