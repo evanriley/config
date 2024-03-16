@@ -8,7 +8,7 @@ require('options')
 -- load theme
 -- Use Scheme util, stolen from https://github.com/Theory-of-Everything/nii-nvim/blob/master/lua/lib/scheme.lua
 local scheme = require('lib.scheme')
-scheme.load_shared_scheme('tokyonight')
+scheme.load_shared_scheme('kanagawa')
 
 -- Load plugin configs
 require('config.plug')

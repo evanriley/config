@@ -455,7 +455,7 @@ JetBrains Mono runs my life.
 
 
 **** Theme and Modeline
-I'm really enjoying ~doom-city-lights~ as my theme.
+I'm really enjoying ~doom-tokyo-night~ as my theme.
 #+begin_src emacs-lisp
 (setq doom-theme 'doom-city-lights)
 #+end_src

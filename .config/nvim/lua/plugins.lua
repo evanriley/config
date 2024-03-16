@@ -51,6 +51,7 @@ return require('packer').startup(function()
 	use 'folke/tokyonight.nvim'
   use 'ayu-theme/ayu-vim'
   use 'tiagovla/tokyodark.nvim'
+  use 'rebelot/kanagawa.nvim'
 
   use 'tpope/vim-dispatch'
   use 'radenling/vim-dispatch-neovim'
@@ -66,7 +67,7 @@ return require('packer').startup(function()
   }
   use  {
       'Olical/conjure',
-      tag = 'v4.24.1'
+      tag = 'v4.28.0'
   }
   use {
       'kovisoft/slimv'

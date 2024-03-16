@@ -21,8 +21,6 @@ alias ..... 'cd ../../../../'
 alias .4 'cd ../../../../'
 alias .5 'cd ../../../../..'
 
-alias wget 'wget -c'
-
 alias gac 'git add . && git commit -a -m '
 alias gl 'git pull --prune'
 alias glog "git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
@@ -86,3 +84,5 @@ frum init | source
 fnm env | source
 
 starship init fish | source
+
+[ -s "/Users/evan/.jabba/jabba.fish" ]; and source "/Users/evan/.jabba/jabba.fish"
