@@ -60,4 +60,6 @@
                           :snippet {:expand (fn [args]
                                               (luasnip.lsp_expand args.body))}
                           :sources cmp-srcs
-                          :preselect cmp.PreselectMode.None})))}]
+                          :preselect cmp.PreselectMode.None
+                          :experimental {
+                                         :ghost_text true}})))}]
