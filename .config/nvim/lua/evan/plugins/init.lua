@@ -1,4 +1,5 @@
 local plugins = {
+	-- Plugins that I'm testing or feel just don't need their own file.
 	{
 		"moll/vim-bbye",
 		event = "BufReadPost",
@@ -6,6 +7,10 @@ local plugins = {
 	{
 		"eraserhd/parinfer-rust",
 		build = "cargo build --release",
+		ft = "clojure",
+	},
+	{
+		"Olical/conjure",
 		ft = "clojure",
 	},
 	{
@@ -19,7 +24,7 @@ local plugins = {
 }
 
 table.insert(plugins, require("evan.plugins.lsp"))
-table.insert(plugins, require("evan.plugins.kanagawa"))
+table.insert(plugins, require("evan.plugins.tokyonight"))
 table.insert(plugins, require("evan.plugins.lualine"))
 table.insert(plugins, require("evan.plugins.autopairs"))
 table.insert(plugins, require("evan.plugins.cmp"))
