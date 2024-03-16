@@ -1,5 +1,5 @@
 FROM opensuse/tumbleweed:latest
-RUN zypper up
+# RUN zypper up
 RUN zypper --non-interactive in git curl sudo shadow
 RUN groupadd wheel
 RUN useradd --create-home --shell /bin/bash cirun
