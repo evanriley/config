@@ -20,6 +20,7 @@ brew 'gpg2'
 brew 'starship'
 brew 'coreutils'
 brew 'zsh'
+brew 'fish'
 brew 'fzf'
 brew 'go'
 brew 'ripgrep'
@@ -27,7 +28,6 @@ brew 'exa'
 brew 'fd'
 brew 'lsd'
 brew 'xsv'
-brew 'node'
 brew 'python'
 brew 'python3'
 brew 'clojure'
@@ -42,7 +42,6 @@ brew 'heroku'
 # cask installs
 cask 'google-chrome'
 cask 'firefox'
-cask 'google-drive'
 cask 'spotify'
 cask 'steam'
 cask 'iterm2'
@@ -56,12 +55,11 @@ cask 'cloudapp'
 cask 'visual-studio-code'
 cask 'adoptopenjdk8'
 cask 'adoptopenjdk16'
-cask 'alacritty'
-cask 'obs'
+cask 'kitty'
 
 # mas installs
 mas 'NextDNS', id: 1_464_122_853
 mas 'Tailscale', id: 1_475_387_142
 mas 'Bitwarden', id: 1_352_778_147
 mas 'Deliveries: a package tracker', id: 29_098_6013
-mas 'Xcode', id: 497_799_835
+# mas 'Xcode', id: 497_799_835
