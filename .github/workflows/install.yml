@@ -39,7 +39,8 @@ jobs:
           password: ${{ secrets.PAT }}
 
       - name: Build config Docker image
-          run: docker build .github/docker --tag ghcr.io/evanriley/config:latest
-          run: docker run ghcr.io/evanriley/config:latest
-          run: docker push ghcr.io/evanriley/config:latest
+        run: |
+          docker build .github/docker --tag ghcr.io/evanriley/config:latest
+          docker run ghcr.io/evanrily/config:latest
+          docker push ghcr.io/evanriley/config:latest
 
