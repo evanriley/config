@@ -2,7 +2,7 @@ version: '3'
 
 services:
   dotfiles:
-    image: evanriley/config:latest
+    image: ghcr.io/evanriley/config:latest
     container_name: config
     volumes:
       - .:/usr/src/
