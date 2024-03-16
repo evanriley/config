@@ -4,7 +4,6 @@
 
 [{1 :elixir-tools/elixir-tools.nvim
   :lazy true
-  :event [ "BufReadPre" "BufNewFile"]
   :ft [:elixir]
   :config (fn []
             (let [elixir (require :elixir)

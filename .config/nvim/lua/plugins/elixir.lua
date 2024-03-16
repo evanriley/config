@@ -7,4 +7,4 @@ local function _2_()
   local elixirls = require("elixir.elixirls")
   return elixir.setup({nextls = {enable = true}, elixirls = {enable = false}})
 end
-return {{"elixir-tools/elixir-tools.nvim", lazy = true, event = {"BufReadPre", "BufNewFile"}, ft = {"elixir"}, config = _2_}}
+return {{"elixir-tools/elixir-tools.nvim", lazy = true, ft = {"elixir"}, config = _2_}}
