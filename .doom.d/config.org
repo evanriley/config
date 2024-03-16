@@ -451,18 +451,12 @@ JuliaMono
 
 **** Theme and Modeline
 #+begin_src emacs-lisp
-(setq doom-theme 'doom-tokyo-night)
+(setq doom-gruxbox-material-background "medium"
+      doom-gruxbox-material-palette "material")
+
+(setq doom-theme 'doom-gruvbox-material)
 #+end_src
 
-But lets make make org blocks a little more...enjoyable to look at.
-#+begin_src emacs-lisp
-(custom-set-faces!
-  `(org-block :background ,(doom-darken 'bg 0.3)))
-(custom-set-faces!
-  `(org-block-begin-line :background ,(doom-darken 'bg 0.2)))
-(custom-set-faces!
-  `(org-block-end-line :background ,(doom-darken 'bg 0.2)))
-#+end_src
 
 =LF UTF-8= is the default file encoding, and I would rather it not show up on the modeline when editing files.
 #+begin_src emacs-lisp
