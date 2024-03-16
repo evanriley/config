@@ -47,8 +47,12 @@ return require('packer').startup(function()
   }
 	use 'phaazon/hop.nvim'
   use 'machakann/vim-sandwich'
+
 	-- Themes
 	use 'folke/tokyonight.nvim'
+
+  -- Terminals, amirite?
+  use 'voldikss/vim-floaterm'
 
   -- General Language
   use 'p00f/nvim-ts-rainbow'
