@@ -60,8 +60,8 @@ end
 
 
 if test (uname) = "Darwin"
-  # the -CC argument is take advantage of iTerm2s tmux features
- function tma # tmux attach to either last session or if given an argument connect to named session
+  # the -CC argument is take advantage of iTerm2's tmux features
+ function tma # tmux attach to either the last session or if given an argument connect to named session
     if [ -z "$argv" ];
       tmux -CC attach
     else
@@ -69,7 +69,7 @@ if test (uname) = "Darwin"
     end
  end
 
- function tmn # tmux new either create the 'main' session or new one named by argument
+ function tmn # tmux new either create the 'main' session or new one named by the given argument
     if [ -z "$argv" ];
       tmux -CC new -A -s main
     else
@@ -77,4 +77,3 @@ if test (uname) = "Darwin"
     end
  end
 end
-fish_add_path /Users/evan/.spicetify
