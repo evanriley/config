@@ -8,8 +8,9 @@
 
 * Table of Contents :TOC_3_gh:
 - [[#intro][Intro]]
-  - [[#about-this-config][About This Config]]
+  - [[#about-this-configuration][About This Configuration]]
   - [[#notes-for-the-unwary-adventurer][Notes for the unwary adventurer]]
+  - [[#current-issues][Current Issues]]
   - [[#lets-begin][Let's Begin!]]
 - [[#doom-configuration][Doom Configuration]]
   - [[#modules][Modules]]
@@ -26,7 +27,7 @@
   - [[#evil][Evil]]
   - [[#mu4e][Mu4e]]
   - [[#magit][Magit]]
-  - [[#monkeytype][Monkeytype]]
+  - [[#monkeytype][MonkeyType]]
   - [[#smudge][Smudge]]
 - [[#visual-configuration][Visual configuration]]
   - [[#dashboard][Dashboard]]
@@ -54,9 +55,9 @@
     - [[#make-verbatim-different-to-code][Make verbatim different to code]]
 
 * Intro
-** About This Config
+** About This Configuration
 Hi, I see you've found my personal Doom Emacs configuration. Before we get started, I feel I need to be respectful of your time here.
-Do not copy this config. It is likely broken. If we're being honest I'm not sure I would feel comfortable telling you to even
+Do not copy this configuration. It is likely broken. If we're being honest I'm not sure I would feel comfortable telling you to even
 take pieces from here.
 
 With that said...Welcome!
@@ -73,6 +74,8 @@ and probably countless more.
 ** Notes for the unwary adventurer
 The lovely ~doom doctor~ is good at diagnosing most missing things, but a few extras packages might be needed.
 
+** Current Issues
+- Nano Emacs has nano-minbuffer, a beautiful, clean looking minibuffer. With the package installed and enabled, I get an error. And my own implementation is incredibly buggy prone to breaking.
 ** Let's Begin!
 Make this file run (slightly) faster with lexical binding
 #+begin_src emacs-lisp
@@ -181,7 +184,7 @@ zen                          ; distraction-free coding or writing
 #+begin_src emacs-lisp
 (evil +everywhere)           ; come to the dark side, we have cookies
 (format +onsave)             ; automated prettiness
-lispy
+;;lispy
 parinfer
 snippets
 #+end_src
@@ -304,7 +307,8 @@ emacs-lisp                   ; drown in parentheses
 ;;qt                         ; the 'cutest' gui framework ever
 ;;racket                     ; a DSL for DSLs
 ;;raku                       ; the artist formerly known as perl6
-;;rest                       ; Emacs as a REST client
+(rest                       ; Emacs as a REST client
+ +jq)
 ;;rst                        ; ReST in peace
 ;;(ruby +rails)              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
 (rust
@@ -390,10 +394,10 @@ Gotta look good while you code.
 (package! minions)
 (package! mini-frame)
 (package! solaire-mode :disable t)
+(package! svg-tag-mode)
 
 ;; nano stuff
 (package! nano-theme)
-(package! svg-tag-mode)
 (package! nano-modeline)
 #+end_src
 
@@ -611,8 +615,8 @@ This requires the delta binary. It’s packaged on some distributions, but most 
   (magit-delta-mode +1))
 #+end_src
 
-** Monkeytype
-Monkeytype clone for when I'm bored
+** MonkeyType
+MonkeyType clone for when I'm bored
 #+begin_src emacs-lisp
 (use-package! monkeytype
   :commands (monkeytype-region monkeytype-buffer monkeytype-region-as-words)
@@ -833,130 +837,131 @@ Make the minibuffer look closer to Nano Emacs
 #+end_src
 
 ** Mini-Frame
-Place our minibuffer in a posframe, and clean it up.
+Place our mini-buffer in a mini-frame, and clean it up.
+This is currently bugged, so it's been disabled.
 #+begin_src emacs-lisp
-(use-package! mini-frame
-  :hook (after-init . mini-frame-mode)
-  :config
-  (defcustom my/minibuffer-position 'bottom
-    "Minibuffer position, one of 'top or 'bottom"
-    :type '(choice (const :tag "Top"    top)
-                   (const :tag "Bottom" bottom))
-    :group 'nano-minibuffer)
+;; (use-package! mini-frame
+;;   :hook (after-init . mini-frame-mode)
+;;   :config
+;;   (defcustom my/minibuffer-position 'bottom
+;;     "Minibuffer position, one of 'top or 'bottom"
+;;     :type '(choice (const :tag "Top"    top)
+;;                    (const :tag "Bottom" bottom))
+;;     :group 'nano-minibuffer)
 
-  (defun my/minibuffer--frame-parameters ()
-    "Compute minibuffer frame size and position."
+;;   (defun my/minibuffer--frame-parameters ()
+;;     "Compute minibuffer frame size and position."
 
-    ;; Quite precise computation to align the minibuffer and the
-    ;; modeline when they are both at top position
-    (let* ((edges (window-pixel-edges)) ;; (left top right bottom)
-           (body-edges (window-body-pixel-edges)) ;; (left top right bottom)
-           (left (nth 0 edges)) ;; Take margins into account
-           (top (nth 1 edges)) ;; Drop header line
-           (right (nth 2 edges)) ;; Take margins into account
-           (bottom (nth 3 body-edges)) ;; Drop header line
-           (left (if (eq left-fringe-width 0)
-                     left
-                   (- left (frame-parameter nil 'left-fringe))))
-           (right (nth 2 edges))
-           (right (if (eq right-fringe-width 0)
-                      right
-                    (+ right (frame-parameter nil 'right-fringe))))
-           (border 1)
-           (width (- right left (* 0 border)))
+;;     ;; Quite precise computation to align the minibuffer and the
+;;     ;; modeline when they are both at top position
+;;     (let* ((edges (window-pixel-edges)) ;; (left top right bottom)
+;;            (body-edges (window-body-pixel-edges)) ;; (left top right bottom)
+;;            (left (nth 0 edges)) ;; Take margins into account
+;;            (top (nth 1 edges)) ;; Drop header line
+;;            (right (nth 2 edges)) ;; Take margins into account
+;;            (bottom (nth 3 body-edges)) ;; Drop header line
+;;            (left (if (eq left-fringe-width 0)
+;;                      left
+;;                    (- left (frame-parameter nil 'left-fringe))))
+;;            (right (nth 2 edges))
+;;            (right (if (eq right-fringe-width 0)
+;;                       right
+;;                     (+ right (frame-parameter nil 'right-fringe))))
+;;            (border 1)
+;;            (width (- right left (* 0 border)))
 
-           ;; Window divider mode
-           (width (- width (if (and (bound-and-true-p window-divider-mode)
-                                    (or (eq window-divider-default-places 'right-only)
-                                        (eq window-divider-default-places t))
-                                    (window-in-direction 'right (selected-window)))
-                               window-divider-default-right-width
-                             0)))
-           (y (- top border)))
+;;            ;; Window divider mode
+;;            (width (- width (if (and (bound-and-true-p window-divider-mode)
+;;                                     (or (eq window-divider-default-places 'right-only)
+;;                                         (eq window-divider-default-places t))
+;;                                     (window-in-direction 'right (selected-window)))
+;;                                window-divider-default-right-width
+;;                              0)))
+;;            (y (- top border)))
 
-      (append `((left-fringe . 0)
-                (right-fringe . 0)
-                (user-position . t)
-                (foreground-color . ,(face-foreground 'highlight nil 'default))
-                (background-color . ,(face-background 'highlight nil 'default)))
-              (cond ((and (eq my/minibuffer-position 'bottom))
-                     `((top . -1)
-                       (left . 0)
-                       (width . 1.0)
-                       (child-frame-border-width . 0)
-                       (internal-border-width . 0)))
-                    (t
-                     `((left . ,(- left border))
-                       (top . ,y)
-                       (width . (text-pixels . ,width))
-                       (child-frame-border-width . ,border)
-                       (internal-border-width . ,border)))))))
+;;       (append `((left-fringe . 0)
+;;                 (right-fringe . 0)
+;;                 (user-position . t)
+;;                 (foreground-color . ,(face-foreground 'highlight nil 'default))
+;;                 (background-color . ,(face-background 'highlight nil 'default)))
+;;               (cond ((and (eq my/minibuffer-position 'bottom))
+;;                      `((top . -1)
+;;                        (left . 0)
+;;                        (width . 1.0)
+;;                        (child-frame-border-width . 0)
+;;                        (internal-border-width . 0)))
+;;                     (t
+;;                      `((left . ,(- left border))
+;;                        (top . ,y)
+;;                        (width . (text-pixels . ,width))
+;;                        (child-frame-border-width . ,border)
+;;                        (internal-border-width . ,border)))))))
 
-    (set-face-background 'child-frame-border (face-foreground 'nano-faded))
-    (setq mini-frame-default-height 3)
-    (setq mini-frame-create-lazy t)
-    (setq mini-frame-show-parameters 'my/minibuffer--frame-parameters)
-    (setq mini-frame-ignore-commands
-          '("edebug-eval-expression" debugger-eval-expression))
-    (setq mini-frame-internal-border-color (face-foreground 'nano-faded))
-    (setq mini-frame-resize-min-height 3)
-    (setq mini-frame-resize t)
+;;   (set-face-background 'child-frame-border (face-foreground 'nano-faded))
+;;   (setq mini-frame-default-height 3)
+;;   (setq mini-frame-create-lazy t)
+;;   (setq mini-frame-show-parameters 'my/minibuffer--frame-parameters)
+;;   (setq mini-frame-ignore-commands
+;;         '("edebug-eval-expression" debugger-eval-expression))
+;;   (setq mini-frame-internal-border-color (face-foreground 'nano-faded))
+;;   (setq mini-frame-resize-min-height 3)
+;;   (setq mini-frame-resize t)
 
-  (defun my/mini-frame (&optional height foreground background border)
-    "Create a child frame positionned over the header line whose
-  width corresponds to the width of the current selected window.
+;;   (defun my/mini-frame (&optional height foreground background border)
+;;     "Create a child frame positionned over the header line whose
+;;    width corresponds to the width of the current selected window.
 
-  The HEIGHT in lines can be specified, as well as the BACKGROUND
-  color of the frame. BORDER width (pixels) and color (FOREGROUND)
-  can be also specified."
-    (interactive)
-    (let* ((foreground (or foreground
-                           (face-foreground 'font-lock-comment-face nil t)))
-           (background (or background (face-background 'highlight nil t)))
-           (border (or border 1))
-           (height (round (* (or height 8) (window-font-height))))
-           (edges (window-pixel-edges))
-           (body-edges (window-body-pixel-edges))
-           (top (nth 1 edges))
-           (bottom (nth 3 body-edges))
-           (left (- (nth 0 edges) (or left-fringe-width 0)))
-           (right (+ (nth 2 edges) (or right-fringe-width 0)))
-           (width (- right left))
+;;    The HEIGHT in lines can be specified, as well as the BACKGROUND
+;;    color of the frame. BORDER width (pixels) and color (FOREGROUND)
+;;    can be also specified."
+;;     (interactive)
+;;     (let* ((foreground (or foreground
+;;                            (face-foreground 'font-lock-comment-face nil t)))
+;;            (background (or background (face-background 'highlight nil t)))
+;;            (border (or border 1))
+;;            (height (round (* (or height 8) (window-font-height))))
+;;            (edges (window-pixel-edges))
+;;            (body-edges (window-body-pixel-edges))
+;;            (top (nth 1 edges))
+;;            (bottom (nth 3 body-edges))
+;;            (left (- (nth 0 edges) (or left-fringe-width 0)))
+;;            (right (+ (nth 2 edges) (or right-fringe-width 0)))
+;;            (width (- right left))
 
-           ;; Window divider mode
-           (width (- width (if (and (bound-and-true-p window-divider-mode)
-                                    (or (eq window-divider-default-places 'right-only)
-                                        (eq window-divider-default-places t))
-                                  (window-in-direction 'right (selected-window)))
-                               window-divider-default-right-width
-                             0)))
-           (y (- top border))
-           (child-frame-border (face-attribute 'child-frame-border :background)))
-      (set-face-attribute 'child-frame-border t :background foreground)
-      (let ((frame (make-frame
-                    `((parent-frame . ,(window-frame))
-                      (delete-before . ,(window-frame))
-                      (minibuffer . nil)
-                      (modeline . nil)
-                      (left . ,(- left border))
-                      (top . ,y)
-                      (width . (text-pixels . ,width))
-                      (height . (text-pixels . ,height))
-                      ;; (height . ,height)
-                      (child-frame-border-width . ,border)
-                      (internal-border-width . ,border)
-                      (background-color . ,background)
-                      (horizontal-scroll-bars . nil)
-                      (menu-bar-lines . 0)
-                      (tool-bar-lines . 0)
-                      (desktop-dont-save . t)
-                      (unsplittable . nil)
-                      (no-other-frame . t)
-                      (undecorated . t)
-                      (pixelwise . t)
-                      (visibility . t)))))
-        (set-face-attribute 'child-frame-border t :background child-frame-border)
-        frame))))
+;;            ;; Window divider mode
+;;            (width (- width (if (and (bound-and-true-p window-divider-mode)
+;;                                     (or (eq window-divider-default-places 'right-only)
+;;                                         (eq window-divider-default-places t))
+;;                                   (window-in-direction 'right (selected-window)))
+;;                                window-divider-default-right-width
+;;                              0)))
+;;            (y (- top border))
+;;            (child-frame-border (face-attribute 'child-frame-border :background)))
+;;       (set-face-attribute 'child-frame-border t :background foreground)
+;;       (let ((frame (make-frame
+;;                     `((parent-frame . ,(window-frame))
+;;                       (delete-before . ,(window-frame))
+;;                       (minibuffer . nil)
+;;                       (modeline . nil)
+;;                       (left . ,(- left border))
+;;                       (top . ,y)
+;;                       (width . (text-pixels . ,width))
+;;                       (height . (text-pixels . ,height))
+;;                       ;; (height . ,height)
+;;                       (child-frame-border-width . ,border)
+;;                       (internal-border-width . ,border)
+;;                       (background-color . ,background)
+;;                       (horizontal-scroll-bars . nil)
+;;                       (menu-bar-lines . 0)
+;;                       (tool-bar-lines . 0)
+;;                       (desktop-dont-save . t)
+;;                       (unsplittable . nil)
+;;                       (no-other-frame . t)
+;;                       (undecorated . t)
+;;                       (pixelwise . t)
+;;                       (visibility . t)))))
+;;         (set-face-attribute 'child-frame-border t :background child-frame-border)
+;;         frame))))
 #+end_src
 
 ** Minad Suite
@@ -1140,8 +1145,8 @@ And setup nano-modeline
 (use-package! nano-modeline
   :hook (after-init . nano-modeline-mode)
   :config
-  (setq nano-modeline-prefix 'status
-        nano-modeline-prefix-padding 1
+  (setq nano-modeline-prefix 'icon
+        nano-modeline-prefix-padding t
         nano-modeline-position 'top))
 
 ;; (use-package! minions
@@ -1240,33 +1245,33 @@ Replace org-modern, some what heavier but looks way better.
 ** Dimming
 #+begin_src emacs-lisp
 ;; Dim inactive windows
-(use-package! dimmer
-  :hook (after-init . dimmer-mode)
-  :config
-  (setq dimmer-fraction 0.5
-        dimmer-adjustment-mode :foreground
-        dimmer-use-colorspace :rgb
-        dimmer-watch-frame-focus-events nil)
-  (dimmer-configure-which-key)
-  (dimmer-configure-magit)
-  (dimmer-configure-posframe))
+;; (use-package! dimmer
+;;   :hook (after-init . dimmer-mode)
+;;   :config
+;;   (setq dimmer-fraction 0.5
+;;         dimmer-adjustment-mode :foreground
+;;         dimmer-use-colorspace :rgb
+;;         dimmer-watch-frame-focus-events nil)
+;;   (dimmer-configure-which-key)
+;;   (dimmer-configure-magit))
+;;   (dimmer-configure-posframe))
 #+end_src
 
 Similar to that, I want to dim surrounding text using the focus package
 #+begin_src emacs-lisp
-(defun add-list-to-list (dst src)
-  "Similar to `add-to-list', but accepts a list as 2nd argument"
-  (set dst
-       (append (eval dst) src)))
+;; (defun add-list-to-list (dst src)
+;;   "Similar to `add-to-list', but accepts a list as 2nd argument"
+;;   (set dst
+;;        (append (eval dst) src)))
 
-(use-package! focus
-  :commands focus-mode
-  :config
-  ;; add whatever lsp servers you use to this list
-  (add-list-to-list 'focus-mode-to-thing
-                    '((lua-mode . lsp-folding-range)
-                      (rust-mode . lsp-folding-range)
-                      (python-mode . lsp-folding-range))))
+;; (use-package! focus
+;;   :commands focus-mode
+;;   :config
+;;   ;; add whatever lsp servers you use to this list
+;;   (add-list-to-list 'focus-mode-to-thing
+;;                     '((lua-mode . lsp-folding-range)
+;;                       (rust-mode . lsp-folding-range)
+;;                       (python-mode . lsp-folding-range))))
 #+end_src
 
 ** RSS
