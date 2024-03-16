@@ -170,6 +170,8 @@ return require('packer').startup(function()
       end,
     })
 
+    use({ "LnL7/vim-nix" })
+
     ------------------------
     -- Editing Text Stuff --
     ------------------------
