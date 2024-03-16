@@ -1,5 +1,4 @@
 FROM opensuse/tumbleweed:latest
-RUN su -
 RUN zypper clean --all
 RUN zypper update
 RUN zypper --non-interactive install git curl sudo shadow
