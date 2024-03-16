@@ -63,7 +63,7 @@
 
 ;; Set theme
 ;;(setq doom-theme 'doom-wilmersdorf)
-(setq doom-theme 'doom-city-lights)
+;; (setq doom-theme 'doom-city-lights)
 ;; (setq doom-theme 'doom-acario-light)
 ;; (setq doom-theme 'doom-tomorrow-day)
 ;; (setq doom-theme 'doom-opera-light)
@@ -72,7 +72,7 @@
 ;; (setq doom-theme 'doom-gruvbox)
 ;; (setq doom-theme 'doom-xcode)
 ;; (setq doom-theme 'doom-sourcerer)
-;; (setq doom-theme 'doom-tokyo-night)
+(setq doom-theme 'doom-tokyo-night)
 ;; (setq doom-theme 'doom-rouge)
 
 ;; Modeline Settings
@@ -168,10 +168,10 @@
 (setq +magit-hub-features t)
 
 ;; General LSP Settings
-(after! lsp-ui
-  (setq lsp-ui-sideline-enable nil)
-  (setq lsp-ui-doc-show-with-cursor nil)
-  (setq lsp-ui-doc-show-with-mouse t))
+;; (after! lsp-ui
+;;   (setq lsp-ui-sideline-enable nil)
+;;   (setq lsp-ui-doc-show-with-cursor nil)
+;;   (setq lsp-ui-doc-show-with-mouse t))
 
 
 ;; Start pinentry on launch
@@ -243,3 +243,9 @@
 
 ;; For Lisp
 (load (expand-file-name "~/.roswell/helper.el"))
+
+;; Tabnine
+(use-package! company-tabnine
+  :after company
+  :config
+  (cl-pushnew 'company-tabnine (default-value 'company-backends)))
