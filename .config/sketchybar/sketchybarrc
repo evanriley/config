@@ -31,33 +31,33 @@ sketchybar -m --add space code left                              \
                          label=code                              \
                          click_script="yabai -m space --focus 1" \
                                                                  \
-              --add space mail left                               \
-              --set mail associated_display=1                    \
+              --add space web left                               \
+              --set web associated_display=1                    \
                          associated_space=2                      \
                          icon.highlight_color=0xff238fba         \
-                         icon=                                  \
-                         label=mail                               \
+                         icon=                                  \
+                         label=web                               \
                          click_script="yabai -m space --focus 2" \
                                                                  \
-              --add space media left                           \
-              --set media associated_display=1                \
+              --add space mail left                           \
+              --set mail associated_display=1                \
                          associated_space=3                      \
                          icon.highlight_color=0xff238fba         \
-                         icon=                                \
-                         label=media                               \
+                         icon=                               \
+                         label=mail                               \
                          click_script="yabai -m space --focus 3"
 
 
 ############## SECONDARY DISPLAY SPACES ############## 
-sketchybar -m --add space web left                              \
-              --set web associated_display=2                    \
+sketchybar -m --add space media left                              \
+              --set media associated_display=2                    \
                          associated_space=7                      \
                          icon.font="JetBrainsMono Nerd Font:Bold:20.0"    \
-                         icon=                                  \
+                         icon=                                 \
                          icon.highlight_color=0xff48aa2a         \
                          icon.padding_left=0                     \
-                         label=web                              \
-                         click_script="yabai -m space --focus 7"
+                         label=media                              \
+                         click_script="yabai -m space --focus 4"
 
 ############## TERTIARY DISPLAY SPACES ############## 
 sketchybar -m --add space social left                              \
@@ -68,7 +68,7 @@ sketchybar -m --add space social left                              \
                          icon.highlight_color=0xff48aa2a         \
                          icon.padding_left=0                     \
                          label=social                              \
-                         click_script="yabai -m space --focus 8"
+                         click_script="yabai -m space --focus 50"
 
 ############## ITEM DEFAULTS ###############
 sketchybar -m --default label.padding_left=2  \
