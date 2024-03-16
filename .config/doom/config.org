@@ -23,11 +23,6 @@ All of my used doom modules appear in the following sections.
  +childframe
  +tng)
 
-(ivy
- +fuzzy
- +icons
- +prescient)
-
 (vertico
  +icons)
 #+end_src
@@ -224,6 +219,8 @@ Store ~.authinfo.gpg~ in my home directory so that it isn't lost all the time.
 Some simple default settings.
 #+begin_src emacs-lisp
 (setq-default
+ gc-cons-threshold 134217738
+ gc-cons-percentage 0.1
  delete-by-moving-to-trash t                      ; Delete files to trash
  window-combination-resize t                      ; take new window space from all other windows (not just current)
  x-stretch-cursor t)                              ; Stretch cursor to the glyph width
@@ -1813,4 +1810,14 @@ The current pinned version in doom emacs is not up to date with the pinned versi
 So we need to unpin evil-collection so that we can use VIm keys in mu4e
 #+begin_src emacs-lisp :tangle packages.el
 (unpin! evil-collection)
+#+end_src
+
+** Prevent emacs using Fish as its shell.
+Fish (and possibly other non-POSIX shells) is known to inject garbage
+output into some of the child processes that Emacs spawns. Many Emacs
+packages/utilities will choke on this output, causing unpredictable
+issues. To get around this, I will use zsh as my shell in emacs.
+
+#+begin_src emacs-lisp
+(setq shell-file-name (executable-find "zsh"))
 #+end_src
