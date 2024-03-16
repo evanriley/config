@@ -85,3 +85,5 @@
   prune = true
 [branch]
 	autosetupRebase = always
+[github]
+	user = evanriley
