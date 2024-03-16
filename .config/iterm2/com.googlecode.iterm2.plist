@@ -361,6 +361,8 @@
 	</dict>
 	<key>Default Bookmark Guid</key>
 	<string>76E12D4B-23AA-4BF5-BD9D-EA5E070051BF</string>
+	<key>DimInactiveSplitPanes</key>
+	<false/>
 	<key>HapticFeedbackForEsc</key>
 	<false/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
