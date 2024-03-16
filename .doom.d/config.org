@@ -26,6 +26,7 @@ Also a number of lsp's, which will require going through the ~init.el~ and looki
 
 ** Current Issues
 N/A :)
+
 * Setup
 Speeds up this file /slightly/
 #+begin_src emacs-lisp :comments no
