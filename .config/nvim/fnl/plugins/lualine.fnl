@@ -15,7 +15,7 @@
   :config (fn []
             (let [lualine (require :lualine)]
               (lualine.setup
-                {:options {:theme "kanagawa"
+                {:options {:theme "gruvbox"
                            :icons_enabled true
                            :section_separators ["" ""]
                            :component_separators ["" ""]}

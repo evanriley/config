@@ -3,8 +3,8 @@ local _local_1_ = require("nfnl.module")
 local autoload = _local_1_["autoload"]
 local nvim = autoload("nvim")
 local function _2_()
-  local theme = require("kanagawa")
-  theme.setup({theme = "wave", background = {dark = "wave", light = "lotus"}, undercurl = false})
-  return vim.cmd("colorscheme kanagawa")
+  local theme = require("gruvbox")
+  theme.setup({terminal_colors = true, transparent_mode = true, undrcurl = false, underline = false})
+  return vim.cmd("colorscheme gruvbox")
 end
-return {{"rebelot/kanagawa.nvim", priority = 1000, name = "kanagawa", config = _2_, lazy = false}}
+return {{"ellisonleao/gruvbox.nvim", priority = 1000, name = "gruvbox", config = _2_, lazy = false}}
