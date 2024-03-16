@@ -18,7 +18,7 @@ XF86AudioNext
 
 # Play/Pause audio
 XF86AudioPlay
-    playerctl play-pause
+    playerctl --player=spotifyd,spotify,%any play-pause
 
 # -- Misc Keys -- #  
 Print
