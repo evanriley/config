@@ -47,7 +47,7 @@
   (+ivy/switch-buffer))
 
 
-(setq doom-theme 'doom-flatwhite)
+(setq doom-theme 'doom-earl-grey)
 
 (setq
  doom-font (font-spec :family "JuliaMono" :size 16)
