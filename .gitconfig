@@ -67,7 +67,7 @@
 [commit]
   gpgsign = true
 [gpg]
-	program = gpg
+	program = /opt/homebrew/bin/gpg
 [credential]
   helper = osxkeychain
 [difftool "nvimdiff"]
