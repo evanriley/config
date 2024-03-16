@@ -73,6 +73,18 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/evan/.local/share/nvim/site/pack/packer/start/bufferline.nvim"
   },
+  ["cmp-buffer"] = {
+    loaded = true,
+    path = "/home/evan/.local/share/nvim/site/pack/packer/start/cmp-buffer"
+  },
+  ["cmp-nvim-lsp"] = {
+    loaded = true,
+    path = "/home/evan/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp"
+  },
+  conjure = {
+    loaded = true,
+    path = "/home/evan/.local/share/nvim/site/pack/packer/start/conjure"
+  },
   ["gitsigns.nvim"] = {
     loaded = true,
     path = "/home/evan/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
@@ -93,9 +105,17 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/evan/.local/share/nvim/site/pack/packer/start/neoformat"
   },
+  neogit = {
+    loaded = true,
+    path = "/home/evan/.local/share/nvim/site/pack/packer/start/neogit"
+  },
   ["nvim-autopairs"] = {
     loaded = true,
     path = "/home/evan/.local/share/nvim/site/pack/packer/start/nvim-autopairs"
+  },
+  ["nvim-cmp"] = {
+    loaded = true,
+    path = "/home/evan/.local/share/nvim/site/pack/packer/start/nvim-cmp"
   },
   ["nvim-colorizer.lua"] = {
     loaded = true,
@@ -104,10 +124,6 @@ _G.packer_plugins = {
   ["nvim-comment"] = {
     loaded = true,
     path = "/home/evan/.local/share/nvim/site/pack/packer/start/nvim-comment"
-  },
-  ["nvim-compe"] = {
-    loaded = true,
-    path = "/home/evan/.local/share/nvim/site/pack/packer/start/nvim-compe"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -152,6 +168,22 @@ _G.packer_plugins = {
   ["tokyonight.nvim"] = {
     loaded = true,
     path = "/home/evan/.local/share/nvim/site/pack/packer/start/tokyonight.nvim"
+  },
+  ["vim-dispatch"] = {
+    loaded = true,
+    path = "/home/evan/.local/share/nvim/site/pack/packer/start/vim-dispatch"
+  },
+  ["vim-dispatch-neovim"] = {
+    loaded = true,
+    path = "/home/evan/.local/share/nvim/site/pack/packer/start/vim-dispatch-neovim"
+  },
+  ["vim-floaterm"] = {
+    loaded = true,
+    path = "/home/evan/.local/share/nvim/site/pack/packer/start/vim-floaterm"
+  },
+  ["vim-jack-in"] = {
+    loaded = true,
+    path = "/home/evan/.local/share/nvim/site/pack/packer/start/vim-jack-in"
   },
   ["vim-sandwich"] = {
     loaded = true,
