@@ -5,6 +5,7 @@ return {
   require('config.plug.hop'),
   require('config.plug.lsp'),
   require('config.plug.lualine'),
+  require('config.plug.neoformat'),
   require('config.plug.nvim-colorizer'),
   require('config.plug.nvim-comment'),
   require('config.plug.org'),
