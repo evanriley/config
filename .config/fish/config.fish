@@ -50,6 +50,9 @@ direnv hook fish | source
 #source zoxide
 zoxide init fish | source
 
+# opam configuration
+source /Users/evan/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
+
 # Aliases
 # Use this to manage dotfiles
 alias config '/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
