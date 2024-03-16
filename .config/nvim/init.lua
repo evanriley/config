@@ -19,6 +19,7 @@ require "evan.lsp"
 require "evan.dap"
 require "evan.hop"
 require "evan.neogit"
+require "evan.numb"
 -- Don't source the default filetype.vim, use filtetype.nvim instead.
 -- TODO: neovim now has `filetype.lua`, consider changing to it. PR: https://github.com/neovim/neovim/pull/16600
 vim.g.did_load_filetypes = 1
