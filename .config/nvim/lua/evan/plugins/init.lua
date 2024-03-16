@@ -34,6 +34,7 @@ table.insert(plugins, require("evan.plugins.lualine"))
 table.insert(plugins, require("evan.plugins.surround"))
 table.insert(plugins, require("evan.plugins.targets"))
 table.insert(plugins, require("evan.plugins.todocomments"))
+table.insert(plugins, require("evan.plugins.oil"))
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
