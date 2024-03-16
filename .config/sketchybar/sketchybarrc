@@ -39,37 +39,13 @@ sketchybar -m --add space code left                              \
                          label=mail                               \
                          click_script="yabai -m space --focus 2" \
                                                                  \
-              --add space general left                           \
-              --set general associated_display=1                \
-                         associated_space=3                      \
-                         icon.highlight_color=0xff238fba         \
-                         icon=                                  \
-                         label=gen                               \
-                         click_script="yabai -m space --focus 3" \
-                                                                 \
-              --add space notes left                               \
-              --set notes associated_display=1                    \
-                         associated_space=4                      \
-                         icon.highlight_color=0xff238fba         \
-                         icon=                                  \
-                         label=notes                               \
-                         click_script="yabai -m space --focus 4" \
-                                                                 \
               --add space media left                           \
               --set media associated_display=1                \
-                         associated_space=5                      \
+                         associated_space=3                      \
                          icon.highlight_color=0xff238fba         \
-                         icon=ﳜ                                  \
+                         icon=                                \
                          label=media                               \
-                         click_script="yabai -m space --focus 5" \
-                                                                 \
-              --add space games left                           \
-              --set games associated_display=1                \
-                         associated_space=6                      \
-                         icon.highlight_color=0xff238fba         \
-                         icon=                                  \
-                         label=games                               \
-                         click_script="yabai -m space --focus 6" 
+                         click_script="yabai -m space --focus 3"
 
 
 ############## SECONDARY DISPLAY SPACES ############## 
@@ -102,28 +78,28 @@ sketchybar -m --default label.padding_left=2  \
 
 
 ############## LEFT ITEMS ############## 
-sketchybar -m --add item space_separator left                                                  \
-              --set space_separator  icon=                                                    \
-                                     associated_space=1                                        \
-                                     associated_space=3                                        \
-                                     icon.padding_left=15                                      \
-                                     label.padding_right=15                                    \
-                                     icon.font="JetBrainsMono Nerd Font:Bold:15.0"                      \
-                                                                                               \
-              --add item gitNotifications left                                                 \
-              --set gitNotifications associated_space=1                                        \
-                                     update_freq=300                                           \
-                                     icon.font="JetBrainsMono Nerd Font:Bold:18.0"                      \
-                                     icon=                                                    \
-                                     script="~/.config/sketchybar/plugins/gitNotifications.sh" \
-                                     click_script="open https://github.com/notifications"      \
-              --subscribe gitNotifications system_woke                                         \
-                                                                                               \
-              --add item topmem left                                                           \
-              --set topmem           associated_space=1                                        \
-                                     icon.padding_left=10                                      \
-                                     update_freq=15                                            \
-                                     script="~/.config/sketchybar/plugins/topmem.sh"
+/* sketchybar -m --add item space_separator left                                                  \ */
+/*               --set space_separator  icon=                                                    \ */
+/*                                      associated_space=1                                        \ */
+/*                                      associated_space=3                                        \ */
+/*                                      icon.padding_left=15                                      \ */
+/*                                      label.padding_right=15                                    \ */
+/*                                      icon.font="JetBrainsMono Nerd Font:Bold:15.0"                      \ */
+/*                                                                                                \ */
+/*               --add item gitNotifications left                                                 \ */
+/*               --set gitNotifications associated_space=1                                        \ */
+/*                                      update_freq=300                                           \ */
+/*                                      icon.font="JetBrainsMono Nerd Font:Bold:18.0"                      \ */
+/*                                      icon=                                                    \ */
+/*                                      script="~/.config/sketchybar/plugins/gitNotifications.sh" \ */
+/*                                      click_script="open https://github.com/notifications"      \ */
+/*               --subscribe gitNotifications system_woke                                         \ */
+/*                                                                                                \ */
+/*               --add item topmem left                                                           \ */
+/*               --set topmem           associated_space=1                                        \ */
+/*                                      icon.padding_left=10                                      \ */
+/*                                      update_freq=15                                            \ */
+/*                                      script="~/.config/sketchybar/plugins/topmem.sh" */
 
 ############## RIGHT ITEMS ############## 
 sketchybar -m --add item clock right                                                                  \
