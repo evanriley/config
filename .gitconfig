@@ -45,7 +45,10 @@
   ui = true
 [core]
   excludesfile = /Users/evan/.gitignore
-  editor = nvim
+  filemode = false
+  trustctime = false
+    autocrlf = false
+    safecrlf = false
 [apply]
   whitespace = fix
 [mergetool]
@@ -55,14 +58,17 @@
 [help]
   autocorrect = 1
 [push]
-  default = simple
+  default = tracking
 [user]
   name = Evan Riley
   email = evan@evanriley.net
-[commit]
-  gpgsign = false
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO2YujIPUDxQV13gJ5Ygg2C39kguFxbsE2QzDlFGN9Du
 [gpg]
   format = ssh
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+[commit]
+  gpgsign = true
 [difftool "nvimdiff"]
   cmd = nvim -d $LOCAL $REMOTE
 [mergetool "nvimmerge"]
@@ -80,3 +86,11 @@
   autosetupRebase = always
 [github]
   user = evanriley
+[submodule]
+  recurse = true
+[rebase]
+  autoStash = true
+[credential "https://github.com"]
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = !/opt/homebrew/bin/gh auth git-credential
