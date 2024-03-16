@@ -22,6 +22,7 @@
     - [[#auto-customizations][Auto-customizations]]
     - [[#windows][Windows]]
     - [[#mouse-buttons][Mouse Buttons]]
+    - [[#smooth-scrolling][Smooth Scrolling]]
   - [[#doom-modules][Doom Modules]]
   - [[#personal-information][Personal Information]]
     - [[#authinfogpg][Authinfo.gpg]]
@@ -197,6 +198,12 @@ I sometimes explore with my mouse, use the mouse buttons to go back and forward
 #+begin_src emacs-lisp
 (map! :n [mouse-8] #'better-jumper-jump-backward
       :n [mouse-9] #'better-jumper-jump-forward)
+#+end_src
+*** Smooth Scrolling
+#+begin_src emacs-lisp
+(setq-default scroll-conservatively 101       ; Avoid recentering when scrolling far
+              scroll-margin 2                 ; Add a margin when scrolling vertically
+              recenter-positions '(5 bottom)) ; Set re-centering positions
 #+end_src
 ** Doom Modules
 This code is written to the =init.el= to select which modules to load.
@@ -394,8 +401,7 @@ This code is written to the =init.el= to select which modules to load.
         +tree-sitter)
 
        :email
-       (mu4e
-        +org)
+       ;;(mu4e +org)
        ;;notmuch
        ;;(wanderlust +gmail)
 
@@ -411,7 +417,6 @@ This code is written to the =init.el= to select which modules to load.
        literate
        (default +bindings +smartparens))
 #+end_src
-
 ** Personal Information
 Personal information, this is used by GPG and some other stuff.
 #+begin_src emacs-lisp
