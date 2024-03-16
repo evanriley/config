@@ -33,5 +33,9 @@ require('nvim-treesitter.configs').setup({
   indent = {
     enable = false,
     disbale = {},
-  }
+  },
+  autotag = {
+    enable = true,
+  },
 })
+

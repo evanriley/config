@@ -3,6 +3,11 @@
 -- for _, server in pairs(servers) do
 --   require'lspconfig'[server].setup{}
 -- end
+vim.cmd [[
+ let g:coq_settings = { 'auto_start': 'shut-up' }
+]]
+local coq = require "coq"
+
 
 -- keymaps
 local on_attach = function(client, bufnr)
@@ -92,14 +97,13 @@ local ruby_settings = {
 }
 
 local typescript_settings = {
-  tsserver = {
-    autoformat = true,
-    completion = true,
-    formatting = true,
-    filetypes = { "typescript", "typescriptreact", "typescript.tsx" }
-  }
+  autoformat = true,
+  completion = true,
+  formatting = true,
+  filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript", "javascriptreact", "javascript.jsx" }
 }
 
+local html_settings = {}
 
 -- config that activates keymaps and enables snippet support
 local function make_config()
@@ -134,6 +138,14 @@ local function setup_servers()
     if server == 'ruby' then
       config.settings = ruby_settings
     end
+
+    if server == 'tsserver' then
+      config.settings = typescript_settings
+    end
+
+    if server == emmet then
+      config.settings = emmet_settings
+    end
 		-- if server == "sourcekit" then
 		-- config.filetypes = {"swift", "objective-c", "objective-cpp"}; -- we don't want c and cpp!
 		-- end
@@ -141,7 +153,7 @@ local function setup_servers()
 		-- config.filetypes = {"c", "cpp"}; -- we don't want objective-c and objective-cpp!
 		-- end
 
-		require('lspconfig')[server].setup(config)
+		require('lspconfig')[server].setup(coq.lsp_ensure_capabilities(config))
 	end
 end
 

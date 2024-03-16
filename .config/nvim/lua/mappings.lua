@@ -43,6 +43,8 @@ map('n', '<leader>yl', '"+yy', opt) -- yank current line into system clipboard
 -- map('s', '<Tab>', 'v:lua.tab_complete()', { expr = true })
 -- map('i', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
 -- map('s', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
+-- map('i', '<C-E>', '<Plug>luasnip-next-choice', { expr = true })
+-- map('s', '<C-E>', '<Plug>luasnip-next-choice', { expr = true })
 
 -- Easily reachable Packer commands
 map('n', '<localleader>pu', ':PackerUpdate<cr>', opt)
