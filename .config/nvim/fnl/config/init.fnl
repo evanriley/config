@@ -24,7 +24,7 @@
        :shiftwidth 2
        :softtabstop 2
        ;settings needed for compe autocompletion
-       :completeopt "menu,menuone,noselect"
+       :completeopt "menuone,noselect"
        ;case insensitive search
        :ignorecase true
        ;smart search case
@@ -53,6 +53,8 @@
        :splitright true
        ;display long lines as-is
        :wrap false
+       ; make sure the background is set to dark
+       :background "dark"
        ; required settings for nvim-ufo
        :foldcolumn "auto:1"
        :foldlevel 99
