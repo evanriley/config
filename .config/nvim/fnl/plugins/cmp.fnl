@@ -31,7 +31,8 @@
   :config (fn []
             (let [cmp (require :cmp)
                   luasnip (require :luasnip)
-                  copilot_cmp (require :copilot_cmp)]
+                  copilot_cmp (require :copilot_cmp)
+                  cmp_autopairs (require :nvim-autopairs.completion.cmp)]
               (copilot_cmp.setup {})
               (cmp.setup {:formatting {:format (fn [entry item]
                                                  (set item.menu (or (. cmp-src-menu-items entry.source.name) ""))
@@ -62,4 +63,5 @@
                           :sources cmp-srcs
                           :preselect cmp.PreselectMode.None
                           :experimental {
-                                         :ghost_text true}})))}]
+                                         :ghost_text true}}
+                (: cmp.event :on :confirm_done (cmp_autopairs.on_confirm_done {:map_char {:tex ""}})))))}]
