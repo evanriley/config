@@ -6,7 +6,8 @@
   :config (fn []
             (let [gitsigns (require :gitsigns)]
               (gitsigns.setup {
-                               :current_line_blame false})))}]
+                               :current_line_blame false
+                               :attach_to_untracked false})))}]
                                
               
             
