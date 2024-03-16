@@ -11,7 +11,7 @@ APIKEY="28b88d1e9949043c2f6e683e85cb5e5c"
 # find your City ID here: https://openweathermap.org/
 # search for your city and copy the ID from the URL inside the browser.
 CITY_ID="4464368"
-URL="http://api.openweathermap.org/data/2.5/weather?id=${CITY_ID}&units=metric&APPID=${APIKEY}"
+URL="http://api.openweathermap.org/data/2.5/weather?id=${CITY_ID}&units=imperial&APPID=${APIKEY}"
 
 WEATHER_RESPONSE=$(wget -qO- "${URL}")
 
@@ -40,4 +40,4 @@ case $WEATHER_CONDITION in
     ;;
 esac
 
-echo "${WEATHER_ICON}  ${WEATHER_TEMP}°C: ${WIND_SPEED} km/h ${WIND_DIR}"
+echo "${WEATHER_ICON}  ${WEATHER_TEMP}°F: ${WIND_SPEED} mp/h ${WIND_DIR}"
