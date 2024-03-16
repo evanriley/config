@@ -3,10 +3,6 @@
 #+author: evanriley
 
 * Introduction
-Here is my emacs config, in literate form. I also use neovim, the dotfiles which you can also find in this repo.
-But something just keeps bring me back to emacs. It does almost everything I need and it does it in an incredibly
-comfortable way. Things just make /sense./
-
 ** Notes for those who steal (like me!)
 This config is +stolen from+ inspired by the following people.
 
@@ -22,24 +18,19 @@ Some settings in this config require the emacs-mac port from mituharu. I'll be c
 I don't remember which settings those are...
 
 ** Extra requirements.
-
-This config uses the following fonts
-- Jet Brains Mono Nerd Font
-- Overpass
-- IBM Plex Mono
+This config uses the following font.
+- JuliaMono
+- JetBrainsMono Nerd Font (sometimes)
 
 Also a number of lsp's, which will require going through the ~init.el~ and looking for the ~+lsp~ flag.
 
 ** Current Issues
-...Yes.
-
-
+N/A :)
 * Setup
 Speeds up this file /slightly/
 #+begin_src emacs-lisp :comments no
 ;;; config.el -*- lexical-binding: t; -*-
 #+end_src
-
 ** Personal information
 This information is used by numeration plugins, let's get it setup nice and early.
 #+begin_src emacs-lisp
@@ -53,7 +44,6 @@ Tecosaur has a great point about the location of ~.authinfo.gpg~ let's follow hi
 (setq auth-sources '("~/.authinfo.gpg")
       auth-source-cache-expiry nil)
 #+end_src
-
 
 ** Some Defaults
 *** macOS Settings
@@ -110,6 +100,12 @@ Display the time in the modeline
 Iterate through CamelCase words
 #+begin_src emacs-lisp
 (global-subword-mode 1)
+#+end_src
+
+Hide the bars
+#+begin_src emacs-lisp
+(tool-bar-mode -1)
+(menu-bar-mode -1)
 #+end_src
 
 *** Window Stuff
