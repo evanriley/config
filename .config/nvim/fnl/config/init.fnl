@@ -24,7 +24,7 @@
        :shiftwidth 2
        :softtabstop 2
        ;settings needed for compe autocompletion
-       :completeopt "menuone,noselect"
+       :completeopt "menu,menuone,noselect"
        ;case insensitive search
        :ignorecase true
        ;smart search case
