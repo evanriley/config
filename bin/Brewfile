@@ -51,6 +51,7 @@ brew 'cmacrae/formulae/spacebar'
 brew 'direnv'
 brew 'ruby-install'
 brew 'grep'
+brew 'tmux'
 
 # cask installs
 cask '1password'
