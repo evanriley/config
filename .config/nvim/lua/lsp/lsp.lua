@@ -8,23 +8,23 @@ end
 
 local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
 if not lspconfig_status_ok then
-	return
+  return
 end
 
 local servers = {
-	"sumneko_lua",
-	"cssls",
-	"html",
-	"tsserver",
-	"pyright",
-	"bashls",
-	"jsonls",
-	"yamlls",
-	"rust_analyzer",
-	"gopls",
-	"clojure_lsp",
-	"zls",
-	"clangd",
+  "sumneko_lua",
+  "cssls",
+  "html",
+  "hls",
+  "tsserver",
+  "pyright",
+  "bashls",
+  "yamlls",
+  "rust_analyzer",
+  "gopls",
+  "clojure_lsp",
+  "zls",
+  "clangd",
 }
 
 local function lsp_keymaps(bufnr)
@@ -51,7 +51,6 @@ end
 mason_lspconfig.setup({
   ensure_installed = servers,
 })
-
 
 -- Handlers
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
@@ -85,7 +84,7 @@ end
 for _, server in pairs(servers) do
   opts = {
     on_attach = on_attach,
-    capabilities = capabilities
+    capabilities = capabilities,
   }
 
   lspconfig[server].setup(coq.lsp_ensure_capabilities(opts))
