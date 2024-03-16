@@ -7,6 +7,4 @@
                  :sindrets/diffview.nvim
                  :ibhagwan/fzf-lua]
   :cmd "Neogit"
-  :config true
-  :init (fn []
-          (nvim.set_keymap :n :<leader>gg "<cmd>Neogit<CR>" {:noremap true}))}]
+  :config true}]
