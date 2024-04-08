@@ -1,3 +1,4 @@
+Archived: Find my new dotfiles [Here](https://github.com/evanriley/dotfiles)
 # Setup
 
 1. Install the dotfiles into a bare repo.
